@@ -1,0 +1,39 @@
+setting locale: en_US.utf8
+connecting to client at '10.1.1.11'
+connecting to client port at '30000'
+
+database table cardinalities:
+warehouses = 1
+districts = 10
+customers = 3000
+items = 100000
+orders = 3000
+stock = 100000
+new-orders = 900
+
+ transaction  mix threshold keying thinking
+new order    0.45      0.45      0        0
+payment      0.43      0.88      0        0
+order status 0.04      0.92      0        0
+delivery     0.04      0.96      0        0
+stock level  0.04      1.00      0        0
+
+w_id range 1 to 1
+10 terminals per warehouse
+300 second steady state duration
+
+driver is starting to ramp up at time 1650892562
+driver will ramp up in  0 seconds
+will stop test at time 1650892862
+seed for 975:7fdebd450700 : 17233434294744531555
+seed for 975:7fdebd428700 : 5317988862692897450
+seed for 975:7fdebd407700 : 2683103127769549162
+seed for 975:7fdebd3e6700 : 8454183206055277981
+seed for 975:7fdebd3c5700 : 18440562945787617779
+seed for 975:7fdebd3a4700 : 5077531360629277982
+seed for 975:7fdebd383700 : 14302249086165335173
+seed for 975:7fdebd362700 : 9331404888259072894
+seed for 975:7fdebd341700 : 6638241666210881610
+seed for 975:7fdebd320700 : 3407342911420035849
+terminals started...
+driver is exiting normally
