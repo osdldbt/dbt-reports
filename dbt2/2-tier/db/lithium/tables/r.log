@@ -1,0 +1,7 @@
+Error in plot.window(...) : need finite 'ylim' values
+Calls: plot -> plot.default -> localWindow -> plot.window
+In addition: Warning message:
+In max(df$tidx_read, na.rm = T) :
+  no non-missing arguments to max; returning -Inf
+Execution halted
+alted

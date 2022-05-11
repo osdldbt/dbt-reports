@@ -1,0 +1,10 @@
+i_customer
+i_orders
+pk_customer
+pk_district
+pk_item
+pk_new_order
+pk_order_line
+pk_orders
+pk_stock
+pk_warehouse
