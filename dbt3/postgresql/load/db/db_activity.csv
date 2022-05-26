@@ -1,0 +1,165 @@
+ctime,datname,pid,usesysid,usename,application_name,client_addr,client_port,backend_start,xact_start,query_start,query,state,state_change
+1653527041.791035,,7363,,,"",,,2022-05-26 01:04:00.545902+00,,,"",,
+1653527041.791035,,7365,10,postgres,"",,,2022-05-26 01:04:00.546439+00,,,"",,
+1653527041.791035,dbt3,7439,10,postgres,psql,,-1,2022-05-26 01:04:01.526537+00,2022-05-26 01:04:01.528635+00,2022-05-26 01:04:01.528635+00,COPY supplier FROM PROGRAM 'dbgen -s 10 -T s -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.528636+00
+1653527041.791035,dbt3,7440,10,postgres,psql,,-1,2022-05-26 01:04:01.52321+00,2022-05-26 01:04:01.540114+00,2022-05-26 01:04:01.540114+00,COPY nation FROM PROGRAM 'dbgen -s 10 -T n -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.540115+00
+1653527041.791035,dbt3,7441,10,postgres,psql,,-1,2022-05-26 01:04:01.5215+00,2022-05-26 01:04:01.52707+00,2022-05-26 01:04:01.52707+00,COPY partsupp FROM PROGRAM 'dbgen -s 10 -T S -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.527071+00
+1653527041.791035,dbt3,7444,10,postgres,psql,,-1,2022-05-26 01:04:01.528415+00,2022-05-26 01:04:01.531954+00,2022-05-26 01:04:01.531954+00,COPY region FROM PROGRAM 'dbgen -s 10 -T r -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.531956+00
+1653527041.791035,dbt3,7442,10,postgres,psql,,-1,2022-05-26 01:04:01.529158+00,2022-05-26 01:04:01.533395+00,2022-05-26 01:04:01.533395+00,COPY lineitem FROM PROGRAM 'dbgen -s 10 -T L -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.533396+00
+1653527041.791035,dbt3,7447,10,postgres,psql,,-1,2022-05-26 01:04:01.528957+00,2022-05-26 01:04:01.536731+00,2022-05-26 01:04:01.536731+00,COPY orders FROM PROGRAM 'dbgen -s 10 -T O -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.536732+00
+1653527041.791035,dbt3,7448,10,postgres,psql,,-1,2022-05-26 01:04:01.533821+00,2022-05-26 01:04:01.535891+00,2022-05-26 01:04:01.535891+00,COPY part FROM PROGRAM 'dbgen -s 10 -T P -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.535893+00
+1653527041.791035,dbt3,7452,10,postgres,psql,,-1,2022-05-26 01:04:01.536038+00,2022-05-26 01:04:01.538095+00,2022-05-26 01:04:01.538095+00,COPY customer FROM PROGRAM 'dbgen -s 10 -T c -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.538096+00
+1653527041.791035,dbt3,7472,10,postgres,psql,,-1,2022-05-26 01:04:01.742376+00,,2022-05-26 01:04:01.75401+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV, HEADER);",idle,2022-05-26 01:04:01.781335+00
+1653527041.791035,dbt3,7471,10,postgres,psql,,-1,2022-05-26 01:04:01.751179+00,2022-05-26 01:04:01.764225+00,2022-05-26 01:04:01.764225+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV, HEADER);",active,2022-05-26 01:04:01.764227+00
+1653527041.791035,dbt3,7475,10,postgres,psql,,-1,2022-05-26 01:04:01.770717+00,2022-05-26 01:04:01.791035+00,2022-05-26 01:04:01.791035+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV, HEADER);",active,2022-05-26 01:04:01.791037+00
+1653527041.791035,,7361,,,"",,,2022-05-26 01:04:00.545429+00,,,"",,
+1653527041.791035,,7360,,,"",,,2022-05-26 01:04:00.545181+00,,,"",,
+1653527041.791035,,7362,,,"",,,2022-05-26 01:04:00.54567+00,,,"",,
+1653527101.757285,,7363,,,"",,,2022-05-26 01:04:00.545902+00,,,"",,
+1653527101.757285,,7365,10,postgres,"",,,2022-05-26 01:04:00.546439+00,,,"",,
+1653527101.757285,dbt3,7501,10,postgres,psql,,-1,2022-05-26 01:05:01.753724+00,,,"",idle,2022-05-26 01:05:01.760222+00
+1653527101.757285,dbt3,7499,10,postgres,psql,,-1,2022-05-26 01:05:01.739969+00,2022-05-26 01:05:01.746888+00,2022-05-26 01:05:01.746888+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:05:01.746889+00
+1653527101.757285,dbt3,7441,10,postgres,psql,,-1,2022-05-26 01:04:01.5215+00,2022-05-26 01:04:01.52707+00,2022-05-26 01:04:01.52707+00,COPY partsupp FROM PROGRAM 'dbgen -s 10 -T S -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.527071+00
+1653527101.757285,dbt3,7500,10,postgres,psql,,-1,2022-05-26 01:05:01.747365+00,2022-05-26 01:05:01.757285+00,2022-05-26 01:05:01.757285+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:05:01.757287+00
+1653527101.757285,dbt3,7442,10,postgres,psql,,-1,2022-05-26 01:04:01.529158+00,2022-05-26 01:04:01.533395+00,2022-05-26 01:04:01.533395+00,COPY lineitem FROM PROGRAM 'dbgen -s 10 -T L -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.533396+00
+1653527101.757285,dbt3,7447,10,postgres,psql,,-1,2022-05-26 01:04:01.528957+00,2022-05-26 01:04:01.536731+00,2022-05-26 01:04:01.536731+00,COPY orders FROM PROGRAM 'dbgen -s 10 -T O -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.536732+00
+1653527101.757285,dbt3,7448,10,postgres,psql,,-1,2022-05-26 01:04:01.533821+00,2022-05-26 01:04:01.535891+00,2022-05-26 01:04:01.535891+00,COPY part FROM PROGRAM 'dbgen -s 10 -T P -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.535893+00
+1653527101.757285,,7361,,,"",,,2022-05-26 01:04:00.545429+00,,,"",,
+1653527101.757285,,7360,,,"",,,2022-05-26 01:04:00.545181+00,,,"",,
+1653527101.757285,,7362,,,"",,,2022-05-26 01:04:00.54567+00,,,"",,
+1653527161.752748,,7363,,,"",,,2022-05-26 01:04:00.545902+00,,,"",,
+1653527161.752748,,7365,10,postgres,"",,,2022-05-26 01:04:00.546439+00,,,"",,
+1653527161.752748,dbt3,7538,10,postgres,psql,,-1,2022-05-26 01:06:01.741365+00,2022-05-26 01:06:01.743805+00,2022-05-26 01:06:01.743805+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:06:01.743807+00
+1653527161.752748,dbt3,7540,10,postgres,psql,,-1,2022-05-26 01:06:01.750301+00,2022-05-26 01:06:01.752748+00,2022-05-26 01:06:01.752748+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:06:01.75275+00
+1653527161.752748,dbt3,7442,10,postgres,psql,,-1,2022-05-26 01:04:01.529158+00,2022-05-26 01:04:01.533395+00,2022-05-26 01:04:01.533395+00,COPY lineitem FROM PROGRAM 'dbgen -s 10 -T L -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.533396+00
+1653527161.752748,dbt3,7447,10,postgres,psql,,-1,2022-05-26 01:04:01.528957+00,2022-05-26 01:04:01.536731+00,2022-05-26 01:04:01.536731+00,COPY orders FROM PROGRAM 'dbgen -s 10 -T O -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.536732+00
+1653527161.752748,,7361,,,"",,,2022-05-26 01:04:00.545429+00,,,"",,
+1653527161.752748,,7360,,,"",,,2022-05-26 01:04:00.545181+00,,,"",,
+1653527161.752748,,7362,,,"",,,2022-05-26 01:04:00.54567+00,,,"",,
+1653527221.745186,,7363,,,"",,,2022-05-26 01:04:00.545902+00,,,"",,
+1653527221.745186,,7365,10,postgres,"",,,2022-05-26 01:04:00.546439+00,,,"",,
+1653527221.745186,dbt3,7549,,,"",,,2022-05-26 01:06:30.663098+00,2022-05-26 01:06:30.686645+00,2022-05-26 01:06:30.686645+00,autovacuum: VACUUM ANALYZE public.partsupp,active,2022-05-26 01:06:30.686645+00
+1653527221.745186,dbt3,7566,10,postgres,psql,,-1,2022-05-26 01:07:01.743552+00,2022-05-26 01:07:01.744996+00,2022-05-26 01:07:01.744996+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:07:01.744997+00
+1653527221.745186,dbt3,7567,10,postgres,psql,,-1,2022-05-26 01:07:01.743777+00,2022-05-26 01:07:01.745186+00,2022-05-26 01:07:01.745186+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:07:01.745187+00
+1653527221.745186,dbt3,7442,10,postgres,psql,,-1,2022-05-26 01:04:01.529158+00,2022-05-26 01:04:01.533395+00,2022-05-26 01:04:01.533395+00,COPY lineitem FROM PROGRAM 'dbgen -s 10 -T L -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.533396+00
+1653527221.745186,dbt3,7568,10,postgres,psql,,-1,2022-05-26 01:07:01.744035+00,2022-05-26 01:07:01.74542+00,2022-05-26 01:07:01.74542+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:07:01.745421+00
+1653527221.745186,dbt3,7569,10,postgres,psql,,-1,2022-05-26 01:07:01.744268+00,2022-05-26 01:07:01.745622+00,2022-05-26 01:07:01.745622+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:07:01.745623+00
+1653527221.745186,,7361,,,"",,,2022-05-26 01:04:00.545429+00,,,"",,
+1653527221.745186,,7360,,,"",,,2022-05-26 01:04:00.545181+00,,,"",,
+1653527221.745186,,7362,,,"",,,2022-05-26 01:04:00.54567+00,,,"",,
+1653527281.780104,,7363,,,"",,,2022-05-26 01:04:00.545902+00,,,"",,
+1653527281.780104,,7365,10,postgres,"",,,2022-05-26 01:04:00.546439+00,,,"",,
+1653527281.780104,dbt3,7576,,,"",,,2022-05-26 01:07:30.675066+00,2022-05-26 01:07:30.696981+00,2022-05-26 01:07:30.696981+00,autovacuum: VACUUM ANALYZE public.orders,active,2022-05-26 01:07:30.696982+00
+1653527281.780104,dbt3,7593,10,postgres,psql,,-1,2022-05-26 01:08:01.766032+00,2022-05-26 01:08:01.770114+00,2022-05-26 01:08:01.770114+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:08:01.770115+00
+1653527281.780104,dbt3,7595,10,postgres,psql,,-1,2022-05-26 01:08:01.771054+00,2022-05-26 01:08:01.780104+00,2022-05-26 01:08:01.780104+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:08:01.780106+00
+1653527281.780104,dbt3,7594,10,postgres,psql,,-1,2022-05-26 01:08:01.778776+00,2022-05-26 01:08:01.78068+00,2022-05-26 01:08:01.78068+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:08:01.780681+00
+1653527281.780104,dbt3,7442,10,postgres,psql,,-1,2022-05-26 01:04:01.529158+00,2022-05-26 01:04:01.533395+00,2022-05-26 01:04:01.533395+00,COPY lineitem FROM PROGRAM 'dbgen -s 10 -T L -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.533396+00
+1653527281.780104,dbt3,7592,10,postgres,psql,,-1,2022-05-26 01:08:01.765273+00,2022-05-26 01:08:01.78109+00,2022-05-26 01:08:01.78109+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:08:01.781091+00
+1653527281.780104,dbt3,7596,10,postgres,psql,,-1,2022-05-26 01:08:01.780537+00,2022-05-26 01:08:01.782368+00,2022-05-26 01:08:01.782368+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:08:01.78237+00
+1653527281.780104,,7361,,,"",,,2022-05-26 01:04:00.545429+00,,,"",,
+1653527281.780104,,7360,,,"",,,2022-05-26 01:04:00.545181+00,,,"",,
+1653527281.780104,,7362,,,"",,,2022-05-26 01:04:00.54567+00,,,"",,
+1653527341.750169,,7363,,,"",,,2022-05-26 01:04:00.545902+00,,,"",,
+1653527341.750169,,7365,10,postgres,"",,,2022-05-26 01:04:00.546439+00,,,"",,
+1653527341.750169,dbt3,7619,10,postgres,psql,,-1,2022-05-26 01:09:01.747712+00,2022-05-26 01:09:01.750169+00,2022-05-26 01:09:01.750169+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:09:01.75017+00
+1653527341.750169,dbt3,7621,10,postgres,psql,,-1,2022-05-26 01:09:01.748239+00,,2022-05-26 01:09:01.750053+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",idle,2022-05-26 01:09:01.751686+00
+1653527341.750169,dbt3,7620,10,postgres,psql,,-1,2022-05-26 01:09:01.748557+00,2022-05-26 01:09:01.750094+00,2022-05-26 01:09:01.750094+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:09:01.750095+00
+1653527341.750169,dbt3,7622,10,postgres,psql,,-1,2022-05-26 01:09:01.749047+00,2022-05-26 01:09:01.750617+00,2022-05-26 01:09:01.750617+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:09:01.750618+00
+1653527341.750169,dbt3,7442,10,postgres,psql,,-1,2022-05-26 01:04:01.529158+00,2022-05-26 01:04:01.533395+00,2022-05-26 01:04:01.533395+00,COPY lineitem FROM PROGRAM 'dbgen -s 10 -T L -o' USING DELIMITERS '|';,active,2022-05-26 01:04:01.533396+00
+1653527341.750169,,7361,,,"",,,2022-05-26 01:04:00.545429+00,,,"",,
+1653527341.750169,,7360,,,"",,,2022-05-26 01:04:00.545181+00,,,"",,
+1653527341.750169,,7362,,,"",,,2022-05-26 01:04:00.54567+00,,,"",,
+1653527401.810345,,7363,,,"",,,2022-05-26 01:04:00.545902+00,,,"",,
+1653527401.810345,,7365,10,postgres,"",,,2022-05-26 01:04:00.546439+00,,,"",,
+1653527401.810345,dbt3,7753,10,postgres,psql,,-1,2022-05-26 01:10:01.775617+00,,2022-05-26 01:10:01.78557+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",idle,2022-05-26 01:10:01.809463+00
+1653527401.810345,dbt3,7756,10,postgres,psql,,-1,2022-05-26 01:10:01.795427+00,2022-05-26 01:10:01.810699+00,2022-05-26 01:10:01.810699+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:10:01.810701+00
+1653527401.810345,dbt3,7671,10,postgres,psql,,-1,2022-05-26 01:09:05.391447+00,2022-05-26 01:09:05.393052+00,2022-05-26 01:09:05.393052+00,"
+CREATE INDEX lineitem_l_receiptdate_idx
+ON lineitem USING BRIN (l_receiptdate);",active,2022-05-26 01:09:05.393053+00
+1653527401.810345,dbt3,7755,10,postgres,psql,,-1,2022-05-26 01:10:01.786547+00,2022-05-26 01:10:01.793709+00,2022-05-26 01:10:01.793709+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:10:01.793711+00
+1653527401.810345,dbt3,7754,10,postgres,psql,,-1,2022-05-26 01:10:01.779386+00,2022-05-26 01:10:01.810345+00,2022-05-26 01:10:01.810345+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:10:01.810348+00
+1653527401.810345,dbt3,7668,10,postgres,psql,,-1,2022-05-26 01:09:05.39378+00,2022-05-26 01:09:05.405379+00,2022-05-26 01:09:05.405379+00,"
+CREATE INDEX lineitem_l_partkey_l_quantity_l_shipmode_idx
+ON lineitem (l_partkey, l_quantity, l_shipmode)
+WITH (fillfactor = 100);",active,2022-05-26 01:09:05.40538+00
+1653527401.810345,dbt3,7672,10,postgres,psql,,-1,2022-05-26 01:09:05.399213+00,2022-05-26 01:09:05.410961+00,2022-05-26 01:09:05.410961+00,"
+CREATE INDEX lineitem_l_orderkey_idx_l_returnflag
+ON lineitem (l_orderkey)
+WITH (fillfactor = 100)
+WHERE l_returnflag = 'R';",active,2022-05-26 01:09:05.410962+00
+1653527401.810345,dbt3,7683,10,postgres,psql,,-1,2022-05-26 01:09:05.403103+00,2022-05-26 01:09:05.409353+00,2022-05-26 01:09:05.409353+00,"
+CREATE UNIQUE INDEX pk_lineitem
+ON lineitem (l_orderkey, l_linenumber)
+WITH (fillfactor = 100);",active,2022-05-26 01:09:05.409354+00
+1653527401.810345,dbt3,7685,10,postgres,psql,,-1,2022-05-26 01:09:05.401932+00,2022-05-26 01:09:05.411852+00,2022-05-26 01:09:05.411852+00,"
+CREATE INDEX lineitem_l_orderkey_l_suppkey_idx
+ON lineitem (l_orderkey, l_suppkey)
+WITH (fillfactor = 100)
+WHERE l_commitdate < l_receiptdate;",active,2022-05-26 01:09:05.411853+00
+1653527401.810345,dbt3,7690,10,postgres,psql,,-1,2022-05-26 01:09:05.416288+00,2022-05-26 01:09:05.417894+00,2022-05-26 01:09:05.417894+00,"
+CREATE INDEX lineitem_l_shipdate_idx
+ON lineitem USING BRIN (l_shipdate);",active,2022-05-26 01:09:05.417895+00
+1653527401.810345,dbt3,7693,10,postgres,psql,,-1,2022-05-26 01:09:05.415533+00,2022-05-26 01:09:05.441049+00,2022-05-26 01:09:05.441049+00,"
+CREATE INDEX orders_o_custkey_idx
+ON orders (o_custkey)
+WITH (fillfactor = 100);",active,2022-05-26 01:09:05.441051+00
+1653527401.810345,dbt3,7687,10,postgres,psql,,-1,2022-05-26 01:09:05.410174+00,2022-05-26 01:09:05.423216+00,2022-05-26 01:09:05.423216+00,"
+CREATE INDEX lineitem_l_orderkey_idx_part2
+ON lineitem (l_orderkey)
+WITH (fillfactor = 100)
+WHERE l_commitdate < l_receiptdate
+  AND l_shipdate < l_commitdate;",active,2022-05-26 01:09:05.423217+00
+1653527401.810345,dbt3,7688,10,postgres,psql,,-1,2022-05-26 01:09:05.41142+00,2022-05-26 01:09:05.435674+00,2022-05-26 01:09:05.435674+00,"
+CREATE INDEX lineitem_l_partkey_l_suppkey_l_shipdate_l_quantity_idx
+ON lineitem (l_partkey, l_suppkey, l_shipdate, l_quantity)
+WITH (fillfactor = 100);",active,2022-05-26 01:09:05.435676+00
+1653527401.810345,dbt3,7686,10,postgres,psql,,-1,2022-05-26 01:09:05.4268+00,2022-05-26 01:09:05.438206+00,2022-05-26 01:09:05.438206+00,"
+CREATE INDEX lineitem_l_orderkey_l_suppkey_l_quantity_idx
+ON lineitem (l_orderkey, l_suppkey, l_quantity)
+WITH (fillfactor = 100);",active,2022-05-26 01:09:05.438207+00
+1653527401.810345,dbt3,7697,10,postgres,psql,,,2022-05-26 01:09:05.428468+00,2022-05-26 01:09:05.411852+00,2022-05-26 01:09:05.411852+00,"
+CREATE INDEX lineitem_l_orderkey_l_suppkey_idx
+ON lineitem (l_orderkey, l_suppkey)
+WITH (fillfactor = 100)
+WHERE l_commitdate < l_receiptdate;",active,2022-05-26 01:09:05.430428+00
+1653527401.810345,dbt3,7699,10,postgres,psql,,-1,2022-05-26 01:09:05.427775+00,2022-05-26 01:09:05.459898+00,2022-05-26 01:09:05.459898+00,"
+CREATE INDEX orders_o_orderkey_o_orderdate_idx
+ON orders (o_orderkey, o_orderdate)
+WITH (fillfactor = 100);",active,2022-05-26 01:09:05.4599+00
+1653527401.810345,,7361,,,"",,,2022-05-26 01:04:00.545429+00,,,"",,
+1653527401.810345,,7360,,,"",,,2022-05-26 01:04:00.545181+00,,,"",,
+1653527401.810345,,7362,,,"",,,2022-05-26 01:04:00.54567+00,,,"",,
+1653527461.788586,,7363,,,"",,,2022-05-26 01:04:00.545902+00,,,"",,
+1653527461.788586,,7365,10,postgres,"",,,2022-05-26 01:04:00.546439+00,,,"",,
+1653527461.788586,dbt3,7790,10,postgres,psql,,-1,2022-05-26 01:11:01.786474+00,2022-05-26 01:11:01.788586+00,2022-05-26 01:11:01.788586+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:11:01.788587+00
+1653527461.788586,dbt3,7789,10,postgres,psql,,-1,2022-05-26 01:11:01.77226+00,2022-05-26 01:11:01.778703+00,2022-05-26 01:11:01.778703+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:11:01.778704+00
+1653527461.788586,dbt3,7668,10,postgres,psql,,-1,2022-05-26 01:09:05.39378+00,2022-05-26 01:09:05.405379+00,2022-05-26 01:09:05.405379+00,"
+CREATE INDEX lineitem_l_partkey_l_quantity_l_shipmode_idx
+ON lineitem (l_partkey, l_quantity, l_shipmode)
+WITH (fillfactor = 100);",active,2022-05-26 01:09:05.40538+00
+1653527461.788586,dbt3,7683,10,postgres,psql,,-1,2022-05-26 01:09:05.403103+00,2022-05-26 01:09:05.409353+00,2022-05-26 01:09:05.409353+00,"
+CREATE UNIQUE INDEX pk_lineitem
+ON lineitem (l_orderkey, l_linenumber)
+WITH (fillfactor = 100);",active,2022-05-26 01:09:05.409354+00
+1653527461.788586,dbt3,7688,10,postgres,psql,,-1,2022-05-26 01:09:05.41142+00,2022-05-26 01:09:05.435674+00,2022-05-26 01:09:05.435674+00,"
+CREATE INDEX lineitem_l_partkey_l_suppkey_l_shipdate_l_quantity_idx
+ON lineitem (l_partkey, l_suppkey, l_shipdate, l_quantity)
+WITH (fillfactor = 100);",active,2022-05-26 01:09:05.435676+00
+1653527461.788586,dbt3,7686,10,postgres,psql,,-1,2022-05-26 01:09:05.4268+00,2022-05-26 01:09:05.438206+00,2022-05-26 01:09:05.438206+00,"
+CREATE INDEX lineitem_l_orderkey_l_suppkey_l_quantity_idx
+ON lineitem (l_orderkey, l_suppkey, l_quantity)
+WITH (fillfactor = 100);",active,2022-05-26 01:09:05.438207+00
+1653527461.788586,,7361,,,"",,,2022-05-26 01:04:00.545429+00,,,"",,
+1653527461.788586,,7360,,,"",,,2022-05-26 01:04:00.545181+00,,,"",,
+1653527461.788586,,7362,,,"",,,2022-05-26 01:04:00.54567+00,,,"",,
+1653527521.771630,,7363,,,"",,,2022-05-26 01:04:00.545902+00,,,"",,
+1653527521.771630,,7365,10,postgres,"",,,2022-05-26 01:04:00.546439+00,,,"",,
+1653527521.771630,dbt3,7809,10,postgres,psql,,-1,2022-05-26 01:11:58.979826+00,2022-05-26 01:11:58.981321+00,2022-05-26 01:11:58.981321+00,VACUUM ANALYZE lineitem;,active,2022-05-26 01:11:58.981322+00
+1653527521.771630,dbt3,7818,10,postgres,psql,,-1,2022-05-26 01:12:01.770254+00,2022-05-26 01:12:01.77163+00,2022-05-26 01:12:01.77163+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:12:01.771631+00
+1653527521.771630,dbt3,7819,10,postgres,psql,,-1,2022-05-26 01:12:01.770492+00,2022-05-26 01:12:01.77176+00,2022-05-26 01:12:01.77176+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:12:01.771761+00
+1653527521.771630,dbt3,7817,10,postgres,psql,,-1,2022-05-26 01:12:01.770045+00,2022-05-26 01:12:01.771988+00,2022-05-26 01:12:01.771988+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:12:01.771989+00
+1653527521.771630,dbt3,7820,10,postgres,psql,,-1,2022-05-26 01:12:01.770705+00,2022-05-26 01:12:01.771883+00,2022-05-26 01:12:01.771883+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:12:01.771884+00
+1653527521.771630,dbt3,7821,10,postgres,psql,,-1,2022-05-26 01:12:01.770899+00,2022-05-26 01:12:01.772074+00,2022-05-26 01:12:01.772074+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-26 01:12:01.772075+00
+1653527521.771630,,7361,,,"",,,2022-05-26 01:04:00.545429+00,,,"",,
+1653527521.771630,,7360,,,"",,,2022-05-26 01:04:00.545181+00,,,"",,
+1653527521.771630,,7362,,,"",,,2022-05-26 01:04:00.54567+00,,,"",,

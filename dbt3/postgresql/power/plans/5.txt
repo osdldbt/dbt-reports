@@ -1,0 +1,67 @@
+BEGIN;
+BEGIN
+EXPLAIN
+select
+	n_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue
+from
+	customer,
+	orders,
+	lineitem,
+	supplier,
+	nation,
+	region
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and l_suppkey = s_suppkey
+	and c_nationkey = s_nationkey
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'AFRICA'
+	and o_orderdate >= date '1995-01-01'
+	and o_orderdate < date '1995-01-01' + interval '1 year'
+group by
+	n_name
+order by
+	revenue desc;
+                                                                                     QUERY PLAN                                                                                     
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=2080155.00..2080155.06 rows=25 width=58)
+   Sort Key: (sum((lineitem.l_extendedprice * ('1'::numeric - lineitem.l_discount)))) DESC
+   ->  Finalize GroupAggregate  (cost=2079766.21..2080154.42 rows=25 width=58)
+         Group Key: nation.n_name
+         ->  Gather Merge  (cost=2079766.21..2080153.73 rows=50 width=58)
+               Workers Planned: 2
+               ->  Partial GroupAggregate  (cost=2078766.18..2079147.93 rows=25 width=58)
+                     Group Key: nation.n_name
+                     ->  Sort  (cost=2078766.18..2078842.47 rows=30515 width=38)
+                           Sort Key: nation.n_name
+                           ->  Parallel Hash Join  (cost=421146.12..2076493.24 rows=30515 width=38)
+                                 Hash Cond: ((orders.o_custkey = customer.c_custkey) AND (supplier.s_nationkey = customer.c_nationkey))
+                                 ->  Parallel Hash Join  (cost=380733.57..2014728.80 rows=763028 width=50)
+                                       Hash Cond: (lineitem.l_orderkey = orders.o_orderkey)
+                                       ->  Parallel Hash Join  (cost=2248.79..1521505.72 rows=4966970 width=54)
+                                             Hash Cond: (lineitem.l_suppkey = supplier.s_suppkey)
+                                             ->  Parallel Seq Scan on lineitem  (cost=0.00..1404834.40 rows=24994040 width=24)
+                                             ->  Parallel Hash  (cost=2144.63..2144.63 rows=8333 width=38)
+                                                   ->  Merge Join  (cost=2.80..2144.63 rows=8333 width=38)
+                                                         Merge Cond: (supplier.s_nationkey = nation.n_nationkey)
+                                                         ->  Parallel Index Only Scan using supplier_s_nationkey_s_suppkey_idx on supplier  (cost=0.29..1912.96 rows=41667 width=8)
+                                                         ->  Sort  (cost=2.50..2.52 rows=5 width=30)
+                                                               Sort Key: nation.n_nationkey
+                                                               ->  Hash Join  (cost=1.07..2.45 rows=5 width=30)
+                                                                     Hash Cond: (nation.n_regionkey = region.r_regionkey)
+                                                                     ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=34)
+                                                                     ->  Hash  (cost=1.06..1.06 rows=1 width=4)
+                                                                           ->  Seq Scan on region  (cost=0.00..1.06 rows=1 width=4)
+                                                                                 Filter: (r_name = 'AFRICA'::bpchar)
+                                       ->  Parallel Hash  (cost=361795.74..361795.74 rows=960083 width=12)
+                                             ->  Parallel Seq Scan on orders  (cost=0.00..361795.74 rows=960083 width=12)
+                                                   Filter: ((o_orderdate >= '1995-01-01'::date) AND (o_orderdate < '1996-01-01 00:00:00'::timestamp without time zone))
+                                 ->  Parallel Hash  (cost=28595.10..28595.10 rows=625030 width=8)
+                                       ->  Parallel Index Only Scan using customer_c_nationkey_c_custkey_idx on customer  (cost=0.43..28595.10 rows=625030 width=8)
+(34 rows)
+
+COMMIT;
+COMMIT

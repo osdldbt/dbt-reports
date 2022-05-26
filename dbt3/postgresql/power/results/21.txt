@@ -1,0 +1,148 @@
+BEGIN;
+BEGIN
+select
+	s_name,
+	count(*) as numwait
+from
+	supplier,
+	lineitem l1,
+	orders,
+	nation
+where
+	s_suppkey = l1.l_suppkey
+	and o_orderkey = l1.l_orderkey
+	and o_orderstatus = 'F'
+	and l1.l_receiptdate > l1.l_commitdate
+	and exists (
+		select
+			*
+		from
+			lineitem l2
+		where
+			l2.l_orderkey = l1.l_orderkey
+			and l2.l_suppkey <> l1.l_suppkey
+	)
+	and not exists (
+		select
+			*
+		from
+			lineitem l3
+		where
+			l3.l_orderkey = l1.l_orderkey
+			and l3.l_suppkey <> l1.l_suppkey
+			and l3.l_receiptdate > l3.l_commitdate
+	)
+	and s_nationkey = n_nationkey
+	and n_name = 'ARGENTINA'
+group by
+	s_name
+order by
+	numwait desc,
+	s_name
+LIMIT 100;
+          s_name           | numwait 
+---------------------------+---------
+ Supplier#000063593        |      26
+ Supplier#000072463        |      22
+ Supplier#000017543        |      21
+ Supplier#000019666        |      21
+ Supplier#000054165        |      21
+ Supplier#000086182        |      21
+ Supplier#000001884        |      20
+ Supplier#000013434        |      20
+ Supplier#000059868        |      20
+ Supplier#000061955        |      20
+ Supplier#000091330        |      20
+ Supplier#000005624        |      19
+ Supplier#000010973        |      19
+ Supplier#000018878        |      19
+ Supplier#000019396        |      19
+ Supplier#000028928        |      19
+ Supplier#000029403        |      19
+ Supplier#000031777        |      19
+ Supplier#000041491        |      19
+ Supplier#000043603        |      19
+ Supplier#000045713        |      19
+ Supplier#000045862        |      19
+ Supplier#000049696        |      19
+ Supplier#000069213        |      19
+ Supplier#000075790        |      19
+ Supplier#000077400        |      19
+ Supplier#000083838        |      19
+ Supplier#000091420        |      19
+ Supplier#000095842        |      19
+ Supplier#000002515        |      18
+ Supplier#000013368        |      18
+ Supplier#000014971        |      18
+ Supplier#000020001        |      18
+ Supplier#000027378        |      18
+ Supplier#000038770        |      18
+ Supplier#000041140        |      18
+ Supplier#000045686        |      18
+ Supplier#000049531        |      18
+ Supplier#000057893        |      18
+ Supplier#000064421        |      18
+ Supplier#000067281        |      18
+ Supplier#000078102        |      18
+ Supplier#000078809        |      18
+ Supplier#000092790        |      18
+ Supplier#000000127        |      17
+ Supplier#000009627        |      17
+ Supplier#000015054        |      17
+ Supplier#000021259        |      17
+ Supplier#000023127        |      17
+ Supplier#000024799        |      17
+ Supplier#000026036        |      17
+ Supplier#000027107        |      17
+ Supplier#000033882        |      17
+ Supplier#000037813        |      17
+ Supplier#000038250        |      17
+ Supplier#000040663        |      17
+ Supplier#000041596        |      17
+ Supplier#000042865        |      17
+ Supplier#000043684        |      17
+ Supplier#000046139        |      17
+ Supplier#000046161        |      17
+ Supplier#000046802        |      17
+ Supplier#000054184        |      17
+ Supplier#000057355        |      17
+ Supplier#000057497        |      17
+ Supplier#000057634        |      17
+ Supplier#000061704        |      17
+ Supplier#000063543        |      17
+ Supplier#000063592        |      17
+ Supplier#000066294        |      17
+ Supplier#000066839        |      17
+ Supplier#000067124        |      17
+ Supplier#000070187        |      17
+ Supplier#000072528        |      17
+ Supplier#000076634        |      17
+ Supplier#000078884        |      17
+ Supplier#000085296        |      17
+ Supplier#000085611        |      17
+ Supplier#000089835        |      17
+ Supplier#000092562        |      17
+ Supplier#000093599        |      17
+ Supplier#000093664        |      17
+ Supplier#000094232        |      17
+ Supplier#000095018        |      17
+ Supplier#000097128        |      17
+ Supplier#000097829        |      17
+ Supplier#000099092        |      17
+ Supplier#000001533        |      16
+ Supplier#000002017        |      16
+ Supplier#000002843        |      16
+ Supplier#000004803        |      16
+ Supplier#000005482        |      16
+ Supplier#000005628        |      16
+ Supplier#000005759        |      16
+ Supplier#000005783        |      16
+ Supplier#000007698        |      16
+ Supplier#000008564        |      16
+ Supplier#000009469        |      16
+ Supplier#000010264        |      16
+ Supplier#000011383        |      16
+(100 rows)
+
+COMMIT;
+COMMIT

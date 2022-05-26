@@ -1,0 +1,51 @@
+BEGIN;
+BEGIN
+EXPLAIN
+select
+	l_shipmode,
+	sum(case
+		when o_orderpriority = '1-URGENT'
+			or o_orderpriority = '2-HIGH'
+			then 1
+		else 0
+	end) as high_line_count,
+	sum(case
+		when o_orderpriority <> '1-URGENT'
+			and o_orderpriority <> '2-HIGH'
+			then 1
+		else 0
+	end) as low_line_count
+from
+	orders,
+	lineitem
+where
+	o_orderkey = l_orderkey
+	and l_shipmode in ('REG AIR', 'FOB')
+	and l_commitdate < l_receiptdate
+	and l_shipdate < l_commitdate
+	and l_receiptdate >= date '1994-01-01'
+	and l_receiptdate < date '1994-01-01' + interval '1 year'
+group by
+	l_shipmode
+order by
+	l_shipmode;
+                                                                                                  QUERY PLAN                                                                                                   
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize GroupAggregate  (cost=760817.74..760819.55 rows=7 width=27)
+   Group Key: lineitem.l_shipmode
+   ->  Gather Merge  (cost=760817.74..760819.37 rows=14 width=27)
+         Workers Planned: 2
+         ->  Sort  (cost=759817.71..759817.73 rows=7 width=27)
+               Sort Key: lineitem.l_shipmode
+               ->  Partial HashAggregate  (cost=759817.55..759817.62 rows=7 width=27)
+                     Group Key: lineitem.l_shipmode
+                     ->  Parallel Hash Join  (cost=445730.59..757682.67 rows=121993 width=27)
+                           Hash Cond: (lineitem.l_orderkey = orders.o_orderkey)
+                           ->  Parallel Index Scan using lineitem_l_orderkey_idx_part2 on lineitem  (cost=0.43..273546.28 rows=121993 width=19)
+                                 Filter: ((l_shipmode = ANY ('{"REG AIR",FOB}'::bpchar[])) AND (l_receiptdate >= '1994-01-01'::date) AND (l_receiptdate < '1995-01-01 00:00:00'::timestamp without time zone))
+                           ->  Parallel Hash  (cost=330875.18..330875.18 rows=6255918 width=24)
+                                 ->  Parallel Seq Scan on orders  (cost=0.00..330875.18 rows=6255918 width=24)
+(14 rows)
+
+COMMIT;
+COMMIT

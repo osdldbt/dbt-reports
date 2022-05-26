@@ -1,0 +1,68 @@
+BEGIN;
+BEGIN
+EXPLAIN
+select
+	s_name,
+	s_address
+from
+	supplier,
+	nation
+where
+	s_suppkey in (
+		select
+			ps_suppkey
+		from
+			partsupp
+		where
+			ps_partkey in (
+				select
+					p_partkey
+				from
+					part
+				where
+					p_name like 'misty%'
+			)
+			and ps_availqty > (
+				select
+					0.5 * sum(l_quantity)
+				from
+					lineitem
+				where
+					l_partkey = ps_partkey
+					and l_suppkey = ps_suppkey
+					and l_shipdate >= '1995-01-01'
+					and l_shipdate < cast(date '1995-01-01' + interval '1 year' as date)
+			)
+	)
+	and s_nationkey = n_nationkey
+	and n_name = 'KENYA'
+order by
+	s_name;
+                                                                                           QUERY PLAN                                                                                           
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Nested Loop Semi Join  (cost=4118.79..2781576.05 rows=1056 width=51)
+   ->  Gather Merge  (cost=4117.93..4573.81 rows=4000 width=55)
+         Workers Planned: 1
+         ->  Sort  (cost=3117.92..3123.80 rows=2353 width=55)
+               Sort Key: supplier.s_name
+               ->  Hash Join  (cost=1.32..2986.15 rows=2353 width=55)
+                     Hash Cond: (supplier.s_nationkey = nation.n_nationkey)
+                     ->  Parallel Seq Scan on supplier  (cost=0.00..2804.24 rows=58824 width=59)
+                     ->  Hash  (cost=1.31..1.31 rows=1 width=4)
+                           ->  Seq Scan on nation  (cost=0.00..1.31 rows=1 width=4)
+                                 Filter: (n_name = 'KENYA'::bpchar)
+   ->  Nested Loop  (cost=0.86..694.24 rows=1 width=4)
+         ->  Index Scan using partsupp_ps_suppkey_idx on partsupp  (cost=0.43..680.82 rows=26 width=8)
+               Index Cond: (ps_suppkey = supplier.s_suppkey)
+               Filter: ((ps_availqty)::numeric > (SubPlan 1))
+               SubPlan 1
+                 ->  Aggregate  (cost=8.59..8.61 rows=1 width=32)
+                       ->  Index Only Scan using lineitem_l_partkey_l_suppkey_l_shipdate_l_quantity_idx on lineitem  (cost=0.56..8.59 rows=1 width=5)
+                             Index Cond: ((l_partkey = partsupp.ps_partkey) AND (l_suppkey = partsupp.ps_suppkey) AND (l_shipdate >= '1995-01-01'::date) AND (l_shipdate < '1996-01-01'::date))
+         ->  Index Scan using pk_part on part  (cost=0.43..0.52 rows=1 width=4)
+               Index Cond: (p_partkey = partsupp.ps_partkey)
+               Filter: ((p_name)::text ~~ 'misty%'::text)
+(22 rows)
+
+COMMIT;
+COMMIT

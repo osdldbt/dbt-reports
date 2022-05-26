@@ -1,0 +1,55 @@
+BEGIN;
+BEGIN
+EXPLAIN
+select
+	l_orderkey,
+	sum(l_extendedprice * (1 - l_discount)) as revenue,
+	o_orderdate,
+	o_shippriority
+from
+	customer,
+	orders,
+	lineitem
+where
+	c_mktsegment = 'BUILDING'
+	and c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and o_orderdate < date '1995-03-23'
+	and l_shipdate > date '1995-03-23'
+group by
+	l_orderkey,
+	o_orderdate,
+	o_shippriority
+order by
+	revenue desc,
+	o_orderdate
+LIMIT 10;
+                                                                                      QUERY PLAN                                                                                      
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=2777186.62..2777186.65 rows=10 width=48)
+   ->  Sort  (cost=2777186.62..2785082.72 rows=3158439 width=48)
+         Sort Key: (sum((lineitem.l_extendedprice * ('1'::numeric - lineitem.l_discount)))) DESC, orders.o_orderdate
+         ->  Finalize GroupAggregate  (cost=2293270.73..2708933.89 rows=3158439 width=48)
+               Group Key: lineitem.l_orderkey, orders.o_orderdate, orders.o_shippriority
+               ->  Gather Merge  (cost=2293270.73..2636553.01 rows=2632032 width=48)
+                     Workers Planned: 2
+                     ->  Partial GroupAggregate  (cost=2292270.70..2331751.18 rows=1316016 width=48)
+                           Group Key: lineitem.l_orderkey, orders.o_orderdate, orders.o_shippriority
+                           ->  Sort  (cost=2292270.70..2295560.74 rows=1316016 width=28)
+                                 Sort Key: lineitem.l_orderkey, orders.o_orderdate, orders.o_shippriority
+                                 ->  Parallel Hash Join  (cost=411081.81..2095533.51 rows=1316016 width=28)
+                                       Hash Cond: (lineitem.l_orderkey = orders.o_orderkey)
+                                       ->  Parallel Seq Scan on lineitem  (cost=0.00..1468769.17 rows=13394436 width=20)
+                                             Filter: (l_shipdate > '1995-03-23'::date)
+                                       ->  Parallel Hash  (cost=400396.68..400396.68 rows=614650 width=16)
+                                             ->  Parallel Hash Join  (cost=9854.31..400396.68 rows=614650 width=16)
+                                                   Hash Cond: (orders.o_custkey = customer.c_custkey)
+                                                   ->  Parallel Seq Scan on orders  (cost=0.00..346514.98 rows=3034808 width=20)
+                                                         Filter: (o_orderdate < '1995-03-23'::date)
+                                                   ->  Parallel Hash  (cost=7776.94..7776.94 rows=126590 width=4)
+                                                         ->  Parallel Index Only Scan using customer_c_mktsegment_c_custkey_idx on customer  (cost=0.43..7776.94 rows=126590 width=4)
+                                                               Index Cond: (c_mktsegment = 'BUILDING'::bpchar)
+(23 rows)
+
+COMMIT;
+COMMIT

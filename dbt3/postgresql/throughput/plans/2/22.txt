@@ -1,0 +1,71 @@
+BEGIN;
+BEGIN
+EXPLAIN
+select
+	cntrycode,
+	count(*) as numcust,
+	sum(c_acctbal) as totacctbal
+from
+	(
+		select
+			substring(c_phone from 1 for 2) as cntrycode,
+			c_acctbal
+		from
+			customer
+		where
+			substring(c_phone from 1 for 2) in
+				('24', '21', '33', '32', '23', '27', '17')
+			and c_acctbal > (
+				select
+					avg(c_acctbal)
+				from
+					customer
+				where
+					c_acctbal > 0.00
+					and substring(c_phone from 1 for 2) in
+						('24', '21', '33', '32', '23', '27', '17')
+			)
+			and not exists (
+				select
+					*
+				from
+					orders
+				where
+					o_custkey = c_custkey
+			)
+	) as vip
+group by
+	cntrycode
+order by
+	cntrycode;
+                                                                     QUERY PLAN                                                                      
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize GroupAggregate  (cost=121907.86..121914.63 rows=25 width=72)
+   Group Key: (SUBSTRING(customer.c_phone FROM 1 FOR 2))
+   InitPlan 1 (returns $1)
+     ->  Finalize Aggregate  (cost=50173.73..50173.74 rows=1 width=32)
+           ->  Gather  (cost=50173.51..50173.72 rows=2 width=32)
+                 Workers Planned: 2
+                 ->  Partial Aggregate  (cost=49173.51..49173.52 rows=1 width=32)
+                       ->  Parallel Bitmap Heap Scan on customer customer_1  (cost=8723.07..48771.47 rows=160815 width=6)
+                             Recheck Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{24,21,33,32,23,27,17}'::text[])) AND (c_acctbal > 0.00))
+                             ->  Bitmap Index Scan on customer_c_phone_c_acctbal_c_custkey_idx  (cost=0.00..8626.58 rows=385956 width=0)
+                                   Index Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{24,21,33,32,23,27,17}'::text[])) AND (c_acctbal > 0.00))
+   ->  Gather Merge  (cost=71734.12..71739.95 rows=50 width=72)
+         Workers Planned: 2
+         Params Evaluated: $1
+         ->  Sort  (cost=70734.10..70734.16 rows=25 width=72)
+               Sort Key: (SUBSTRING(customer.c_phone FROM 1 FOR 2))
+               ->  Partial HashAggregate  (cost=70733.08..70733.52 rows=25 width=72)
+                     Group Key: SUBSTRING(customer.c_phone FROM 1 FOR 2)
+                     ->  Nested Loop Anti Join  (cost=3351.99..70527.71 rows=27383 width=38)
+                           ->  Parallel Bitmap Heap Scan on customer  (cost=3351.55..40724.28 rows=58885 width=26)
+                                 Recheck Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{24,21,33,32,23,27,17}'::text[])) AND (c_acctbal > $1))
+                                 ->  Bitmap Index Scan on customer_c_phone_c_acctbal_c_custkey_idx  (cost=0.00..3316.22 rows=141324 width=0)
+                                       Index Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{24,21,33,32,23,27,17}'::text[])) AND (c_acctbal > $1))
+                           ->  Index Only Scan using orders_o_custkey_idx on orders  (cost=0.43..1.18 rows=19 width=4)
+                                 Index Cond: (o_custkey = customer.c_custkey)
+(25 rows)
+
+COMMIT;
+COMMIT

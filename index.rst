@@ -9,3 +9,8 @@ DBT-2
   driver combined into a single program.
 * `3-Tier example <dbt2/3-tier/report.html>`_: Traditional 3-tier client-server
   configuration.
+
+DBT-3
+=====
+
+* `PostgreSQL Example <dbt3/postgresql/report.html>`__

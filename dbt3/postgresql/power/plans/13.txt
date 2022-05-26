@@ -1,0 +1,44 @@
+BEGIN;
+BEGIN
+EXPLAIN
+select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%unusual%packages%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;
+                                                              QUERY PLAN                                                               
+---------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=1573254.63..1573255.13 rows=200 width=16)
+   Sort Key: (count(*)) DESC, (count(orders.o_orderkey)) DESC
+   ->  HashAggregate  (cost=1573244.99..1573246.99 rows=200 width=16)
+         Group Key: count(orders.o_orderkey)
+         ->  Finalize GroupAggregate  (cost=1000.89..1550743.89 rows=1500073 width=12)
+               Group Key: customer.c_custkey
+               ->  Gather Merge  (cost=1000.89..1520742.43 rows=3000146 width=12)
+                     Workers Planned: 2
+                     ->  Partial GroupAggregate  (cost=0.86..1173451.12 rows=1500073 width=12)
+                           Group Key: customer.c_custkey
+                           ->  Nested Loop Left Join  (cost=0.86..1127204.93 rows=6249091 width=12)
+                                 ->  Parallel Index Only Scan using pk_customer on customer  (cost=0.43..28595.10 rows=625030 width=4)
+                                 ->  Index Scan using orders_o_custkey_idx on orders  (cost=0.43..1.57 rows=19 width=12)
+                                       Index Cond: (o_custkey = customer.c_custkey)
+                                       Filter: ((o_comment)::text !~~ '%unusual%packages%'::text)
+(15 rows)
+
+COMMIT;
+COMMIT

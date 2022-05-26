@@ -1,0 +1,9 @@
+# hostname;interval;timestamp;pswpin/s;pswpout/s
+pgsql1.dbt2.internal;60;1653527099;0.00;0.00
+pgsql1.dbt2.internal;60;1653527159;0.00;0.00
+pgsql1.dbt2.internal;60;1653527219;0.00;0.00
+pgsql1.dbt2.internal;60;1653527279;0.00;0.00
+pgsql1.dbt2.internal;60;1653527339;0.00;0.00
+pgsql1.dbt2.internal;60;1653527399;0.00;0.00
+pgsql1.dbt2.internal;60;1653527459;0.00;0.00
+pgsql1.dbt2.internal;60;1653527519;0.00;0.00
