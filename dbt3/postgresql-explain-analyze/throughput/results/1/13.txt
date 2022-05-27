@@ -1,0 +1,61 @@
+BEGIN;
+BEGIN
+explain (analyze, buffers)
+select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%accounts%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;
+                                                                                       QUERY PLAN                                                                                       
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=1556169.88..1556170.38 rows=200 width=16) (actual time=77867.117..77876.148 rows=46 loops=1)
+   Sort Key: (count(*)) DESC, (count(orders.o_orderkey)) DESC
+   Sort Method: quicksort  Memory: 27kB
+   Buffers: shared hit=5382224 read=14239056 written=1019
+   ->  HashAggregate  (cost=1556160.23..1556162.23 rows=200 width=16) (actual time=77867.043..77876.083 rows=46 loops=1)
+         Group Key: count(orders.o_orderkey)
+         Batches: 1  Memory Usage: 40kB
+         Buffers: shared hit=5382221 read=14239056 written=1019
+         ->  Finalize GroupAggregate  (cost=1000.89..1533658.85 rows=1500092 width=12) (actual time=14.341..76872.921 rows=1500000 loops=1)
+               Group Key: customer.c_custkey
+               Buffers: shared hit=5382221 read=14239056 written=1019
+               ->  Gather Merge  (cost=1000.89..1503657.01 rows=3000184 width=12) (actual time=14.262..75281.150 rows=1500000 loops=1)
+                     Workers Planned: 2
+                     Workers Launched: 2
+                     Buffers: shared hit=5382221 read=14239056 written=1019
+                     ->  Partial GroupAggregate  (cost=0.86..1156361.31 rows=1500092 width=12) (actual time=0.325..64211.310 rows=500000 loops=3)
+                           Group Key: customer.c_custkey
+                           Buffers: shared hit=5382221 read=14239056 written=1019
+                           ->  Nested Loop Left Join  (cost=0.86..1110305.40 rows=6210998 width=12) (actual time=0.186..61596.593 rows=5112987 loops=3)
+                                 Buffers: shared hit=5382221 read=14239056 written=1019
+                                 ->  Parallel Index Only Scan using pk_customer on customer  (cost=0.43..28595.27 rows=625038 width=4) (actual time=0.098..356.766 rows=500000 loops=3)
+                                       Heap Fetches: 0
+                                       Buffers: shared hit=69 read=3699
+                                 ->  Index Scan using orders_o_custkey_idx on orders  (cost=0.43..1.55 rows=18 width=12) (actual time=0.014..0.118 rows=10 loops=1500000)
+                                       Index Cond: (o_custkey = customer.c_custkey)
+                                       Filter: ((o_comment)::text !~~ '%express%accounts%'::text)
+                                       Rows Removed by Filter: 0
+                                       Buffers: shared hit=5382152 read=14235357 written=1019
+ Planning:
+   Buffers: shared hit=292 read=49 written=1
+ Planning Time: 2.978 ms
+ Execution Time: 77876.470 ms
+(32 rows)
+
+COMMIT;
+COMMIT

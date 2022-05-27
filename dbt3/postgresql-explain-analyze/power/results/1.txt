@@ -1,0 +1,57 @@
+BEGIN;
+BEGIN
+explain (analyze, buffers)
+select
+	l_returnflag,
+	l_linestatus,
+	sum(l_quantity) as sum_qty,
+	sum(l_extendedprice) as sum_base_price,
+	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	avg(l_quantity) as avg_qty,
+	avg(l_extendedprice) as avg_price,
+	avg(l_discount) as avg_disc,
+	count(*) as count_order
+from
+	lineitem
+where
+	l_shipdate <= date '1998-12-01' - interval '119 days'
+group by
+	l_returnflag,
+	l_linestatus
+order by
+	l_returnflag,
+	l_linestatus;
+                                                                        QUERY PLAN                                                                         
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize GroupAggregate  (cost=2325330.99..2325332.94 rows=6 width=236) (actual time=37968.568..37970.416 rows=4 loops=1)
+   Group Key: l_returnflag, l_linestatus
+   Buffers: shared hit=206 read=1155828
+   ->  Gather Merge  (cost=2325330.99..2325332.39 rows=12 width=236) (actual time=37968.527..37970.329 rows=12 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         Buffers: shared hit=206 read=1155828
+         ->  Sort  (cost=2324330.96..2324330.98 rows=6 width=236) (actual time=37966.150..37966.151 rows=4 loops=3)
+               Sort Key: l_returnflag, l_linestatus
+               Sort Method: quicksort  Memory: 27kB
+               Buffers: shared hit=206 read=1155828
+               Worker 0:  Sort Method: quicksort  Memory: 27kB
+               Worker 1:  Sort Method: quicksort  Memory: 27kB
+               ->  Partial HashAggregate  (cost=2324330.75..2324330.89 rows=6 width=236) (actual time=37966.102..37966.117 rows=4 loops=3)
+                     Group Key: l_returnflag, l_linestatus
+                     Batches: 1  Memory Usage: 32kB
+                     Buffers: shared hit=192 read=1155828
+                     Worker 0:  Batches: 1  Memory Usage: 32kB
+                     Worker 1:  Batches: 1  Memory Usage: 32kB
+                     ->  Parallel Seq Scan on lineitem  (cost=0.00..1468752.92 rows=24445081 width=25) (actual time=0.023..5286.791 rows=19524207 loops=3)
+                           Filter: (l_shipdate <= '1998-08-04 00:00:00'::timestamp without time zone)
+                           Rows Removed by Filter: 491016
+                           Buffers: shared hit=192 read=1155828
+ Planning:
+   Buffers: shared hit=324 read=1 dirtied=2
+ Planning Time: 0.962 ms
+ Execution Time: 37970.548 ms
+(27 rows)
+
+COMMIT;
+COMMIT

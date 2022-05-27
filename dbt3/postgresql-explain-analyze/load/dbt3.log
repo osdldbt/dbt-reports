@@ -1,0 +1,2 @@
+2022-05-27 16:11:51.762 UTC [15568] LOG:  redirecting log output to logging collector process
+2022-05-27 16:11:51.762 UTC [15568] HINT:  Future log output will appear in directory "log".

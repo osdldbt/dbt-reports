@@ -1,0 +1,11 @@
+Fri May 27 16:28:02 UTC 2022: Stream 5 : Starting Refresh Stream 2...
+BEGIN
+CREATE TABLE
+COPY 15000
+CREATE INDEX
+ANALYZE
+DELETE 59522
+DELETE 15000
+COMMIT
+Fri May 27 16:28:03 UTC 2022: Stream 5 : Refresh Stream 2 completed.
+Stream 5 : Elapsed time for Refresh Stream 2 : 1 seconds

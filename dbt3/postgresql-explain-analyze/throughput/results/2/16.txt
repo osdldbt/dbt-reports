@@ -1,0 +1,81 @@
+BEGIN;
+BEGIN
+explain (analyze, buffers)
+select
+	p_brand,
+	p_type,
+	p_size,
+	count(distinct ps_suppkey) as supplier_cnt
+from
+	partsupp,
+	part
+where
+	p_partkey = ps_partkey
+	and p_brand <> 'Brand#24'
+	and p_type not like 'PROMO PLATED%'
+	and p_size in (28, 46, 8, 39, 20, 17, 21, 15)
+	and ps_suppkey not in (
+		select
+			s_suppkey
+		from
+			supplier
+		where
+			s_comment like '%Customer%Complaints%'
+	)
+group by
+	p_brand,
+	p_type,
+	p_size
+order by
+	supplier_cnt desc,
+	p_brand,
+	p_type,
+	p_size;
+                                                                                      QUERY PLAN                                                                                       
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=319783.00..320168.28 rows=154110 width=44) (actual time=11079.422..11297.055 rows=27840 loops=1)
+   Sort Key: (count(DISTINCT partsupp.ps_suppkey)) DESC, part.p_brand, part.p_type, part.p_size
+   Sort Method: quicksort  Memory: 2968kB
+   Buffers: shared hit=896 read=21961 written=15442, temp read=36957 written=37057
+   ->  GroupAggregate  (cost=224674.92..301761.15 rows=154110 width=44) (actual time=8240.053..11167.784 rows=27840 loops=1)
+         Group Key: part.p_brand, part.p_type, part.p_size
+         Buffers: shared hit=893 read=21961 written=15442, temp read=36957 written=37057
+         ->  Gather Merge  (cost=224674.92..294246.52 rows=597353 width=40) (actual time=8239.948..10333.415 rows=1186778 loops=1)
+               Workers Planned: 2
+               Workers Launched: 2
+               Buffers: shared hit=893 read=21961 written=15442, temp read=36957 written=37057
+               ->  Sort  (cost=223674.90..224297.14 rows=248897 width=40) (actual time=8218.862..8645.842 rows=395593 loops=3)
+                     Sort Key: part.p_brand, part.p_type, part.p_size
+                     Sort Method: external merge  Disk: 21896kB
+                     Buffers: shared hit=890 read=21961 written=15442, temp read=36957 written=37057
+                     Worker 0:  Sort Method: external merge  Disk: 22264kB
+                     Worker 1:  Sort Method: external merge  Disk: 16640kB
+                     ->  Parallel Hash Join  (cost=15432.50..194559.77 rows=248897 width=40) (actual time=5533.755..6573.907 rows=395593 loops=3)
+                           Hash Cond: (partsupp.ps_partkey = part.p_partkey)
+                           Buffers: shared hit=846 read=21961 written=15442, temp read=29357 written=29428
+                           ->  Parallel Index Only Scan using pk_partsupp on partsupp  (cost=4.75..160764.79 rows=1666368 width=8) (actual time=0.189..3751.029 rows=2665173 loops=3)
+                                 Filter: (NOT (hashed SubPlan 1))
+                                 Rows Removed by Filter: 1493
+                                 Heap Fetches: 0
+                                 Buffers: shared hit=604 read=19710 written=13268
+                                 SubPlan 1
+                                   ->  Index Only Scan using supplier_s_suppkey_idx_like on supplier  (cost=0.14..4.29 rows=10 width=4) (actual time=0.043..0.052 rows=56 loops=3)
+                                         Heap Fetches: 0
+                                         Buffers: shared hit=7 read=1 written=1
+                           ->  Parallel Hash  (cost=12898.90..12898.90 rows=124468 width=40) (actual time=235.785..235.787 rows=98951 loops=3)
+                                 Buckets: 65536  Batches: 8  Memory Usage: 3360kB
+                                 Buffers: shared hit=208 read=2249 written=2172, temp written=2024
+                                 ->  Parallel Index Only Scan using part_ios_test1 on part  (cost=0.43..12898.90 rows=124468 width=40) (actual time=0.895..158.488 rows=98951 loops=3)
+                                       Index Cond: (p_size = ANY ('{28,46,8,39,20,17,21,15}'::integer[]))
+                                       Filter: ((p_brand <> 'Brand#24'::bpchar) AND ((p_type)::text !~~ 'PROMO PLATED%'::text))
+                                       Rows Removed by Filter: 7615
+                                       Heap Fetches: 0
+                                       Buffers: shared hit=208 read=2249 written=2172
+ Planning:
+   Buffers: shared hit=311 read=54 written=53
+ Planning Time: 4.906 ms
+ Execution Time: 11316.391 ms
+(42 rows)
+
+COMMIT;
+COMMIT

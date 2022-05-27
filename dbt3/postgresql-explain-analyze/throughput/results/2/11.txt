@@ -1,0 +1,95 @@
+BEGIN;
+BEGIN
+explain (analyze, buffers)
+select
+	ps_partkey,
+	sum(ps_supplycost * ps_availqty) as value
+from
+	partsupp,
+	supplier,
+	nation
+where
+	ps_suppkey = s_suppkey
+	and s_nationkey = n_nationkey
+	and n_name = 'EGYPT'
+group by
+	ps_partkey having
+		sum(ps_supplycost * ps_availqty) > (
+			select
+				sum(ps_supplycost * ps_availqty) * 0.0000100000
+			from
+				partsupp,
+				supplier,
+				nation
+			where
+				ps_suppkey = s_suppkey
+				and s_nationkey = n_nationkey
+				and n_name = 'EGYPT'
+		)
+order by
+	value desc;
+                                                                                                      QUERY PLAN                                                                                                      
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=101894.47..102160.25 rows=106314 width=36) (actual time=5606.201..5607.626 rows=9574 loops=1)
+   Sort Key: (sum((partsupp.ps_supplycost * (partsupp.ps_availqty)::numeric))) DESC
+   Sort Method: quicksort  Memory: 833kB
+   Buffers: shared hit=138211 read=522715 written=5, temp read=1736 written=3446
+   InitPlan 1 (returns $2)
+     ->  Finalize Aggregate  (cost=20505.11..20505.12 rows=1 width=32) (actual time=1577.883..1578.012 rows=1 loops=1)
+           Buffers: shared hit=70413 read=260076
+           ->  Gather  (cost=20504.89..20505.10 rows=2 width=32) (actual time=1473.653..1577.976 rows=3 loops=1)
+                 Workers Planned: 2
+                 Workers Launched: 2
+                 Buffers: shared hit=70413 read=260076
+                 ->  Partial Aggregate  (cost=19504.89..19504.90 rows=1 width=32) (actual time=1457.388..1457.391 rows=1 loops=3)
+                       Buffers: shared hit=70413 read=260076
+                       ->  Nested Loop  (cost=2.05..18508.20 rows=132892 width=10) (actual time=1.915..1344.969 rows=106160 loops=3)
+                             Buffers: shared hit=70413 read=260076
+                             ->  Merge Join  (cost=1.61..2035.13 rows=1667 width=4) (actual time=1.842..6.071 rows=1327 loops=3)
+                                   Merge Cond: (supplier_1.s_nationkey = nation_1.n_nationkey)
+                                   Buffers: shared hit=13 read=54
+                                   ->  Parallel Index Only Scan using supplier_s_nationkey_s_suppkey_idx on supplier supplier_1  (cost=0.29..1912.96 rows=41667 width=8) (actual time=0.080..4.256 rows=6658 loops=3)
+                                         Heap Fetches: 0
+                                         Buffers: shared hit=3 read=53
+                                   ->  Sort  (cost=1.32..1.33 rows=1 width=4) (actual time=0.083..0.085 rows=1 loops=3)
+                                         Sort Key: nation_1.n_nationkey
+                                         Sort Method: quicksort  Memory: 25kB
+                                         Buffers: shared hit=10 read=1
+                                         Worker 0:  Sort Method: quicksort  Memory: 25kB
+                                         Worker 1:  Sort Method: quicksort  Memory: 25kB
+                                         ->  Seq Scan on nation nation_1  (cost=0.00..1.31 rows=1 width=4) (actual time=0.028..0.033 rows=1 loops=3)
+                                               Filter: (n_name = 'EGYPT'::bpchar)
+                                               Rows Removed by Filter: 24
+                                               Buffers: shared hit=3
+                             ->  Index Scan using partsupp_ps_suppkey_idx on partsupp partsupp_1  (cost=0.43..9.08 rows=80 width=14) (actual time=0.030..0.960 rows=80 loops=3981)
+                                   Index Cond: (ps_suppkey = supplier_1.s_suppkey)
+                                   Buffers: shared hit=70400 read=260022
+   ->  HashAggregate  (cost=61705.93..69604.70 rows=106314 width=36) (actual time=4830.664..5587.164 rows=9574 loops=1)
+         Group Key: partsupp.ps_partkey
+         Filter: (sum((partsupp.ps_supplycost * (partsupp.ps_availqty)::numeric)) > $2)
+         Planned Partitions: 32  Batches: 161  Memory Usage: 4281kB  Disk Usage: 14224kB
+         Rows Removed by Filter: 290578
+         Buffers: shared hit=138208 read=522715 written=5, temp read=1736 written=3446
+         ->  Nested Loop  (cost=0.72..39679.07 rows=318941 width=14) (actual time=0.135..2660.368 rows=318480 loops=1)
+               Buffers: shared hit=67795 read=262639 written=5
+               ->  Nested Loop  (cost=0.29..151.60 rows=4000 width=4) (actual time=0.092..5.553 rows=3981 loops=1)
+                     Buffers: shared hit=1 read=13
+                     ->  Seq Scan on nation  (cost=0.00..1.31 rows=1 width=4) (actual time=0.030..0.038 rows=1 loops=1)
+                           Filter: (n_name = 'EGYPT'::bpchar)
+                           Rows Removed by Filter: 24
+                           Buffers: shared read=1
+                     ->  Index Only Scan using supplier_s_nationkey_s_suppkey_idx on supplier  (cost=0.29..110.29 rows=4000 width=8) (actual time=0.059..3.566 rows=3981 loops=1)
+                           Index Cond: (s_nationkey = nation.n_nationkey)
+                           Heap Fetches: 0
+                           Buffers: shared hit=1 read=12
+               ->  Index Scan using partsupp_ps_suppkey_idx on partsupp  (cost=0.43..9.08 rows=80 width=18) (actual time=0.017..0.637 rows=80 loops=3981)
+                     Index Cond: (ps_suppkey = supplier.s_suppkey)
+                     Buffers: shared hit=67794 read=262626 written=5
+ Planning:
+   Buffers: shared hit=254 read=20
+ Planning Time: 2.998 ms
+ Execution Time: 5613.829 ms
+(59 rows)
+
+COMMIT;
+COMMIT

@@ -1,0 +1,165 @@
+======================
+Database Test 3 Report
+======================
+
+**These results are not comparable to TPC Benchmark(TM) H Results.**
+
+Summary
+=======
+
+* Date:  Fri May 27 16:35:36 UTC 2022
+* Database Size: 10 GB
+* Database Manager: PostgreSQL 14.3
+* Operating System: 5.15.41-gentoo-x86_64-zbkstdxg5
+* Notes: 
+
+Metrics
+=======
+
+======================  ============  ==========================================
+       Composite Score      5480.077
+Load Test Time (hours)           .15  `CPU <load/cpu/>`__ `Memory <load/mem/>`__ `Blockdev <load/blockdev/>`__ `Network <load/net/>`__ `Swap <load/swap/>`__
+      Power Test Score      7623.442  `CPU <power/cpu/>`__ `Memory <power/mem/>`__ `Blockdev <power/blockdev/>`__ `Network <power/net/>`__ `Swap <power/swap/>`__
+ Throughput Test Score       3939.33  `CPU <throughput/cpu/>`__ `Memory <throughput/mem/>`__ `Blockdev <throughput/blockdev/>`__ `Network <throughput/net/>`__ `Swap <throughput/swap/>`__
+======================  ============  ==========================================
+
+Query Times
+===========
+
+.. image:: q_time.png
+   :target: q_time.png
+   :width: 100%
+
+Power Test
+----------
+
+* Seed: 527162057
+
++------------------+----------------------+----------------------+----------------------+
+|Duration (seconds)|Query Start Time      |RF1 Start Time        |RF2 Start Time        |
+|                  +----------------------+----------------------+----------------------+
+|                  |Query End Time        |RF1 End Time          |RF2 End Time          |
++==================+======================+======================+======================+
+|            268.01|2022-05-27 16:21:20.69|2022-05-27 16:21:01.95|2022-05-27 16:25:29.75|
+|                  +----------------------+----------------------+----------------------+
+|                  |2022-05-27 16:25:29.73|2022-05-27 16:21:20.68|2022-05-27 16:25:29.94|
++------------------+----------------------+----------------------+----------------------+
+
+=====  =======================  ==
+Query  Response Time (seconds)
+=====  =======================  ==
+    1                    37.99  `Plan <power/plans/1.txt>`__ | `Result <power/results/1.txt>`__
+    2                     5.34  `Plan <power/plans/2.txt>`__ | `Result <power/results/2.txt>`__
+    3                    14.17  `Plan <power/plans/3.txt>`__ | `Result <power/results/3.txt>`__
+    4                     1.70  `Plan <power/plans/4.txt>`__ | `Result <power/results/4.txt>`__
+    5                    12.99  `Plan <power/plans/5.txt>`__ | `Result <power/results/5.txt>`__
+    6                     5.08  `Plan <power/plans/6.txt>`__ | `Result <power/results/6.txt>`__
+    7                     8.82  `Plan <power/plans/7.txt>`__ | `Result <power/results/7.txt>`__
+    8                     2.80  `Plan <power/plans/8.txt>`__ | `Result <power/results/8.txt>`__
+    9                    23.86  `Plan <power/plans/9.txt>`__ | `Result <power/results/9.txt>`__
+   10                    10.79  `Plan <power/plans/10.txt>`__ | `Result <power/results/10.txt>`__
+   11                     2.01  `Plan <power/plans/11.txt>`__ | `Result <power/results/11.txt>`__
+   12                    10.50  `Plan <power/plans/12.txt>`__ | `Result <power/results/12.txt>`__
+   13                    34.43  `Plan <power/plans/13.txt>`__ | `Result <power/results/13.txt>`__
+   14                     5.36  `Plan <power/plans/14.txt>`__ | `Result <power/results/14.txt>`__
+   15                    13.66  `Plan <power/plans/15.txt>`__ | `Result <power/results/15.txt>`__
+   16                     3.58  `Plan <power/plans/16.txt>`__ | `Result <power/results/16.txt>`__
+   17                     0.15  `Plan <power/plans/17.txt>`__ | `Result <power/results/17.txt>`__
+   18                    37.62  `Plan <power/plans/18.txt>`__ | `Result <power/results/18.txt>`__
+   19                     0.16  `Plan <power/plans/19.txt>`__ | `Result <power/results/19.txt>`__
+   20                     3.55  `Plan <power/plans/20.txt>`__ | `Result <power/results/20.txt>`__
+   21                     6.28  `Plan <power/plans/21.txt>`__ | `Result <power/results/21.txt>`__
+   22                     0.54  `Plan <power/plans/22.txt>`__ | `Result <power/results/22.txt>`__
+  RF1                    18.73  `Result <power/results/rf1.txt>`__
+  RF2                     0.19  `Result <power/results/rf2.txt>`__
+=====  =======================  ==
+
+Throughput Test
+---------------
+
+Stream execution summary:
+
++---------+---------+----------------------+----------------------+----------------------+
+|Stream   |Duration |Query Start Time      |RF1 Start Time        |RF2 Start Time        |
++---------+(seconds)+----------------------+----------------------+----------------------+
+|Seed     |         |Query End Time        |RF1 End Time          |RF2 End Time          |
++=========+=========+======================+======================+======================+
+|        1|   595.44|2022-05-27 16:25:57.57|2022-05-27 16:25:34.24|2022-05-27 16:26:24.10|
++---------+         +----------------------+----------------------+----------------------+
+|527162058|         |2022-05-27 16:26:32.85|2022-05-27 16:26:24.02|2022-05-27 16:26:25.07|
++---------+---------+----------------------+----------------------+----------------------+
+|        2|   599.77|2022-05-27 16:25:34.47|2022-05-27 16:26:25.26|2022-05-27 16:27:11.61|
++---------+         +----------------------+----------------------+----------------------+
+|527162059|         |2022-05-27 16:25:49.87|2022-05-27 16:27:11.51|2022-05-27 16:27:12.62|
++---------+---------+----------------------+----------------------+----------------------+
+|        3|   601.87|2022-05-27 16:25:34.47|2022-05-27 16:27:12.77|2022-05-27 16:28:02.76|
++---------+         +----------------------+----------------------+----------------------+
+|527162060|         |2022-05-27 16:25:42.45|2022-05-27 16:28:02.69|2022-05-27 16:28:03.95|
++---------+---------+----------------------+----------------------+----------------------+
+
+Query execution duration (seconds) (Click **P** for plans and **R** for results):
+
+======  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================
+Stream  Q1                                                                               Q2                                                                               Q3                                                                               Q4                                                                               Q5                                                                               Q6                                                                               Q7                                                                             
+======  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================
+     1    76.15   `P <throughput/plans/1/1.txt>`__   `R <throughput/results/1/1.txt>`__    13.59   `P <throughput/plans/1/2.txt>`__   `R <throughput/results/1/2.txt>`__    35.28   `P <throughput/plans/1/3.txt>`__   `R <throughput/results/1/3.txt>`__     4.70   `P <throughput/plans/1/4.txt>`__   `R <throughput/results/1/4.txt>`__    31.25   `P <throughput/plans/1/5.txt>`__   `R <throughput/results/1/5.txt>`__    15.54   `P <throughput/plans/1/6.txt>`__   `R <throughput/results/1/6.txt>`__    28.15   `P <throughput/plans/1/7.txt>`__   `R <throughput/results/1/7.txt>`__
+     2    72.05   `P <throughput/plans/2/1.txt>`__   `R <throughput/results/2/1.txt>`__    15.15   `P <throughput/plans/2/2.txt>`__   `R <throughput/results/2/2.txt>`__    34.34   `P <throughput/plans/2/3.txt>`__   `R <throughput/results/2/3.txt>`__     5.10   `P <throughput/plans/2/4.txt>`__   `R <throughput/results/2/4.txt>`__    30.89   `P <throughput/plans/2/5.txt>`__   `R <throughput/results/2/5.txt>`__    15.40   `P <throughput/plans/2/6.txt>`__   `R <throughput/results/2/6.txt>`__    20.49   `P <throughput/plans/2/7.txt>`__   `R <throughput/results/2/7.txt>`__
+     3    85.65   `P <throughput/plans/3/1.txt>`__   `R <throughput/results/3/1.txt>`__    13.78   `P <throughput/plans/3/2.txt>`__   `R <throughput/results/3/2.txt>`__    25.35   `P <throughput/plans/3/3.txt>`__   `R <throughput/results/3/3.txt>`__     6.72   `P <throughput/plans/3/4.txt>`__   `R <throughput/results/3/4.txt>`__    37.93   `P <throughput/plans/3/5.txt>`__   `R <throughput/results/3/5.txt>`__    17.33   `P <throughput/plans/3/6.txt>`__   `R <throughput/results/3/6.txt>`__    26.53   `P <throughput/plans/3/7.txt>`__   `R <throughput/results/3/7.txt>`__
+   Min                                                                            72.05                                                                            13.59                                                                            25.35                                                                             4.70                                                                            30.89                                                                            15.40                                                                            20.49
+   Max                                                                            85.65                                                                            15.15                                                                            35.28                                                                             6.72                                                                            37.93                                                                            17.33                                                                            28.15
+   Avg                                                                            77.95                                                                            14.17                                                                            31.66                                                                             5.51                                                                            33.36                                                                            16.09                                                                            25.06
+======  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================
+
+======  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================
+Stream  Q8                                                                               Q9                                                                               Q10                                                                              Q11                                                                              Q12                                                                              Q13                                                                              Q14                                                                            
+======  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================
+     1     7.51   `P <throughput/plans/1/8.txt>`__   `R <throughput/results/1/8.txt>`__    58.20   `P <throughput/plans/1/9.txt>`__   `R <throughput/results/1/9.txt>`__    21.87  `P <throughput/plans/1/10.txt>`__  `R <throughput/results/1/10.txt>`__     4.82  `P <throughput/plans/1/11.txt>`__  `R <throughput/results/1/11.txt>`__    27.06  `P <throughput/plans/1/12.txt>`__  `R <throughput/results/1/12.txt>`__    77.92  `P <throughput/plans/1/13.txt>`__  `R <throughput/results/1/13.txt>`__    14.54  `P <throughput/plans/1/14.txt>`__  `R <throughput/results/1/14.txt>`__
+     2     6.48   `P <throughput/plans/2/8.txt>`__   `R <throughput/results/2/8.txt>`__    94.37   `P <throughput/plans/2/9.txt>`__   `R <throughput/results/2/9.txt>`__    31.67  `P <throughput/plans/2/10.txt>`__  `R <throughput/results/2/10.txt>`__     5.71  `P <throughput/plans/2/11.txt>`__  `R <throughput/results/2/11.txt>`__    25.07  `P <throughput/plans/2/12.txt>`__  `R <throughput/results/2/12.txt>`__    76.69  `P <throughput/plans/2/13.txt>`__  `R <throughput/results/2/13.txt>`__    15.88  `P <throughput/plans/2/14.txt>`__  `R <throughput/results/2/14.txt>`__
+     3     7.98   `P <throughput/plans/3/8.txt>`__   `R <throughput/results/3/8.txt>`__    56.65   `P <throughput/plans/3/9.txt>`__   `R <throughput/results/3/9.txt>`__    23.82  `P <throughput/plans/3/10.txt>`__  `R <throughput/results/3/10.txt>`__     6.51  `P <throughput/plans/3/11.txt>`__  `R <throughput/results/3/11.txt>`__    31.33  `P <throughput/plans/3/12.txt>`__  `R <throughput/results/3/12.txt>`__   103.12  `P <throughput/plans/3/13.txt>`__  `R <throughput/results/3/13.txt>`__    13.52  `P <throughput/plans/3/14.txt>`__  `R <throughput/results/3/14.txt>`__
+   Min                                                                             6.48                                                                            56.65                                                                            21.87                                                                             4.82                                                                            25.07                                                                            76.69                                                                            13.52
+   Max                                                                             7.98                                                                            94.37                                                                            31.67                                                                             6.51                                                                            31.33                                                                           103.12                                                                            15.88
+   Avg                                                                             7.32                                                                            69.74                                                                            25.79                                                                             5.68                                                                            27.82                                                                            85.91                                                                            14.65
+======  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================
+
+======  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================
+Stream  Q15                                                                              Q16                                                                              Q17                                                                              Q18                                                                              Q19                                                                              Q20                                                                              Q21                                                                            
+======  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================
+     1    34.67  `P <throughput/plans/1/15.txt>`__  `R <throughput/results/1/15.txt>`__     7.83  `P <throughput/plans/1/16.txt>`__  `R <throughput/results/1/16.txt>`__     0.40  `P <throughput/plans/1/17.txt>`__  `R <throughput/results/1/17.txt>`__    94.47  `P <throughput/plans/1/18.txt>`__  `R <throughput/results/1/18.txt>`__     0.60  `P <throughput/plans/1/19.txt>`__  `R <throughput/results/1/19.txt>`__    10.78  `P <throughput/plans/1/20.txt>`__  `R <throughput/results/1/20.txt>`__    22.92  `P <throughput/plans/1/21.txt>`__  `R <throughput/results/1/21.txt>`__
+     2    46.00  `P <throughput/plans/2/15.txt>`__  `R <throughput/results/2/15.txt>`__    11.41  `P <throughput/plans/2/16.txt>`__  `R <throughput/results/2/16.txt>`__     0.28  `P <throughput/plans/2/17.txt>`__  `R <throughput/results/2/17.txt>`__    63.96  `P <throughput/plans/2/18.txt>`__  `R <throughput/results/2/18.txt>`__     0.78  `P <throughput/plans/2/19.txt>`__  `R <throughput/results/2/19.txt>`__     7.73  `P <throughput/plans/2/20.txt>`__  `R <throughput/results/2/20.txt>`__    15.05  `P <throughput/plans/2/21.txt>`__  `R <throughput/results/2/21.txt>`__
+     3    31.25  `P <throughput/plans/3/15.txt>`__  `R <throughput/results/3/15.txt>`__     9.87  `P <throughput/plans/3/16.txt>`__  `R <throughput/results/3/16.txt>`__     0.69  `P <throughput/plans/3/17.txt>`__  `R <throughput/results/3/17.txt>`__    71.64  `P <throughput/plans/3/18.txt>`__  `R <throughput/results/3/18.txt>`__     1.00  `P <throughput/plans/3/19.txt>`__  `R <throughput/results/3/19.txt>`__    11.18  `P <throughput/plans/3/20.txt>`__  `R <throughput/results/3/20.txt>`__    15.22  `P <throughput/plans/3/21.txt>`__  `R <throughput/results/3/21.txt>`__
+   Min                                                                            31.25                                                                             7.83                                                                             0.28                                                                            63.96                                                                             0.60                                                                             7.73                                                                            15.05
+   Max                                                                            46.00                                                                            11.41                                                                             0.69                                                                            94.47                                                                             1.00                                                                            11.18                                                                            22.92
+   Avg                                                                            37.30                                                                             9.71                                                                             0.46                                                                            76.69                                                                             0.79                                                                             9.90                                                                            17.73
+======  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================  ===============================================================================
+
+======  ===============================================================================  ===============================================================================  ===============================================================================
+Stream  Q22                                                                              RF1                                                                              RF2                                                                            
+======  ===============================================================================  ===============================================================================  ===============================================================================
+     1     3.14  `P <throughput/plans/1/22.txt>`__  `R <throughput/results/1/22.txt>`__    49.78                                    `R <throughput/results/1/rf1.txt>`__     0.97                                    `R <throughput/results/1/rf2.txt>`__
+     2     1.86  `P <throughput/plans/2/22.txt>`__  `R <throughput/results/2/22.txt>`__    46.25                                    `R <throughput/results/2/rf1.txt>`__     1.01                                    `R <throughput/results/2/rf2.txt>`__
+     3     2.04  `P <throughput/plans/3/22.txt>`__  `R <throughput/results/3/22.txt>`__    49.92                                    `R <throughput/results/3/rf1.txt>`__     1.19                                    `R <throughput/results/3/rf2.txt>`__
+   Min                                                                             1.86                                                                            46.25                                                                             0.97
+   Max                                                                             3.14                                                                            49.92                                                                             1.19
+   Avg                                                                             2.35                                                                            48.65                                                                             1.06
+======  ===============================================================================  ===============================================================================  ===============================================================================
+
+PostgreSQL Report
+=================
+
+Load Test
+--------------------------------------------------------------------------------
+
+* `Database Settings <load/param.txt>`__
+* Per Process Statistics:  `autovacum <load/autovacum/>`__ `bgwriter <load/bgwriter/>`__ `checkpointer <load/checkpointer/>`__ `logger <load/logger/>`__ `logical <load/logical/>`__ `statscollector <load/statscollector/>`__ `walwriter <load/walwriter/>`__
+
+Power Test
+--------------------------------------------------------------------------------
+
+* `Database Settings <power/param.txt>`__
+* Per Process Statistics:  `autovacum <power/autovacum/>`__ `bgwriter <power/bgwriter/>`__ `checkpointer <power/checkpointer/>`__ `logger <power/logger/>`__ `logical <power/logical/>`__ `statscollector <power/statscollector/>`__ `walwriter <power/walwriter/>`__
+
+Throughput Test
+--------------------------------------------------------------------------------
+
+* `Database Settings <throughput/param.txt>`__
+* Per Process Statistics:  `autovacum <throughput/autovacum/>`__ `bgwriter <throughput/bgwriter/>`__ `checkpointer <throughput/checkpointer/>`__ `logger <throughput/logger/>`__ `logical <throughput/logical/>`__ `statscollector <throughput/statscollector/>`__ `walwriter <throughput/walwriter/>`__

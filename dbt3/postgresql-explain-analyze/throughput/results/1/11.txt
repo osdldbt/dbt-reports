@@ -1,0 +1,95 @@
+BEGIN;
+BEGIN
+explain (analyze, buffers)
+select
+	ps_partkey,
+	sum(ps_supplycost * ps_availqty) as value
+from
+	partsupp,
+	supplier,
+	nation
+where
+	ps_suppkey = s_suppkey
+	and s_nationkey = n_nationkey
+	and n_name = 'MOZAMBIQUE'
+group by
+	ps_partkey having
+		sum(ps_supplycost * ps_availqty) > (
+			select
+				sum(ps_supplycost * ps_availqty) * 0.0000100000
+			from
+				partsupp,
+				supplier,
+				nation
+			where
+				ps_suppkey = s_suppkey
+				and s_nationkey = n_nationkey
+				and n_name = 'MOZAMBIQUE'
+		)
+order by
+	value desc;
+                                                                                                      QUERY PLAN                                                                                                       
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=101894.47..102160.25 rows=106314 width=36) (actual time=4763.731..4765.345 rows=10265 loops=1)
+   Sort Key: (sum((partsupp.ps_supplycost * (partsupp.ps_availqty)::numeric))) DESC
+   Sort Method: quicksort  Memory: 866kB
+   Buffers: shared hit=138073 read=513507 written=556, temp read=1678 written=3383
+   InitPlan 1 (returns $2)
+     ->  Finalize Aggregate  (cost=20505.11..20505.12 rows=1 width=32) (actual time=1411.272..1411.409 rows=1 loops=1)
+           Buffers: shared hit=73523 read=252352 written=538
+           ->  Gather  (cost=20504.89..20505.10 rows=2 width=32) (actual time=1394.456..1411.379 rows=3 loops=1)
+                 Workers Planned: 2
+                 Workers Launched: 2
+                 Buffers: shared hit=73523 read=252352 written=538
+                 ->  Partial Aggregate  (cost=19504.89..19504.90 rows=1 width=32) (actual time=1387.164..1387.168 rows=1 loops=3)
+                       Buffers: shared hit=73523 read=252352 written=538
+                       ->  Nested Loop  (cost=2.05..18508.20 rows=132892 width=10) (actual time=7.118..1277.442 rows=104640 loops=3)
+                             Buffers: shared hit=73523 read=252352 written=538
+                             ->  Merge Join  (cost=1.61..2035.13 rows=1667 width=4) (actual time=7.039..11.347 rows=1308 loops=3)
+                                   Merge Cond: (supplier_1.s_nationkey = nation_1.n_nationkey)
+                                   Buffers: shared hit=13 read=172
+                                   ->  Parallel Index Only Scan using supplier_s_nationkey_s_suppkey_idx on supplier supplier_1  (cost=0.29..1912.96 rows=41667 width=8) (actual time=0.078..7.859 rows=22667 loops=3)
+                                         Heap Fetches: 0
+                                         Buffers: shared hit=3 read=171
+                                   ->  Sort  (cost=1.32..1.33 rows=1 width=4) (actual time=0.080..0.082 rows=1 loops=3)
+                                         Sort Key: nation_1.n_nationkey
+                                         Sort Method: quicksort  Memory: 25kB
+                                         Buffers: shared hit=10 read=1
+                                         Worker 0:  Sort Method: quicksort  Memory: 25kB
+                                         Worker 1:  Sort Method: quicksort  Memory: 25kB
+                                         ->  Seq Scan on nation nation_1  (cost=0.00..1.31 rows=1 width=4) (actual time=0.031..0.033 rows=1 loops=3)
+                                               Filter: (n_name = 'MOZAMBIQUE'::bpchar)
+                                               Rows Removed by Filter: 24
+                                               Buffers: shared hit=3
+                             ->  Index Scan using partsupp_ps_suppkey_idx on partsupp partsupp_1  (cost=0.43..9.08 rows=80 width=14) (actual time=0.027..0.934 rows=80 loops=3924)
+                                   Index Cond: (ps_suppkey = supplier_1.s_suppkey)
+                                   Buffers: shared hit=73510 read=252180 written=538
+   ->  HashAggregate  (cost=61705.93..69604.70 rows=106314 width=36) (actual time=4100.431..4749.375 rows=10265 loops=1)
+         Group Key: partsupp.ps_partkey
+         Filter: (sum((partsupp.ps_supplycost * (partsupp.ps_availqty)::numeric)) > $2)
+         Planned Partitions: 32  Batches: 161  Memory Usage: 4281kB  Disk Usage: 14216kB
+         Rows Removed by Filter: 285527
+         Buffers: shared hit=138070 read=513507 written=556, temp read=1678 written=3383
+         ->  Nested Loop  (cost=0.72..39679.07 rows=318941 width=14) (actual time=0.090..2270.676 rows=313920 loops=1)
+               Buffers: shared hit=64547 read=261155 written=18
+               ->  Nested Loop  (cost=0.29..151.60 rows=4000 width=4) (actual time=0.056..4.700 rows=3924 loops=1)
+                     Buffers: shared hit=2 read=12
+                     ->  Seq Scan on nation  (cost=0.00..1.31 rows=1 width=4) (actual time=0.011..0.017 rows=1 loops=1)
+                           Filter: (n_name = 'MOZAMBIQUE'::bpchar)
+                           Rows Removed by Filter: 24
+                           Buffers: shared hit=1
+                     ->  Index Only Scan using supplier_s_nationkey_s_suppkey_idx on supplier  (cost=0.29..110.29 rows=4000 width=8) (actual time=0.043..2.970 rows=3924 loops=1)
+                           Index Cond: (s_nationkey = nation.n_nationkey)
+                           Heap Fetches: 0
+                           Buffers: shared hit=1 read=12
+               ->  Index Scan using partsupp_ps_suppkey_idx on partsupp  (cost=0.43..9.08 rows=80 width=18) (actual time=0.018..0.546 rows=80 loops=3924)
+                     Index Cond: (ps_suppkey = supplier.s_suppkey)
+                     Buffers: shared hit=64545 read=261143 written=18
+ Planning:
+   Buffers: shared hit=255 read=19
+ Planning Time: 2.619 ms
+ Execution Time: 4772.086 ms
+(59 rows)
+
+COMMIT;
+COMMIT

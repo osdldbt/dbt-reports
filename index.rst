@@ -14,3 +14,6 @@ DBT-3
 =====
 
 * `PostgreSQL Example <dbt3/postgresql/report.html>`__
+* `PostgreSQL EXPLAIN ANALYZE Example
+  <dbt3/postgresql-explain-analyze/report.html>`__: The query results are
+  replaced by actual query execution plans.

@@ -1,0 +1,311 @@
+ctime,datname,pid,usesysid,usename,application_name,client_addr,client_port,backend_start,xact_start,query_start,query,state,state_change
+1653668461.992623,,16163,,,"",,,2022-05-27 16:21:00.852968+00,,,"",,
+1653668461.992623,,16165,10,postgres,"",,,2022-05-27 16:21:00.853551+00,,,"",,
+1653668461.992623,dbt3,16211,10,postgres,psql,,-1,2022-05-27 16:21:01.985797+00,2022-05-27 16:21:01.987559+00,2022-05-27 16:21:01.987559+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV, HEADER);",active,2022-05-27 16:21:01.987559+00
+1653668461.992623,dbt3,16214,10,postgres,psql,,-1,2022-05-27 16:21:01.991152+00,2022-05-27 16:21:01.992623+00,2022-05-27 16:21:01.992623+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV, HEADER);",active,2022-05-27 16:21:01.992624+00
+1653668461.992623,dbt3,16212,10,postgres,psql,,-1,2022-05-27 16:21:01.988569+00,2022-05-27 16:21:01.991067+00,2022-05-27 16:21:01.991067+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV, HEADER);",active,2022-05-27 16:21:01.991068+00
+1653668461.992623,dbt3,16213,10,postgres,psql,,-1,2022-05-27 16:21:01.991175+00,2022-05-27 16:21:01.992623+00,2022-05-27 16:21:01.992623+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV, HEADER);",active,2022-05-27 16:21:01.992624+00
+1653668461.992623,,16161,,,"",,,2022-05-27 16:21:00.852413+00,,,"",,
+1653668461.992623,,16160,,,"",,,2022-05-27 16:21:00.852128+00,,,"",,
+1653668461.992623,,16162,,,"",,,2022-05-27 16:21:00.852658+00,,,"",,
+1653668522.001206,,16163,,,"",,,2022-05-27 16:21:00.852968+00,,,"",,
+1653668522.001206,,16165,10,postgres,"",,,2022-05-27 16:21:00.853551+00,,,"",,
+1653668522.001206,dbt3,16292,10,postgres,psql,,-1,2022-05-27 16:22:01.4502+00,2022-05-27 16:22:01.451564+00,2022-05-27 16:22:01.451734+00,"explain (analyze, buffers)
+select
+	sum(l_extendedprice * l_discount) as revenue
+from
+	lineitem
+where
+	l_shipdate >= date '1996-01-01'
+	and l_shipdate < cast(date '1996-01-01' + interval '1 year' as date)
+	and l_discount between 0.06 - 0.01 and 0.06 + 0.01
+	and l_quantity < 25;",active,2022-05-27 16:22:01.451735+00
+1653668522.001206,dbt3,16293,10,postgres,psql,,,2022-05-27 16:22:01.454242+00,2022-05-27 16:22:01.451564+00,2022-05-27 16:22:01.451734+00,"explain (analyze, buffers)
+select
+	sum(l_extendedprice * l_discount) as revenue
+from
+	lineitem
+where
+	l_shipdate >= date '1996-01-01'
+	and l_shipdate < cast(date '1996-01-01' + interval '1 year' as date)
+	and l_discount between 0.06 - 0.01 and 0.06 + 0.01
+	and l_quantity < 25;",active,2022-05-27 16:22:01.455844+00
+1653668522.001206,dbt3,16294,10,postgres,psql,,,2022-05-27 16:22:01.454456+00,2022-05-27 16:22:01.451564+00,2022-05-27 16:22:01.451734+00,"explain (analyze, buffers)
+select
+	sum(l_extendedprice * l_discount) as revenue
+from
+	lineitem
+where
+	l_shipdate >= date '1996-01-01'
+	and l_shipdate < cast(date '1996-01-01' + interval '1 year' as date)
+	and l_discount between 0.06 - 0.01 and 0.06 + 0.01
+	and l_quantity < 25;",active,2022-05-27 16:22:01.455893+00
+1653668522.001206,dbt3,16304,10,postgres,psql,,-1,2022-05-27 16:22:01.999333+00,2022-05-27 16:22:02.001206+00,2022-05-27 16:22:02.001206+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:22:02.001207+00
+1653668522.001206,dbt3,16303,10,postgres,psql,,-1,2022-05-27 16:22:01.99422+00,2022-05-27 16:22:01.996284+00,2022-05-27 16:22:01.996284+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:22:01.996285+00
+1653668522.001206,dbt3,16305,10,postgres,psql,,-1,2022-05-27 16:22:01.99464+00,2022-05-27 16:22:01.996461+00,2022-05-27 16:22:01.996461+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:22:01.996463+00
+1653668522.001206,,16161,,,"",,,2022-05-27 16:21:00.852413+00,,,"",,
+1653668522.001206,,16160,,,"",,,2022-05-27 16:21:00.852128+00,,,"",,
+1653668522.001206,,16162,,,"",,,2022-05-27 16:21:00.852658+00,,,"",,
+1653668581.996977,,16163,,,"",,,2022-05-27 16:21:00.852968+00,,,"",,
+1653668581.996977,,16165,10,postgres,"",,,2022-05-27 16:21:00.853551+00,,,"",,
+1653668581.996977,dbt3,16372,10,postgres,psql,,-1,2022-05-27 16:22:55.226636+00,2022-05-27 16:22:55.227856+00,2022-05-27 16:22:55.227946+00,"explain (analyze, buffers)
+select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%accounts%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",active,2022-05-27 16:22:55.227946+00
+1653668581.996977,dbt3,16373,10,postgres,psql,,,2022-05-27 16:22:55.230457+00,2022-05-27 16:22:55.227856+00,2022-05-27 16:22:55.227946+00,"explain (analyze, buffers)
+select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%accounts%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",active,2022-05-27 16:22:55.231923+00
+1653668581.996977,dbt3,16374,10,postgres,psql,,,2022-05-27 16:22:55.23066+00,2022-05-27 16:22:55.227856+00,2022-05-27 16:22:55.227946+00,"explain (analyze, buffers)
+select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%accounts%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",active,2022-05-27 16:22:55.231923+00
+1653668581.996977,dbt3,16382,10,postgres,psql,,-1,2022-05-27 16:23:01.994496+00,2022-05-27 16:23:01.996977+00,2022-05-27 16:23:01.996977+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:23:01.996978+00
+1653668581.996977,dbt3,16383,10,postgres,psql,,-1,2022-05-27 16:23:01.995445+00,2022-05-27 16:23:01.997522+00,2022-05-27 16:23:01.997522+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:23:01.997523+00
+1653668581.996977,,16161,,,"",,,2022-05-27 16:21:00.852413+00,,,"",,
+1653668581.996977,,16160,,,"",,,2022-05-27 16:21:00.852128+00,,,"",,
+1653668581.996977,,16162,,,"",,,2022-05-27 16:21:00.852658+00,,,"",,
+1653668642.000062,,16163,,,"",,,2022-05-27 16:21:00.852968+00,,,"",,
+1653668642.000062,,16165,10,postgres,"",,,2022-05-27 16:21:00.853551+00,,,"",,
+1653668642.000062,dbt3,16471,10,postgres,psql,,-1,2022-05-27 16:23:51.881153+00,2022-05-27 16:23:51.882738+00,2022-05-27 16:23:51.885602+00,"explain (analyze, buffers)
+select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue0
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue0
+	)
+order by
+	s_suppkey;",active,2022-05-27 16:23:51.885603+00
+1653668642.000062,dbt3,16472,10,postgres,psql,,,2022-05-27 16:23:51.888948+00,2022-05-27 16:23:51.882738+00,2022-05-27 16:23:51.885602+00,"explain (analyze, buffers)
+select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue0
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue0
+	)
+order by
+	s_suppkey;",active,2022-05-27 16:23:51.890886+00
+1653668642.000062,dbt3,16473,10,postgres,psql,,,2022-05-27 16:23:51.889232+00,2022-05-27 16:23:51.882738+00,2022-05-27 16:23:51.885602+00,"explain (analyze, buffers)
+select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue0
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue0
+	)
+order by
+	s_suppkey;",active,2022-05-27 16:23:51.890966+00
+1653668642.000062,dbt3,16474,10,postgres,psql,,,2022-05-27 16:23:57.951996+00,2022-05-27 16:23:51.882738+00,2022-05-27 16:23:51.885602+00,"explain (analyze, buffers)
+select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue0
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue0
+	)
+order by
+	s_suppkey;",active,2022-05-27 16:23:57.954509+00
+1653668642.000062,dbt3,16475,10,postgres,psql,,,2022-05-27 16:23:57.952384+00,2022-05-27 16:23:51.882738+00,2022-05-27 16:23:51.885602+00,"explain (analyze, buffers)
+select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue0
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue0
+	)
+order by
+	s_suppkey;",active,2022-05-27 16:23:57.954669+00
+1653668642.000062,dbt3,16484,10,postgres,psql,,-1,2022-05-27 16:24:01.99874+00,2022-05-27 16:24:02.000067+00,2022-05-27 16:24:02.000067+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:24:02.000067+00
+1653668642.000062,dbt3,16485,10,postgres,psql,,-1,2022-05-27 16:24:01.99895+00,2022-05-27 16:24:02.000062+00,2022-05-27 16:24:02.000062+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:24:02.000062+00
+1653668642.000062,dbt3,16483,10,postgres,psql,,-1,2022-05-27 16:24:01.998458+00,2022-05-27 16:24:02.000422+00,2022-05-27 16:24:02.000422+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:24:02.000423+00
+1653668642.000062,dbt3,16486,10,postgres,psql,,-1,2022-05-27 16:24:01.999167+00,2022-05-27 16:24:02.000425+00,2022-05-27 16:24:02.000425+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:24:02.000426+00
+1653668642.000062,dbt3,16487,10,postgres,psql,,-1,2022-05-27 16:24:01.999379+00,2022-05-27 16:24:02.000471+00,2022-05-27 16:24:02.000471+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:24:02.000472+00
+1653668642.000062,,16161,,,"",,,2022-05-27 16:21:00.852413+00,,,"",,
+1653668642.000062,,16160,,,"",,,2022-05-27 16:21:00.852128+00,,,"",,
+1653668642.000062,,16162,,,"",,,2022-05-27 16:21:00.852658+00,,,"",,
+1653668702.037901,,16163,,,"",,,2022-05-27 16:21:00.852968+00,,,"",,
+1653668702.037901,,16165,10,postgres,"",,,2022-05-27 16:21:00.853551+00,,,"",,
+1653668702.037901,dbt3,16542,10,postgres,psql,,-1,2022-05-27 16:24:57.312885+00,2022-05-27 16:24:57.31454+00,2022-05-27 16:24:57.314757+00,"explain (analyze, buffers)
+select
+	n_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue
+from
+	customer,
+	orders,
+	lineitem,
+	supplier,
+	nation,
+	region
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and l_suppkey = s_suppkey
+	and c_nationkey = s_nationkey
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'AFRICA'
+	and o_orderdate >= date '1996-01-01'
+	and o_orderdate < date '1996-01-01' + interval '1 year'
+group by
+	n_name
+order by
+	revenue desc;",active,2022-05-27 16:24:57.314758+00
+1653668702.037901,dbt3,16543,10,postgres,psql,,,2022-05-27 16:24:57.323525+00,2022-05-27 16:24:57.31454+00,2022-05-27 16:24:57.314757+00,"explain (analyze, buffers)
+select
+	n_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue
+from
+	customer,
+	orders,
+	lineitem,
+	supplier,
+	nation,
+	region
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and l_suppkey = s_suppkey
+	and c_nationkey = s_nationkey
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'AFRICA'
+	and o_orderdate >= date '1996-01-01'
+	and o_orderdate < date '1996-01-01' + interval '1 year'
+group by
+	n_name
+order by
+	revenue desc;",active,2022-05-27 16:24:57.32569+00
+1653668702.037901,dbt3,16544,10,postgres,psql,,,2022-05-27 16:24:57.323781+00,2022-05-27 16:24:57.31454+00,2022-05-27 16:24:57.314757+00,"explain (analyze, buffers)
+select
+	n_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue
+from
+	customer,
+	orders,
+	lineitem,
+	supplier,
+	nation,
+	region
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and l_suppkey = s_suppkey
+	and c_nationkey = s_nationkey
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'AFRICA'
+	and o_orderdate >= date '1996-01-01'
+	and o_orderdate < date '1996-01-01' + interval '1 year'
+group by
+	n_name
+order by
+	revenue desc;",active,2022-05-27 16:24:57.325691+00
+1653668702.037901,dbt3,16552,10,postgres,psql,,-1,2022-05-27 16:25:02.024946+00,2022-05-27 16:25:02.029573+00,2022-05-27 16:25:02.029573+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:25:02.029575+00
+1653668702.037901,dbt3,16554,10,postgres,psql,,-1,2022-05-27 16:25:02.026673+00,2022-05-27 16:25:02.037901+00,2022-05-27 16:25:02.037901+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:25:02.037902+00
+1653668702.037901,dbt3,16555,10,postgres,psql,,-1,2022-05-27 16:25:02.033356+00,2022-05-27 16:25:02.045128+00,2022-05-27 16:25:02.045128+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:25:02.045129+00
+1653668702.037901,,16161,,,"",,,2022-05-27 16:21:00.852413+00,,,"",,
+1653668702.037901,,16160,,,"",,,2022-05-27 16:21:00.852128+00,,,"",,
+1653668702.037901,,16162,,,"",,,2022-05-27 16:21:00.852658+00,,,"",,

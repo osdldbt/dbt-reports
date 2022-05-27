@@ -1,0 +1,46 @@
+BEGIN;
+BEGIN
+explain (analyze, buffers)
+select
+	100.00 * sum(case
+		when p_type like 'PROMO%'
+			then l_extendedprice * (1 - l_discount)
+		else 0
+	end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue
+from
+	lineitem,
+	part
+where
+	l_partkey = p_partkey
+	and l_shipdate >= date '1995-10-01'
+	and l_shipdate < cast(date '1995-10-01' + interval '1 month' as date);
+                                                                       QUERY PLAN                                                                       
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize Aggregate  (cost=1617768.40..1617768.41 rows=1 width=32) (actual time=14393.521..14491.860 rows=1 loops=1)
+   Buffers: shared hit=165 read=1200441, temp read=15217 written=15508
+   ->  Gather  (cost=1617768.16..1617768.37 rows=2 width=64) (actual time=14387.107..14491.827 rows=3 loops=1)
+         Workers Planned: 2
+         Workers Launched: 2
+         Buffers: shared hit=165 read=1200441, temp read=15217 written=15508
+         ->  Partial Aggregate  (cost=1616768.16..1616768.17 rows=1 width=64) (actual time=14378.721..14378.729 rows=1 loops=3)
+               Buffers: shared hit=165 read=1200441, temp read=15217 written=15508
+               ->  Parallel Hash Join  (cost=65408.48..1611042.98 rows=327153 width=33) (actual time=13506.025..13991.436 rows=257843 loops=3)
+                     Hash Cond: (lineitem.l_partkey = part.p_partkey)
+                     Buffers: shared hit=165 read=1200441, temp read=15217 written=15508
+                     ->  Parallel Seq Scan on lineitem  (cost=0.00..1535882.73 rows=327153 width=16) (actual time=0.150..12268.002 rows=257843 loops=3)
+                           Filter: ((l_shipdate >= '1995-10-01'::date) AND (l_shipdate < '1995-11-01'::date))
+                           Rows Removed by Filter: 19737417
+                           Buffers: shared hit=2 read=1159478
+                     ->  Parallel Hash  (cost=49295.10..49295.10 rows=833310 width=25) (actual time=874.505..874.506 rows=666667 loops=3)
+                           Buckets: 65536  Batches: 64  Memory Usage: 2432kB
+                           Buffers: shared read=40962, temp written=11656
+                           ->  Parallel Seq Scan on part  (cost=0.00..49295.10 rows=833310 width=25) (actual time=0.044..410.140 rows=666667 loops=3)
+                                 Buffers: shared read=40962
+ Planning:
+   Buffers: shared hit=408 read=86
+ Planning Time: 3.802 ms
+ Execution Time: 14492.013 ms
+(24 rows)
+
+COMMIT;
+COMMIT
