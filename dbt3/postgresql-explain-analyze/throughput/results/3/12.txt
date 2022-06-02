@@ -1,6 +1,17 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	l_shipmode,
 	sum(case
@@ -20,50 +31,69 @@ from
 	lineitem
 where
 	o_orderkey = l_orderkey
-	and l_shipmode in ('MAIL', 'REG AIR')
+	and l_shipmode in ('SHIP', 'FOB')
 	and l_commitdate < l_receiptdate
 	and l_shipdate < l_commitdate
-	and l_receiptdate >= date '1996-01-01'
-	and l_receiptdate < date '1996-01-01' + interval '1 year'
+	and l_receiptdate >= date '1997-01-01'
+	and l_receiptdate < date '1997-01-01' + interval '1 year'
 group by
 	l_shipmode
 order by
 	l_shipmode;
-                                                                                                                                    QUERY PLAN                                                                                                                                     
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Finalize GroupAggregate  (cost=2223863.61..2226302.18 rows=7 width=27) (actual time=30250.912..31249.343 rows=2 loops=1)
-   Group Key: lineitem.l_shipmode
-   Buffers: shared hit=552 read=1428195, temp read=84347 written=86614
-   ->  Gather Merge  (cost=2223863.61..2226302.00 rows=14 width=27) (actual time=30134.698..31249.320 rows=6 loops=1)
-         Workers Planned: 2
-         Workers Launched: 2
-         Buffers: shared hit=552 read=1428195, temp read=84347 written=86614
-         ->  Partial GroupAggregate  (cost=2222863.59..2225300.36 rows=7 width=27) (actual time=30115.349..30224.850 rows=2 loops=3)
-               Group Key: lineitem.l_shipmode
-               Buffers: shared hit=552 read=1428195, temp read=84347 written=86614
-               ->  Sort  (cost=2222863.59..2223168.18 rows=121835 width=27) (actual time=29967.965..30045.230 rows=104458 loops=3)
-                     Sort Key: lineitem.l_shipmode
-                     Sort Method: external merge  Disk: 3632kB
-                     Buffers: shared hit=552 read=1428195, temp read=84347 written=86614
-                     Worker 0:  Sort Method: external merge  Disk: 4112kB
-                     Worker 1:  Sort Method: external merge  Disk: 3648kB
-                     ->  Parallel Hash Join  (cost=447060.44..2209656.34 rows=121835 width=27) (actual time=27429.546..29816.658 rows=104458 loops=3)
-                           Hash Cond: (lineitem.l_orderkey = orders.o_orderkey)
-                           Buffers: shared hit=438 read=1428195, temp read=82923 written=85184
-                           ->  Parallel Seq Scan on lineitem  (cost=0.00..1724084.09 rows=121835 width=19) (actual time=0.233..19846.806 rows=104458 loops=3)
-                                 Filter: ((l_shipmode = ANY ('{MAIL,"REG AIR"}'::bpchar[])) AND (l_commitdate < l_receiptdate) AND (l_shipdate < l_commitdate) AND (l_receiptdate >= '1996-01-01'::date) AND (l_receiptdate < '1997-01-01 00:00:00'::timestamp without time zone))
-                                 Rows Removed by Filter: 19890802
-                                 Buffers: shared hit=310 read=1159170
-                           ->  Parallel Hash  (cost=331866.75..331866.75 rows=6274375 width=24) (actual time=7260.452..7260.454 rows=5000000 loops=3)
-                                 Buckets: 65536  Batches: 256  Memory Usage: 3808kB
-                                 Buffers: shared hit=98 read=269025, temp written=82112
-                                 ->  Parallel Seq Scan on orders  (cost=0.00..331866.75 rows=6274375 width=24) (actual time=0.052..3179.983 rows=5000000 loops=3)
-                                       Buffers: shared hit=98 read=269025
- Planning:
-   Buffers: shared hit=443 read=2
- Planning Time: 2.774 ms
- Execution Time: 31250.771 ms
-(32 rows)
+NOTICE:  duration: 25351.215 ms  plan:
+Query Text: select
+	l_shipmode,
+	sum(case
+		when o_orderpriority = '1-URGENT'
+			or o_orderpriority = '2-HIGH'
+			then 1
+		else 0
+	end) as high_line_count,
+	sum(case
+		when o_orderpriority <> '1-URGENT'
+			and o_orderpriority <> '2-HIGH'
+			then 1
+		else 0
+	end) as low_line_count
+from
+	orders,
+	lineitem
+where
+	o_orderkey = l_orderkey
+	and l_shipmode in ('SHIP', 'FOB')
+	and l_commitdate < l_receiptdate
+	and l_shipdate < l_commitdate
+	and l_receiptdate >= date '1997-01-01'
+	and l_receiptdate < date '1997-01-01' + interval '1 year'
+group by
+	l_shipmode
+order by
+	l_shipmode;
+Finalize GroupAggregate  (cost=2223537.67..2225926.16 rows=7 width=27) (actual time=25052.703..25351.198 rows=2 loops=1)
+  Group Key: lineitem.l_shipmode
+  ->  Gather Merge  (cost=2223537.67..2225925.98 rows=14 width=27) (actual time=24976.301..25351.183 rows=6 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial GroupAggregate  (cost=2222537.65..2224924.34 rows=7 width=27) (actual time=24945.084..25019.192 rows=2 loops=3)
+              Group Key: lineitem.l_shipmode
+              ->  Sort  (cost=2222537.65..2222835.98 rows=119331 width=27) (actual time=24861.185..24914.671 rows=103669 loops=3)
+                    Sort Key: lineitem.l_shipmode
+                    Sort Method: external merge  Disk: 3768kB
+                    Worker 0:  Sort Method: external merge  Disk: 3416kB
+                    Worker 1:  Sort Method: external merge  Disk: 4120kB
+                    ->  Parallel Hash Join  (cost=447062.90..2209619.30 rows=119331 width=27) (actual time=23134.382..24741.852 rows=103669 loops=3)
+                          Hash Cond: (lineitem.l_orderkey = orders.o_orderkey)
+                          ->  Parallel Seq Scan on lineitem  (cost=0.00..1724079.15 rows=119331 width=19) (actual time=0.151..17035.904 rows=103669 loops=3)
+                                Filter: ((l_shipmode = ANY ('{SHIP,FOB}'::bpchar[])) AND (l_commitdate < l_receiptdate) AND (l_shipdate < l_commitdate) AND (l_receiptdate >= '1997-01-01'::date) AND (l_receiptdate < '1998-01-01 00:00:00'::timestamp without time zone))
+                                Rows Removed by Filter: 19891592
+                          ->  Parallel Hash  (cost=331869.51..331869.51 rows=6274351 width=24) (actual time=5808.950..5808.951 rows=5000000 loops=3)
+                                Buckets: 65536  Batches: 256  Memory Usage: 3776kB
+                                ->  Parallel Seq Scan on orders  (cost=0.00..331869.51 rows=6274351 width=24) (actual time=0.051..2517.821 rows=5000000 loops=3)
+ l_shipmode | high_line_count | low_line_count 
+------------+-----------------+----------------
+ FOB        |           62487 |          92736
+ SHIP       |           62548 |          93235
+(2 rows)
 
 COMMIT;
 COMMIT

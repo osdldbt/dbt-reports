@@ -1,7 +1,6 @@
 BEGIN;
 BEGIN
 EXPLAIN
-explain (analyze, buffers)
 select
 	s_name,
 	count(*) as numwait
@@ -35,10 +34,47 @@ where
 			and l3.l_receiptdate > l3.l_commitdate
 	)
 	and s_nationkey = n_nationkey
-	and n_name = 'BRAZIL'
+	and n_name = 'ETHIOPIA'
 group by
 	s_name
 order by
 	numwait desc,
 	s_name
 LIMIT 100;
+                                                                                     QUERY PLAN                                                                                      
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=823128.06..823128.07 rows=1 width=34)
+   ->  Sort  (cost=823128.06..823128.07 rows=1 width=34)
+         Sort Key: (count(*)) DESC, supplier.s_name
+         ->  GroupAggregate  (cost=823128.03..823128.05 rows=1 width=34)
+               Group Key: supplier.s_name
+               ->  Sort  (cost=823128.03..823128.04 rows=1 width=26)
+                     Sort Key: supplier.s_name
+                     ->  Nested Loop  (cost=4018.69..823128.02 rows=1 width=26)
+                           ->  Nested Loop Semi Join  (cost=4018.26..823120.68 rows=1 width=42)
+                                 ->  Gather  (cost=4017.69..823113.15 rows=1 width=38)
+                                       Workers Planned: 2
+                                       ->  Nested Loop Anti Join  (cost=3017.69..822113.05 rows=1 width=38)
+                                             ->  Parallel Hash Join  (cost=3017.13..566118.57 rows=333577 width=38)
+                                                   Hash Cond: (l1.l_suppkey = supplier.s_suppkey)
+                                                   ->  Parallel Index Only Scan using lineitem_l_orderkey_l_suppkey_idx on lineitem l1  (cost=0.56..529866.91 rows=8339420 width=12)
+                                                   ->  Parallel Hash  (cost=2987.15..2987.15 rows=2353 width=30)
+                                                         ->  Hash Join  (cost=1.32..2987.15 rows=2353 width=30)
+                                                               Hash Cond: (supplier.s_nationkey = nation.n_nationkey)
+                                                               ->  Parallel Seq Scan on supplier  (cost=0.00..2805.24 rows=58824 width=34)
+                                                               ->  Hash  (cost=1.31..1.31 rows=1 width=4)
+                                                                     ->  Seq Scan on nation  (cost=0.00..1.31 rows=1 width=4)
+                                                                           Filter: (n_name = 'ETHIOPIA'::bpchar)
+                                             ->  Index Only Scan using lineitem_l_orderkey_l_suppkey_idx on lineitem l3  (cost=0.56..5.17 rows=49 width=12)
+                                                   Index Cond: (l_orderkey = l1.l_orderkey)
+                                                   Filter: (l_suppkey <> l1.l_suppkey)
+                                 ->  Index Only Scan using lineitem_l_orderkey_l_suppkey_l_quantity_idx on lineitem l2  (cost=0.56..7.51 rows=148 width=12)
+                                       Index Cond: (l_orderkey = l1.l_orderkey)
+                                       Filter: (l_suppkey <> l1.l_suppkey)
+                           ->  Index Scan using pk_orders on orders  (cost=0.43..7.34 rows=1 width=8)
+                                 Index Cond: (o_orderkey = l1.l_orderkey)
+                                 Filter: (o_orderstatus = 'F'::bpchar)
+(31 rows)
+
+COMMIT;
+COMMIT

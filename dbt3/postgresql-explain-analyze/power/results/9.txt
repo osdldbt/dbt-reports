@@ -1,6 +1,17 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	nation,
 	o_year,
@@ -25,7 +36,7 @@ from
 			and p_partkey = l_partkey
 			and o_orderkey = l_orderkey
 			and s_nationkey = n_nationkey
-			and p_name like '%peru%'
+			and p_name like '%plum%'
 	) as profit
 group by
 	nation,
@@ -33,65 +44,256 @@ group by
 order by
 	nation,
 	o_year desc;
-                                                                                                      QUERY PLAN                                                                                                       
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Finalize GroupAggregate  (cost=1143600.21..1143614.05 rows=103 width=90) (actual time=22056.000..23818.703 rows=175 loops=1)
-   Group Key: nation.n_name, (EXTRACT(year FROM orders.o_orderdate))
-   Buffers: shared hit=21244398 read=6510059 dirtied=2849 written=2474, temp read=47966 written=48100
-   ->  Gather Merge  (cost=1143600.21..1143611.65 rows=86 width=90) (actual time=22044.726..23817.518 rows=525 loops=1)
-         Workers Planned: 2
-         Workers Launched: 2
-         Buffers: shared hit=21244398 read=6510059 dirtied=2849 written=2474, temp read=47966 written=48100
-         ->  Partial GroupAggregate  (cost=1142600.19..1142601.69 rows=43 width=90) (actual time=22031.515..23765.222 rows=175 loops=3)
-               Group Key: nation.n_name, (EXTRACT(year FROM orders.o_orderdate))
-               Buffers: shared hit=21244398 read=6510059 dirtied=2849 written=2474, temp read=47966 written=48100
-               ->  Sort  (cost=1142600.19..1142600.30 rows=43 width=81) (actual time=22025.503..22615.759 rows=1090447 loops=3)
-                     Sort Key: nation.n_name, (EXTRACT(year FROM orders.o_orderdate)) DESC
-                     Sort Method: external merge  Disk: 70456kB
-                     Buffers: shared hit=21244398 read=6510059 dirtied=2849 written=2474, temp read=47966 written=48100
-                     Worker 0:  Sort Method: external merge  Disk: 71160kB
-                     Worker 1:  Sort Method: external merge  Disk: 71256kB
-                     ->  Hash Join  (cost=51802.10..1142599.02 rows=43 width=81) (actual time=170.049..20248.132 rows=1090447 loops=3)
-                           Hash Cond: (supplier.s_nationkey = nation.n_nationkey)
-                           Buffers: shared hit=21244370 read=6510059 dirtied=2849 written=2474
-                           ->  Nested Loop  (cost=51800.54..1142597.22 rows=43 width=31) (actual time=169.991..19520.472 rows=1090447 loops=3)
-                                 Buffers: shared hit=21244339 read=6510059 dirtied=2849 written=2474
-                                 ->  Nested Loop  (cost=51800.10..1142458.86 rows=43 width=35) (actual time=169.947..11126.977 rows=1090447 loops=3)
-                                       Buffers: shared hit=11379773 read=3676139 written=1399
-                                       ->  Nested Loop  (cost=51799.81..1142211.72 rows=43 width=39) (actual time=169.922..8050.149 rows=1090447 loops=3)
-                                             Buffers: shared hit=1680037 read=3561847 written=1344
-                                             ->  Parallel Hash Join  (cost=51799.24..268418.06 rows=134656 width=18) (actual time=169.817..1308.879 rows=145215 loops=3)
-                                                   Hash Cond: (partsupp.ps_partkey = part.p_partkey)
-                                                   Buffers: shared hit=9414 read=206091
-                                                   ->  Parallel Seq Scan on partsupp  (cost=0.00..207870.36 rows=3332736 width=14) (actual time=0.027..513.472 rows=2666667 loops=3)
-                                                         Buffers: shared hit=2 read=174541
-                                                   ->  Parallel Hash  (cost=51378.38..51378.38 rows=33669 width=4) (actual time=169.101..169.102 rows=36304 loops=3)
-                                                         Buckets: 131072  Batches: 1  Memory Usage: 5344kB
-                                                         Buffers: shared hit=9412 read=31550
-                                                         ->  Parallel Seq Scan on part  (cost=0.00..51378.38 rows=33669 width=4) (actual time=0.018..158.126 rows=36304 loops=3)
-                                                               Filter: ((p_name)::text ~~ '%peru%'::text)
-                                                               Rows Removed by Filter: 630363
-                                                               Buffers: shared hit=9412 read=31550
-                                             ->  Index Scan using lineitem_l_partkey_l_suppkey_l_shipdate_l_quantity_idx on lineitem  (cost=0.56..6.48 rows=1 width=33) (actual time=0.010..0.044 rows=8 loops=435644)
-                                                   Index Cond: ((l_partkey = partsupp.ps_partkey) AND (l_suppkey = partsupp.ps_suppkey))
-                                                   Buffers: shared hit=1670623 read=3355756 written=1344
-                                       ->  Index Scan using pk_supplier on supplier  (cost=0.29..5.75 rows=1 width=8) (actual time=0.002..0.002 rows=1 loops=3271342)
-                                             Index Cond: (s_suppkey = lineitem.l_suppkey)
-                                             Buffers: shared hit=9699736 read=114292 written=55
-                                 ->  Index Only Scan using orders_o_orderkey_o_orderdate_idx on orders  (cost=0.43..3.22 rows=1 width=12) (actual time=0.007..0.007 rows=1 loops=3271342)
-                                       Index Cond: (o_orderkey = lineitem.l_orderkey)
-                                       Heap Fetches: 3350
-                                       Buffers: shared hit=9864566 read=2833920 dirtied=2849 written=1075
-                           ->  Hash  (cost=1.25..1.25 rows=25 width=30) (actual time=0.029..0.029 rows=25 loops=3)
-                                 Buckets: 1024  Batches: 1  Memory Usage: 10kB
-                                 Buffers: shared hit=3
-                                 ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=30) (actual time=0.017..0.020 rows=25 loops=3)
-                                       Buffers: shared hit=3
- Planning:
-   Buffers: shared hit=823 read=106 dirtied=5
- Planning Time: 5.616 ms
- Execution Time: 23833.839 ms
-(56 rows)
+NOTICE:  duration: 18372.473 ms  plan:
+Query Text: select
+	nation,
+	o_year,
+	sum(amount) as sum_profit
+from
+	(
+		select
+			n_name as nation,
+			extract(year from o_orderdate) as o_year,
+			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+		from
+			part,
+			supplier,
+			lineitem,
+			partsupp,
+			orders,
+			nation
+		where
+			s_suppkey = l_suppkey
+			and ps_suppkey = l_suppkey
+			and ps_partkey = l_partkey
+			and p_partkey = l_partkey
+			and o_orderkey = l_orderkey
+			and s_nationkey = n_nationkey
+			and p_name like '%plum%'
+	) as profit
+group by
+	nation,
+	o_year
+order by
+	nation,
+	o_year desc;
+Finalize GroupAggregate  (cost=923729.45..923739.12 rows=73 width=90) (actual time=16883.246..18372.271 rows=175 loops=1)
+  Group Key: nation.n_name, (EXTRACT(year FROM orders.o_orderdate))
+  ->  Gather Merge  (cost=923729.45..923737.42 rows=60 width=90) (actual time=16874.499..18371.434 rows=525 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial GroupAggregate  (cost=922729.42..922730.47 rows=30 width=90) (actual time=16868.608..18337.375 rows=175 loops=3)
+              Group Key: nation.n_name, (EXTRACT(year FROM orders.o_orderdate))
+              ->  Sort  (cost=922729.42..922729.50 rows=30 width=81) (actual time=16863.562..17351.599 rows=1087625 loops=3)
+                    Sort Key: nation.n_name, (EXTRACT(year FROM orders.o_orderdate)) DESC
+                    Sort Method: external merge  Disk: 70608kB
+                    Worker 0:  Sort Method: external merge  Disk: 71088kB
+                    Worker 1:  Sort Method: external merge  Disk: 70608kB
+                    ->  Hash Join  (cost=54131.91..922728.69 rows=30 width=81) (actual time=137.494..15396.839 rows=1087625 loops=3)
+                          Hash Cond: (supplier.s_nationkey = nation.n_nationkey)
+                          ->  Nested Loop  (cost=54130.35..922726.96 rows=30 width=31) (actual time=137.432..14836.437 rows=1087625 loops=3)
+                                ->  Nested Loop  (cost=54129.91..922630.43 rows=30 width=35) (actual time=137.401..6642.082 rows=1087625 loops=3)
+                                      Join Filter: (supplier.s_suppkey = lineitem.l_suppkey)
+                                      ->  Parallel Hash Join  (cost=54129.35..271049.19 rows=100373 width=26) (actual time=137.339..1176.722 rows=144964 loops=3)
+                                            Hash Cond: (partsupp.ps_suppkey = supplier.s_suppkey)
+                                            ->  Parallel Hash Join  (cost=51695.55..268350.18 rows=101029 width=18) (actual time=128.655..1050.789 rows=144964 loops=3)
+                                                  Hash Cond: (partsupp.ps_partkey = part.p_partkey)
+                                                  ->  Parallel Seq Scan on partsupp  (cost=0.00..207902.88 rows=3333988 width=14) (actual time=0.018..418.246 rows=2666667 loops=3)
+                                                  ->  Parallel Hash  (cost=51379.89..51379.89 rows=25253 width=4) (actual time=128.382..128.383 rows=36241 loops=3)
+                                                        Buckets: 131072 (originally 65536)  Batches: 1 (originally 1)  Memory Usage: 5824kB
+                                                        ->  Parallel Seq Scan on part  (cost=0.00..51379.89 rows=25253 width=4) (actual time=0.032..119.041 rows=36241 loops=3)
+                                                              Filter: ((p_name)::text ~~ '%plum%'::text)
+                                                              Rows Removed by Filter: 630426
+                                            ->  Parallel Hash  (cost=1912.96..1912.96 rows=41667 width=8) (actual time=8.196..8.196 rows=33333 loops=3)
+                                                  Buckets: 131072  Batches: 1  Memory Usage: 4960kB
+                                                  ->  Parallel Index Only Scan using supplier_s_nationkey_s_suppkey_idx on supplier  (cost=0.29..1912.96 rows=41667 width=8) (actual time=0.033..3.658 rows=33333 loops=3)
+                                                        Heap Fetches: 0
+                                      ->  Index Scan using lineitem_l_partkey_l_suppkey_l_shipdate_l_quantity_idx on lineitem  (cost=0.56..6.48 rows=1 width=33) (actual time=0.008..0.035 rows=8 loops=434892)
+                                            Index Cond: ((l_partkey = partsupp.ps_partkey) AND (l_suppkey = partsupp.ps_suppkey))
+                                ->  Index Only Scan using orders_o_orderkey_o_orderdate_idx on orders  (cost=0.43..3.22 rows=1 width=12) (actual time=0.007..0.007 rows=1 loops=3262874)
+                                      Index Cond: (o_orderkey = lineitem.l_orderkey)
+                                      Heap Fetches: 3499
+                          ->  Hash  (cost=1.25..1.25 rows=25 width=30) (actual time=0.022..0.022 rows=25 loops=3)
+                                Buckets: 1024  Batches: 1  Memory Usage: 10kB
+                                ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=30) (actual time=0.012..0.015 rows=25 loops=3)
+          nation           | o_year |   sum_profit   
+---------------------------+--------+----------------
+ ALGERIA                   |   1998 | 267150370.7046
+ ALGERIA                   |   1997 | 447321963.9683
+ ALGERIA                   |   1996 | 463858671.1243
+ ALGERIA                   |   1995 | 459495998.9664
+ ALGERIA                   |   1994 | 457272327.7874
+ ALGERIA                   |   1993 | 462729450.0049
+ ALGERIA                   |   1992 | 460806994.9538
+ ARGENTINA                 |   1998 | 269910166.8359
+ ARGENTINA                 |   1997 | 467652722.6752
+ ARGENTINA                 |   1996 | 466836407.0720
+ ARGENTINA                 |   1995 | 461640225.7148
+ ARGENTINA                 |   1994 | 466412296.6287
+ ARGENTINA                 |   1993 | 465115025.1519
+ ARGENTINA                 |   1992 | 456309352.2730
+ BRAZIL                    |   1998 | 273475283.9217
+ BRAZIL                    |   1997 | 483293549.3573
+ BRAZIL                    |   1996 | 473753607.6776
+ BRAZIL                    |   1995 | 468049197.6736
+ BRAZIL                    |   1994 | 469364092.5611
+ BRAZIL                    |   1993 | 482816214.1674
+ BRAZIL                    |   1992 | 474812478.7407
+ CANADA                    |   1998 | 271285582.4513
+ CANADA                    |   1997 | 469263470.0252
+ CANADA                    |   1996 | 475489694.2510
+ CANADA                    |   1995 | 474354925.1119
+ CANADA                    |   1994 | 483210081.6943
+ CANADA                    |   1993 | 480318820.1427
+ CANADA                    |   1992 | 472727290.4450
+ CHINA                     |   1998 | 273363148.1576
+ CHINA                     |   1997 | 465109323.2030
+ CHINA                     |   1996 | 475752933.1251
+ CHINA                     |   1995 | 472961373.7570
+ CHINA                     |   1994 | 475494047.4195
+ CHINA                     |   1993 | 467277103.0499
+ CHINA                     |   1992 | 469003110.5158
+ EGYPT                     |   1998 | 274270725.4994
+ EGYPT                     |   1997 | 464858706.1867
+ EGYPT                     |   1996 | 471594890.8099
+ EGYPT                     |   1995 | 464199396.8475
+ EGYPT                     |   1994 | 454695642.9197
+ EGYPT                     |   1993 | 461918715.2645
+ EGYPT                     |   1992 | 465635111.0355
+ ETHIOPIA                  |   1998 | 268381831.4865
+ ETHIOPIA                  |   1997 | 457882111.6666
+ ETHIOPIA                  |   1996 | 466540168.6300
+ ETHIOPIA                  |   1995 | 466043849.2851
+ ETHIOPIA                  |   1994 | 464092021.7062
+ ETHIOPIA                  |   1993 | 456917446.6286
+ ETHIOPIA                  |   1992 | 467826563.1299
+ FRANCE                    |   1998 | 271058931.9308
+ FRANCE                    |   1997 | 463746707.5521
+ FRANCE                    |   1996 | 467382498.0562
+ FRANCE                    |   1995 | 470871872.9553
+ FRANCE                    |   1994 | 465350046.4947
+ FRANCE                    |   1993 | 465057577.3082
+ FRANCE                    |   1992 | 464885048.8982
+ GERMANY                   |   1998 | 272896095.9262
+ GERMANY                   |   1997 | 464050364.6818
+ GERMANY                   |   1996 | 465374814.8436
+ GERMANY                   |   1995 | 469255499.4871
+ GERMANY                   |   1994 | 469119592.9508
+ GERMANY                   |   1993 | 469047671.7565
+ GERMANY                   |   1992 | 472673436.9368
+ INDIA                     |   1998 | 271343906.1301
+ INDIA                     |   1997 | 468465362.3465
+ INDIA                     |   1996 | 477398434.0336
+ INDIA                     |   1995 | 476042736.7788
+ INDIA                     |   1994 | 467047390.3514
+ INDIA                     |   1993 | 470175144.4427
+ INDIA                     |   1992 | 478083745.6974
+ INDONESIA                 |   1998 | 272049881.1477
+ INDONESIA                 |   1997 | 467881030.2262
+ INDONESIA                 |   1996 | 462974887.2618
+ INDONESIA                 |   1995 | 462079126.9932
+ INDONESIA                 |   1994 | 459125592.7024
+ INDONESIA                 |   1993 | 465788933.8963
+ INDONESIA                 |   1992 | 469238428.0287
+ IRAN                      |   1998 | 274647841.5501
+ IRAN                      |   1997 | 468676886.6238
+ IRAN                      |   1996 | 464591538.6537
+ IRAN                      |   1995 | 469386168.5184
+ IRAN                      |   1994 | 464181840.9901
+ IRAN                      |   1993 | 463983061.3642
+ IRAN                      |   1992 | 461594829.5138
+ IRAQ                      |   1998 | 271406927.3078
+ IRAQ                      |   1997 | 469555868.6545
+ IRAQ                      |   1996 | 482353717.2997
+ IRAQ                      |   1995 | 461138936.6281
+ IRAQ                      |   1994 | 470521435.4744
+ IRAQ                      |   1993 | 473774574.2927
+ IRAQ                      |   1992 | 466954386.5191
+ JAPAN                     |   1998 | 274638480.7795
+ JAPAN                     |   1997 | 469121844.1121
+ JAPAN                     |   1996 | 471429331.4071
+ JAPAN                     |   1995 | 466863701.5397
+ JAPAN                     |   1994 | 458831387.6542
+ JAPAN                     |   1993 | 468084041.0450
+ JAPAN                     |   1992 | 461577683.6008
+ JORDAN                    |   1998 | 269793617.2190
+ JORDAN                    |   1997 | 470589214.9887
+ JORDAN                    |   1996 | 463526374.2259
+ JORDAN                    |   1995 | 462712547.5201
+ JORDAN                    |   1994 | 458629232.8820
+ JORDAN                    |   1993 | 471313474.7203
+ JORDAN                    |   1992 | 463483247.1760
+ KENYA                     |   1998 | 281214780.8067
+ KENYA                     |   1997 | 473255351.4050
+ KENYA                     |   1996 | 475085235.1712
+ KENYA                     |   1995 | 477506824.3504
+ KENYA                     |   1994 | 480770376.0244
+ KENYA                     |   1993 | 475045300.6331
+ KENYA                     |   1992 | 477504914.5768
+ MOROCCO                   |   1998 | 276508397.8055
+ MOROCCO                   |   1997 | 471980333.0640
+ MOROCCO                   |   1996 | 462729291.0981
+ MOROCCO                   |   1995 | 464604252.4248
+ MOROCCO                   |   1994 | 469446906.6787
+ MOROCCO                   |   1993 | 463840239.0239
+ MOROCCO                   |   1992 | 464945575.6178
+ MOZAMBIQUE                |   1998 | 266204900.7057
+ MOZAMBIQUE                |   1997 | 454902962.6630
+ MOZAMBIQUE                |   1996 | 453944497.9446
+ MOZAMBIQUE                |   1995 | 449254727.8695
+ MOZAMBIQUE                |   1994 | 451613053.6134
+ MOZAMBIQUE                |   1993 | 463382370.1633
+ MOZAMBIQUE                |   1992 | 460027912.3966
+ PERU                      |   1998 | 271787564.1412
+ PERU                      |   1997 | 460974009.3734
+ PERU                      |   1996 | 459103434.1672
+ PERU                      |   1995 | 455982648.1866
+ PERU                      |   1994 | 456154069.6818
+ PERU                      |   1993 | 463621929.4744
+ PERU                      |   1992 | 463332721.2013
+ ROMANIA                   |   1998 | 275530346.2788
+ ROMANIA                   |   1997 | 457227216.7032
+ ROMANIA                   |   1996 | 463887180.5971
+ ROMANIA                   |   1995 | 468424863.0890
+ ROMANIA                   |   1994 | 469450640.6415
+ ROMANIA                   |   1993 | 459743627.4762
+ ROMANIA                   |   1992 | 455742526.7811
+ RUSSIA                    |   1998 | 277607317.8766
+ RUSSIA                    |   1997 | 476007115.4264
+ RUSSIA                    |   1996 | 471597182.0784
+ RUSSIA                    |   1995 | 477275651.3275
+ RUSSIA                    |   1994 | 471810024.3013
+ RUSSIA                    |   1993 | 463088812.7176
+ RUSSIA                    |   1992 | 467716038.0809
+ SAUDI ARABIA              |   1998 | 273013350.6732
+ SAUDI ARABIA              |   1997 | 468093938.1134
+ SAUDI ARABIA              |   1996 | 468493813.1946
+ SAUDI ARABIA              |   1995 | 469276470.7670
+ SAUDI ARABIA              |   1994 | 463290564.5911
+ SAUDI ARABIA              |   1993 | 465627034.0230
+ SAUDI ARABIA              |   1992 | 471904478.5697
+ UNITED KINGDOM            |   1998 | 268331779.9358
+ UNITED KINGDOM            |   1997 | 466336767.0747
+ UNITED KINGDOM            |   1996 | 459766654.7139
+ UNITED KINGDOM            |   1995 | 462990127.1778
+ UNITED KINGDOM            |   1994 | 455854891.6415
+ UNITED KINGDOM            |   1993 | 460994722.1486
+ UNITED KINGDOM            |   1992 | 465031804.0682
+ UNITED STATES             |   1998 | 277105935.5284
+ UNITED STATES             |   1997 | 481100520.5185
+ UNITED STATES             |   1996 | 473803020.1290
+ UNITED STATES             |   1995 | 472385931.0188
+ UNITED STATES             |   1994 | 473471052.3831
+ UNITED STATES             |   1993 | 474035632.3700
+ UNITED STATES             |   1992 | 471382569.2129
+ VIETNAM                   |   1998 | 274920538.6376
+ VIETNAM                   |   1997 | 468272861.5485
+ VIETNAM                   |   1996 | 481743338.0373
+ VIETNAM                   |   1995 | 467463785.8785
+ VIETNAM                   |   1994 | 476331121.8397
+ VIETNAM                   |   1993 | 476781242.0526
+ VIETNAM                   |   1992 | 471408701.0943
+(175 rows)
 
 COMMIT;
 COMMIT

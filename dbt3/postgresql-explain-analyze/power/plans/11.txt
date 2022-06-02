@@ -1,7 +1,6 @@
 BEGIN;
 BEGIN
 EXPLAIN
-explain (analyze, buffers)
 select
 	ps_partkey,
 	sum(ps_supplycost * ps_availqty) as value
@@ -12,7 +11,7 @@ from
 where
 	ps_suppkey = s_suppkey
 	and s_nationkey = n_nationkey
-	and n_name = 'CANADA'
+	and n_name = 'JORDAN'
 group by
 	ps_partkey having
 		sum(ps_supplycost * ps_availqty) > (
@@ -25,7 +24,42 @@ group by
 			where
 				ps_suppkey = s_suppkey
 				and s_nationkey = n_nationkey
-				and n_name = 'CANADA'
+				and n_name = 'JORDAN'
 		)
 order by
 	value desc;
+                                                                               QUERY PLAN                                                                                
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=101612.44..101877.42 rows=105994 width=36)
+   Sort Key: (sum((partsupp.ps_supplycost * (partsupp.ps_availqty)::numeric))) DESC
+   InitPlan 1 (returns $2)
+     ->  Finalize Aggregate  (cost=20457.08..20457.09 rows=1 width=32)
+           ->  Gather  (cost=20456.85..20457.06 rows=2 width=32)
+                 Workers Planned: 2
+                 ->  Partial Aggregate  (cost=19456.85..19456.86 rows=1 width=32)
+                       ->  Nested Loop  (cost=2.05..18463.15 rows=132493 width=10)
+                             ->  Merge Join  (cost=1.61..2035.13 rows=1667 width=4)
+                                   Merge Cond: (supplier_1.s_nationkey = nation_1.n_nationkey)
+                                   ->  Parallel Index Only Scan using supplier_s_nationkey_s_suppkey_idx on supplier supplier_1  (cost=0.29..1912.96 rows=41667 width=8)
+                                   ->  Sort  (cost=1.32..1.33 rows=1 width=4)
+                                         Sort Key: nation_1.n_nationkey
+                                         ->  Seq Scan on nation nation_1  (cost=0.00..1.31 rows=1 width=4)
+                                               Filter: (n_name = 'JORDAN'::bpchar)
+                             ->  Index Scan using partsupp_ps_suppkey_idx on partsupp partsupp_1  (cost=0.43..9.06 rows=79 width=14)
+                                   Index Cond: (ps_suppkey = supplier_1.s_suppkey)
+   ->  HashAggregate  (cost=61531.68..69406.73 rows=105994 width=36)
+         Group Key: partsupp.ps_partkey
+         Filter: (sum((partsupp.ps_supplycost * (partsupp.ps_availqty)::numeric)) > $2)
+         Planned Partitions: 32
+         ->  Nested Loop  (cost=0.72..39570.98 rows=317983 width=14)
+               ->  Nested Loop  (cost=0.29..151.60 rows=4000 width=4)
+                     ->  Seq Scan on nation  (cost=0.00..1.31 rows=1 width=4)
+                           Filter: (n_name = 'JORDAN'::bpchar)
+                     ->  Index Only Scan using supplier_s_nationkey_s_suppkey_idx on supplier  (cost=0.29..110.29 rows=4000 width=8)
+                           Index Cond: (s_nationkey = nation.n_nationkey)
+               ->  Index Scan using partsupp_ps_suppkey_idx on partsupp  (cost=0.43..9.06 rows=79 width=18)
+                     Index Cond: (ps_suppkey = supplier.s_suppkey)
+(29 rows)
+
+COMMIT;
+COMMIT

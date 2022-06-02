@@ -1,11 +1,37 @@
-Fri May 27 16:28:02 UTC 2022: Stream 5 : Starting Refresh Stream 2...
+Wed Jun  1 23:28:12 UTC 2022: Stream 5 : Starting Refresh Stream 2...
+LOAD
+SET
+SET
+SET
+SET
+SET
 BEGIN
 CREATE TABLE
 COPY 15000
 CREATE INDEX
 ANALYZE
+NOTICE:  duration: 862.027 ms  plan:
+Query Text: DELETE FROM lineitem
+USING tmp_orderkey5
+WHERE l_orderkey = orderkey;
+Delete on lineitem  (cost=595311.87..767278.57 rows=0 width=0) (actual time=862.023..862.025 rows=0 loops=1)
+  WAL: records=59522 fpi=1243 bytes=13312027
+  ->  Merge Join  (cost=595311.87..767278.57 rows=2226777 width=12) (actual time=485.292..710.009 rows=59522 loops=1)
+        Merge Cond: (tmp_orderkey5.orderkey = lineitem.l_orderkey)
+        ->  Index Scan using tmp_orderkey5_orderkey_idx on tmp_orderkey5  (cost=0.29..467.29 rows=15000 width=10) (actual time=0.011..6.647 rows=15000 loops=1)
+        ->  Index Scan using pk_lineitem on lineitem  (cost=0.56..148802676.76 rows=60223483 width=14) (actual time=0.049..603.916 rows=359061 loops=1)
 DELETE 59522
+NOTICE:  duration: 106.284 ms  plan:
+Query Text: DELETE FROM orders
+USING tmp_orderkey5
+WHERE o_orderkey = orderkey;
+Delete on orders  (cost=6434.47..8697.48 rows=0 width=0) (actual time=106.280..106.282 rows=0 loops=1)
+  WAL: records=15000 fpi=295 bytes=3212019
+  ->  Merge Join  (cost=6434.47..8697.48 rows=15000 width=12) (actual time=45.223..87.262 rows=15000 loops=1)
+        Merge Cond: (orders.o_orderkey = tmp_orderkey5.orderkey)
+        ->  Index Scan using pk_orders on orders  (cost=0.43..1429623.35 rows=15058443 width=14) (actual time=0.050..63.962 rows=90000 loops=1)
+        ->  Index Scan using tmp_orderkey5_orderkey_idx on tmp_orderkey5  (cost=0.29..467.29 rows=15000 width=10) (actual time=0.011..5.833 rows=15000 loops=1)
 DELETE 15000
 COMMIT
-Fri May 27 16:28:03 UTC 2022: Stream 5 : Refresh Stream 2 completed.
+Wed Jun  1 23:28:13 UTC 2022: Stream 5 : Refresh Stream 2 completed.
 Stream 5 : Elapsed time for Refresh Stream 2 : 1 seconds

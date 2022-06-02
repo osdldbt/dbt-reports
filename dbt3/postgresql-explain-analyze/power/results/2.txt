@@ -1,6 +1,17 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	s_acctbal,
 	s_name,
@@ -19,11 +30,11 @@ from
 where
 	p_partkey = ps_partkey
 	and s_suppkey = ps_suppkey
-	and p_size = 47
-	and p_type like '%STEEL'
+	and p_size = 41
+	and p_type like '%TIN'
 	and s_nationkey = n_nationkey
 	and n_regionkey = r_regionkey
-	and r_name = 'EUROPE'
+	and r_name = 'MIDDLE EAST'
 	and ps_supplycost = (
 		select
 			min(ps_supplycost)
@@ -37,7 +48,7 @@ where
 			and s_suppkey = ps_suppkey
 			and s_nationkey = n_nationkey
 			and n_regionkey = r_regionkey
-			and r_name = 'EUROPE'
+			and r_name = 'MIDDLE EAST'
 	)
 order by
 	s_acctbal desc,
@@ -45,82 +56,201 @@ order by
 	s_name,
 	p_partkey
 LIMIT 100;
-                                                                                    QUERY PLAN                                                                                     
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Limit  (cost=2379064.79..2379064.80 rows=1 width=192) (actual time=5271.361..5271.377 rows=100 loops=1)
-   Buffers: shared hit=1188321 read=658944 written=12410, temp read=93243 written=93360
-   ->  Sort  (cost=2379064.79..2379064.80 rows=1 width=192) (actual time=5271.360..5271.369 rows=100 loops=1)
-         Sort Key: supplier.s_acctbal DESC, nation.n_name, supplier.s_name, part.p_partkey
-         Sort Method: top-N heapsort  Memory: 69kB
-         Buffers: shared hit=1188321 read=658944 written=12410, temp read=93243 written=93360
-         ->  Merge Join  (cost=639246.72..2379064.78 rows=1 width=192) (actual time=4306.456..5269.022 rows=4619 loops=1)
-               Merge Cond: (part.p_partkey = partsupp.ps_partkey)
-               Join Filter: (partsupp.ps_supplycost = (SubPlan 1))
-               Rows Removed by Join Filter: 1591
-               Buffers: shared hit=1188315 read=658944 written=12410, temp read=93243 written=93360
-               ->  Index Scan using part_ios_test1 on part  (cost=0.43..108916.41 rows=8850 width=30) (actual time=0.070..87.563 rows=7985 loops=1)
-                     Index Cond: (p_size = 47)
-                     Filter: ((p_type)::text ~~ '%STEEL'::text)
-                     Rows Removed by Filter: 32148
-                     Buffers: shared hit=84 read=26142
-               ->  Materialize  (cost=639245.39..647218.92 rows=1594706 width=172) (actual time=4305.839..4833.720 rows=1602567 loops=1)
-                     Buffers: shared hit=1043933 read=620999 written=12410, temp read=93243 written=93360
-                     ->  Sort  (cost=639245.39..643232.15 rows=1594706 width=172) (actual time=4305.827..4634.837 rows=1602567 loops=1)
-                           Sort Key: partsupp.ps_partkey
-                           Sort Method: external merge  Disk: 293016kB
-                           Buffers: shared hit=1043933 read=620999 written=12410, temp read=93243 written=93360
-                           ->  Nested Loop  (cost=2.00..202413.93 rows=1594706 width=172) (actual time=0.106..2810.099 rows=1602640 loops=1)
-                                 Buffers: shared hit=1043933 read=620999 written=12410
-                                 ->  Nested Loop  (cost=1.56..4776.62 rows=20000 width=166) (actual time=0.071..66.895 rows=20033 loops=1)
-                                       Join Filter: (nation.n_regionkey = region.r_regionkey)
-                                       Rows Removed by Join Filter: 79967
-                                       Buffers: shared read=2219 written=43
-                                       ->  Seq Scan on region  (cost=0.00..1.06 rows=1 width=4) (actual time=0.012..0.014 rows=1 loops=1)
-                                             Filter: (r_name = 'EUROPE'::bpchar)
-                                             Rows Removed by Filter: 4
-                                             Buffers: shared read=1
-                                       ->  Hash Join  (cost=1.56..3525.56 rows=100000 width=170) (actual time=0.050..55.324 rows=100000 loops=1)
-                                             Hash Cond: (supplier.s_nationkey = nation.n_nationkey)
-                                             Buffers: shared read=2218 written=43
-                                             ->  Seq Scan on supplier  (cost=0.00..3217.00 rows=100000 width=144) (actual time=0.011..20.725 rows=100000 loops=1)
-                                                   Buffers: shared read=2217 written=43
-                                             ->  Hash  (cost=1.25..1.25 rows=25 width=34) (actual time=0.022..0.023 rows=25 loops=1)
-                                                   Buckets: 1024  Batches: 1  Memory Usage: 10kB
-                                                   Buffers: shared read=1
-                                                   ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=34) (actual time=0.009..0.013 rows=25 loops=1)
-                                                         Buffers: shared read=1
-                                 ->  Index Scan using partsupp_ps_suppkey_idx on partsupp  (cost=0.43..9.08 rows=80 width=14) (actual time=0.004..0.124 rows=80 loops=20033)
-                                       Index Cond: (ps_suppkey = supplier.s_suppkey)
-                                       Buffers: shared hit=1043933 read=618780 written=12367
-               SubPlan 1
-                 ->  Aggregate  (cost=229.38..229.39 rows=1 width=32) (actual time=0.025..0.025 rows=1 loops=6210)
-                       Buffers: shared hit=144298 read=11803
-                       ->  Nested Loop  (cost=0.86..229.37 rows=4 width=6) (actual time=0.016..0.023 rows=2 loops=6210)
-                             Join Filter: (nation_1.n_regionkey = region_1.r_regionkey)
-                             Rows Removed by Join Filter: 2
-                             Buffers: shared hit=144298 read=11803
-                             ->  Seq Scan on region region_1  (cost=0.00..1.06 rows=1 width=4) (actual time=0.001..0.001 rows=1 loops=6210)
-                                   Filter: (r_name = 'EUROPE'::bpchar)
-                                   Rows Removed by Filter: 4
-                                   Buffers: shared hit=6210
-                             ->  Nested Loop  (cost=0.86..228.09 rows=18 width=10) (actual time=0.010..0.022 rows=4 loops=6210)
-                                   Buffers: shared hit=138088 read=11803
-                                   ->  Nested Loop  (cost=0.72..225.31 rows=18 width=10) (actual time=0.009..0.017 rows=4 loops=6210)
-                                         Buffers: shared hit=88410 read=11801
-                                         ->  Index Scan using pk_partsupp on partsupp partsupp_1  (cost=0.43..75.73 rows=18 width=10) (actual time=0.006..0.007 rows=4 loops=6210)
-                                               Index Cond: (ps_partkey = part.p_partkey)
-                                               Buffers: shared hit=16597 read=9094
-                                         ->  Index Scan using pk_supplier on supplier supplier_1  (cost=0.29..8.31 rows=1 width=8) (actual time=0.002..0.002 rows=1 loops=24840)
-                                               Index Cond: (s_suppkey = partsupp_1.ps_suppkey)
-                                               Buffers: shared hit=71813 read=2707
-                                   ->  Index Scan using pk_nation on nation nation_1  (cost=0.14..0.16 rows=1 width=8) (actual time=0.001..0.001 rows=1 loops=24840)
-                                         Index Cond: (n_nationkey = supplier_1.s_nationkey)
-                                         Buffers: shared hit=49678 read=2
- Planning:
-   Buffers: shared hit=476 read=44 dirtied=6
- Planning Time: 3.644 ms
- Execution Time: 5312.890 ms
-(73 rows)
+NOTICE:  duration: 4359.438 ms  plan:
+Query Text: select
+	s_acctbal,
+	s_name,
+	n_name,
+	p_partkey,
+	p_mfgr,
+	s_address,
+	s_phone,
+	s_comment
+from
+	part,
+	supplier,
+	partsupp,
+	nation,
+	region
+where
+	p_partkey = ps_partkey
+	and s_suppkey = ps_suppkey
+	and p_size = 41
+	and p_type like '%TIN'
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'MIDDLE EAST'
+	and ps_supplycost = (
+		select
+			min(ps_supplycost)
+		from
+			partsupp,
+			supplier,
+			nation,
+			region
+		where
+			p_partkey = ps_partkey
+			and s_suppkey = ps_suppkey
+			and s_nationkey = n_nationkey
+			and n_regionkey = r_regionkey
+			and r_name = 'MIDDLE EAST'
+	)
+order by
+	s_acctbal desc,
+	n_name,
+	s_name,
+	p_partkey
+LIMIT 100;
+Limit  (cost=2141128.32..2141128.33 rows=1 width=193) (actual time=4359.340..4359.354 rows=100 loops=1)
+  ->  Sort  (cost=2141128.32..2141128.33 rows=1 width=193) (actual time=4359.339..4359.347 rows=100 loops=1)
+        Sort Key: supplier.s_acctbal DESC, nation.n_name, supplier.s_name, part.p_partkey
+        Sort Method: top-N heapsort  Memory: 69kB
+        ->  Merge Join  (cost=637358.42..2141128.31 rows=1 width=193) (actual time=3562.732..4357.211 rows=4764 loops=1)
+              Merge Cond: (part.p_partkey = partsupp.ps_partkey)
+              Join Filter: (partsupp.ps_supplycost = (SubPlan 1))
+              Rows Removed by Join Filter: 1697
+              ->  Index Scan using part_ios_test1 on part  (cost=0.43..109414.95 rows=8019 width=30) (actual time=0.038..72.355 rows=8093 loops=1)
+                    Index Cond: (p_size = 41)
+                    Filter: ((p_type)::text ~~ '%TIN'::text)
+                    Rows Removed by Filter: 32160
+              ->  Materialize  (cost=637357.99..645307.57 rows=1589916 width=173) (actual time=3562.582..3993.447 rows=1603316 loops=1)
+                    ->  Sort  (cost=637357.99..641332.78 rows=1589916 width=173) (actual time=3562.576..3826.286 rows=1603316 loops=1)
+                          Sort Key: partsupp.ps_partkey
+                          Sort Method: external merge  Disk: 292776kB
+                          ->  Nested Loop  (cost=2.00..201873.52 rows=1589916 width=173) (actual time=0.098..2280.162 rows=1603360 loops=1)
+                                ->  Nested Loop  (cost=1.56..4776.62 rows=20000 width=167) (actual time=0.065..52.167 rows=20042 loops=1)
+                                      Join Filter: (nation.n_regionkey = region.r_regionkey)
+                                      Rows Removed by Join Filter: 79958
+                                      ->  Seq Scan on region  (cost=0.00..1.06 rows=1 width=4) (actual time=0.011..0.012 rows=1 loops=1)
+                                            Filter: (r_name = 'MIDDLE EAST'::bpchar)
+                                            Rows Removed by Filter: 4
+                                      ->  Hash Join  (cost=1.56..3525.56 rows=100000 width=171) (actual time=0.052..43.382 rows=100000 loops=1)
+                                            Hash Cond: (supplier.s_nationkey = nation.n_nationkey)
+                                            ->  Seq Scan on supplier  (cost=0.00..3217.00 rows=100000 width=145) (actual time=0.012..16.378 rows=100000 loops=1)
+                                            ->  Hash  (cost=1.25..1.25 rows=25 width=34) (actual time=0.020..0.021 rows=25 loops=1)
+                                                  Buckets: 1024  Batches: 1  Memory Usage: 10kB
+                                                  ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=34) (actual time=0.008..0.012 rows=25 loops=1)
+                                ->  Index Scan using partsupp_ps_suppkey_idx on partsupp  (cost=0.43..9.06 rows=79 width=14) (actual time=0.004..0.101 rows=80 loops=20042)
+                                      Index Cond: (ps_suppkey = supplier.s_suppkey)
+              SubPlan 1
+                ->  Aggregate  (cost=216.83..216.84 rows=1 width=32) (actual time=0.021..0.021 rows=1 loops=6461)
+                      ->  Nested Loop  (cost=0.86..216.82 rows=3 width=6) (actual time=0.013..0.020 rows=2 loops=6461)
+                            Join Filter: (nation_1.n_regionkey = region_1.r_regionkey)
+                            Rows Removed by Join Filter: 2
+                            ->  Seq Scan on region region_1  (cost=0.00..1.06 rows=1 width=4) (actual time=0.001..0.001 rows=1 loops=6461)
+                                  Filter: (r_name = 'MIDDLE EAST'::bpchar)
+                                  Rows Removed by Filter: 4
+                            ->  Nested Loop  (cost=0.86..215.54 rows=17 width=10) (actual time=0.009..0.018 rows=4 loops=6461)
+                                  ->  Nested Loop  (cost=0.72..212.92 rows=17 width=10) (actual time=0.007..0.014 rows=4 loops=6461)
+                                        ->  Index Scan using pk_partsupp on partsupp partsupp_1  (cost=0.43..71.65 rows=17 width=10) (actual time=0.005..0.006 rows=4 loops=6461)
+                                              Index Cond: (ps_partkey = part.p_partkey)
+                                        ->  Index Scan using pk_supplier on supplier supplier_1  (cost=0.29..8.31 rows=1 width=8) (actual time=0.002..0.002 rows=1 loops=25844)
+                                              Index Cond: (s_suppkey = partsupp_1.ps_suppkey)
+                                  ->  Index Scan using pk_nation on nation nation_1  (cost=0.14..0.16 rows=1 width=8) (actual time=0.001..0.001 rows=1 loops=25844)
+                                        Index Cond: (n_nationkey = supplier_1.s_nationkey)
+ s_acctbal |          s_name           |          n_name           | p_partkey |          p_mfgr           |                s_address                 |     s_phone     |                                              s_comment                                              
+-----------+---------------------------+---------------------------+-----------+---------------------------+------------------------------------------+-----------------+-----------------------------------------------------------------------------------------------------
+   9999.21 | Supplier#000081559        | IRAQ                      |   1131536 | Manufacturer#4            | YplAwJxhoHNeIyqDv3kgzv x2dymRYx          | 21-345-604-7861 | bold packages cajole blithely pinto beans. carefully special 
+   9997.83 | Supplier#000086862        | EGYPT                     |   1311822 | Manufacturer#2            | x7fXJ88ZAc704u7jVRHCru48QaJgfq           | 14-507-112-4463 |  beans haggle closely stealthy packages. pending, express 
+   9997.35 | Supplier#000031340        | IRAN                      |   1281315 | Manufacturer#3            | OXcLAf,LolJ HDq                          | 20-432-827-9234 | even foxes cajole against the blithely 
+   9995.59 | Supplier#000031731        | IRAQ                      |    456718 | Manufacturer#1            | ihiaqm0S33pkU                            | 21-420-388-3738 |  against the special ideas are furiously furiously even platelet
+   9995.22 | Supplier#000048197        | IRAN                      |    423192 | Manufacturer#3            | LrFpXTitmS5r5CFbi91Zm,0IuOySu,JV         | 20-830-770-1138 |  cajole slyly. bold, even ideas s
+   9994.10 | Supplier#000047385        | SAUDI ARABIA              |   1947384 | Manufacturer#2            | pbRKuJaBXBl,5bOv9UhB8SDR cuz 8           | 30-427-545-5707 | nic dependencies nag fluffily across the blithely special foxes. furiously silent deposit
+   9993.91 | Supplier#000037644        | JORDAN                    |    162640 | Manufacturer#2            | G7p42aJGwfktyUfxcZ7fy65uRbSQdlXhFW       | 23-181-198-2592 | nstructions across the slyly silent warhorses integrate around
+   9993.91 | Supplier#000037644        | JORDAN                    |    337643 | Manufacturer#3            | G7p42aJGwfktyUfxcZ7fy65uRbSQdlXhFW       | 23-181-198-2592 | nstructions across the slyly silent warhorses integrate around
+   9991.74 | Supplier#000033579        | SAUDI ARABIA              |    158575 | Manufacturer#5            | 6hIBIWozUfib                             | 30-991-648-3391 |  haggle according to the final theodolites. silent platelets use
+   9991.53 | Supplier#000030467        | IRAQ                      |     55466 | Manufacturer#4            | xQ3 5fQoG0X                              | 21-373-974-1547 | yly pending pinto beans: furiously ironic dolphins haggle sly
+   9991.00 | Supplier#000009966        | IRAN                      |    259961 | Manufacturer#2            | f7UB YWpwxkecW40I07kFYA9Ytnwg            | 20-100-554-8091 | ts haggle quietly. quickly regular patterns cajole regular, bold pinto beans. excuses so
+   9985.28 | Supplier#000015471        | JORDAN                    |    365464 | Manufacturer#5            | KkxpZ4X9ZvrUTzWnoKNdJlyT7CHM             | 23-910-981-9900 | sual deposits should are furiously furiously bold foxes-- 
+   9983.12 | Supplier#000012035        | IRAN                      |   1887016 | Manufacturer#3            | 0GhmqM,MVfWRsvlsA                        | 20-510-461-9152 | y regular packages. carefully express accounts nag. requests cajole blithely express 
+   9979.26 | Supplier#000045297        | IRAN                      |    770275 | Manufacturer#3            | heS19iu,c8wmCLbl24J                      | 20-538-649-3396 | r accounts. deposits play. slyly final requests haggle final instructions. slyly s
+   9977.38 | Supplier#000021030        | JORDAN                    |   1870993 | Manufacturer#3            | 0qV0JOd,EMFJ,n9yCOwXh7gjbglyHHRMSG       | 23-739-192-7141 | ely ironic packages wake quickly about the final in
+   9977.32 | Supplier#000007895        | EGYPT                     |    357888 | Manufacturer#2            | NYl,i8UhxTykLxGJ2voIRn20Ugk1KTzz         | 14-559-808-3306 | mptotes near the quickly sp
+   9974.67 | Supplier#000034088        | IRAQ                      |   1909068 | Manufacturer#5            | PXw1Ith,OD7C,HHoPPPrr0Aqdo               | 21-860-583-9736 | ake about the fluffily pending deposits. bold, regular braids cajole whithout the 
+   9972.08 | Supplier#000015107        | IRAN                      |    515106 | Manufacturer#4            | amW3SM9SlD2Ky655VDbU4EGzvUmGpjXO49Xm6xeO | 20-972-735-1382 | ual accounts sleep alongside
+   9971.45 | Supplier#000079916        | EGYPT                     |   1179915 | Manufacturer#4            | DLydFHGezaSZJ EdHVIIr IfQ                | 14-135-922-1594 |  final excuses. blithely even requests cajole furiously. unusual excuses nag alongside 
+   9970.44 | Supplier#000028674        | IRAQ                      |    728673 | Manufacturer#2            | dHnqxbbo3kzrs13f74hL g5fh0ZZIfYeaOPUqq   | 21-941-488-2922 | inal dependencies. carefully even asymptotes haggle along the blithely silent re
+   9969.49 | Supplier#000032378        | JORDAN                    |   1007367 | Manufacturer#2            | YHyfYx1byX0VVXMcUkhQ0AO5pcjT             | 23-958-815-5166 | ven deposits. unusual deposits l
+   9969.49 | Supplier#000032378        | JORDAN                    |   1757326 | Manufacturer#4            | YHyfYx1byX0VVXMcUkhQ0AO5pcjT             | 23-958-815-5166 | ven deposits. unusual deposits l
+   9967.00 | Supplier#000030089        | SAUDI ARABIA              |    580078 | Manufacturer#1            | PM5TKCIrQNM1B0JF2n                       | 30-389-124-5153 | s accounts use blithely final requests. pe
+   9967.00 | Supplier#000030089        | SAUDI ARABIA              |   1605072 | Manufacturer#3            | PM5TKCIrQNM1B0JF2n                       | 30-389-124-5153 | s accounts use blithely final requests. pe
+   9963.65 | Supplier#000020322        | EGYPT                     |    545306 | Manufacturer#4            | J3ShW3oKhfTniLW8C                        | 14-304-869-9488 | cies haggle furiously around the special accounts. ruthlessly special asym
+   9963.65 | Supplier#000020322        | EGYPT                     |   1095311 | Manufacturer#4            | J3ShW3oKhfTniLW8C                        | 14-304-869-9488 | cies haggle furiously around the special accounts. ruthlessly special asym
+   9963.65 | Supplier#000020322        | EGYPT                     |   1795304 | Manufacturer#2            | J3ShW3oKhfTniLW8C                        | 14-304-869-9488 | cies haggle furiously around the special accounts. ruthlessly special asym
+   9963.64 | Supplier#000029847        | IRAN                      |   1929846 | Manufacturer#5            | lJcIk,OoDEdPTbI2oiQcX8xHYR               | 20-727-557-8083 | ns wake carefully regular instructions. final p
+   9962.84 | Supplier#000081474        | IRAN                      |   1381473 | Manufacturer#2            | NxCJ6ZrmeX3KaB                           | 20-152-664-5113 | t the theodolites cajole furiously even ideas. courts kindle furiously a
+   9958.64 | Supplier#000061965        | EGYPT                     |   1336951 | Manufacturer#2            | Edt9WKXBmLgSke1F6Q8pTKAMtChXK9uENY       | 14-977-296-3935 | es maintain. slyly ironic accounts wak
+   9958.64 | Supplier#000061965        | EGYPT                     |   1661964 | Manufacturer#5            | Edt9WKXBmLgSke1F6Q8pTKAMtChXK9uENY       | 14-977-296-3935 | es maintain. slyly ironic accounts wak
+   9949.88 | Supplier#000065842        | IRAQ                      |   1890787 | Manufacturer#4            | 9uFLGZzgxT9sj4B,60dPUJCn2jX839RLgxnSx9U  | 21-518-108-6770 | es are carefully carefully eve
+   9949.21 | Supplier#000038089        | EGYPT                     |    488080 | Manufacturer#1            | TPWLc1QTJ68 Dd3bP nMpjZ4BLhj5 ,qp9HnFVN  | 14-468-409-1360 | tes cajole express accounts. final 
+   9949.21 | Supplier#000038089        | EGYPT                     |    938088 | Manufacturer#3            | TPWLc1QTJ68 Dd3bP nMpjZ4BLhj5 ,qp9HnFVN  | 14-468-409-1360 | tes cajole express accounts. final 
+   9935.51 | Supplier#000024897        | SAUDI ARABIA              |     74896 | Manufacturer#2            | w8d9a1tMnSCsTW3zav yFI7Pr4zzlk i9FD      | 30-595-773-2958 | pending packages nag furiously above the ironic, final packages. 
+   9934.50 | Supplier#000031048        | JORDAN                    |   1855993 | Manufacturer#3            | FKPtZtWe6a6etVF6rtftnYPS6xFpPJ pE,2N,    | 23-113-690-2419 |  ironic instructions according to the blithely express platelets 
+   9932.53 | Supplier#000031752        | IRAN                      |   1956694 | Manufacturer#1            | KlqVdU20rBYePDXiJ2I2eW5B2 r0ux0933f      | 20-154-319-4626 | tions affix daringly. furiously ironic platelets after the slyly unusual 
+   9931.82 | Supplier#000007052        | IRAQ                      |     57051 | Manufacturer#3            | EvvMY80H5gifhB5a82U4Q0FtttnZ3npEYJ       | 21-562-180-1409 | he furiously even theodolites. blithely ironic theodo
+   9931.71 | Supplier#000096309        | EGYPT                     |   1496308 | Manufacturer#2            | 7b03z syyE                               | 14-208-104-6810 |  at the regular accounts are blithely p
+   9931.00 | Supplier#000099353        | IRAN                      |    574347 | Manufacturer#3            | wJC8ziqzTHL5arSFJGRX9hElX,ak8ojhdEK      | 20-277-942-5913 |  carefully silent attainments can mol
+   9926.29 | Supplier#000083961        | IRAQ                      |     83960 | Manufacturer#5            | 0KgUMM8 pPMwSwAeFVhqaQz3nOYoR            | 21-909-791-4434 | arefully. quickly unusual deposits are. even packages across th
+   9924.97 | Supplier#000073836        | IRAN                      |   1123813 | Manufacturer#2            | 4fWJnQgK5 3lGZu                          | 20-647-181-4183 | counts. final accounts haggle slyly at the blithely even accounts-- quickly final ide
+   9924.67 | Supplier#000062082        | IRAQ                      |     37081 | Manufacturer#5            | q3K8b6MzXyLvJkdi                         | 21-316-109-3592 | ously blithely unusual ideas? carefully ironic 
+   9920.15 | Supplier#000048792        | IRAQ                      |   1123780 | Manufacturer#3            | is,ctAOqDZLRunDu3UCJlkWSICMmVUiHYNbT,Q   | 21-723-681-8759 | gainst the quickly regular requests cajole furiously according to the pen
+   9919.96 | Supplier#000054974        | SAUDI ARABIA              |    229971 | Manufacturer#2            | YGvyVGhdKT0xp7QGLDYE0,4rUd               | 30-955-483-1244 | carefully closely bold braids. unusual foxes haggle. accounts use carefully at the unusual, regul
+   9915.99 | Supplier#000058366        | EGYPT                     |    558365 | Manufacturer#3            |  PtDDIBjKqGzl5YfGaw4NNrjrUpMCc2r2vwhB5QR | 14-900-400-3876 | riously according to the regular foxes. pinto beans boost against t
+   9915.86 | Supplier#000065164        | JORDAN                    |   1540148 | Manufacturer#5            | 50JMM 0kCSKsvSPPzNzouonNu9FpqX8q9        | 23-737-134-5891 | final instructions above the unusual requests use furiousl
+   9912.44 | Supplier#000015929        | JORDAN                    |    815928 | Manufacturer#4            | mkRFlh3luC                               | 23-669-356-1807 | equests sleep slyly dependencies. accounts wake furiously carefully regular realms. carefully iron
+   9911.23 | Supplier#000038763        | EGYPT                     |    713755 | Manufacturer#5            | cP10zxXHssbQ6vQ96QVWPptdm                | 14-882-340-6441 | wake. instructions sleep blithely. depo
+   9910.99 | Supplier#000078714        | EGYPT                     |   1403671 | Manufacturer#1            | uiMQ3 5AytXBkUzVsX                       | 14-990-549-2939 |  boost slyly furiously ironic pinto beans; unusual packages can s
+   9906.91 | Supplier#000011551        | JORDAN                    |    386547 | Manufacturer#3            | u7DH4Dt,qztQUf5Rm0tje                    | 23-279-528-6091 | after the carefully express instruct
+   9904.04 | Supplier#000014047        | JORDAN                    |   1514046 | Manufacturer#2            | 9Z5Vr9wZQPj1DLanSFtCo3Izw8jg             | 23-985-646-4439 | , regular requests haggle quickly. regular warhorses eng
+   9903.69 | Supplier#000019183        | IRAQ                      |     69182 | Manufacturer#2            | c72mOn6I4vbWtvcKoqGrQg                   | 21-868-358-2337 | unusual, express requests are. even foxes sleep fluffily per
+   9896.56 | Supplier#000094084        | IRAQ                      |    569078 | Manufacturer#1            | K4FpE,wZSgqs42s4BZszAB                   | 21-639-787-5944 | lites? requests print among the quickly regular requests. furiously ironic 
+   9895.79 | Supplier#000015939        | IRAN                      |     90938 | Manufacturer#2            | e15UKvy2lR4CIdf3 E4                      | 20-298-628-9571 | eas breach. pinto beans sleep about the fluffily final dependencies. excuses wake busil
+   9895.79 | Supplier#000015939        | IRAN                      |    115938 | Manufacturer#2            | e15UKvy2lR4CIdf3 E4                      | 20-298-628-9571 | eas breach. pinto beans sleep about the fluffily final dependencies. excuses wake busil
+   9893.79 | Supplier#000061010        | SAUDI ARABIA              |     11009 | Manufacturer#5            | jP9PVEr2ZlMlCLmYu1GTRiAiF4OP,QW          | 30-782-445-8125 | egular deposits play quickly. ironic, regular hocke
+   9891.91 | Supplier#000085917        | JORDAN                    |   1385916 | Manufacturer#2            | iOLLF6dDvGBT5SZxYeFQV                    | 23-894-464-2131 | y even accounts. final dependenci
+   9889.10 | Supplier#000007220        | EGYPT                     |   1832165 | Manufacturer#4            | ,7dILJeEhKrHly2nD2K7BXNrioZ2w            | 14-575-445-3713 | ccording to the final realms are furiously unus
+   9885.37 | Supplier#000034764        | SAUDI ARABIA              |   1509748 | Manufacturer#5            | zLo0lQrMAo9C,oC0VZDk3YKvmH97FGNkZ        | 30-890-201-4379 |  regular deposits are quickly. ex
+   9882.34 | Supplier#000094356        | JORDAN                    |    619337 | Manufacturer#5            | 1xN3Vr1X6Ulb                             | 23-737-620-2237 |  the ironic ideas sleep furiously furiously ironic excuses. blithely regular theodolites sleep fu
+   9881.87 | Supplier#000060444        | IRAQ                      |   1560443 | Manufacturer#3            | ,6WNlwLz0LI2lJy4T                        | 21-641-481-4929 | of the ideas use according to th
+   9877.13 | Supplier#000015239        | EGYPT                     |   1540193 | Manufacturer#5            | Tzrn1D6D6LMhzdsshdGFk tF                 | 14-856-702-5090 |  inside the ironic accounts. ironic packages do are carefully. furiously regular packa
+   9876.77 | Supplier#000029804        | SAUDI ARABIA              |   1004793 | Manufacturer#4            | o3v kyVImUNAzOXWBm77gr52sZXQuCc8rFk7G,U  | 30-918-853-6605 | beans. regular, ironic dinos cajole about th
+   9868.16 | Supplier#000039716        | SAUDI ARABIA              |    714708 | Manufacturer#3            | Tz,,E0qAc FUbO OchVYwt                   | 30-950-967-5041 | fully pending accounts might haggle carefully. qui
+   9866.14 | Supplier#000027555        | JORDAN                    |   1702537 | Manufacturer#1            | L57 vJYQ14IXu20V6jdcNWR                  | 23-385-543-6565 | cuses cajole fluffily. furiously special requests cajole slyly. final
+   9866.14 | Supplier#000027555        | JORDAN                    |   1802536 | Manufacturer#5            | L57 vJYQ14IXu20V6jdcNWR                  | 23-385-543-6565 | cuses cajole fluffily. furiously special requests cajole slyly. final
+   9865.50 | Supplier#000061495        | IRAQ                      |    936485 | Manufacturer#3            | dimPBhw58Yb7qtmc1eP4BUldIk05NaIjh0A3nc   | 21-592-442-8266 | ven requests. quickly pending deposits boost quickly among t
+   9864.66 | Supplier#000018254        | JORDAN                    |    893245 | Manufacturer#2            | wV ErXuYs33v3mF7tbI5ou5rriyDVAuK1G8uV    | 23-349-201-1000 | leep across the pinto beans. blithely final packages according to the braids cajo
+   9860.69 | Supplier#000048472        | JORDAN                    |   1748471 | Manufacturer#3            | 9jabjy4CYniCjvP4dJn94y BPLIF3Yeik6eaPVT  | 23-158-183-2087 | nal foxes according to the carefully 
+   9860.04 | Supplier#000078927        | IRAQ                      |    728912 | Manufacturer#1            | GrD0uuOUUSHVVV6                          | 21-339-752-2896 | ully throughout the carefully regular accounts. slyly final theodolites nag. fluffily express
+   9859.76 | Supplier#000045940        | IRAN                      |    370930 | Manufacturer#5            | yNPvV8L,vWFWRufLGDGLQFT8jhDQp20a         | 20-103-818-9298 |  requests. excuses use furiously 
+   9859.76 | Supplier#000031214        | SAUDI ARABIA              |    631213 | Manufacturer#4            | tViysWcOkN                               | 30-803-261-8210 | its sleep furiously about the theodolites. bold, bold platelets along the slyly unusual warhorses n
+   9859.30 | Supplier#000037027        | EGYPT                     |   1886990 | Manufacturer#4            | IYh7Hl8wZGrmDCFjtl                       | 14-760-204-2085 | gular ideas. regular packages are slowly deposits.
+   9859.05 | Supplier#000071122        | IRAN                      |   1096091 | Manufacturer#3            | A7yrWbXOsWozZbbi7VnRWLbu0DjqzRImlhd3     | 20-903-348-6132 | s. unusual theodolites against the ironic, ironic requests are quickly 
+   9857.64 | Supplier#000064798        | IRAQ                      |    889773 | Manufacturer#1            | 2LJeNGY4nVmoto2HSvbAOco                  | 21-250-503-6972 | riously finally regular accounts. quietly ironic asymptotes boost. final dependencies wake furio
+   9841.97 | Supplier#000094836        | IRAN                      |    719814 | Manufacturer#5            | cWBLIUB0ZShN hYu5ajiyGwY YN4hldmt2SfqKD  | 20-190-269-3999 | ckly ironic accounts among the pending theodolites play even accounts. silent
+   9840.84 | Supplier#000061360        | JORDAN                    |    186356 | Manufacturer#3            | cZtsGRjO21L8uL6P,9Vy1                    | 23-122-598-2427 | xpress packages cajole quickly across the quickly regular pi
+   9840.84 | Supplier#000061360        | JORDAN                    |    586344 | Manufacturer#4            | cZtsGRjO21L8uL6P,9Vy1                    | 23-122-598-2427 | xpress packages cajole quickly across the quickly regular pi
+   9839.45 | Supplier#000082623        | IRAQ                      |   1757605 | Manufacturer#1            | DTvcXA8f9R                               | 21-212-103-9400 | ly bold notornis. furiously regular theodolites integrate slyly after the final accounts: 
+   9833.34 | Supplier#000079699        | JORDAN                    |     54698 | Manufacturer#5            | iS9sAcuhy41 a                            | 23-839-870-5773 | packages. carefully dogged requests wake quickly-- regular, ironic pack
+   9833.34 | Supplier#000079699        | JORDAN                    |   1929660 | Manufacturer#3            | iS9sAcuhy41 a                            | 23-839-870-5773 | packages. carefully dogged requests wake quickly-- regular, ironic pack
+   9828.46 | Supplier#000027156        | IRAN                      |    227155 | Manufacturer#1            | fQrPIzdRT qCs clOJmS4ZDsNEL1b,,paWD40IE8 | 20-387-464-2711 | ronic accounts engage fluffily regular deposits. bold, final ac
+   9828.33 | Supplier#000046434        | SAUDI ARABIA              |    646433 | Manufacturer#5            | pAtDhPA2MoUBkvRfKLsrSY03u                | 30-570-885-5384 | r deposits. special courts haggle carefully express dependencies. unusual platelets s
+   9826.30 | Supplier#000018696        | IRAN                      |   1118695 | Manufacturer#5            | d2GreXVb25jBu81j3nrptzx2wOfyURq7yg,      | 20-473-361-3631 | y regular packages boost furiously final, final hockey players. furiously bold
+   9825.61 | Supplier#000004196        | JORDAN                    |    329186 | Manufacturer#5            | M WMlXALjG85VYh9mkvo81,                  | 23-679-372-7879 | to the blithely even theodolites-- blithely bold accounts are about the furiously ironic package
+   9825.29 | Supplier#000017638        | SAUDI ARABIA              |   1767603 | Manufacturer#4            | Ya9gC7zoo0tYCm3YaSnFwEqpw                | 30-138-180-3154 | s. final warthogs cajole blithely. quickly even exc
+   9818.79 | Supplier#000004778        | JORDAN                    |      4777 | Manufacturer#3            | NFVxKobRQOHN B1O0U7U,                    | 23-829-256-1950 | ve the slyly ironic requests nag pending
+   9818.79 | Supplier#000004778        | JORDAN                    |   1704777 | Manufacturer#3            | NFVxKobRQOHN B1O0U7U,                    | 23-829-256-1950 | ve the slyly ironic requests nag pending
+   9812.19 | Supplier#000089317        | JORDAN                    |    489316 | Manufacturer#5            | ggOJ wuIlZ6y pS14Q8s3pLBip2ZI,GNA        | 23-531-207-9459 | quickly regular accounts; slyly ironic ideas around the dogged, regular foxe
+   9812.19 | Supplier#000089317        | JORDAN                    |   1414274 | Manufacturer#5            | ggOJ wuIlZ6y pS14Q8s3pLBip2ZI,GNA        | 23-531-207-9459 | quickly regular accounts; slyly ironic ideas around the dogged, regular foxe
+   9808.11 | Supplier#000019716        | IRAN                      |    419715 | Manufacturer#2            | fHO7XUbznBRI4pN0 yAmKz                   | 20-580-516-8036 | egular requests are against the carefully special asymptotes. carefully unusual warhorses alon
+   9808.11 | Supplier#000019716        | IRAN                      |    694709 | Manufacturer#4            | fHO7XUbznBRI4pN0 yAmKz                   | 20-580-516-8036 | egular requests are against the carefully special asymptotes. carefully unusual warhorses alon
+   9805.03 | Supplier#000085003        | JORDAN                    |    309993 | Manufacturer#3            | OBcbzYvvrhlEXHats7Fxr5                   | 23-998-713-3526 | equests. furiously final dependenc
+   9804.92 | Supplier#000034958        | JORDAN                    |    159954 | Manufacturer#4            | FRVvxJd o5NNceR7hE                       | 23-590-312-7665 | ptotes. regular, ironic ideas across the flu
+   9799.11 | Supplier#000088820        | SAUDI ARABIA              |    963810 | Manufacturer#1            | WP6tL4iOGGMJbDWBUzwQlhCOU6lSdxwr3        | 30-328-960-8277 |  wake slyly up the ironic packages. furiously regular ideas are 
+   9792.93 | Supplier#000071255        | EGYPT                     |   1821218 | Manufacturer#2            | z7URG1fHhs13oSEde,bdHf                   | 14-178-141-5480 | osits boost slyly. doggedly ironic
+   9784.56 | Supplier#000092583        | EGYPT                     |   1592582 | Manufacturer#1            | TnTrsbF4MtbArZ1tHX                       | 14-235-120-6411 | iresias cajole. slyly bold packages after the carefully express theo
+   9782.08 | Supplier#000072835        | IRAN                      |   1672834 | Manufacturer#1            | Os9Ut7fDway9mBZzUu28yzo04mSmL0nIr4r      | 20-572-437-3128 |  alongside of the fluffily ironic requests. furiously final sauternes sin
+   9781.61 | Supplier#000031113        | JORDAN                    |   1506097 | Manufacturer#1            | GcOGGe32iWS7roXOMFVMUCTSAQLL             | 23-910-191-4358 | oost quickly after the even accounts. a
+(100 rows)
 
 COMMIT;
 COMMIT

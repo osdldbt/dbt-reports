@@ -1,17 +1,17 @@
-date: Fri May 27 16:35:36 UTC 2022
-node: pgsql1.dbt2.internal
+date: Wed Jun  1 23:34:24 UTC 2022
+node: pgsql1.dbt3.internal
 kernel: Linux 5.15.41-gentoo-x86_64-zbkstdxg5
 distribution: Rocky Linux release 8.5 (Green Obsidian)
 dbver: PostgreSQL 14.3
 sysstat: 11.7.3
 CPUS: 6
-MHz:  2957.801
+MHz:  2200.000
 model:  Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz
-memory:        65708276 kB
+memory:        65708288 kB
 scale_factor: 10
 num_stream: 3
-load_parameters: -c unix_socket_directories='/tmp'
-power_parameters: -c unix_socket_directories='/tmp'
-throughput_parameters: -c unix_socket_directories='/tmp'
+load_parameters: 
+power_parameters: 
+throughput_parameters: 
 shmmax: 18446744073692774399
 dbms: pgsql

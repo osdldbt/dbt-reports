@@ -1,7 +1,6 @@
 BEGIN;
 BEGIN
 EXPLAIN
-explain (analyze, buffers)
 select
 	c_count,
 	count(*) as custdist
@@ -22,3 +21,24 @@ group by
 order by
 	custdist desc,
 	c_count desc;
+                                                              QUERY PLAN                                                               
+---------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=1535746.77..1535747.27 rows=200 width=16)
+   Sort Key: (count(*)) DESC, (count(orders.o_orderkey)) DESC
+   ->  HashAggregate  (cost=1535737.13..1535739.13 rows=200 width=16)
+         Group Key: count(orders.o_orderkey)
+         ->  Finalize GroupAggregate  (cost=1000.89..1513236.39 rows=1500049 width=12)
+               Group Key: customer.c_custkey
+               ->  Gather Merge  (cost=1000.89..1483235.41 rows=3000098 width=12)
+                     Workers Planned: 2
+                     ->  Partial GroupAggregate  (cost=0.86..1135949.64 rows=1500049 width=12)
+                           Group Key: customer.c_custkey
+                           ->  Nested Loop Left Join  (cost=0.86..1089705.13 rows=6248804 width=12)
+                                 ->  Parallel Index Only Scan using pk_customer on customer  (cost=0.43..28594.88 rows=625020 width=4)
+                                 ->  Index Scan using orders_o_custkey_idx on orders  (cost=0.43..1.53 rows=17 width=12)
+                                       Index Cond: (o_custkey = customer.c_custkey)
+                                       Filter: ((o_comment)::text !~~ '%express%accounts%'::text)
+(15 rows)
+
+COMMIT;
+COMMIT

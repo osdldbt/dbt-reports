@@ -1,5 +1,4 @@
 # hostname;interval;timestamp;pswpin/s;pswpout/s
-pgsql1.dbt2.internal;60;1653668521;0.00;0.00
-pgsql1.dbt2.internal;60;1653668581;0.00;0.00
-pgsql1.dbt2.internal;60;1653668641;0.00;0.00
-pgsql1.dbt2.internal;60;1653668701;0.00;0.00
+pgsql1.dbt3.internal;60;1654125806;0.00;0.00
+pgsql1.dbt3.internal;60;1654125866;0.00;0.00
+pgsql1.dbt3.internal;60;1654125926;0.00;0.00

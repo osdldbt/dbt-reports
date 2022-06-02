@@ -1,6 +1,17 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	100.00 * sum(case
 		when p_type like 'PROMO%'
@@ -12,35 +23,39 @@ from
 	part
 where
 	l_partkey = p_partkey
-	and l_shipdate >= date '1995-07-01'
-	and l_shipdate < cast(date '1995-07-01' + interval '1 month' as date);
-                                                                      QUERY PLAN                                                                       
--------------------------------------------------------------------------------------------------------------------------------------------------------
- Finalize Aggregate  (cost=1612695.81..1612695.82 rows=1 width=32) (actual time=5294.809..5336.480 rows=1 loops=1)
-   Buffers: shared hit=170 read=1196976 dirtied=1152 written=1146, temp read=15222 written=15608
-   ->  Gather  (cost=1612695.57..1612695.78 rows=2 width=64) (actual time=5293.448..5336.460 rows=3 loops=1)
-         Workers Planned: 2
-         Workers Launched: 2
-         Buffers: shared hit=170 read=1196976 dirtied=1152 written=1146, temp read=15222 written=15608
-         ->  Partial Aggregate  (cost=1611695.57..1611695.58 rows=1 width=64) (actual time=5290.970..5291.171 rows=1 loops=3)
-               Buffers: shared hit=170 read=1196976 dirtied=1152 written=1146, temp read=15222 written=15608
-               ->  Parallel Hash Join  (cost=65408.48..1606256.80 rows=310787 width=33) (actual time=4947.420..5131.270 rows=257943 loops=3)
-                     Hash Cond: (lineitem.l_partkey = part.p_partkey)
-                     Buffers: shared hit=170 read=1196976 dirtied=1152 written=1146, temp read=15222 written=15608
-                     ->  Parallel Seq Scan on lineitem  (cost=0.00..1531299.50 rows=310787 width=16) (actual time=0.097..4548.799 rows=257943 loops=3)
-                           Filter: ((l_shipdate >= '1995-07-01'::date) AND (l_shipdate < '1995-08-01'::date))
-                           Rows Removed by Filter: 19757280
-                           Buffers: shared hit=7 read=1156013 dirtied=1152 written=1049
-                     ->  Parallel Hash  (cost=49295.10..49295.10 rows=833310 width=25) (actual time=282.108..282.109 rows=666667 loops=3)
-                           Buckets: 65536  Batches: 64  Memory Usage: 2432kB
-                           Buffers: shared read=40962 written=95, temp written=11760
-                           ->  Parallel Seq Scan on part  (cost=0.00..49295.10 rows=833310 width=25) (actual time=0.027..127.247 rows=666667 loops=3)
-                                 Buffers: shared read=40962 written=95
- Planning:
-   Buffers: shared hit=447 read=55 dirtied=5 written=55
- Planning Time: 2.046 ms
- Execution Time: 5336.570 ms
-(24 rows)
+	and l_shipdate >= date '1996-02-01'
+	and l_shipdate < cast(date '1996-02-01' + interval '1 month' as date);
+NOTICE:  duration: 4383.994 ms  plan:
+Query Text: select
+	100.00 * sum(case
+		when p_type like 'PROMO%'
+			then l_extendedprice * (1 - l_discount)
+		else 0
+	end) / sum(l_extendedprice * (1 - l_discount)) as promo_revenue
+from
+	lineitem,
+	part
+where
+	l_partkey = p_partkey
+	and l_shipdate >= date '1996-02-01'
+	and l_shipdate < cast(date '1996-02-01' + interval '1 month' as date);
+Finalize Aggregate  (cost=1612104.51..1612104.52 rows=1 width=32) (actual time=4346.130..4383.986 rows=1 loops=1)
+  ->  Gather  (cost=1612104.27..1612104.48 rows=2 width=64) (actual time=4345.093..4383.970 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial Aggregate  (cost=1611104.27..1611104.28 rows=1 width=64) (actual time=4342.143..4342.212 rows=1 loops=3)
+              ->  Parallel Hash Join  (cost=65410.40..1606012.12 rows=290980 width=33) (actual time=4069.986..4217.944 rows=240840 loops=3)
+                    Hash Cond: (lineitem.l_partkey = part.p_partkey)
+                    ->  Parallel Seq Scan on lineitem  (cost=0.00..1531298.89 rows=290980 width=16) (actual time=0.065..3745.310 rows=240840 loops=3)
+                          Filter: ((l_shipdate >= '1996-02-01'::date) AND (l_shipdate < '1996-03-01'::date))
+                          Rows Removed by Filter: 19774383
+                    ->  Parallel Hash  (cost=49296.51..49296.51 rows=833351 width=25) (actual time=239.439..239.439 rows=666667 loops=3)
+                          Buckets: 65536  Batches: 64  Memory Usage: 2432kB
+                          ->  Parallel Seq Scan on part  (cost=0.00..49296.51 rows=833351 width=25) (actual time=0.020..108.813 rows=666667 loops=3)
+    promo_revenue    
+---------------------
+ 16.6217113982237546
+(1 row)
 
 COMMIT;
 COMMIT

@@ -1,6 +1,17 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	l_returnflag,
 	l_linestatus,
@@ -15,43 +26,60 @@ select
 from
 	lineitem
 where
-	l_shipdate <= date '1998-12-01' - interval '82 days'
+	l_shipdate <= date '1998-12-01' - interval '62 days'
 group by
 	l_returnflag,
 	l_linestatus
 order by
 	l_returnflag,
 	l_linestatus;
-                                                                         QUERY PLAN                                                                         
-------------------------------------------------------------------------------------------------------------------------------------------------------------
- Finalize GroupAggregate  (cost=2340665.41..2340667.37 rows=6 width=236) (actual time=85590.391..85597.155 rows=4 loops=1)
-   Group Key: l_returnflag, l_linestatus
-   Buffers: shared hit=5851 read=1152495 dirtied=1 written=17
-   ->  Gather Merge  (cost=2340665.41..2340666.81 rows=12 width=236) (actual time=85590.345..85597.032 rows=12 loops=1)
-         Workers Planned: 2
-         Workers Launched: 2
-         Buffers: shared hit=5851 read=1152495 dirtied=1 written=17
-         ->  Sort  (cost=2339665.39..2339665.40 rows=6 width=236) (actual time=85575.155..85575.157 rows=4 loops=3)
-               Sort Key: l_returnflag, l_linestatus
-               Sort Method: quicksort  Memory: 27kB
-               Buffers: shared hit=5851 read=1152495 dirtied=1 written=17
-               Worker 0:  Sort Method: quicksort  Memory: 27kB
-               Worker 1:  Sort Method: quicksort  Memory: 27kB
-               ->  Partial HashAggregate  (cost=2339665.17..2339665.31 rows=6 width=236) (actual time=85575.078..85575.097 rows=4 loops=3)
-                     Group Key: l_returnflag, l_linestatus
-                     Batches: 1  Memory Usage: 32kB
-                     Buffers: shared hit=5837 read=1152495 dirtied=1 written=17
-                     Worker 0:  Batches: 1  Memory Usage: 32kB
-                     Worker 1:  Batches: 1  Memory Usage: 32kB
-                     ->  Parallel Seq Scan on lineitem  (cost=0.00..1471690.38 rows=24799280 width=25) (actual time=0.069..14638.974 rows=19781015 loops=3)
-                           Filter: (l_shipdate <= '1998-09-10 00:00:00'::timestamp without time zone)
-                           Rows Removed by Filter: 234111
-                           Buffers: shared hit=5837 read=1152495 dirtied=1 written=17
- Planning:
-   Buffers: shared hit=279 read=46 written=5
- Planning Time: 2.672 ms
- Execution Time: 85597.412 ms
-(27 rows)
+NOTICE:  duration: 73667.783 ms  plan:
+Query Text: select
+	l_returnflag,
+	l_linestatus,
+	sum(l_quantity) as sum_qty,
+	sum(l_extendedprice) as sum_base_price,
+	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	avg(l_quantity) as avg_qty,
+	avg(l_extendedprice) as avg_price,
+	avg(l_discount) as avg_disc,
+	count(*) as count_order
+from
+	lineitem
+where
+	l_shipdate <= date '1998-12-01' - interval '62 days'
+group by
+	l_returnflag,
+	l_linestatus
+order by
+	l_returnflag,
+	l_linestatus;
+Finalize GroupAggregate  (cost=2342072.02..2342073.97 rows=6 width=236) (actual time=73667.575..73667.754 rows=4 loops=1)
+  Group Key: l_returnflag, l_linestatus
+  ->  Gather Merge  (cost=2342072.02..2342073.42 rows=12 width=236) (actual time=73667.529..73667.649 rows=12 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Sort  (cost=2341071.99..2341072.01 rows=6 width=236) (actual time=73642.476..73642.478 rows=4 loops=3)
+              Sort Key: l_returnflag, l_linestatus
+              Sort Method: quicksort  Memory: 27kB
+              Worker 0:  Sort Method: quicksort  Memory: 27kB
+              Worker 1:  Sort Method: quicksort  Memory: 27kB
+              ->  Partial HashAggregate  (cost=2341071.78..2341071.92 rows=6 width=236) (actual time=73642.403..73642.422 rows=4 loops=3)
+                    Group Key: l_returnflag, l_linestatus
+                    Batches: 1  Memory Usage: 32kB
+                    Worker 0:  Batches: 1  Memory Usage: 32kB
+                    Worker 1:  Batches: 1  Memory Usage: 32kB
+                    ->  Parallel Seq Scan on lineitem  (cost=0.00..1471169.78 rows=24854343 width=25) (actual time=0.077..12253.395 rows=19860925 loops=3)
+                          Filter: (l_shipdate <= '1998-09-30 00:00:00'::timestamp without time zone)
+                          Rows Removed by Filter: 134259
+ l_returnflag | l_linestatus |  sum_qty  |  sum_base_price  |   sum_disc_price   |      sum_charge      |       avg_qty       |     avg_price      |        avg_disc        | count_order 
+--------------+--------------+-----------+------------------+--------------------+----------------------+---------------------+--------------------+------------------------+-------------
+ A            | F            | 377514153 |  566059588540.91 |  537753386205.1259 |  559270768624.054925 | 25.5008760489079685 | 38237.017841494253 | 0.05000611187487030504 |    14803968
+ N            | F            |   9852244 |   14768197143.31 |   14029408708.8827 |   14591128077.589154 | 25.5213696025531099 | 38255.712876963208 | 0.04997881043107043589 |      386039
+ N            | O            | 754357618 | 1131139739814.82 | 1074578884795.6300 | 1117574048426.515563 | 25.4983327466539501 | 38234.090543461382 | 0.04999938718087858319 |    29584586
+ R            | F            | 377737932 |  566442208389.47 |  538121634410.8545 |  559646423183.994943 | 25.5087293289122643 | 38251.972466133759 | 0.04999604745565340461 |    14808183
+(4 rows)
 
 COMMIT;
 COMMIT

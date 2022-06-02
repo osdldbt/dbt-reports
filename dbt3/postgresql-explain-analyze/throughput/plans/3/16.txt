@@ -1,7 +1,6 @@
 BEGIN;
 BEGIN
 EXPLAIN
-explain (analyze, buffers)
 select
 	p_brand,
 	p_type,
@@ -12,9 +11,9 @@ from
 	part
 where
 	p_partkey = ps_partkey
-	and p_brand <> 'Brand#54'
-	and p_type not like 'SMALL POLISHED%'
-	and p_size in (32, 17, 41, 19, 16, 10, 45, 4)
+	and p_brand <> 'Brand#34'
+	and p_type not like 'ECONOMY BRUSHED%'
+	and p_size in (10, 18, 47, 25, 48, 19, 23, 46)
 	and ps_suppkey not in (
 		select
 			s_suppkey
@@ -32,3 +31,27 @@ order by
 	p_brand,
 	p_type,
 	p_size;
+                                                               QUERY PLAN                                                               
+----------------------------------------------------------------------------------------------------------------------------------------
+ Sort  (cost=319905.70..320291.20 rows=154203 width=44)
+   Sort Key: (count(DISTINCT partsupp.ps_suppkey)) DESC, part.p_brand, part.p_type, part.p_size
+   ->  GroupAggregate  (cost=224646.65..301871.66 rows=154203 width=44)
+         Group Key: part.p_brand, part.p_type, part.p_size
+         ->  Gather Merge  (cost=224646.65..294345.20 rows=598443 width=40)
+               Workers Planned: 2
+               ->  Sort  (cost=223646.63..224270.01 rows=249351 width=40)
+                     Sort Key: part.p_brand, part.p_type, part.p_size
+                     ->  Parallel Hash Join  (cost=15308.95..194473.53 rows=249351 width=40)
+                           Hash Cond: (partsupp.ps_partkey = part.p_partkey)
+                           ->  Parallel Index Only Scan using pk_partsupp on partsupp  (cost=4.75..160795.46 rows=1666994 width=8)
+                                 Filter: (NOT (hashed SubPlan 1))
+                                 SubPlan 1
+                                   ->  Index Only Scan using supplier_s_suppkey_idx_like on supplier  (cost=0.14..4.29 rows=10 width=4)
+                           ->  Parallel Hash  (cost=12772.02..12772.02 rows=124654 width=40)
+                                 ->  Parallel Index Only Scan using part_ios_test1 on part  (cost=0.43..12772.02 rows=124654 width=40)
+                                       Index Cond: (p_size = ANY ('{10,18,47,25,48,19,23,46}'::integer[]))
+                                       Filter: ((p_brand <> 'Brand#34'::bpchar) AND ((p_type)::text !~~ 'ECONOMY BRUSHED%'::text))
+(18 rows)
+
+COMMIT;
+COMMIT

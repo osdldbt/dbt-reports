@@ -1,9 +1,0 @@
-customer
-lineitem
-nation
-orders
-part
-partsupp
-region
-supplier
-time_statistics

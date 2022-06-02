@@ -1,11 +1,37 @@
-Fri May 27 16:25:29 UTC 2022: Stream 2 : Starting Refresh Stream 2...
+Wed Jun  1 23:26:02 UTC 2022: Stream 2 : Starting Refresh Stream 2...
+LOAD
+SET
+SET
+SET
+SET
+SET
 BEGIN
 CREATE TABLE
 COPY 15000
 CREATE INDEX
 ANALYZE
+NOTICE:  duration: 95.600 ms  plan:
+Query Text: DELETE FROM lineitem
+USING tmp_orderkey2
+WHERE l_orderkey = orderkey;
+Delete on lineitem  (cost=148017.28..319104.70 rows=0 width=0) (actual time=95.597..95.598 rows=0 loops=1)
+  WAL: records=60340 fpi=1260 bytes=13494188
+  ->  Merge Join  (cost=148017.28..319104.70 rows=2220134 width=12) (actual time=16.773..62.277 rows=60340 loops=1)
+        Merge Cond: (tmp_orderkey2.orderkey = lineitem.l_orderkey)
+        ->  Index Scan using tmp_orderkey2_orderkey_idx on tmp_orderkey2  (cost=0.29..467.29 rows=15000 width=10) (actual time=0.006..2.471 rows=15000 loops=1)
+        ->  Index Scan using pk_lineitem on lineitem  (cost=0.56..147991715.39 rows=60043823 width=14) (actual time=0.035..47.333 rows=180128 loops=1)
 DELETE 60340
+NOTICE:  duration: 24.431 ms  plan:
+Query Text: DELETE FROM orders
+USING tmp_orderkey2
+WHERE o_orderkey = orderkey;
+Delete on orders  (cost=1603.99..3861.86 rows=0 width=0) (actual time=24.429..24.430 rows=0 loops=1)
+  WAL: records=15000 fpi=284 bytes=3122904
+  ->  Merge Join  (cost=1603.99..3861.86 rows=15000 width=12) (actual time=3.906..17.431 rows=15000 loops=1)
+        Merge Cond: (orders.o_orderkey = tmp_orderkey2.orderkey)
+        ->  Index Scan using pk_orders on orders  (cost=0.43..1425023.40 rows=15013513 width=14) (actual time=0.025..10.718 rows=45000 loops=1)
+        ->  Index Scan using tmp_orderkey2_orderkey_idx on tmp_orderkey2  (cost=0.29..467.29 rows=15000 width=10) (actual time=0.004..2.194 rows=15000 loops=1)
 DELETE 15000
 COMMIT
-Fri May 27 16:25:29 UTC 2022: Stream 2 : Refresh Stream 2 completed.
-Stream 2 : Elapsed time for Refresh Stream 2 : 0 seconds
+Wed Jun  1 23:26:03 UTC 2022: Stream 2 : Refresh Stream 2 completed.
+Stream 2 : Elapsed time for Refresh Stream 2 : 1 seconds

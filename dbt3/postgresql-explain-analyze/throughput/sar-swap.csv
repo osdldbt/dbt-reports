@@ -1,11 +1,9 @@
 # hostname;interval;timestamp;pswpin/s;pswpout/s
-pgsql1.dbt2.internal;60;1653668794;0.00;0.00
-pgsql1.dbt2.internal;60;1653668854;0.00;0.00
-pgsql1.dbt2.internal;60;1653668914;0.00;0.00
-pgsql1.dbt2.internal;60;1653668974;0.00;0.00
-pgsql1.dbt2.internal;60;1653669034;0.00;0.00
-pgsql1.dbt2.internal;60;1653669094;0.00;0.00
-pgsql1.dbt2.internal;60;1653669154;0.00;0.00
-pgsql1.dbt2.internal;60;1653669214;0.00;0.00
-pgsql1.dbt2.internal;60;1653669274;0.00;0.00
-pgsql1.dbt2.internal;60;1653669334;0.00;0.00
+pgsql1.dbt3.internal;60;1654126024;0.00;0.00
+pgsql1.dbt3.internal;60;1654126084;0.00;0.00
+pgsql1.dbt3.internal;60;1654126144;0.00;0.00
+pgsql1.dbt3.internal;60;1654126204;0.00;0.00
+pgsql1.dbt3.internal;60;1654126264;0.00;0.00
+pgsql1.dbt3.internal;60;1654126324;0.00;0.00
+pgsql1.dbt3.internal;60;1654126384;0.00;0.00
+pgsql1.dbt3.internal;60;1654126444;0.00;0.00

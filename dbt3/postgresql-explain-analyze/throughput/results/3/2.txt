@@ -1,6 +1,17 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	s_acctbal,
 	s_name,
@@ -19,11 +30,11 @@ from
 where
 	p_partkey = ps_partkey
 	and s_suppkey = ps_suppkey
-	and p_size = 10
-	and p_type like '%COPPER'
+	and p_size = 5
+	and p_type like '%NICKEL'
 	and s_nationkey = n_nationkey
 	and n_regionkey = r_regionkey
-	and r_name = 'AMERICA'
+	and r_name = 'ASIA'
 	and ps_supplycost = (
 		select
 			min(ps_supplycost)
@@ -37,7 +48,7 @@ where
 			and s_suppkey = ps_suppkey
 			and s_nationkey = n_nationkey
 			and n_regionkey = r_regionkey
-			and r_name = 'AMERICA'
+			and r_name = 'ASIA'
 	)
 order by
 	s_acctbal desc,
@@ -45,82 +56,201 @@ order by
 	s_name,
 	p_partkey
 LIMIT 100;
-                                                                                    QUERY PLAN                                                                                     
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Limit  (cost=2073576.28..2073576.29 rows=1 width=192) (actual time=13659.430..13659.460 rows=100 loops=1)
-   Buffers: shared hit=1188064 read=662735 written=3, temp read=93367 written=93484
-   ->  Sort  (cost=2073576.28..2073576.29 rows=1 width=192) (actual time=13659.428..13659.445 rows=100 loops=1)
-         Sort Key: supplier.s_acctbal DESC, nation.n_name, supplier.s_name, part.p_partkey
-         Sort Method: top-N heapsort  Memory: 71kB
-         Buffers: shared hit=1188064 read=662735 written=3, temp read=93367 written=93484
-         ->  Merge Join  (cost=639246.72..2073576.27 rows=1 width=192) (actual time=11704.782..13654.108 rows=4669 loops=1)
-               Merge Cond: (part.p_partkey = partsupp.ps_partkey)
-               Join Filter: (partsupp.ps_supplycost = (SubPlan 1))
-               Rows Removed by Join Filter: 1628
-               Buffers: shared hit=1188058 read=662735 written=3, temp read=93367 written=93484
-               ->  Index Scan using part_ios_test1 on part  (cost=0.43..107166.05 rows=7190 width=30) (actual time=0.214..172.368 rows=7963 loops=1)
-                     Index Cond: (p_size = 10)
-                     Filter: ((p_type)::text ~~ '%COPPER'::text)
-                     Rows Removed by Filter: 32104
-                     Buffers: shared hit=44 read=26127
-               ->  Materialize  (cost=639245.39..647218.92 rows=1594706 width=172) (actual time=11703.552..12754.383 rows=1603489 loops=1)
-                     Buffers: shared hit=1042368 read=624055 written=3, temp read=93367 written=93484
-                     ->  Sort  (cost=639245.39..643232.15 rows=1594706 width=172) (actual time=11703.534..12337.414 rows=1603489 loops=1)
-                           Sort Key: partsupp.ps_partkey
-                           Sort Method: external merge  Disk: 293496kB
-                           Buffers: shared hit=1042368 read=624055 written=3, temp read=93367 written=93484
-                           ->  Nested Loop  (cost=2.00..202413.93 rows=1594706 width=172) (actual time=0.179..7951.742 rows=1604080 loops=1)
-                                 Buffers: shared hit=1042368 read=624055 written=3
-                                 ->  Nested Loop  (cost=1.56..4776.62 rows=20000 width=166) (actual time=0.113..179.472 rows=20051 loops=1)
-                                       Join Filter: (nation.n_regionkey = region.r_regionkey)
-                                       Rows Removed by Join Filter: 79949
-                                       Buffers: shared read=2219
-                                       ->  Seq Scan on region  (cost=0.00..1.06 rows=1 width=4) (actual time=0.020..0.023 rows=1 loops=1)
-                                             Filter: (r_name = 'AMERICA'::bpchar)
-                                             Rows Removed by Filter: 4
-                                             Buffers: shared read=1
-                                       ->  Hash Join  (cost=1.56..3525.56 rows=100000 width=170) (actual time=0.087..146.285 rows=100000 loops=1)
-                                             Hash Cond: (supplier.s_nationkey = nation.n_nationkey)
-                                             Buffers: shared read=2218
-                                             ->  Seq Scan on supplier  (cost=0.00..3217.00 rows=100000 width=144) (actual time=0.018..51.997 rows=100000 loops=1)
-                                                   Buffers: shared read=2217
-                                             ->  Hash  (cost=1.25..1.25 rows=25 width=34) (actual time=0.036..0.037 rows=25 loops=1)
-                                                   Buckets: 1024  Batches: 1  Memory Usage: 10kB
-                                                   Buffers: shared read=1
-                                                   ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=34) (actual time=0.016..0.023 rows=25 loops=1)
-                                                         Buffers: shared read=1
-                                 ->  Index Scan using partsupp_ps_suppkey_idx on partsupp  (cost=0.43..9.08 rows=80 width=14) (actual time=0.013..0.348 rows=80 loops=20051)
-                                       Index Cond: (ps_suppkey = supplier.s_suppkey)
-                                       Buffers: shared hit=1042368 read=621836 written=3
-               SubPlan 1
-                 ->  Aggregate  (cost=229.38..229.39 rows=1 width=32) (actual time=0.052..0.052 rows=1 loops=6297)
-                       Buffers: shared hit=145646 read=12553
-                       ->  Nested Loop  (cost=0.86..229.37 rows=4 width=6) (actual time=0.031..0.048 rows=2 loops=6297)
-                             Join Filter: (nation_1.n_regionkey = region_1.r_regionkey)
-                             Rows Removed by Join Filter: 2
-                             Buffers: shared hit=145646 read=12553
-                             ->  Seq Scan on region region_1  (cost=0.00..1.06 rows=1 width=4) (actual time=0.001..0.002 rows=1 loops=6297)
-                                   Filter: (r_name = 'AMERICA'::bpchar)
-                                   Rows Removed by Filter: 4
-                                   Buffers: shared hit=6296 read=1
-                             ->  Nested Loop  (cost=0.86..228.09 rows=18 width=10) (actual time=0.021..0.044 rows=4 loops=6297)
-                                   Buffers: shared hit=139350 read=12552
-                                   ->  Nested Loop  (cost=0.72..225.31 rows=18 width=10) (actual time=0.018..0.034 rows=4 loops=6297)
-                                         Buffers: shared hit=88976 read=12550
-                                         ->  Index Scan using pk_partsupp on partsupp partsupp_1  (cost=0.43..75.73 rows=18 width=10) (actual time=0.012..0.014 rows=4 loops=6297)
-                                               Index Cond: (ps_partkey = part.p_partkey)
-                                               Buffers: shared hit=16720 read=9242
-                                         ->  Index Scan using pk_supplier on supplier supplier_1  (cost=0.29..8.31 rows=1 width=8) (actual time=0.004..0.004 rows=1 loops=25188)
-                                               Index Cond: (s_suppkey = partsupp_1.ps_suppkey)
-                                               Buffers: shared hit=72256 read=3308
-                                   ->  Index Scan using pk_nation on nation nation_1  (cost=0.14..0.16 rows=1 width=8) (actual time=0.001..0.001 rows=1 loops=25188)
-                                         Index Cond: (n_nationkey = supplier_1.s_nationkey)
-                                         Buffers: shared hit=50374 read=2
- Planning:
-   Buffers: shared hit=437 read=72
- Planning Time: 6.570 ms
- Execution Time: 13738.009 ms
-(73 rows)
+NOTICE:  duration: 12060.106 ms  plan:
+Query Text: select
+	s_acctbal,
+	s_name,
+	n_name,
+	p_partkey,
+	p_mfgr,
+	s_address,
+	s_phone,
+	s_comment
+from
+	part,
+	supplier,
+	partsupp,
+	nation,
+	region
+where
+	p_partkey = ps_partkey
+	and s_suppkey = ps_suppkey
+	and p_size = 5
+	and p_type like '%NICKEL'
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'ASIA'
+	and ps_supplycost = (
+		select
+			min(ps_supplycost)
+		from
+			partsupp,
+			supplier,
+			nation,
+			region
+		where
+			p_partkey = ps_partkey
+			and s_suppkey = ps_suppkey
+			and s_nationkey = n_nationkey
+			and n_regionkey = r_regionkey
+			and r_name = 'ASIA'
+	)
+order by
+	s_acctbal desc,
+	n_name,
+	s_name,
+	p_partkey
+LIMIT 100;
+Limit  (cost=2118202.83..2118202.84 rows=1 width=193) (actual time=12059.751..12059.786 rows=100 loops=1)
+  ->  Sort  (cost=2118202.83..2118202.84 rows=1 width=193) (actual time=12059.748..12059.770 rows=100 loops=1)
+        Sort Key: supplier.s_acctbal DESC, nation.n_name, supplier.s_name, part.p_partkey
+        Sort Method: top-N heapsort  Memory: 71kB
+        ->  Merge Join  (cost=637358.42..2118202.82 rows=1 width=193) (actual time=9882.185..12054.082 rows=4797 loops=1)
+              Merge Cond: (part.p_partkey = partsupp.ps_partkey)
+              Join Filter: (partsupp.ps_supplycost = (SubPlan 1))
+              Rows Removed by Join Filter: 1716
+              ->  Index Scan using part_ios_test1 on part  (cost=0.43..111861.13 rows=7872 width=30) (actual time=0.159..204.669 rows=8004 loops=1)
+                    Index Cond: (p_size = 5)
+                    Filter: ((p_type)::text ~~ '%NICKEL'::text)
+                    Rows Removed by Filter: 31901
+              ->  Materialize  (cost=637357.99..645307.57 rows=1589916 width=173) (actual time=9880.778..11039.815 rows=1602859 loops=1)
+                    ->  Sort  (cost=637357.99..641332.78 rows=1589916 width=173) (actual time=9880.770..10612.845 rows=1602859 loops=1)
+                          Sort Key: partsupp.ps_partkey
+                          Sort Method: external merge  Disk: 293616kB
+                          ->  Nested Loop  (cost=2.00..201873.52 rows=1589916 width=173) (actual time=0.157..6513.399 rows=1602960 loops=1)
+                                ->  Nested Loop  (cost=1.56..4776.62 rows=20000 width=167) (actual time=0.105..147.118 rows=20037 loops=1)
+                                      Join Filter: (nation.n_regionkey = region.r_regionkey)
+                                      Rows Removed by Join Filter: 79963
+                                      ->  Seq Scan on region  (cost=0.00..1.06 rows=1 width=4) (actual time=0.020..0.022 rows=1 loops=1)
+                                            Filter: (r_name = 'ASIA'::bpchar)
+                                            Rows Removed by Filter: 4
+                                      ->  Hash Join  (cost=1.56..3525.56 rows=100000 width=171) (actual time=0.079..121.118 rows=100000 loops=1)
+                                            Hash Cond: (supplier.s_nationkey = nation.n_nationkey)
+                                            ->  Seq Scan on supplier  (cost=0.00..3217.00 rows=100000 width=145) (actual time=0.019..32.584 rows=100000 loops=1)
+                                            ->  Hash  (cost=1.25..1.25 rows=25 width=34) (actual time=0.034..0.035 rows=25 loops=1)
+                                                  Buckets: 1024  Batches: 1  Memory Usage: 10kB
+                                                  ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=34) (actual time=0.016..0.021 rows=25 loops=1)
+                                ->  Index Scan using partsupp_ps_suppkey_idx on partsupp  (cost=0.43..9.06 rows=79 width=14) (actual time=0.011..0.287 rows=80 loops=20037)
+                                      Index Cond: (ps_suppkey = supplier.s_suppkey)
+              SubPlan 1
+                ->  Aggregate  (cost=216.83..216.84 rows=1 width=32) (actual time=0.057..0.057 rows=1 loops=6513)
+                      ->  Nested Loop  (cost=0.86..216.82 rows=3 width=6) (actual time=0.033..0.053 rows=2 loops=6513)
+                            Join Filter: (nation_1.n_regionkey = region_1.r_regionkey)
+                            Rows Removed by Join Filter: 2
+                            ->  Seq Scan on region region_1  (cost=0.00..1.06 rows=1 width=4) (actual time=0.002..0.002 rows=1 loops=6513)
+                                  Filter: (r_name = 'ASIA'::bpchar)
+                                  Rows Removed by Filter: 4
+                            ->  Nested Loop  (cost=0.86..215.54 rows=17 width=10) (actual time=0.022..0.049 rows=4 loops=6513)
+                                  ->  Nested Loop  (cost=0.72..212.92 rows=17 width=10) (actual time=0.019..0.038 rows=4 loops=6513)
+                                        ->  Index Scan using pk_partsupp on partsupp partsupp_1  (cost=0.43..71.65 rows=17 width=10) (actual time=0.013..0.015 rows=4 loops=6513)
+                                              Index Cond: (ps_partkey = part.p_partkey)
+                                        ->  Index Scan using pk_supplier on supplier supplier_1  (cost=0.29..8.31 rows=1 width=8) (actual time=0.005..0.005 rows=1 loops=26052)
+                                              Index Cond: (s_suppkey = partsupp_1.ps_suppkey)
+                                  ->  Index Scan using pk_nation on nation nation_1  (cost=0.14..0.16 rows=1 width=8) (actual time=0.002..0.002 rows=1 loops=26052)
+                                        Index Cond: (n_nationkey = supplier_1.s_nationkey)
+ s_acctbal |          s_name           |          n_name           | p_partkey |          p_mfgr           |                s_address                |     s_phone     |                                             s_comment                                              
+-----------+---------------------------+---------------------------+-----------+---------------------------+-----------------------------------------+-----------------+----------------------------------------------------------------------------------------------------
+   9999.14 | Supplier#000058246        | CHINA                     |    633239 | Manufacturer#2            | K44oF,yPllAObqlTuiifUsBObneERr HR       | 28-133-556-7631 | ly unusual foxes. even theodolites haggle according to the express instructio
+   9999.14 | Supplier#000058246        | CHINA                     |   1258245 | Manufacturer#3            | K44oF,yPllAObqlTuiifUsBObneERr HR       | 28-133-556-7631 | ly unusual foxes. even theodolites haggle according to the express instructio
+   9998.46 | Supplier#000094965        | INDIA                     |   1644932 | Manufacturer#5            | VmMFuFhO7N8                             | 18-850-437-6211 | d deposits. quickly even accounts ar
+   9997.21 | Supplier#000045318        | JAPAN                     |   1670269 | Manufacturer#5            | BiLLOLswp8cfsoygolv0tfhC wg             | 22-208-264-2271 | integrate about the unusual, regular foxes. furiously furious packages wake
+   9996.92 | Supplier#000047415        | CHINA                     |    772393 | Manufacturer#2            | 5DWeOSupcmLCQ                           | 28-832-603-7709 | iously ironic pinto beans. dependencies 
+   9996.65 | Supplier#000041402        | CHINA                     |    841401 | Manufacturer#5            | YTO5 WxLYMSHpjhJ,h                      | 28-763-115-7623 | ular platelets are slyly about the furiously regular accounts. ironically un
+   9994.86 | Supplier#000089719        | INDONESIA                 |    789718 | Manufacturer#3            | lDNpZesVZBeI7Aj6pLaUEDdFSTlGyJk1Yz      | 19-995-912-8747 | unusual deposits. blithely permanent pinto beans haggle carefully. regul
+   9992.35 | Supplier#000039849        | INDIA                     |    889832 | Manufacturer#4            | l0r4e4xKfG Og7OdlieTGQWKK               | 18-415-728-7534 | ites poach permanently sly
+   9991.70 | Supplier#000033562        | INDONESIA                 |   1058531 | Manufacturer#5            | SopB krelv                              | 19-493-533-8956 | even accounts haggle slyly above the regular requests. fluffily final pinto beans cajole even acc
+   9983.25 | Supplier#000053494        | INDONESIA                 |    353493 | Manufacturer#3            | dtzBhsu6EzAdwzZBHdwt5ARHRZL2            | 19-414-416-2397 | luffily ironic deposits boost carefully alongside of the packages. blithely unusual
+   9983.25 | Supplier#000053494        | INDONESIA                 |   1178460 | Manufacturer#5            | dtzBhsu6EzAdwzZBHdwt5ARHRZL2            | 19-414-416-2397 | luffily ironic deposits boost carefully alongside of the packages. blithely unusual
+   9981.30 | Supplier#000039534        | INDONESIA                 |   1089513 | Manufacturer#4            | F9wlPGs7JV5iTA xzgvn0stPhhAyuCLtAb5AKA  | 19-794-735-3903 | y along the quicklCustomer ependencies. slyly reguComplaintsts believe carefully iron
+   9970.83 | Supplier#000047054        | CHINA                     |   1297029 | Manufacturer#3            | gwO Q4MnhkKSjTtmeeFJycmYhhm             | 28-172-114-8694 | ccounts cajole above the requests. courts hinder. unusual, final packages cajol
+   9962.52 | Supplier#000070654        | JAPAN                     |    920635 | Manufacturer#3            | q6nCo35iz85AEwECi                       | 22-580-348-5979 | lyly special accounts affix busily. requests around the carefully regular packages affix above the
+   9961.58 | Supplier#000030247        | INDIA                     |   1005236 | Manufacturer#4            | NCBeIFhm0msmQpQlYm9jNU1HZvOFCs06OpQ     | 18-294-166-5475 |  even theodolites boost quickly. carefully unusual
+   9954.41 | Supplier#000049876        | JAPAN                     |   1849875 | Manufacturer#4            | 8sqIwoQcVQXsk07loSV gWkAuUugqsJ         | 22-229-251-8495 | usly ironic frets are quickly. final courts int
+   9953.38 | Supplier#000057593        | VIETNAM                   |    882568 | Manufacturer#1            | iNjhvQhTyVPBfEtVnm1VNLtqTC7OYIuFgW,QDZ  | 31-490-408-8259 | alongside of the slyly regular account
+   9951.85 | Supplier#000014460        | VIETNAM                   |    589454 | Manufacturer#5            | tUof8iXlj1mq7CZh1lbi3RWXsX5I            | 31-774-818-2250 | slyly pending asymptotes haggle quickly quickly express instructions. blithe
+   9949.49 | Supplier#000026904        | JAPAN                     |   1901884 | Manufacturer#3            | cWMUTMYIAd9 O9Hubl43                    | 22-437-955-9373 |  blithely slyly final theodolites. carefully ironic packages are carefully. asymptotes nag furio
+   9948.33 | Supplier#000027792        | VIETNAM                   |   1627791 | Manufacturer#5            | elJHDrs3WTXCs5sUOVvqwIddP0jAbV4pwKS     | 31-261-658-3498 | press, even pinto beans. ironic requests across the fluffily regular deposit
+   9948.33 | Supplier#000027792        | VIETNAM                   |   1852737 | Manufacturer#3            | elJHDrs3WTXCs5sUOVvqwIddP0jAbV4pwKS     | 31-261-658-3498 | press, even pinto beans. ironic requests across the fluffily regular deposit
+   9947.40 | Supplier#000061189        | CHINA                     |   1886134 | Manufacturer#4            | E9EQ4kMu9zIX Ke4AYfL8tfPK               | 28-137-244-1289 |  slyly regular requests haggle. furiously regular dependencies haggle slyly alongside 
+   9946.78 | Supplier#000019299        | JAPAN                     |    594293 | Manufacturer#5            | pcoNu6QsK,9VVW54nRFVddwEauz             | 22-691-247-6377 | ctions. blithely regular theodolites nag quickly alongside of the bold excuses. u
+   9946.78 | Supplier#000019299        | JAPAN                     |   1744247 | Manufacturer#2            | pcoNu6QsK,9VVW54nRFVddwEauz             | 22-691-247-6377 | ctions. blithely regular theodolites nag quickly alongside of the bold excuses. u
+   9945.45 | Supplier#000042869        | INDONESIA                 |   1442868 | Manufacturer#1            | 718qkRWpKo4eK3                          | 19-852-877-2594 | l accounts. dolphins about the furiously
+   9940.08 | Supplier#000090187        | VIETNAM                   |    365183 | Manufacturer#2            | Eu4andd9uloRB3vKhefH7A                  | 31-473-731-3732 | are blithely above the regular accounts. fluff
+   9940.08 | Supplier#000090187        | VIETNAM                   |   1565171 | Manufacturer#3            | Eu4andd9uloRB3vKhefH7A                  | 31-473-731-3732 | are blithely above the regular accounts. fluff
+   9937.34 | Supplier#000045341        | INDIA                     |   1270304 | Manufacturer#2            | IO6A9uWKuKpxEXOxj,WWvOrI64pEw59JL       | 18-946-354-8698 | e furiously even packages. furiously unusual packages nag slyly unusual, expre
+   9934.78 | Supplier#000099368        | JAPAN                     |    124364 | Manufacturer#3            | yEi7J2WnNXl0dD                          | 22-773-119-9980 | ickly regular foxes. fluffily final deposits haggle carefully. carefully silent requests a
+   9934.05 | Supplier#000073468        | VIETNAM                   |   1873467 | Manufacturer#1            | 2DDkSrjDTbz                             | 31-844-261-1791 | lithely special deposits. blithely pending ideas are requests. special, regular account
+   9929.15 | Supplier#000084042        | INDONESIA                 |   1634009 | Manufacturer#2            | b2crwDibQ3Xa6D1CiwH80bOjvXEcz8Ppng      | 19-813-169-2227 | nstructions use furiously inside the q
+   9928.19 | Supplier#000041648        | JAPAN                     |   1566602 | Manufacturer#3            | fuahGk77lDlxe,,uegZPGh7n8LYISI4zN73     | 22-438-264-6023 | slyly express, bold pinto beans. slyly regular accounts use quic
+   9927.20 | Supplier#000060106        | INDIA                     |   1035095 | Manufacturer#3            | HVu2ViE35yBTc0u7VuS64fHlk 6             | 18-858-532-5040 | s across the deposits haggle fluffily against the 
+   9925.92 | Supplier#000058999        | JAPAN                     |    783977 | Manufacturer#4            | zDHkXvP9lvTQP5H                         | 22-714-514-9527 | arefully ironic pinto beans ab
+   9922.84 | Supplier#000065253        | JAPAN                     |   1190219 | Manufacturer#5            | vM,1TgLpikMsaEHaw7SIAUajANHljda         | 22-918-946-3360 | l instructions haggle furiously above the 
+   9922.84 | Supplier#000065253        | JAPAN                     |   1465252 | Manufacturer#3            | vM,1TgLpikMsaEHaw7SIAUajANHljda         | 22-918-946-3360 | l instructions haggle furiously above the 
+   9922.76 | Supplier#000051095        | JAPAN                     |     26094 | Manufacturer#2            | V8mVE2aXbpB3IyeHa9BWNvlMtgYb47Y,,v      | 22-970-696-4667 | d quickly furiously slow 
+   9913.93 | Supplier#000078850        | CHINA                     |   1653833 | Manufacturer#4            | ,TgWV,t gxlcYo6                         | 28-946-543-6833 | refully regular, special accounts. regular a
+   9913.93 | Supplier#000078850        | CHINA                     |   1678849 | Manufacturer#5            | ,TgWV,t gxlcYo6                         | 28-946-543-6833 | refully regular, special accounts. regular a
+   9913.73 | Supplier#000083211        | JAPAN                     |   1308171 | Manufacturer#3            | GWuWLjV7TkPS                            | 22-686-860-2890 | . silent, furious ideas wake ironic, 
+   9913.73 | Supplier#000083211        | JAPAN                     |   1458196 | Manufacturer#2            | GWuWLjV7TkPS                            | 22-686-860-2890 | . silent, furious ideas wake ironic, 
+   9912.79 | Supplier#000086365        | CHINA                     |    661358 | Manufacturer#3            | 1tVVrj mcc,biV,ed9ZyGoGzIourmPrl39JQ0Ja | 28-655-252-8443 | ges. blithely enticing requests sleep slyly. special, final deposits wake 
+   9912.30 | Supplier#000074817        | JAPAN                     |    274816 | Manufacturer#5            | 7SWcXb43XDpQW8MLp1pxtdg,MXtXUp7BmR,FP   | 22-853-185-1268 |  even instructions: accounts haggle about the carefully regular 
+   9910.62 | Supplier#000080165        | JAPAN                     |    855156 | Manufacturer#4            | sDhQmCXgE0OzqxkA9G5                     | 22-304-301-3629 | ckages along the slyly pending theodolite
+   9907.27 | Supplier#000087723        | VIETNAM                   |    337716 | Manufacturer#4            |  RJQZhyTygIUFHT96lRqh                   | 31-856-485-2157 |  cajole daringly quickly final pinto beans. slyly regular foxes after the regular foxes w
+   9906.06 | Supplier#000088637        | JAPAN                     |   1338610 | Manufacturer#5            | cgqBLJvgTRlm                            | 22-800-267-3027 | its will haggle requests. even dependencies above the final orbits x-ra
+   9903.47 | Supplier#000002334        | VIETNAM                   |   1627285 | Manufacturer#1            | TRASs4 HRa7BJLxXRms327M                 | 31-806-679-3391 | nts doze blithely ironic deposits. bold deposits boost. care
+   9901.58 | Supplier#000001432        | VIETNAM                   |    626413 | Manufacturer#2            | gIECERmEUGoiGrKmSz                      | 31-671-456-4156 | ongside of the furiously final
+   9901.07 | Supplier#000081121        | INDONESIA                 |    106117 | Manufacturer#1            | bO6SRZVCq15HFERT1t9TJ5lBVF eHCrsUBfbj   | 19-720-378-1093 | efully regular instructions. carefully ironic deposits 
+   9896.22 | Supplier#000012008        | VIETNAM                   |    861991 | Manufacturer#3            | msiRjQVfAlitwSDeKBH8MgRLU5CHUaPx6NQr    | 31-950-200-3465 |  ideas: requests engage express pinto beans. carefully ironic deposits alo
+   9888.60 | Supplier#000096435        | INDIA                     |   1371421 | Manufacturer#5            | hFF9gULYxqTWLydk                        | 18-888-997-9343 |  special foxes cajole above the fluffily pending deposits. quickly regular instructions in
+   9887.27 | Supplier#000051208        | INDIA                     |   1026197 | Manufacturer#2            | HrWvBd8xLaptIbbTz,eLNBAlMpRF6sBlLurfzQ  | 18-183-208-2711 | arefully unusual packages. silently regular requests grow fluffily. furiously express
+   9877.40 | Supplier#000060920        | INDONESIA                 |   1460919 | Manufacturer#5            | jj,VSIey5 ai2                           | 19-544-883-4649 | gifts haggle fluffily among the furiously final packages. fluffily ironic 
+   9875.88 | Supplier#000067410        | INDIA                     |    792388 | Manufacturer#1            | CQ,3jhQjMZR09f7tLV7pW,8nJ               | 18-743-204-9668 | ly ruthless packages. final ideas haggle. 
+   9875.02 | Supplier#000093763        | JAPAN                     |    993762 | Manufacturer#2            | JykpJCRBxWBNe                           | 22-736-220-6979 | lar, bold packages. final excuses cajole furiously
+   9875.02 | Supplier#000093763        | JAPAN                     |   1343736 | Manufacturer#5            | JykpJCRBxWBNe                           | 22-736-220-6979 | lar, bold packages. final excuses cajole furiously
+   9874.20 | Supplier#000087017        | JAPAN                     |    262014 | Manufacturer#1            | Zsv50nnH6ypoCHbDuNpMsX7nGrKdC5          | 22-506-719-6885 | urts. slyly regular ideas wake. carefully ironic accounts sleep alongside of the
+   9871.52 | Supplier#000066605        | INDONESIA                 |   1816568 | Manufacturer#4            | JvKkqsoK4YM                             | 19-991-647-9809 |  accounts. furiously final sauternes above the quickly unusual deposits are accordin
+   9871.06 | Supplier#000095618        | VIETNAM                   |    720596 | Manufacturer#4            | 42EzawSoHlqqjRW2mUz                     | 31-818-708-6960 | tructions. carefully regular accounts detect blithely unusual theodolites?
+   9869.92 | Supplier#000074672        | JAPAN                     |    699653 | Manufacturer#3            | 6 i2Wbm2pmm                             | 22-361-696-6847 | r theodolites. idle requests against the regular foxes nag about the notornis. ideas haggle slyl
+   9865.93 | Supplier#000035145        | INDONESIA                 |   1860090 | Manufacturer#2            | Jx95RHyQ82VhB uueA0tdtSK312icfbIbjyNB   | 19-710-182-4764 | olites: ironic, final theodolites integrate across the express, regular requests. 
+   9863.46 | Supplier#000003800        | INDIA                     |    753785 | Manufacturer#2            | x4PxtpKcMqS1L8J                         | 18-930-103-2299 | are daringly express ideas. special instructions wake furiously. bold, ironic instr
+   9857.83 | Supplier#000091366        | JAPAN                     |   1316326 | Manufacturer#5            | VrQ,wLsNEroOo                           | 22-256-733-8064 |  boldly slyly special requests. slyly ironic packages boost inside the ideas. final requests x-ra
+   9854.85 | Supplier#000040284        | VIETNAM                   |    590273 | Manufacturer#1            |  Cheq9eEPqVdYPRyCeTc                    | 31-263-356-4981 | posits. regular packages sleep 
+   9854.32 | Supplier#000083188        | INDONESIA                 |     58187 | Manufacturer#5            | Gzz 18MFQBhT9                           | 19-995-232-2981 | xpress instructions nag. even platelets serve carefully final accounts. bold, final account
+   9853.88 | Supplier#000093325        | CHINA                     |   1768307 | Manufacturer#3            | P7bWOWfLATtXyx2zAKvSUTH9MZudGF2         | 28-439-457-5329 | ress deposits! final dolphins sleep. final deposits use at the furiously ironic accounts. q
+   9851.63 | Supplier#000081843        | VIETNAM                   |   1131820 | Manufacturer#3            | Ltf tCxcpoxScD06U4                      | 31-164-675-3876 | ideas. fluffily unusual accounts must have to sleep quickly. c
+   9850.82 | Supplier#000033865        | JAPAN                     |    558849 | Manufacturer#5            | pSX62Y3NpK8BGErkPCSuWDnUw               | 22-908-256-1368 | e furiously fluffily ironic foxes. furiously bold ide
+   9850.67 | Supplier#000095915        | INDIA                     |   1470900 | Manufacturer#2            | uqQyxPYTT21yHSEV3mfxgQ                  | 18-350-713-8558 | ely regular accounts. slyly even packages about the excuses sleep carefully
+   9846.37 | Supplier#000088391        | INDIA                     |    913363 | Manufacturer#4            | OyAMbXjjVaF4nAkel4evicvjCkoh J855gSD    | 18-934-653-6128 | ffix. bold pinto beans mold furiously alongside of the ironic accounts. cl
+   9846.25 | Supplier#000043690        | INDIA                     |   1493661 | Manufacturer#5            | AeS2,BklQ8,lhNIJFxDHkJox6ZcBzE          | 18-104-139-4287 | odolites nod furiously slyly iron
+   9845.98 | Supplier#000000175        | JAPAN                     |   1850138 | Manufacturer#2            | Lgv gYbBdu S9                           | 22-392-226-3266 | leep. quickly blithe theodolites wake slyly. furiously pending ideas haggle after the slyly
+   9845.98 | Supplier#000000175        | JAPAN                     |   1900174 | Manufacturer#1            | Lgv gYbBdu S9                           | 22-392-226-3266 | leep. quickly blithe theodolites wake slyly. furiously pending ideas haggle after the slyly
+   9845.71 | Supplier#000097422        | VIETNAM                   |   1697421 | Manufacturer#2            | eHiCfhIotncTl3B5ylBSPYCwP8bpvz6         | 31-930-544-6657 | gular, even accounts nag furiously even pinto beans. blithely ironic
+   9844.21 | Supplier#000012680        | CHINA                     |    687673 | Manufacturer#1            | YDjhtWzBXGPMyNSRY6bVYz                  | 28-730-263-7146 | platelets are blithely blithely unusual cour
+   9843.82 | Supplier#000093578        | VIETNAM                   |   1118544 | Manufacturer#3            | 4GLtsfrUobdktgS0g 23EKxYmvwyDSKr0ZRPYLz | 31-681-847-4072 | ly final deposits. express dependencies sleep slyly according to the slyl
+   9841.38 | Supplier#000084799        | INDONESIA                 |    909771 | Manufacturer#2            | HUUtiqPqgG,EQN ACzDyk                   | 19-402-466-4902 | . furiously pending dolphins haggle slyly b
+   9834.40 | Supplier#000094430        | VIETNAM                   |    644417 | Manufacturer#5            | my,cR1Dh1eMPvWLYgpyoVJKoLkx6vNuK        | 31-838-609-9758 | unusual deposits. furiously re
+   9833.79 | Supplier#000001761        | INDONESIA                 |   1251736 | Manufacturer#3            | a0m8NEA2aIlbFIC,54v7                    | 19-593-938-9681 | ckages integrate fluffily after the slyly express pains. slyly regula
+   9833.23 | Supplier#000047254        | JAPAN                     |    472241 | Manufacturer#5            | 1F0,,iEn5XEFn4BvX                       | 22-314-882-6103 | beans haggle carefully ironic courts. furious
+   9827.71 | Supplier#000033961        | INDIA                     |    958933 | Manufacturer#5            | Uo32WgjW7o                              | 18-751-315-7908 | s are carefully above the bl
+   9825.57 | Supplier#000030304        | INDONESIA                 |    155300 | Manufacturer#2            | tsIGlSH9G94Lx0zZJj                      | 19-240-906-9848 | y regular requests sleep furiously even packa
+   9824.87 | Supplier#000070786        | CHINA                     |     45785 | Manufacturer#5            | qdRjcwUR0LquOgMksOY                     | 28-243-794-2405 | ual requests according to the fluffily express dinos cajole thinly express tithes. slyly fin
+   9821.66 | Supplier#000039386        | INDIA                     |   1339385 | Manufacturer#2            | yDhD887EJ8vkcJgVSlAiT,8jcLtVvRMk        | 18-463-324-4417 | . special, express dugouts haggle. fluffily bold accounts haggl
+   9821.66 | Supplier#000039386        | INDIA                     |   1814367 | Manufacturer#3            | yDhD887EJ8vkcJgVSlAiT,8jcLtVvRMk        | 18-463-324-4417 | . special, express dugouts haggle. fluffily bold accounts haggl
+   9816.53 | Supplier#000073518        | VIETNAM                   |   1248505 | Manufacturer#3            | 0 LQinvXzzojcyPODMc,sCg,Orh  EtrqM1Ip   | 31-421-395-8250 | even instructions among the foxes are after the s
+   9815.91 | Supplier#000068967        | VIETNAM                   |   1693918 | Manufacturer#2            | 5gmv0LemcDrJVx23OL4pG5FFMwZPi           | 31-890-593-9659 | os against the pinto beans cajole quickly accounts. furiously express packages cajole
+   9814.52 | Supplier#000011964        | INDONESIA                 |    411963 | Manufacturer#3            | SUlR98D9Nto35ZsMbTwNUhn2oLYpKkwKAbI     | 19-268-823-3174 | ess fluffily. theodolites wake pending foxes. slyly even foxes haggle furiously iro
+   9812.02 | Supplier#000040246        | INDONESIA                 |   1940245 | Manufacturer#1            | wKbf5Y3AkmnKIgR3IKrvJDrcKgyvIE2FqPEr2h4 | 19-887-572-6652 | s; blithely bold dolphins after the quickly special fo
+   9807.04 | Supplier#000056204        | INDIA                     |   1531188 | Manufacturer#4            | C6yG3JHM8tdpjOGvWZEIh Rc                | 18-308-710-6747 |  dependencies. furiously special foxes nag car
+   9806.12 | Supplier#000075484        | INDIA                     |    950474 | Manufacturer#1            | GhSor6D0suPVvDd43am6SlBD 5zOHxAP        | 18-732-909-2302 | ages wake idle multipliers. slyly pending id
+   9804.43 | Supplier#000001876        | CHINA                     |   1226839 | Manufacturer#4            | lTZ6pI,RFTpOig,qA                       | 28-885-858-3916 | c requests across the carefully final foxes integrate after the carefully pending
+   9798.73 | Supplier#000069056        | VIETNAM                   |   1844037 | Manufacturer#4            | MRA2ucTfzV9cHuZ                         | 31-416-118-4470 | he depths. furiously regular ideas use alongside of the requests. pendi
+   9795.56 | Supplier#000023939        | CHINA                     |    998929 | Manufacturer#4            | NXKe97Z0i0ztPXVG4UPUfDSSL7s             | 28-388-583-2665 | hely ironic theodolites. bold packages maintain furiously slyly special deposits. blithely final
+   9794.78 | Supplier#000064752        | VIETNAM                   |   1489709 | Manufacturer#1            | gs0UR4rVyPXvosXiZFA1DA5Tbs0q3RF DyTj2Nc | 31-893-963-6418 | ven instructions are blithely ironic theodolites. deposits sleep final ideas. fluffily ir
+   9794.15 | Supplier#000057031        | VIETNAM                   |    957030 | Manufacturer#2            | I,tx5ta2co0P5c0                         | 31-625-654-2419 | sly alongside of the blithely ironic real
+   9794.15 | Supplier#000057031        | VIETNAM                   |   1806994 | Manufacturer#5            | I,tx5ta2co0P5c0                         | 31-625-654-2419 | sly alongside of the blithely ironic real
+   9792.05 | Supplier#000057432        | INDIA                     |    807415 | Manufacturer#1            | 1HsyLBnDrBq496yc7xSVO                   | 18-944-965-2181 | bout the packages wake furiously perma
+   9791.37 | Supplier#000088715        | INDIA                     |    738700 | Manufacturer#5            | cqjobnp0hrFr                            | 18-261-631-7258 |  deposits. ironically express epit
+   9789.01 | Supplier#000073462        | INDIA                     |    223457 | Manufacturer#4            | S9iGDGqqHZfcgd11OTm,07rtjlN7Vj3         | 18-433-643-4412 | egular pinto beans haggle! furiously express dugouts cajole furiously. fi
+(100 rows)
 
 COMMIT;
 COMMIT

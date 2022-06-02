@@ -1,6 +1,17 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	c_custkey,
 	c_name,
@@ -18,8 +29,8 @@ from
 where
 	c_custkey = o_custkey
 	and l_orderkey = o_orderkey
-	and o_orderdate >= date '1993-02-01'
-	and o_orderdate < cast(date '1993-02-01' + interval '3 month' as date)
+	and o_orderdate >= date '1993-06-01'
+	and o_orderdate < cast(date '1993-06-01' + interval '3 month' as date)
 	and l_returnflag = 'R'
 	and c_nationkey = n_nationkey
 group by
@@ -33,65 +44,98 @@ group by
 order by
 	revenue desc
 LIMIT 20;
-                                                                                      QUERY PLAN                                                                                       
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Limit  (cost=2127998.20..2127998.25 rows=20 width=202) (actual time=10533.367..10758.222 rows=20 loops=1)
-   Buffers: shared hit=475 read=1459911, temp read=158640 written=160217
-   ->  Sort  (cost=2127998.20..2129325.15 rows=530780 width=202) (actual time=10533.366..10758.218 rows=20 loops=1)
-         Sort Key: (sum((lineitem.l_extendedprice * ('1'::numeric - lineitem.l_discount)))) DESC
-         Sort Method: top-N heapsort  Memory: 34kB
-         Buffers: shared hit=475 read=1459911, temp read=158640 written=160217
-         ->  Finalize GroupAggregate  (cost=2045680.34..2113874.33 rows=530780 width=202) (actual time=9255.099..10588.396 rows=373018 loops=1)
-               Group Key: customer.c_custkey, nation.n_name
-               Buffers: shared hit=472 read=1459911, temp read=158640 written=160217
-               ->  Gather Merge  (cost=2045680.34..2102816.42 rows=442316 width=202) (actual time=9255.084..10074.818 rows=373687 loops=1)
-                     Workers Planned: 2
-                     Workers Launched: 2
-                     Buffers: shared hit=472 read=1459911, temp read=158640 written=160217
-                     ->  Partial GroupAggregate  (cost=2044680.31..2050762.16 rows=221158 width=202) (actual time=9251.903..9774.492 rows=124562 loops=3)
-                           Group Key: customer.c_custkey, nation.n_name
-                           Buffers: shared hit=472 read=1459911, temp read=158640 written=160217
-                           ->  Sort  (cost=2044680.31..2045233.21 rows=221158 width=182) (actual time=9251.870..9356.122 rows=371328 loops=3)
-                                 Sort Key: customer.c_custkey, nation.n_name
-                                 Sort Method: external merge  Disk: 70344kB
-                                 Buffers: shared hit=472 read=1459911, temp read=158640 written=160217
-                                 Worker 0:  Sort Method: external merge  Disk: 71712kB
-                                 Worker 1:  Sort Method: external merge  Disk: 70608kB
-                                 ->  Hash Join  (cost=429370.49..2005391.32 rows=221158 width=182) (actual time=8487.571..8850.276 rows=371328 loops=3)
-                                       Hash Cond: (customer.c_nationkey = nation.n_nationkey)
-                                       Buffers: shared hit=344 read=1459911, temp read=118671 written=120168
-                                       ->  Parallel Hash Join  (cost=429368.93..2004710.81 rows=221158 width=160) (actual time=8487.527..8732.968 rows=371328 loops=3)
-                                             Hash Cond: (orders.o_custkey = customer.c_custkey)
-                                             Buffers: shared hit=320 read=1459910, temp read=118671 written=120168
-                                             ->  Parallel Hash Join  (cost=366016.57..1925188.91 rows=221158 width=16) (actual time=7314.953..8071.763 rows=371328 loops=3)
-                                                   Hash Cond: (lineitem.l_orderkey = orders.o_orderkey)
-                                                   Buffers: shared hit=320 read=1424050, temp read=82027 written=82128
-                                                   ->  Parallel Seq Scan on lineitem  (cost=0.00..1468752.92 rows=6227972 width=20) (actual time=0.034..4910.011 rows=4940997 loops=3)
-                                                         Filter: (l_returnflag = 'R'::bpchar)
-                                                         Rows Removed by Filter: 15074226
-                                                         Buffers: shared hit=289 read=1155731
-                                                   ->  Parallel Hash  (cost=362154.81..362154.81 rows=222141 width=12) (actual time=948.066..948.067 rows=185222 loops=3)
-                                                         Buckets: 131072  Batches: 16  Memory Usage: 2688kB
-                                                         Buffers: shared hit=1 read=268319, temp written=2344
-                                                         ->  Parallel Seq Scan on orders  (cost=0.00..362154.81 rows=222141 width=12) (actual time=0.046..892.969 rows=185222 loops=3)
-                                                               Filter: ((o_orderdate >= '1993-02-01'::date) AND (o_orderdate < '1993-05-01'::date))
-                                                               Rows Removed by Filter: 4819778
-                                                               Buffers: shared hit=1 read=268319
-                                             ->  Parallel Hash  (cost=42110.38..42110.38 rows=625038 width=148) (actual time=296.018..296.019 rows=500000 loops=3)
-                                                   Buckets: 32768  Batches: 128  Memory Usage: 2432kB
-                                                   Buffers: shared read=35860, temp written=31900
-                                                   ->  Parallel Seq Scan on customer  (cost=0.00..42110.38 rows=625038 width=148) (actual time=0.014..102.831 rows=500000 loops=3)
-                                                         Buffers: shared read=35860
-                                       ->  Hash  (cost=1.25..1.25 rows=25 width=30) (actual time=0.021..0.022 rows=25 loops=3)
-                                             Buckets: 1024  Batches: 1  Memory Usage: 10kB
-                                             Buffers: shared hit=2 read=1
-                                             ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=30) (actual time=0.012..0.015 rows=25 loops=3)
-                                                   Buffers: shared hit=2 read=1
- Planning:
-   Buffers: shared hit=661 read=53 dirtied=2
- Planning Time: 2.111 ms
- Execution Time: 10769.467 ms
-(56 rows)
+NOTICE:  duration: 9146.438 ms  plan:
+Query Text: select
+	c_custkey,
+	c_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue,
+	c_acctbal,
+	n_name,
+	c_address,
+	c_phone,
+	c_comment
+from
+	customer,
+	orders,
+	lineitem,
+	nation
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and o_orderdate >= date '1993-06-01'
+	and o_orderdate < cast(date '1993-06-01' + interval '3 month' as date)
+	and l_returnflag = 'R'
+	and c_nationkey = n_nationkey
+group by
+	c_custkey,
+	c_name,
+	c_acctbal,
+	c_phone,
+	n_name,
+	c_address,
+	c_comment
+order by
+	revenue desc
+LIMIT 20;
+Limit  (cost=2139917.81..2139917.86 rows=20 width=202) (actual time=8959.320..9146.402 rows=20 loops=1)
+  ->  Sort  (cost=2139917.81..2141360.66 rows=577137 width=202) (actual time=8959.319..9146.399 rows=20 loops=1)
+        Sort Key: (sum((lineitem.l_extendedprice * ('1'::numeric - lineitem.l_discount)))) DESC
+        Sort Method: top-N heapsort  Memory: 34kB
+        ->  Finalize GroupAggregate  (cost=2050410.35..2124560.41 rows=577137 width=202) (actual time=7923.562..9002.690 rows=381497 loops=1)
+              Group Key: customer.c_custkey, nation.n_name
+              ->  Gather Merge  (cost=2050410.35..2112536.71 rows=480948 width=202) (actual time=7923.554..8580.003 rows=382050 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    ->  Partial GroupAggregate  (cost=2049410.32..2056023.36 rows=240474 width=202) (actual time=7919.440..8317.731 rows=127350 loops=3)
+                          Group Key: customer.c_custkey, nation.n_name
+                          ->  Sort  (cost=2049410.32..2050011.51 rows=240474 width=182) (actual time=7919.410..7995.474 rows=382440 loops=3)
+                                Sort Key: customer.c_custkey, nation.n_name
+                                Sort Method: external merge  Disk: 73064kB
+                                Worker 0:  Sort Method: external merge  Disk: 73064kB
+                                Worker 1:  Sort Method: external merge  Disk: 72864kB
+                                ->  Hash Join  (cost=429695.41..2006546.33 rows=240474 width=182) (actual time=7244.765..7558.749 rows=382440 loops=3)
+                                      Hash Cond: (customer.c_nationkey = nation.n_nationkey)
+                                      ->  Parallel Hash Join  (cost=429693.85..2005806.51 rows=240474 width=160) (actual time=7244.711..7458.976 rows=382440 loops=3)
+                                            Hash Cond: (orders.o_custkey = customer.c_custkey)
+                                            ->  Parallel Hash Join  (cost=366335.89..1926038.32 rows=240474 width=16) (actual time=6137.489..6800.023 rows=382440 loops=3)
+                                                  Hash Cond: (lineitem.l_orderkey = orders.o_orderkey)
+                                                  ->  Parallel Seq Scan on lineitem  (cost=0.00..1468753.24 rows=6258734 width=20) (actual time=0.030..4055.879 rows=4940997 loops=3)
+                                                        Filter: (l_returnflag = 'R'::bpchar)
+                                                        Rows Removed by Filter: 15074226
+                                                  ->  Parallel Hash  (cost=362157.46..362157.46 rows=240355 width=12) (actual time=864.238..864.239 rows=191417 loops=3)
+                                                        Buckets: 131072  Batches: 16  Memory Usage: 2752kB
+                                                        ->  Parallel Seq Scan on orders  (cost=0.00..362157.46 rows=240355 width=12) (actual time=0.035..817.601 rows=191417 loops=3)
+                                                              Filter: ((o_orderdate >= '1993-06-01'::date) AND (o_orderdate < '1993-09-01'::date))
+                                                              Rows Removed by Filter: 4813583
+                                            ->  Parallel Hash  (cost=42116.20..42116.20 rows=625020 width=148) (actual time=338.611..338.611 rows=500000 loops=3)
+                                                  Buckets: 32768  Batches: 128  Memory Usage: 2432kB
+                                                  ->  Parallel Seq Scan on customer  (cost=0.00..42116.20 rows=625020 width=148) (actual time=0.018..117.548 rows=500000 loops=3)
+                                      ->  Hash  (cost=1.25..1.25 rows=25 width=30) (actual time=0.029..0.029 rows=25 loops=3)
+                                            Buckets: 1024  Batches: 1  Memory Usage: 10kB
+                                            ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=30) (actual time=0.018..0.021 rows=25 loops=3)
+ c_custkey |       c_name       |   revenue   | c_acctbal |          n_name           |                c_address                 |     c_phone     |                                                     c_comment                                                     
+-----------+--------------------+-------------+-----------+---------------------------+------------------------------------------+-----------------+-------------------------------------------------------------------------------------------------------------------
+    305182 | Customer#000305182 | 909037.2021 |   6559.29 | INDIA                     | BBa5UZRszWn7AKqBsJW4G2jywFExReMK         | 18-602-379-1505 | he unusual, even deposits. even instructions after the 
+    349096 | Customer#000349096 | 880291.2043 |   2138.20 | ROMANIA                   | 65kdTon3kL9XH,                           | 29-701-289-1044 |  fluffily regular pinto beans sleep carefully across the fluffily ironic requests
+    974614 | Customer#000974614 | 831429.8632 |   -372.15 | GERMANY                   | jEGNlHyBzLQIsul4y57KvyMYIUlmsU           | 17-157-740-9395 |  furiously deposits. blithely special forges eat. sile
+    898777 | Customer#000898777 | 812004.5641 |   1529.25 | IRAN                      | 1xGYyKeDJOu,P6qzh66SMD                   | 20-801-318-3588 | posits. slyly final packages print quickly; blithely speci
+    153685 | Customer#000153685 | 789592.0302 |   9962.93 | UNITED STATES             | fLcQDk0cDF3lzDv81ElidZ 6M4B8nRnd1iQ2YqWe | 34-576-590-7308 | y stealthy asymptotes haggle quickly. regular packages print fu
+    221011 | Customer#000221011 | 787548.6408 |   5028.42 | MOROCCO                   | ScCGWFRx3Vq3oKPt6 l51JmWx                | 25-882-704-5070 | nic instructions nod carefully around the furiously special asymptotes. slyly special requests 
+   1441840 | Customer#001441840 | 746964.8415 |   6640.64 | KENYA                     | i2Jw5G9lpj                               | 24-218-482-9927 | olites boost furiously ironic deposits. frays sleep regular, ironic accounts. fluffily regula
+    128965 | Customer#000128965 | 745248.3667 |    443.01 | INDIA                     | 8fPUDweK4C4,5                            | 18-784-463-8179 | hely about the pending, ironic packages. regular
+   1481959 | Customer#001481959 | 744798.4853 |   6487.14 | VIETNAM                   | 0OdyO8D9luP77j4VFgORbfMufbJ5k            | 31-847-564-9200 | ld have to sleep final deposits. carefully final requests against the slyly regular packages was qu
+   1429565 | Customer#001429565 | 742802.2110 |   4039.44 | INDIA                     | WEIoAnerYX                               | 18-959-706-8969 | special foxes against the final ideas should have to wake carefully carefully ironic deposits; blithely pen
+    184705 | Customer#000184705 | 736817.9413 |   5059.21 | BRAZIL                    | tRqSNKuhHSjPrybYY0S,Bqbv8ZWLJOkVhQYsi    | 12-285-849-8760 | st fluffily alongside of the iro
+   1064260 | Customer#001064260 | 732156.3855 |   6641.34 | CANADA                    | CV8DxtpmYOZQQ4PlkKnzMo0bK                | 13-752-994-2432 | s cajole. quickly final requests wake carefully ironic foxes. bold, ironic pinto beans boost slyly regula
+   1091348 | Customer#001091348 | 727409.1698 |   9209.18 | KENYA                     | F8ZMVU2jPonRqQdOCQt76e HH4y              | 24-477-923-3075 | . slyly regular deposits are slyly bold packages. packages above the carefully unusual waters are acco
+    416323 | Customer#000416323 | 720280.2245 |   6524.01 | ETHIOPIA                  | Bi4bLplHjFsDyvpMZA,Eq                    | 15-742-786-1360 | ndencies. express requests lose c
+    186127 | Customer#000186127 | 713831.0939 |   1755.60 | CHINA                     | ic0IgXEndq2Z4,HeoYM                      | 28-652-771-2933 | uriously alongside of the ironic excuses. blithely ironic pinto beans cajole slyly regular re
+    519385 | Customer#000519385 | 702656.6023 |   5584.27 | KENYA                     | tPTULq9kTMAFKNWD                         | 24-361-196-7326 | dly special deposits. express accounts eat furiously fur
+    841009 | Customer#000841009 | 701874.3604 |   6523.15 | VIETNAM                   |  r Q9xoZMimAmQ1TPBYxdt4v                 | 31-459-534-7479 | e packages. regular deposits cajole furiously across the quickly regular deposits. ironic deposits cajole quietly
+   1076509 | Customer#001076509 | 701205.0094 |   6145.48 | BRAZIL                    | qIXGOiFQjqFfMLflT2kgZL                   | 12-842-200-5902 | regular Tiresias. fluffily regular pinto beans are closely final dependencies. even, regular excuses above
+   1331422 | Customer#001331422 | 699383.3406 |   2001.78 | IRAQ                      | CHiwTpB0eDt                              | 21-841-992-1248 | ng to the slyly ironic asymptotes. regular, eve
+   1344406 | Customer#001344406 | 699346.6398 |    672.42 | ROMANIA                   | W6raI16Pkcj3kXIfaGQUdpapZluuT1ntHamdI    | 29-972-346-1838 |  special requests. carefully final requests detect slyly; quickly ironic requests above the bravely unusual 
+(20 rows)
 
 COMMIT;
 COMMIT

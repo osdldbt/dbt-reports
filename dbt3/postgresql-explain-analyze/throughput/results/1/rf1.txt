@@ -1,9 +1,15 @@
 TPC-H Population Generator (Version 3.0.0)
 Copyright Transaction Processing Performance Council 1994 - 2010
-Fri May 27 16:25:46 UTC 2022: Stream 3 : Starting Refresh Stream 1...
+Wed Jun  1 23:26:16 UTC 2022: Stream 3 : Starting Refresh Stream 1...
+LOAD
+SET
+SET
+SET
+SET
+SET
 BEGIN
 COPY 60274
 COPY 15000
 COMMIT
-Fri May 27 16:26:24 UTC 2022: Stream 3 : Refresh Stream 1 completed.
-Stream 3 : Elapsed time for Refresh Stream 1 : 37 seconds
+Wed Jun  1 23:26:45 UTC 2022: Stream 3 : Refresh Stream 1 completed.
+Stream 3 : Elapsed time for Refresh Stream 1 : 29 seconds

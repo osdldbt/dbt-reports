@@ -2,6 +2,22 @@
 Database Test 3 throughput blockdev Charts
 ================================================================================
 
+.. image:: ../sar/sar-blockdev-sda3-rw.png
+   :target: ../sar/sar-blockdev-sda3-rw.png
+   :width: 100%
+
+.. image:: ../sar/sar-blockdev-sda2-rw.png
+   :target: ../sar/sar-blockdev-sda2-rw.png
+   :width: 100%
+
+.. image:: ../sar/sar-blockdev-sda1-rw.png
+   :target: ../sar/sar-blockdev-sda1-rw.png
+   :width: 100%
+
+.. image:: ../sar/sar-blockdev-sda-rw.png
+   :target: ../sar/sar-blockdev-sda-rw.png
+   :width: 100%
+
 .. image:: ../sar/sar-blockdev-nvme1n1p3-rw.png
    :target: ../sar/sar-blockdev-nvme1n1p3-rw.png
    :width: 100%

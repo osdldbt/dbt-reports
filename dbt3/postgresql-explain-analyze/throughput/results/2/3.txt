@@ -1,6 +1,17 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	l_orderkey,
 	sum(l_extendedprice * (1 - l_discount)) as revenue,
@@ -14,8 +25,8 @@ where
 	c_mktsegment = 'MACHINERY'
 	and c_custkey = o_custkey
 	and l_orderkey = o_orderkey
-	and o_orderdate < date '1995-03-27'
-	and l_shipdate > date '1995-03-27'
+	and o_orderdate < date '1995-03-01'
+	and l_shipdate > date '1995-03-01'
 group by
 	l_orderkey,
 	o_orderdate,
@@ -24,59 +35,76 @@ order by
 	revenue desc,
 	o_orderdate
 LIMIT 10;
-                                                                                                              QUERY PLAN                                                                                                              
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Limit  (cost=2788306.53..2788306.55 rows=10 width=48) (actual time=33640.347..34283.874 rows=10 loops=1)
-   Buffers: shared hit=349 read=1429423, temp read=210381 written=210702
-   ->  Sort  (cost=2788306.53..2796266.53 rows=3184003 width=48) (actual time=33640.344..34283.868 rows=10 loops=1)
-         Sort Key: (sum((lineitem.l_extendedprice * ('1'::numeric - lineitem.l_discount)))) DESC, orders.o_orderdate
-         Sort Method: top-N heapsort  Memory: 26kB
-         Buffers: shared hit=349 read=1429423, temp read=210381 written=210702
-         ->  Finalize GroupAggregate  (cost=2300473.78..2719501.37 rows=3184003 width=48) (actual time=32979.314..34222.871 rows=113400 loops=1)
-               Group Key: lineitem.l_orderkey, orders.o_orderdate, orders.o_shippriority
-               Buffers: shared hit=346 read=1429423, temp read=210381 written=210702
-               ->  Gather Merge  (cost=2300473.78..2646534.63 rows=2653336 width=48) (actual time=32979.299..33992.778 rows=113404 loops=1)
-                     Workers Planned: 2
-                     Workers Launched: 2
-                     Buffers: shared hit=346 read=1429423, temp read=210381 written=210702
-                     ->  Partial GroupAggregate  (cost=2299473.75..2339273.79 rows=1326668 width=48) (actual time=32961.038..33161.615 rows=37801 loops=3)
-                           Group Key: lineitem.l_orderkey, orders.o_orderdate, orders.o_shippriority
-                           Buffers: shared hit=346 read=1429423, temp read=210381 written=210702
-                           ->  Sort  (cost=2299473.75..2302790.42 rows=1326668 width=28) (actual time=32961.009..32988.057 rows=100062 loops=3)
-                                 Sort Key: lineitem.l_orderkey, orders.o_orderdate, orders.o_shippriority
-                                 Sort Method: external merge  Disk: 3648kB
-                                 Buffers: shared hit=346 read=1429423, temp read=210381 written=210702
-                                 Worker 0:  Sort Method: external merge  Disk: 3592kB
-                                 Worker 1:  Sort Method: external merge  Disk: 4376kB
-                                 ->  Parallel Hash Join  (cost=412924.38..2101065.76 rows=1326668 width=28) (actual time=28694.119..32797.897 rows=100062 loops=3)
-                                       Hash Cond: (lineitem.l_orderkey = orders.o_orderkey)
-                                       Buffers: shared hit=300 read=1429423, temp read=208929 written=209244
-                                       ->  Parallel Seq Scan on lineitem  (cost=0.00..1473148.94 rows=13344174 width=20) (actual time=0.063..14809.370 rows=10677929 loops=3)
-                                             Filter: (l_shipdate > '1995-03-27'::date)
-                                             Rows Removed by Filter: 9317331
-                                             Buffers: shared hit=223 read=1159257
-                                       ->  Parallel Hash  (cost=402080.95..402080.95 rows=623794 width=16) (actual time=6177.939..6178.234 rows=490858 loops=3)
-                                             Buckets: 131072  Batches: 32  Memory Usage: 3232kB
-                                             Buffers: shared hit=53 read=270166, temp read=40265 written=46752
-                                             ->  Parallel Hash Join  (cost=9854.37..402080.95 rows=623794 width=16) (actual time=4797.434..5927.302 rows=490858 loops=3)
-                                                   Hash Cond: (orders.o_custkey = customer.c_custkey)
-                                                   Buffers: shared hit=53 read=270166, temp read=40265 written=40304
-                                                   ->  Parallel Seq Scan on orders  (cost=0.00..347552.69 rows=3079952 width=20) (actual time=0.049..3040.492 rows=2454812 loops=3)
-                                                         Filter: (o_orderdate < '1995-03-27'::date)
-                                                         Rows Removed by Filter: 2545188
-                                                         Buffers: shared hit=1 read=269122
-                                                   ->  Parallel Hash  (cost=7776.98..7776.98 rows=126591 width=4) (actual time=106.661..106.663 rows=100147 loops=3)
-                                                         Buckets: 131072  Batches: 4  Memory Usage: 4000kB
-                                                         Buffers: shared hit=30 read=1044, temp written=684
-                                                         ->  Parallel Index Only Scan using customer_c_mktsegment_c_custkey_idx on customer  (cost=0.43..7776.98 rows=126591 width=4) (actual time=0.075..55.104 rows=100147 loops=3)
-                                                               Index Cond: (c_mktsegment = 'MACHINERY'::bpchar)
-                                                               Heap Fetches: 0
-                                                               Buffers: shared hit=30 read=1044
- Planning:
-   Buffers: shared hit=498 read=87
- Planning Time: 7.060 ms
- Execution Time: 34286.224 ms
-(50 rows)
+NOTICE:  duration: 29057.067 ms  plan:
+Query Text: select
+	l_orderkey,
+	sum(l_extendedprice * (1 - l_discount)) as revenue,
+	o_orderdate,
+	o_shippriority
+from
+	customer,
+	orders,
+	lineitem
+where
+	c_mktsegment = 'MACHINERY'
+	and c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and o_orderdate < date '1995-03-01'
+	and l_shipdate > date '1995-03-01'
+group by
+	l_orderkey,
+	o_orderdate,
+	o_shippriority
+order by
+	revenue desc,
+	o_orderdate
+LIMIT 10;
+Limit  (cost=2787212.47..2787212.50 rows=10 width=48) (actual time=28512.829..29057.029 rows=10 loops=1)
+  ->  Sort  (cost=2787212.47..2795125.74 rows=3165306 width=48) (actual time=28512.826..29057.023 rows=10 loops=1)
+        Sort Key: (sum((lineitem.l_extendedprice * ('1'::numeric - lineitem.l_discount)))) DESC, orders.o_orderdate
+        Sort Method: top-N heapsort  Memory: 26kB
+        ->  Finalize GroupAggregate  (cost=2302244.24..2718811.35 rows=3165306 width=48) (actual time=27919.350..29004.571 rows=113287 loops=1)
+              Group Key: lineitem.l_orderkey, orders.o_orderdate, orders.o_shippriority
+              ->  Gather Merge  (cost=2302244.24..2646273.07 rows=2637756 width=48) (actual time=27919.338..28809.751 rows=113291 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    ->  Partial GroupAggregate  (cost=2301244.22..2340810.56 rows=1318878 width=48) (actual time=27894.778..28073.552 rows=37764 loops=3)
+                          Group Key: lineitem.l_orderkey, orders.o_orderdate, orders.o_shippriority
+                          ->  Sort  (cost=2301244.22..2304541.41 rows=1318878 width=28) (actual time=27894.750..27918.260 rows=99793 loops=3)
+                                Sort Key: lineitem.l_orderkey, orders.o_orderdate, orders.o_shippriority
+                                Sort Method: external merge  Disk: 3576kB
+                                Worker 0:  Sort Method: external merge  Disk: 3712kB
+                                Worker 1:  Sort Method: external merge  Disk: 4296kB
+                                ->  Parallel Hash Join  (cost=411832.16..2104062.47 rows=1318878 width=28) (actual time=25001.768..27769.390 rows=99793 loops=3)
+                                      Hash Cond: (lineitem.l_orderkey = orders.o_orderkey)
+                                      ->  Parallel Seq Scan on lineitem  (cost=0.00..1473147.97 rows=13615737 width=20) (actual time=0.066..12923.039 rows=10894580 loops=3)
+                                            Filter: (l_shipdate > '1995-03-01'::date)
+                                            Rows Removed by Filter: 9100680
+                                      ->  Parallel Hash  (cost=401267.16..401267.16 rows=607760 width=16) (actual time=5370.653..5371.050 rows=479988 loops=3)
+                                            Buckets: 131072  Batches: 32  Memory Usage: 3168kB
+                                            ->  Parallel Hash Join  (cost=9755.44..401267.16 rows=607760 width=16) (actual time=3822.989..5092.046 rows=479988 loops=3)
+                                                  Hash Cond: (orders.o_custkey = customer.c_custkey)
+                                                  ->  Parallel Seq Scan on orders  (cost=0.00..347555.39 rows=3030213 width=20) (actual time=0.054..2489.446 rows=2400624 loops=3)
+                                                        Filter: (o_orderdate < '1995-03-01'::date)
+                                                        Rows Removed by Filter: 2599376
+                                                  ->  Parallel Hash  (cost=7698.46..7698.46 rows=125358 width=4) (actual time=123.980..123.981 rows=100147 loops=3)
+                                                        Buckets: 131072  Batches: 4  Memory Usage: 4000kB
+                                                        ->  Parallel Index Only Scan using customer_c_mktsegment_c_custkey_idx on customer  (cost=0.43..7698.46 rows=125358 width=4) (actual time=2.797..76.233 rows=100147 loops=3)
+                                                              Index Cond: (c_mktsegment = 'MACHINERY'::bpchar)
+                                                              Heap Fetches: 0
+ l_orderkey |   revenue   | o_orderdate | o_shippriority 
+------------+-------------+-------------+----------------
+   15572326 | 485524.4532 | 1995-02-26  |              0
+   45428128 | 447475.7806 | 1995-02-09  |              0
+    4178471 | 435622.8398 | 1995-02-28  |              0
+   14373223 | 428477.8504 | 1995-02-11  |              0
+   31622018 | 426825.5539 | 1995-02-22  |              0
+   36093671 | 423967.6618 | 1995-02-12  |              0
+   33596868 | 422720.3699 | 1995-02-02  |              0
+     937091 | 420300.0927 | 1995-02-22  |              0
+   23187553 | 419330.9664 | 1995-02-22  |              0
+   37561344 | 418495.1382 | 1995-02-26  |              0
+(10 rows)
 
 COMMIT;
 COMMIT

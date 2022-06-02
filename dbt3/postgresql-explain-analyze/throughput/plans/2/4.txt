@@ -1,15 +1,14 @@
 BEGIN;
 BEGIN
 EXPLAIN
-explain (analyze, buffers)
 select
 	o_orderpriority,
 	count(*) as order_count
 from
 	orders
 where
-	o_orderdate >= date '1997-01-01'
-	and o_orderdate < cast(date '1997-01-01' + interval '3 month' as date)
+	o_orderdate >= date '1993-02-01'
+	and o_orderdate < cast(date '1993-02-01' + interval '3 month' as date)
 	and exists (
 		select
 			*
@@ -23,3 +22,22 @@ group by
 	o_orderpriority
 order by
 	o_orderpriority;
+                                                              QUERY PLAN                                                              
+--------------------------------------------------------------------------------------------------------------------------------------
+ Finalize GroupAggregate  (cost=517678.56..517728.43 rows=5 width=24)
+   Group Key: orders.o_orderpriority
+   ->  Gather Merge  (cost=517678.56..517728.33 rows=10 width=24)
+         Workers Planned: 2
+         ->  Partial GroupAggregate  (cost=516678.54..516727.16 rows=5 width=24)
+               Group Key: orders.o_orderpriority
+               ->  Sort  (cost=516678.54..516694.73 rows=6476 width=16)
+                     Sort Key: orders.o_orderpriority
+                     ->  Nested Loop Semi Join  (cost=0.56..516268.58 rows=6476 width=16)
+                           ->  Parallel Seq Scan on orders  (cost=0.00..362157.46 rows=239683 width=24)
+                                 Filter: ((o_orderdate >= '1993-02-01'::date) AND (o_orderdate < '1993-05-01'::date))
+                           ->  Index Only Scan using lineitem_l_orderkey_l_suppkey_idx on lineitem  (cost=0.56..4.27 rows=49 width=8)
+                                 Index Cond: (l_orderkey = orders.o_orderkey)
+(13 rows)
+
+COMMIT;
+COMMIT

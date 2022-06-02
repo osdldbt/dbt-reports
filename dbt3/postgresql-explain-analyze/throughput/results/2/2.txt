@@ -1,6 +1,17 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	s_acctbal,
 	s_name,
@@ -19,11 +30,11 @@ from
 where
 	p_partkey = ps_partkey
 	and s_suppkey = ps_suppkey
-	and p_size = 22
-	and p_type like '%TIN'
+	and p_size = 17
+	and p_type like '%STEEL'
 	and s_nationkey = n_nationkey
 	and n_regionkey = r_regionkey
-	and r_name = 'MIDDLE EAST'
+	and r_name = 'AFRICA'
 	and ps_supplycost = (
 		select
 			min(ps_supplycost)
@@ -37,7 +48,7 @@ where
 			and s_suppkey = ps_suppkey
 			and s_nationkey = n_nationkey
 			and n_regionkey = r_regionkey
-			and r_name = 'MIDDLE EAST'
+			and r_name = 'AFRICA'
 	)
 order by
 	s_acctbal desc,
@@ -45,82 +56,201 @@ order by
 	s_name,
 	p_partkey
 LIMIT 100;
-                                                                                    QUERY PLAN                                                                                     
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Limit  (cost=1985540.66..1985540.66 rows=1 width=192) (actual time=14980.909..14980.949 rows=100 loops=1)
-   Buffers: shared hit=1188495 read=665139 written=31, temp read=93103 written=93220
-   ->  Sort  (cost=1985540.66..1985540.66 rows=1 width=192) (actual time=14980.907..14980.933 rows=100 loops=1)
-         Sort Key: supplier.s_acctbal DESC, nation.n_name, supplier.s_name, part.p_partkey
-         Sort Method: top-N heapsort  Memory: 71kB
-         Buffers: shared hit=1188495 read=665139 written=31, temp read=93103 written=93220
-         ->  Merge Join  (cost=639246.72..1985540.65 rows=1 width=192) (actual time=12876.997..14975.222 rows=4691 loops=1)
-               Merge Cond: (part.p_partkey = partsupp.ps_partkey)
-               Join Filter: (partsupp.ps_supplycost = (SubPlan 1))
-               Rows Removed by Join Filter: 1748
-               Buffers: shared hit=1188489 read=665139 written=31, temp read=93103 written=93220
-               ->  Index Scan using part_ios_test1 on part  (cost=0.43..109288.35 rows=6697 width=30) (actual time=0.130..212.026 rows=8036 loops=1)
-                     Index Cond: (p_size = 22)
-                     Filter: ((p_type)::text ~~ '%TIN'::text)
-                     Rows Removed by Filter: 31898
-                     Buffers: shared hit=20 read=26168
-               ->  Materialize  (cost=639245.39..647218.92 rows=1594706 width=172) (actual time=12876.187..13960.877 rows=1603067 loops=1)
-                     Buffers: shared hit=1043621 read=622069 written=31, temp read=93103 written=93220
-                     ->  Sort  (cost=639245.39..643232.15 rows=1594706 width=172) (actual time=12876.168..13534.845 rows=1603067 loops=1)
-                           Sort Key: partsupp.ps_partkey
-                           Sort Method: external merge  Disk: 292776kB
-                           Buffers: shared hit=1043621 read=622069 written=31, temp read=93103 written=93220
-                           ->  Nested Loop  (cost=2.00..202413.93 rows=1594706 width=172) (actual time=0.170..8220.732 rows=1603360 loops=1)
-                                 Buffers: shared hit=1043621 read=622069 written=31
-                                 ->  Nested Loop  (cost=1.56..4776.62 rows=20000 width=166) (actual time=0.103..208.692 rows=20042 loops=1)
-                                       Join Filter: (nation.n_regionkey = region.r_regionkey)
-                                       Rows Removed by Join Filter: 79958
-                                       Buffers: shared read=2219
-                                       ->  Seq Scan on region  (cost=0.00..1.06 rows=1 width=4) (actual time=0.020..0.022 rows=1 loops=1)
-                                             Filter: (r_name = 'MIDDLE EAST'::bpchar)
-                                             Rows Removed by Filter: 4
-                                             Buffers: shared read=1
-                                       ->  Hash Join  (cost=1.56..3525.56 rows=100000 width=170) (actual time=0.080..152.530 rows=100000 loops=1)
-                                             Hash Cond: (supplier.s_nationkey = nation.n_nationkey)
-                                             Buffers: shared read=2218
-                                             ->  Seq Scan on supplier  (cost=0.00..3217.00 rows=100000 width=144) (actual time=0.014..59.212 rows=100000 loops=1)
-                                                   Buffers: shared read=2217
-                                             ->  Hash  (cost=1.25..1.25 rows=25 width=34) (actual time=0.037..0.038 rows=25 loops=1)
-                                                   Buckets: 1024  Batches: 1  Memory Usage: 10kB
-                                                   Buffers: shared read=1
-                                                   ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=34) (actual time=0.015..0.021 rows=25 loops=1)
-                                                         Buffers: shared read=1
-                                 ->  Index Scan using partsupp_ps_suppkey_idx on partsupp  (cost=0.43..9.08 rows=80 width=14) (actual time=0.014..0.360 rows=80 loops=20042)
-                                       Index Cond: (ps_suppkey = supplier.s_suppkey)
-                                       Buffers: shared hit=1043621 read=619850 written=31
-               SubPlan 1
-                 ->  Aggregate  (cost=229.38..229.39 rows=1 width=32) (actual time=0.060..0.060 rows=1 loops=6439)
-                       Buffers: shared hit=144848 read=16902
-                       ->  Nested Loop  (cost=0.86..229.37 rows=4 width=6) (actual time=0.036..0.056 rows=2 loops=6439)
-                             Join Filter: (nation_1.n_regionkey = region_1.r_regionkey)
-                             Rows Removed by Join Filter: 2
-                             Buffers: shared hit=144848 read=16902
-                             ->  Seq Scan on region region_1  (cost=0.00..1.06 rows=1 width=4) (actual time=0.002..0.002 rows=1 loops=6439)
-                                   Filter: (r_name = 'MIDDLE EAST'::bpchar)
-                                   Rows Removed by Filter: 4
-                                   Buffers: shared hit=6439
-                             ->  Nested Loop  (cost=0.86..228.09 rows=18 width=10) (actual time=0.023..0.052 rows=4 loops=6439)
-                                   Buffers: shared hit=138409 read=16902
-                                   ->  Nested Loop  (cost=0.72..225.31 rows=18 width=10) (actual time=0.020..0.042 rows=4 loops=6439)
-                                         Buffers: shared hit=86899 read=16900
-                                         ->  Index Scan using pk_partsupp on partsupp partsupp_1  (cost=0.43..75.73 rows=18 width=10) (actual time=0.012..0.015 rows=4 loops=6439)
-                                               Index Cond: (ps_partkey = part.p_partkey)
-                                               Buffers: shared hit=17564 read=8967
-                                         ->  Index Scan using pk_supplier on supplier supplier_1  (cost=0.29..8.31 rows=1 width=8) (actual time=0.006..0.006 rows=1 loops=25756)
-                                               Index Cond: (s_suppkey = partsupp_1.ps_suppkey)
-                                               Buffers: shared hit=69335 read=7933
-                                   ->  Index Scan using pk_nation on nation nation_1  (cost=0.14..0.16 rows=1 width=8) (actual time=0.002..0.002 rows=1 loops=25756)
-                                         Index Cond: (n_nationkey = supplier_1.s_nationkey)
-                                         Buffers: shared hit=51510 read=2
- Planning:
-   Buffers: shared hit=434 read=75
- Planning Time: 6.156 ms
- Execution Time: 15065.537 ms
-(73 rows)
+NOTICE:  duration: 16627.266 ms  plan:
+Query Text: select
+	s_acctbal,
+	s_name,
+	n_name,
+	p_partkey,
+	p_mfgr,
+	s_address,
+	s_phone,
+	s_comment
+from
+	part,
+	supplier,
+	partsupp,
+	nation,
+	region
+where
+	p_partkey = ps_partkey
+	and s_suppkey = ps_suppkey
+	and p_size = 17
+	and p_type like '%STEEL'
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'AFRICA'
+	and ps_supplycost = (
+		select
+			min(ps_supplycost)
+		from
+			partsupp,
+			supplier,
+			nation,
+			region
+		where
+			p_partkey = ps_partkey
+			and s_suppkey = ps_suppkey
+			and s_nationkey = n_nationkey
+			and n_regionkey = r_regionkey
+			and r_name = 'AFRICA'
+	)
+order by
+	s_acctbal desc,
+	n_name,
+	s_name,
+	p_partkey
+LIMIT 100;
+Limit  (cost=2058347.42..2058347.42 rows=1 width=193) (actual time=16627.079..16627.108 rows=100 loops=1)
+  ->  Sort  (cost=2058347.42..2058347.42 rows=1 width=193) (actual time=16627.077..16627.094 rows=100 loops=1)
+        Sort Key: supplier.s_acctbal DESC, nation.n_name, supplier.s_name, part.p_partkey
+        Sort Method: top-N heapsort  Memory: 70kB
+        ->  Merge Join  (cost=637358.42..2058347.41 rows=1 width=193) (actual time=14179.794..16621.087 rows=4741 loops=1)
+              Merge Cond: (part.p_partkey = partsupp.ps_partkey)
+              Join Filter: (partsupp.ps_supplycost = (SubPlan 1))
+              Rows Removed by Join Filter: 1647
+              ->  Index Scan using part_ios_test1 on part  (cost=0.43..105134.44 rows=7564 width=30) (actual time=0.109..217.432 rows=8008 loops=1)
+                    Index Cond: (p_size = 17)
+                    Filter: ((p_type)::text ~~ '%STEEL'::text)
+                    Rows Removed by Filter: 32138
+              ->  Materialize  (cost=637357.99..645307.57 rows=1589916 width=173) (actual time=14179.019..15516.681 rows=1586553 loops=1)
+                    ->  Sort  (cost=637357.99..641332.78 rows=1589916 width=173) (actual time=14179.011..15038.909 rows=1586553 loops=1)
+                          Sort Key: partsupp.ps_partkey
+                          Sort Method: external merge  Disk: 290008kB
+                          ->  Nested Loop  (cost=2.00..201873.52 rows=1589916 width=173) (actual time=0.136..8032.643 rows=1586960 loops=1)
+                                ->  Nested Loop  (cost=1.56..4776.62 rows=20000 width=167) (actual time=0.089..177.736 rows=19837 loops=1)
+                                      Join Filter: (nation.n_regionkey = region.r_regionkey)
+                                      Rows Removed by Join Filter: 80163
+                                      ->  Seq Scan on region  (cost=0.00..1.06 rows=1 width=4) (actual time=0.015..0.019 rows=1 loops=1)
+                                            Filter: (r_name = 'AFRICA'::bpchar)
+                                            Rows Removed by Filter: 4
+                                      ->  Hash Join  (cost=1.56..3525.56 rows=100000 width=171) (actual time=0.070..138.467 rows=100000 loops=1)
+                                            Hash Cond: (supplier.s_nationkey = nation.n_nationkey)
+                                            ->  Seq Scan on supplier  (cost=0.00..3217.00 rows=100000 width=145) (actual time=0.018..42.609 rows=100000 loops=1)
+                                            ->  Hash  (cost=1.25..1.25 rows=25 width=34) (actual time=0.025..0.026 rows=25 loops=1)
+                                                  Buckets: 1024  Batches: 1  Memory Usage: 10kB
+                                                  ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=34) (actual time=0.007..0.013 rows=25 loops=1)
+                                ->  Index Scan using partsupp_ps_suppkey_idx on partsupp  (cost=0.43..9.06 rows=79 width=14) (actual time=0.012..0.359 rows=80 loops=19837)
+                                      Index Cond: (ps_suppkey = supplier.s_suppkey)
+              SubPlan 1
+                ->  Aggregate  (cost=216.83..216.84 rows=1 width=32) (actual time=0.067..0.067 rows=1 loops=6388)
+                      ->  Nested Loop  (cost=0.86..216.82 rows=3 width=6) (actual time=0.041..0.060 rows=2 loops=6388)
+                            Join Filter: (nation_1.n_regionkey = region_1.r_regionkey)
+                            Rows Removed by Join Filter: 2
+                            ->  Seq Scan on region region_1  (cost=0.00..1.06 rows=1 width=4) (actual time=0.003..0.004 rows=1 loops=6388)
+                                  Filter: (r_name = 'AFRICA'::bpchar)
+                                  Rows Removed by Filter: 4
+                            ->  Nested Loop  (cost=0.86..215.54 rows=17 width=10) (actual time=0.026..0.054 rows=4 loops=6388)
+                                  ->  Nested Loop  (cost=0.72..212.92 rows=17 width=10) (actual time=0.023..0.043 rows=4 loops=6388)
+                                        ->  Index Scan using pk_partsupp on partsupp partsupp_1  (cost=0.43..71.65 rows=17 width=10) (actual time=0.016..0.018 rows=4 loops=6388)
+                                              Index Cond: (ps_partkey = part.p_partkey)
+                                        ->  Index Scan using pk_supplier on supplier supplier_1  (cost=0.29..8.31 rows=1 width=8) (actual time=0.005..0.005 rows=1 loops=25552)
+                                              Index Cond: (s_suppkey = partsupp_1.ps_suppkey)
+                                  ->  Index Scan using pk_nation on nation nation_1  (cost=0.14..0.16 rows=1 width=8) (actual time=0.001..0.001 rows=1 loops=25552)
+                                        Index Cond: (n_nationkey = supplier_1.s_nationkey)
+ s_acctbal |          s_name           |          n_name           | p_partkey |          p_mfgr           |                s_address                 |     s_phone     |                                              s_comment                                               
+-----------+---------------------------+---------------------------+-----------+---------------------------+------------------------------------------+-----------------+------------------------------------------------------------------------------------------------------
+   9997.48 | Supplier#000019768        | MOZAMBIQUE                |   1794750 | Manufacturer#3            | 8Uqb23Ad35UYUyei                         | 26-790-538-3259 | lithely furiously final instructions. enticingly ironic packa
+   9995.38 | Supplier#000020360        | MOROCCO                   |   1570329 | Manufacturer#3            | p4dmVmNU1tn gJuLfW06jfz6tHW2gzyx5Naz     | 25-995-683-3624 | ake at the blithely ironic packages. quickly even theodolites integra
+   9994.58 | Supplier#000064608        | ETHIOPIA                  |    814591 | Manufacturer#3            | CNfEH4TNM3UBuC9bjQmuoAV6ZLYH2a paJ       | 15-229-599-6397 | haggle furiously above the final, stealthy somas. furiously ironic d
+   9994.58 | Supplier#000064608        | ETHIOPIA                  |   1939588 | Manufacturer#2            | CNfEH4TNM3UBuC9bjQmuoAV6ZLYH2a paJ       | 15-229-599-6397 | haggle furiously above the final, stealthy somas. furiously ironic d
+   9991.71 | Supplier#000039886        | ETHIOPIA                  |    989867 | Manufacturer#4            | rH7D0s wXCJ30d3kDeabv                    | 15-585-638-2423 | uests nag furiously. express, final dolphins wake carefully across the blithely regular ac
+   9988.78 | Supplier#000040352        | MOZAMBIQUE                |    290347 | Manufacturer#1            | TuNXhFA8IN1qmFFRg9ynBZyJ7qRv             | 26-991-201-8115 | . furiously bold sauternes cajole. instructions could ha
+   9982.09 | Supplier#000077347        | ALGERIA                   |    477346 | Manufacturer#3            | mExwT31LzAi1                             | 10-430-975-5645 | ep carefully express deposits. accounts cajole about the sile
+   9982.09 | Supplier#000077347        | ALGERIA                   |   1127324 | Manufacturer#1            | mExwT31LzAi1                             | 10-430-975-5645 | ep carefully express deposits. accounts cajole about the sile
+   9978.89 | Supplier#000079128        | MOROCCO                   |    129125 | Manufacturer#3            | mm,XQwj2wzKVbYMyHF                       | 25-431-663-6083 |  packages boost carefully about the final, even theodolites. slyly final requests maintain carefu
+   9978.70 | Supplier#000096908        | ALGERIA                   |    321898 | Manufacturer#1            | TQQ2fHwl9OtDVKo                          | 10-909-210-4116 | le idly-- ironic platelets boost carefully carefully final deposits. blithely
+   9976.45 | Supplier#000019491        | ETHIOPIA                  |    544475 | Manufacturer#5            | 3v1wWC30BmxuLo                           | 15-476-916-1303 | efully special requests along the furiously even request
+   9970.36 | Supplier#000075070        | MOROCCO                   |   1425041 | Manufacturer#1            | 6yhMGaHfOoGAjtUNM93,y,KXk6uhvtSNP        | 25-847-353-4932 | oxes sleep according to the quickly regular foxes. carefully final patterns use thinly among the 
+   9968.43 | Supplier#000078609        | MOROCCO                   |     53608 | Manufacturer#5            | 3t3bMrw0TdkDZcKKUbjUBk qtd0rTGFHhWIe     | 25-729-121-7477 | ly pending dependencies. carefully 
+   9968.43 | Supplier#000078609        | MOROCCO                   |    303599 | Manufacturer#5            | 3t3bMrw0TdkDZcKKUbjUBk qtd0rTGFHhWIe     | 25-729-121-7477 | ly pending dependencies. carefully 
+   9966.71 | Supplier#000040154        | MOZAMBIQUE                |    515148 | Manufacturer#1            | bihwAmgVqY8XpTA,vUz,woZgHJfhJtqKONxTm    | 26-747-831-3110 | riously regular theodolites haggle around the pending, pending accounts. even, regular dolp
+   9966.71 | Supplier#000096231        | MOZAMBIQUE                |   1646198 | Manufacturer#5            | rFIFEEFuYfsie0qPA8DLRn,CW                | 26-672-526-1336 | y. carefully final requests detect fluffily against the slyly unusual pinto beans. blithely pend
+   9964.88 | Supplier#000035063        | ALGERIA                   |    535062 | Manufacturer#4            | ,T51xQDRMAx0r37,xwEj69UtUhU29pmc9        | 10-929-580-5173 | riously carefully pending requests. carefully regular accounts sleep carefully after th
+   9953.48 | Supplier#000090316        | ETHIOPIA                  |    240311 | Manufacturer#3            | otI8elzWphd0UALkRzsJcqbaeMr6             | 15-335-665-4995 |  slyly regular ideas. blithely express pinto beans h
+   9952.71 | Supplier#000052637        | MOROCCO                   |   1952636 | Manufacturer#1            | K,IncryTKD                               | 25-219-893-8898 | g the furiously final Tiresias use carefully across the special deposits. carefu
+   9952.16 | Supplier#000092274        | ETHIOPIA                  |    292273 | Manufacturer#3            | zlBj0FnyTqtaM9Q                          | 15-282-366-3649 | ect slyly carefully special deposits. carefully regular dependencies against the carefully bold 
+   9947.38 | Supplier#000058381        | ETHIOPIA                  |    808364 | Manufacturer#1            | QWTXBC  b0RV7MurOFmRGzA2WKzTk  fI        | 15-318-696-1959 | . furiously dogged accounts poach 
+   9947.38 | Supplier#000058381        | ETHIOPIA                  |    933371 | Manufacturer#2            | QWTXBC  b0RV7MurOFmRGzA2WKzTk  fI        | 15-318-696-1959 | . furiously dogged accounts poach 
+   9943.06 | Supplier#000077706        | MOROCCO                   |   1352692 | Manufacturer#1            | MOaWlzNujAhbEVucmajVkq62ZaRCxpbI         | 25-348-647-2126 | ully special requests. regular theodolites across the carefully
+   9942.91 | Supplier#000040734        | KENYA                     |   1115722 | Manufacturer#3            | Lxh1AB9OxMuXr,yNJz312                    | 24-375-894-1104 |  quickly silent packages play always a
+   9940.34 | Supplier#000094573        | MOROCCO                   |    394572 | Manufacturer#3            | m8SQ0R7Jw0nL9LgN3ShlQC0i5QmpxXbMU9B      | 25-234-700-3509 | re according to the silent, express asymptotes. slyly regular requests should have to cajole acco
+   9929.82 | Supplier#000084807        | MOROCCO                   |   1084806 | Manufacturer#3            | bRyoX,SYBheyS2gaDU5xpntwkI9B,            | 25-406-490-8393 |  beans are pending ideas. blithely regular instr
+   9924.87 | Supplier#000073670        | ALGERIA                   |    223665 | Manufacturer#3            | 7QEnDOgUEreOBXm1ah                       | 10-828-276-5774 | ultipliers sleep furiously caref
+   9921.89 | Supplier#000053183        | KENYA                     |    303176 | Manufacturer#1            | 0FXNcYXSmnOzB                            | 24-123-788-1917 | y furious packages use bold, special foxes
+   9919.75 | Supplier#000088872        | ALGERIA                   |    838855 | Manufacturer#2            | 2hBsPe9052wXNDKEiG                       | 10-910-335-3317 | ffily against the blithely even asympt
+   9918.16 | Supplier#000028999        | MOROCCO                   |    703991 | Manufacturer#1            | uxSXBUpQoVfXxLfT                         | 25-439-750-9413 | deposits. fluffily thin requests affix. blithely regular courts cajole quickly ac
+   9917.42 | Supplier#000061210        | MOROCCO                   |   1936190 | Manufacturer#4            | 5NQhd0nL28                               | 25-366-558-2380 | quests across the bold dependencies cajole around the quickly ironic accoun
+   9916.96 | Supplier#000048110        | ALGERIA                   |   1573064 | Manufacturer#5            | a kbrzNx5VdUwH175c                       | 10-972-687-6611 | le carefully across the regular, ironic dependencies. pearls cajole. slyl
+   9912.82 | Supplier#000092241        | MOROCCO                   |   1692240 | Manufacturer#4            | 4mgVtdGeqIvUL33TZ5uhn1,PQaFY             | 25-392-189-2998 | r theodolites. idly bold acc
+   9912.71 | Supplier#000013682        | ETHIOPIA                  |   1763647 | Manufacturer#3            | ppJhDh0bK6UVLNds                         | 15-777-839-3030 | the blithely final requests. blithely express ideas cajole against the instructions-- doggedly b
+   9912.09 | Supplier#000047897        | ALGERIA                   |    397890 | Manufacturer#2            | tkL9q2Z9LS0GZ97pocEdDylNXvHQR6F          | 10-846-987-1780 | c packages. furiously regular packages haggle blithely. silent dinos haggle slyly above the f
+   9906.80 | Supplier#000008238        | ETHIOPIA                  |    883229 | Manufacturer#3            | LcAJrR6RFABlXBmXl7Kcpm                   | 15-575-214-7975 | s. furiously final theodolites cajole blithely pending pinto beans. care
+   9905.45 | Supplier#000094920        | ETHIOPIA                  |   1594919 | Manufacturer#5            | NdTTyL9FN6UB rxJ0uFfTcdKplPHOWVFv        | 15-942-736-3379 | pending, final ideas along the unusual plate
+   9902.90 | Supplier#000049816        | KENYA                     |   1074785 | Manufacturer#3            | izadhZGQdoblHdqUFDP1Trj ABlVGwWIW G      | 24-310-122-4880 | notornis wake carefully. furiously pending theodolites wake slyly after the permanently regular req
+   9902.90 | Supplier#000049816        | KENYA                     |   1699783 | Manufacturer#1            | izadhZGQdoblHdqUFDP1Trj ABlVGwWIW G      | 24-310-122-4880 | notornis wake carefully. furiously pending theodolites wake slyly after the permanently regular req
+   9902.83 | Supplier#000012012        | MOZAMBIQUE                |    712011 | Manufacturer#2            | tAVvnAf0iZ2VVYEJNqT3                     | 26-871-771-2592 | quickly slow packages alongside of th
+   9902.83 | Supplier#000012012        | MOZAMBIQUE                |    836987 | Manufacturer#2            | tAVvnAf0iZ2VVYEJNqT3                     | 26-871-771-2592 | quickly slow packages alongside of th
+   9896.62 | Supplier#000034508        | MOROCCO                   |     84507 | Manufacturer#4            | 4A9sPryxncyRkDQ92VWLBF754WyZvs8G3yhzyL   | 25-483-244-7428 | rding to the pending, final instructions. slyly even courts sleep. even, pe
+   9892.17 | Supplier#000044069        | KENYA                     |    394062 | Manufacturer#4            | 2TKqXAaxikAtt3bDKZIUc                    | 24-548-816-3513 | beans hinder quickly courts; blithely close pinto beans wake slyly blithely special dependenci
+   9891.75 | Supplier#000077660        | ETHIOPIA                  |    902632 | Manufacturer#4            | K0xxEf55 w                               | 15-753-886-7734 | posits. fluffily pending instructions sleep. fin
+   9891.58 | Supplier#000019193        | ALGERIA                   |   1744141 | Manufacturer#1            | FCykn9OqfjF F6RjY,lgPBTe1W               | 10-936-993-1956 | nst the express, regular packages. busily ironic accou
+   9889.22 | Supplier#000016107        | ETHIOPIA                  |    741085 | Manufacturer#5            | Ymi9VSt7PsleMkVaxEa 0g1tDpXdOs21IieXaB   | 15-680-714-9145 |  furiously. bold patterns cajole blithe
+   9888.26 | Supplier#000002580        | ETHIOPIA                  |    252575 | Manufacturer#4            | qrs2ub3wSjbzv1kc0a4k                     | 15-284-495-3109 | sias. carefully even orbits wake blithe
+   9888.26 | Supplier#000002580        | ETHIOPIA                  |   1127546 | Manufacturer#2            | qrs2ub3wSjbzv1kc0a4k                     | 15-284-495-3109 | sias. carefully even orbits wake blithe
+   9888.26 | Supplier#000002580        | ETHIOPIA                  |   1977560 | Manufacturer#4            | qrs2ub3wSjbzv1kc0a4k                     | 15-284-495-3109 | sias. carefully even orbits wake blithe
+   9883.89 | Supplier#000015749        | MOZAMBIQUE                |    290746 | Manufacturer#2            | 7L5Sfxrr7cn9jPN,rZf4w,y                  | 26-430-440-7383 | hely regular theodolites. final pinto beans sleep furiously after the carefully ironic pinto beans. 
+   9883.89 | Supplier#000015749        | MOZAMBIQUE                |    315748 | Manufacturer#1            | 7L5Sfxrr7cn9jPN,rZf4w,y                  | 26-430-440-7383 | hely regular theodolites. final pinto beans sleep furiously after the carefully ironic pinto beans. 
+   9879.36 | Supplier#000099204        | ETHIOPIA                  |    549193 | Manufacturer#1            | zHxWiTZSdeHVsDtkNR1FPMjqdVBX,SDQa5Vf     | 15-770-317-1379 | ncies against the unusual, even packages sleep blithely above the blithely sly requests. bli
+   9879.31 | Supplier#000058398        | MOROCCO                   |   1083367 | Manufacturer#1            | CSk9nFbk7iaxY4,V3cSKXfj06AuXZTaT1Xp1X0   | 25-675-462-4197 | o beans sleep quickly according to the quickly ironic orbits. accounts haggle according to the pen
+   9877.51 | Supplier#000054000        | MOROCCO                   |   1803963 | Manufacturer#3            | yHUNGiGsd406B                            | 25-983-485-5286 | ess deposits nod above the fluffily regular asymptotes. fluffily ironic platelets maintain 
+   9870.35 | Supplier#000052772        | KENYA                     |   1702737 | Manufacturer#5            | leVrLTc8nMO FFLlFyikQjmchZv              | 24-588-467-7078 | . final courts cajole furiously final warhorses; thin
+   9869.03 | Supplier#000063304        | MOROCCO                   |    613291 | Manufacturer#3            | 5VWSxgUflDU 01 lWmZ4IePRjSL,dwkVR        | 25-273-623-8491 |  about the ruthlessly regular accounts detect about the furiousl
+   9865.64 | Supplier#000066455        | ALGERIA                   |   1916416 | Manufacturer#5            | HY4XLCbxWLSfK6uGGFxW2wNf6                | 10-196-768-7874 | nments. theodolites boost quickly. pending packages promise furiously. furiously unusua
+   9865.29 | Supplier#000070694        | MOZAMBIQUE                |   1320667 | Manufacturer#5            | tqGwXxJKDEfJvdbR                         | 26-583-852-3645 | s wake fluffily. final dolphins haggle slyly along the pending packages. pinto beans ca
+   9865.29 | Supplier#000070694        | MOZAMBIQUE                |   1920655 | Manufacturer#4            | tqGwXxJKDEfJvdbR                         | 26-583-852-3645 | s wake fluffily. final dolphins haggle slyly along the pending packages. pinto beans ca
+   9861.14 | Supplier#000044348        | KENYA                     |   1219335 | Manufacturer#4            | LXfi6RFoqyde                             | 24-141-919-4735 | old hockey players wake even request
+   9859.43 | Supplier#000067204        | MOZAMBIQUE                |    967203 | Manufacturer#3            | D9b1unu9n6                               | 26-361-506-8640 |  whithout the even accounts. blithely 
+   9858.45 | Supplier#000009622        | ETHIOPIA                  |     34621 | Manufacturer#1            | nEfWHUKQ9VsiM1JdiwRi0P8oCcR              | 15-676-570-3786 | fully ironic courts haggle final packages. ideas
+   9858.45 | Supplier#000009622        | ETHIOPIA                  |   1484607 | Manufacturer#3            | nEfWHUKQ9VsiM1JdiwRi0P8oCcR              | 15-676-570-3786 | fully ironic courts haggle final packages. ideas
+   9856.52 | Supplier#000083390        | ALGERIA                   |   1233365 | Manufacturer#5            | ycKbzCU2nvwFzVsyMHGlCY,V6nk8OKN2         | 10-911-812-5630 | courts cajole daringly ironic deposits. regular deposits cajole slyly. carefully i
+   9852.43 | Supplier#000088555        | ETHIOPIA                  |     63554 | Manufacturer#2            | 95HRiTxTMnkz4PHyJinuqqRRR6fgb            | 15-969-608-1740 | kly even deposits affix against the ca
+   9852.15 | Supplier#000072058        | MOROCCO                   |   1197024 | Manufacturer#1            | nYNVP,8dsXOdLZirHOC                      | 25-456-892-2698 | ly idle theodolites wake. blit
+   9851.79 | Supplier#000020404        | ALGERIA                   |    920403 | Manufacturer#5            | uVL1eMQ8kMsQstv06                        | 10-578-758-5112 | . carefully ironic instructions are slyly slyly ironic deposits. never even d
+   9849.98 | Supplier#000055020        | ALGERIA                   |    380010 | Manufacturer#4            | pTSeFA0UPCY26CNI5M Tctgn,1Uw             | 10-440-802-4726 |  special pinto beans affix blithely a
+   9849.98 | Supplier#000055020        | ALGERIA                   |    879995 | Manufacturer#4            | pTSeFA0UPCY26CNI5M Tctgn,1Uw             | 10-440-802-4726 |  special pinto beans affix blithely a
+   9843.48 | Supplier#000066882        | ETHIOPIA                  |    466881 | Manufacturer#2            | uVDcmy6hchpC6vHVFf2sho9xhIQ,AneBHvWj     | 15-832-228-8246 | e slyly final accounts. slyly regular requests against the carefully unusual pint
+   9843.48 | Supplier#000066882        | ETHIOPIA                  |   1716847 | Manufacturer#3            | uVDcmy6hchpC6vHVFf2sho9xhIQ,AneBHvWj     | 15-832-228-8246 | e slyly final accounts. slyly regular requests against the carefully unusual pint
+   9836.65 | Supplier#000055280        | MOROCCO                   |   1605247 | Manufacturer#3            | T62MZjmpwZehHwI                          | 25-301-884-8105 | . furiously even foxes print carefully unusu
+   9836.53 | Supplier#000005077        | ALGERIA                   |    680070 | Manufacturer#5            | AoD06AAcIfuPu4B6YzUyFOYgVyb6             | 10-852-519-9875 | ven accounts. quickly express deposits was blithe
+   9836.53 | Supplier#000005077        | ALGERIA                   |   1980057 | Manufacturer#1            | AoD06AAcIfuPu4B6YzUyFOYgVyb6             | 10-852-519-9875 | ven accounts. quickly express deposits was blithe
+   9833.62 | Supplier#000056142        | MOROCCO                   |    531136 | Manufacturer#1            | t4xdhHWmCPa5iSb9q6Iy5NSIMLx,j5Sb         | 25-547-943-6598 | even pinto beans are carefully deposits. even, expr
+   9828.06 | Supplier#000068656        | MOROCCO                   |   1543640 | Manufacturer#2            | vuFW 4 DfLPNjApTB3MkszkFun               | 25-867-823-5872 | ronic ideas sleep slyly above the carefully regular asympto
+   9826.75 | Supplier#000055517        | KENYA                     |   1980459 | Manufacturer#2            | B78DFkw1Hf51b,M0D5B48u9fJsy50            | 24-659-189-1177 | final pinto beans sleep slyly 
+   9823.78 | Supplier#000017870        | ALGERIA                   |   1392856 | Manufacturer#2            | csivE9ACzne8                             | 10-199-631-9671 | usly alongside of the carefully even sentiments. pinto beans wa
+   9823.78 | Supplier#000017870        | ALGERIA                   |   1967831 | Manufacturer#5            | csivE9ACzne8                             | 10-199-631-9671 | usly alongside of the carefully even sentiments. pinto beans wa
+   9821.96 | Supplier#000023911        | KENYA                     |    498906 | Manufacturer#5            | h51RgkfampUYUqaPlFHvr85z9LV orQ4Y6jdu    | 24-185-205-4445 | s. bold, regular deposits according to the requests sleep carefully special theod
+   9821.86 | Supplier#000058434        | MOROCCO                   |    608421 | Manufacturer#1            | 7WEm3zGtrNclkfa1k6 X bNQ                 | 25-181-336-2375 |  silent foxes. carefully special packages detect
+   9814.31 | Supplier#000097391        | MOROCCO                   |   1172379 | Manufacturer#5            | kubYx o4g9kyaKqLASSnDanCgbIAPgC,Qpy      | 25-189-590-2241 | ironic pinto beans detect slyly around the busily 
+   9813.32 | Supplier#000042264        | MOROCCO                   |    417259 | Manufacturer#1            | rnK1eXcJYF7N4LR0R0TaI9xA                 | 25-794-767-2913 |  express pinto beans above the foxes solve about the pinto beans. furio
+   9813.32 | Supplier#000042264        | MOROCCO                   |    667245 | Manufacturer#4            | rnK1eXcJYF7N4LR0R0TaI9xA                 | 25-794-767-2913 |  express pinto beans above the foxes solve about the pinto beans. furio
+   9810.37 | Supplier#000001211        | MOROCCO                   |   1801210 | Manufacturer#5            | g lldwVuium jP79qGZT6ztUjTuCZmZKrNlcHglK | 25-752-441-6583 | ong the idly even packages. furiously special acco
+   9809.45 | Supplier#000083608        | MOROCCO                   |    608589 | Manufacturer#4            | xBeRdWUwPrrC7IWFq1G5DgW0A11a             | 25-456-342-7222 |  across the pinto beans. furiously bold deposits across the slyly bold sentiments nag blit
+   9799.67 | Supplier#000090746        | KENYA                     |   1115712 | Manufacturer#1            | pbUpVM6uRAWP,r3q                         | 24-734-594-1310 | y express packages affix after the blithely pending patterns. deposits sleep sl
+   9799.67 | Supplier#000090746        | KENYA                     |   1440717 | Manufacturer#3            | pbUpVM6uRAWP,r3q                         | 24-734-594-1310 | y express packages affix after the blithely pending patterns. deposits sleep sl
+   9798.09 | Supplier#000076810        | MOZAMBIQUE                |    901782 | Manufacturer#5            | dEncxJl4lSghzBYyT4Tmnkoawqv7T5jF4S       | 26-278-117-9757 | dogged, regular requests believe 
+   9794.04 | Supplier#000059435        | MOROCCO                   |   1784383 | Manufacturer#4            | ZtbRhOyCYFDgwrr3FFPjdv6JG1yEEn           | 25-872-898-1866 |  furiously. ironic accounts are slyly furiously ir
+   9791.59 | Supplier#000046522        | ALGERIA                   |   1321508 | Manufacturer#5            | ML3562tUuqgGQ1DA5LRVIE6e                 | 10-259-825-1036 | ons. furiously final theodolites above the final 
+   9789.53 | Supplier#000009333        | ETHIOPIA                  |   1059312 | Manufacturer#4            | e9JTDP8Pt7IrPBBlimjs ,                   | 15-289-312-9549 | e furiously quickly special packages. fluffily final pearls are about the
+   9787.57 | Supplier#000054395        | MOZAMBIQUE                |    604382 | Manufacturer#5            | ln,6AEk6FetNiyhnZYO4id,nGF7T             | 26-662-929-6152 | ithely deposits. fluffily express accounts sleep furiously fur
+   9786.55 | Supplier#000096122        | MOROCCO                   |    446113 | Manufacturer#2            | D,3f92MSxiDzEWX6nauk3cONXhxww0           | 25-426-504-5166 | unts. fluffily bold packages doubt furiously after the furiously ironic tithes. carefully reg
+   9784.07 | Supplier#000071866        | ALGERIA                   |     46865 | Manufacturer#4            | UJu4oxADy0WVhg7zC6i4xqS7J9DhEj           | 10-421-439-1192 | ar accounts. regular platelets maintain about the requests. quickly final d
+   9784.07 | Supplier#000071866        | ALGERIA                   |    896841 | Manufacturer#2            | UJu4oxADy0WVhg7zC6i4xqS7J9DhEj           | 10-421-439-1192 | ar accounts. regular platelets maintain about the requests. quickly final d
+   9781.97 | Supplier#000004289        | ETHIOPIA                  |   1179277 | Manufacturer#3            | WHUavCR2SCX6geDN5dDRgV                   | 15-877-942-9592 | uests wake. ideas haggle fluff
+   9780.40 | Supplier#000071215        | MOZAMBIQUE                |   1371214 | Manufacturer#3            | 7bDq7cCWGxQZHOnz                         | 26-247-992-3309 | eodolites are slyly packages. final, permanent ideas are bl
+   9778.32 | Supplier#000035981        | KENYA                     |    860956 | Manufacturer#4            | oGgz7PSHLX3NPnpAy1B,Jxvuq3FeEY0Q38       | 24-915-545-5182 | ial platelets use quickly unusual, regular requests; slyly ironic deposits use abou
+   9771.48 | Supplier#000010824        | MOZAMBIQUE                |    310823 | Manufacturer#5            | flawHRFbUMGFtCvuXI                       | 26-344-820-8870 | sts. furiously express accounts boost quick, even deposit
+(100 rows)
 
 COMMIT;
 COMMIT

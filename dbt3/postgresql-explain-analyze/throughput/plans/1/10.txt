@@ -1,7 +1,6 @@
 BEGIN;
 BEGIN
 EXPLAIN
-explain (analyze, buffers)
 select
 	c_custkey,
 	c_name,
@@ -19,8 +18,8 @@ from
 where
 	c_custkey = o_custkey
 	and l_orderkey = o_orderkey
-	and o_orderdate >= date '1993-12-01'
-	and o_orderdate < cast(date '1993-12-01' + interval '3 month' as date)
+	and o_orderdate >= date '1994-03-01'
+	and o_orderdate < cast(date '1994-03-01' + interval '3 month' as date)
 	and l_returnflag = 'R'
 	and c_nationkey = n_nationkey
 group by
@@ -34,3 +33,35 @@ group by
 order by
 	revenue desc
 LIMIT 20;
+                                                                     QUERY PLAN                                                                     
+----------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=2137956.92..2137956.97 rows=20 width=202)
+   ->  Sort  (cost=2137956.92..2139379.97 rows=569220 width=202)
+         Sort Key: (sum((lineitem.l_extendedprice * ('1'::numeric - lineitem.l_discount)))) DESC
+         ->  Finalize GroupAggregate  (cost=2049677.36..2122810.18 rows=569220 width=202)
+               Group Key: customer.c_custkey, nation.n_name
+               ->  Gather Merge  (cost=2049677.36..2110951.43 rows=474350 width=202)
+                     Workers Planned: 2
+                     ->  Partial GroupAggregate  (cost=2048677.33..2055199.64 rows=237175 width=202)
+                           Group Key: customer.c_custkey, nation.n_name
+                           ->  Sort  (cost=2048677.33..2049270.27 rows=237175 width=182)
+                                 Sort Key: customer.c_custkey, nation.n_name
+                                 ->  Hash Join  (cost=429638.20..2006422.33 rows=237175 width=182)
+                                       Hash Cond: (customer.c_nationkey = nation.n_nationkey)
+                                       ->  Parallel Hash Join  (cost=429636.64..2005692.64 rows=237175 width=160)
+                                             Hash Cond: (orders.o_custkey = customer.c_custkey)
+                                             ->  Parallel Hash Join  (cost=366278.68..1925965.10 rows=237175 width=16)
+                                                   Hash Cond: (lineitem.l_orderkey = orders.o_orderkey)
+                                                   ->  Parallel Seq Scan on lineitem  (cost=0.00..1468753.24 rows=6258734 width=20)
+                                                         Filter: (l_returnflag = 'R'::bpchar)
+                                                   ->  Parallel Hash  (cost=362157.46..362157.46 rows=237058 width=12)
+                                                         ->  Parallel Seq Scan on orders  (cost=0.00..362157.46 rows=237058 width=12)
+                                                               Filter: ((o_orderdate >= '1994-03-01'::date) AND (o_orderdate < '1994-06-01'::date))
+                                             ->  Parallel Hash  (cost=42116.20..42116.20 rows=625020 width=148)
+                                                   ->  Parallel Seq Scan on customer  (cost=0.00..42116.20 rows=625020 width=148)
+                                       ->  Hash  (cost=1.25..1.25 rows=25 width=30)
+                                             ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=30)
+(26 rows)
+
+COMMIT;
+COMMIT

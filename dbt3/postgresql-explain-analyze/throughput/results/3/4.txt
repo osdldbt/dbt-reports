@@ -1,14 +1,25 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	o_orderpriority,
 	count(*) as order_count
 from
 	orders
 where
-	o_orderdate >= date '1994-10-01'
-	and o_orderdate < cast(date '1994-10-01' + interval '3 month' as date)
+	o_orderdate >= date '1995-09-01'
+	and o_orderdate < cast(date '1995-09-01' + interval '3 month' as date)
 	and exists (
 		select
 			*
@@ -22,39 +33,55 @@ group by
 	o_orderpriority
 order by
 	o_orderpriority;
-                                                                                     QUERY PLAN                                                                                      
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Finalize GroupAggregate  (cost=522014.06..522064.79 rows=5 width=24) (actual time=6498.728..6650.667 rows=5 loops=1)
-   Group Key: orders.o_orderpriority
-   Buffers: shared hit=2203154 read=399285 written=33595, temp read=1680 written=1688
-   ->  Gather Merge  (cost=522014.06..522064.69 rows=10 width=24) (actual time=6461.835..6650.629 rows=15 loops=1)
-         Workers Planned: 2
-         Workers Launched: 2
-         Buffers: shared hit=2203154 read=399285 written=33595, temp read=1680 written=1688
-         ->  Partial GroupAggregate  (cost=521014.03..521063.51 rows=5 width=24) (actual time=6419.567..6556.664 rows=5 loops=3)
-               Group Key: orders.o_orderpriority
-               Buffers: shared hit=2203154 read=399285 written=33595, temp read=1680 written=1688
-               ->  Sort  (cost=521014.03..521030.51 rows=6590 width=16) (actual time=6384.125..6472.602 rows=175525 loops=3)
-                     Sort Key: orders.o_orderpriority
-                     Sort Method: external merge  Disk: 4792kB
-                     Buffers: shared hit=2203154 read=399285 written=33595, temp read=1680 written=1688
-                     Worker 0:  Sort Method: external merge  Disk: 4384kB
-                     Worker 1:  Sort Method: external merge  Disk: 4264kB
-                     ->  Nested Loop Semi Join  (cost=0.56..520596.03 rows=6590 width=16) (actual time=0.221..6140.959 rows=175525 loops=3)
-                           Buffers: shared hit=2203140 read=399285 written=33595
-                           ->  Parallel Seq Scan on orders  (cost=0.00..362154.81 rows=245870 width=24) (actual time=0.081..3203.927 rows=191468 loops=3)
-                                 Filter: ((o_orderdate >= '1994-10-01'::date) AND (o_orderdate < '1995-01-01'::date))
-                                 Rows Removed by Filter: 4808532
-                                 Buffers: shared hit=628 read=267692 written=96
-                           ->  Index Only Scan using lineitem_l_orderkey_l_suppkey_idx on lineitem  (cost=0.56..4.41 rows=50 width=8) (actual time=0.014..0.014 rows=1 loops=574404)
-                                 Index Cond: (l_orderkey = orders.o_orderkey)
-                                 Heap Fetches: 1180
-                                 Buffers: shared hit=2202512 read=131593 written=33499
- Planning:
-   Buffers: shared hit=400 read=33 written=32
- Planning Time: 3.511 ms
- Execution Time: 6653.042 ms
-(30 rows)
+NOTICE:  duration: 5263.067 ms  plan:
+Query Text: select
+	o_orderpriority,
+	count(*) as order_count
+from
+	orders
+where
+	o_orderdate >= date '1995-09-01'
+	and o_orderdate < cast(date '1995-09-01' + interval '3 month' as date)
+	and exists (
+		select
+			*
+		from
+			lineitem
+		where
+			l_orderkey = o_orderkey
+			and l_commitdate < l_receiptdate
+	)
+group by
+	o_orderpriority
+order by
+	o_orderpriority;
+Finalize GroupAggregate  (cost=512584.58..512632.70 rows=5 width=24) (actual time=5174.925..5263.030 rows=5 loops=1)
+  Group Key: orders.o_orderpriority
+  ->  Gather Merge  (cost=512584.58..512632.60 rows=10 width=24) (actual time=5138.612..5262.995 rows=15 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        ->  Partial GroupAggregate  (cost=511584.56..511631.42 rows=5 width=24) (actual time=5097.436..5182.937 rows=5 loops=3)
+              Group Key: orders.o_orderpriority
+              ->  Sort  (cost=511584.56..511600.16 rows=6242 width=16) (actual time=5065.552..5127.511 rows=173141 loops=3)
+                    Sort Key: orders.o_orderpriority
+                    Sort Method: external merge  Disk: 4392kB
+                    Worker 0:  Sort Method: external merge  Disk: 4280kB
+                    Worker 1:  Sort Method: external merge  Disk: 4592kB
+                    ->  Nested Loop Semi Join  (cost=0.56..511191.07 rows=6242 width=16) (actual time=0.133..4857.691 rows=173141 loops=3)
+                          ->  Parallel Seq Scan on orders  (cost=0.00..362157.46 rows=231015 width=24) (actual time=0.047..2331.660 rows=188949 loops=3)
+                                Filter: ((o_orderdate >= '1995-09-01'::date) AND (o_orderdate < '1995-12-01'::date))
+                                Rows Removed by Filter: 4811051
+                          ->  Index Only Scan using lineitem_l_orderkey_l_suppkey_idx on lineitem  (cost=0.56..4.37 rows=49 width=8) (actual time=0.012..0.012 rows=1 loops=566847)
+                                Index Cond: (l_orderkey = orders.o_orderkey)
+                                Heap Fetches: 560
+ o_orderpriority | order_count 
+-----------------+-------------
+ 1-URGENT        |      103954
+ 2-HIGH          |      104286
+ 3-MEDIUM        |      104024
+ 4-NOT SPECIFIED |      103951
+ 5-LOW           |      103207
+(5 rows)
 
 COMMIT;
 COMMIT

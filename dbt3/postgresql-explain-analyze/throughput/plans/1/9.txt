@@ -1,7 +1,6 @@
 BEGIN;
 BEGIN
 EXPLAIN
-explain (analyze, buffers)
 select
 	nation,
 	o_year,
@@ -26,7 +25,7 @@ from
 			and p_partkey = l_partkey
 			and o_orderkey = l_orderkey
 			and s_nationkey = n_nationkey
-			and p_name like '%olive%'
+			and p_name like '%orchid%'
 	) as profit
 group by
 	nation,
@@ -34,3 +33,38 @@ group by
 order by
 	nation,
 	o_year desc;
+                                                                                  QUERY PLAN                                                                                  
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize GroupAggregate  (cost=1576005.55..1576025.17 rows=146 width=90)
+   Group Key: nation.n_name, (EXTRACT(year FROM orders.o_orderdate))
+   ->  Gather Merge  (cost=1576005.55..1576021.76 rows=122 width=90)
+         Workers Planned: 2
+         ->  Partial GroupAggregate  (cost=1575005.52..1575007.66 rows=61 width=90)
+               Group Key: nation.n_name, (EXTRACT(year FROM orders.o_orderdate))
+               ->  Sort  (cost=1575005.52..1575005.68 rows=61 width=81)
+                     Sort Key: nation.n_name, (EXTRACT(year FROM orders.o_orderdate)) DESC
+                     ->  Hash Join  (cost=54447.57..1575003.71 rows=61 width=81)
+                           Hash Cond: (supplier.s_nationkey = nation.n_nationkey)
+                           ->  Nested Loop  (cost=54446.01..1575001.82 rows=61 width=31)
+                                 ->  Nested Loop  (cost=54445.58..1574805.54 rows=61 width=35)
+                                       Join Filter: (supplier.s_suppkey = lineitem.l_suppkey)
+                                       ->  Parallel Hash Join  (cost=54445.01..271630.07 rows=200748 width=26)
+                                             Hash Cond: (partsupp.ps_suppkey = supplier.s_suppkey)
+                                             ->  Parallel Hash Join  (cost=52011.22..268665.84 rows=202060 width=18)
+                                                   Hash Cond: (partsupp.ps_partkey = part.p_partkey)
+                                                   ->  Parallel Seq Scan on partsupp  (cost=0.00..207902.88 rows=3333988 width=14)
+                                                   ->  Parallel Hash  (cost=51379.89..51379.89 rows=50506 width=4)
+                                                         ->  Parallel Seq Scan on part  (cost=0.00..51379.89 rows=50506 width=4)
+                                                               Filter: ((p_name)::text ~~ '%orchid%'::text)
+                                             ->  Parallel Hash  (cost=1912.96..1912.96 rows=41667 width=8)
+                                                   ->  Parallel Index Only Scan using supplier_s_nationkey_s_suppkey_idx on supplier  (cost=0.29..1912.96 rows=41667 width=8)
+                                       ->  Index Scan using lineitem_l_partkey_l_suppkey_l_shipdate_l_quantity_idx on lineitem  (cost=0.56..6.48 rows=1 width=33)
+                                             Index Cond: ((l_partkey = partsupp.ps_partkey) AND (l_suppkey = partsupp.ps_suppkey))
+                                 ->  Index Only Scan using orders_o_orderkey_o_orderdate_idx on orders  (cost=0.43..3.22 rows=1 width=12)
+                                       Index Cond: (o_orderkey = lineitem.l_orderkey)
+                           ->  Hash  (cost=1.25..1.25 rows=25 width=30)
+                                 ->  Seq Scan on nation  (cost=0.00..1.25 rows=25 width=30)
+(29 rows)
+
+COMMIT;
+COMMIT

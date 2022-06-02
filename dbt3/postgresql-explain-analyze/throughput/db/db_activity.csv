@@ -1,134 +1,15 @@
-ctime,datname,pid,usesysid,usename,application_name,client_addr,client_port,backend_start,xact_start,query_start,query,state,state_change
-1653668734.264028,,16627,,,"",,,2022-05-27 16:25:33.146448+00,,,"",,
-1653668734.264028,,16629,10,postgres,"",,,2022-05-27 16:25:33.146785+00,,,"",,
-1653668734.264028,dbt3,16753,10,postgres,psql,,-1,2022-05-27 16:25:34.262507+00,2022-05-27 16:25:34.264028+00,2022-05-27 16:25:34.264028+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV, HEADER);",active,2022-05-27 16:25:34.264029+00
-1653668734.264028,dbt3,16752,10,postgres,psql,,-1,2022-05-27 16:25:34.263416+00,2022-05-27 16:25:34.26492+00,2022-05-27 16:25:34.26492+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV, HEADER);",active,2022-05-27 16:25:34.264921+00
-1653668734.264028,,16625,,,"",,,2022-05-27 16:25:33.146113+00,,,"",,
-1653668734.264028,,16624,,,"",,,2022-05-27 16:25:33.145947+00,,,"",,
-1653668734.264028,,16626,,,"",,,2022-05-27 16:25:33.146293+00,,,"",,
-1653668794.305771,,16627,,,"",,,2022-05-27 16:25:33.146448+00,,,"",,
-1653668794.305771,,16629,10,postgres,"",,,2022-05-27 16:25:33.146785+00,,,"",,
-1653668794.305771,dbt3,17236,10,postgres,psql,,-1,2022-05-27 16:26:18.785689+00,2022-05-27 16:26:18.794582+00,2022-05-27 16:26:18.794849+00,"explain (analyze, buffers)
-select
-	c_custkey,
-	c_name,
-	sum(l_extendedprice * (1 - l_discount)) as revenue,
-	c_acctbal,
-	n_name,
-	c_address,
-	c_phone,
-	c_comment
-from
-	customer,
-	orders,
-	lineitem,
-	nation
-where
-	c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and o_orderdate >= date '1994-09-01'
-	and o_orderdate < cast(date '1994-09-01' + interval '3 month' as date)
-	and l_returnflag = 'R'
-	and c_nationkey = n_nationkey
-group by
-	c_custkey,
-	c_name,
-	c_acctbal,
-	c_phone,
-	n_name,
-	c_address,
-	c_comment
-order by
-	revenue desc
-LIMIT 20;",active,2022-05-27 16:26:18.794851+00
-1653668794.305771,dbt3,17238,10,postgres,psql,,,2022-05-27 16:26:18.822233+00,2022-05-27 16:26:18.794582+00,2022-05-27 16:26:18.794849+00,"explain (analyze, buffers)
-select
-	c_custkey,
-	c_name,
-	sum(l_extendedprice * (1 - l_discount)) as revenue,
-	c_acctbal,
-	n_name,
-	c_address,
-	c_phone,
-	c_comment
-from
-	customer,
-	orders,
-	lineitem,
-	nation
-where
-	c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and o_orderdate >= date '1994-09-01'
-	and o_orderdate < cast(date '1994-09-01' + interval '3 month' as date)
-	and l_returnflag = 'R'
-	and c_nationkey = n_nationkey
-group by
-	c_custkey,
-	c_name,
-	c_acctbal,
-	c_phone,
-	n_name,
-	c_address,
-	c_comment
-order by
-	revenue desc
-LIMIT 20;",active,2022-05-27 16:26:18.830771+00
-1653668794.305771,dbt3,17302,10,postgres,psql,,-1,2022-05-27 16:26:27.606423+00,2022-05-27 16:26:27.617217+00,2022-05-27 16:26:27.617438+00,"explain (analyze, buffers)
-select
-	sum(l_extendedprice * l_discount) as revenue
-from
-	lineitem
-where
-	l_shipdate >= date '1996-01-01'
-	and l_shipdate < cast(date '1996-01-01' + interval '1 year' as date)
-	and l_discount between 0.06 - 0.01 and 0.06 + 0.01
-	and l_quantity < 25;",active,2022-05-27 16:26:27.61744+00
-1653668794.305771,dbt3,17237,10,postgres,psql,,,2022-05-27 16:26:18.821861+00,2022-05-27 16:26:18.794582+00,2022-05-27 16:26:18.794849+00,"explain (analyze, buffers)
-select
-	c_custkey,
-	c_name,
-	sum(l_extendedprice * (1 - l_discount)) as revenue,
-	c_acctbal,
-	n_name,
-	c_address,
-	c_phone,
-	c_comment
-from
-	customer,
-	orders,
-	lineitem,
-	nation
-where
-	c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and o_orderdate >= date '1994-09-01'
-	and o_orderdate < cast(date '1994-09-01' + interval '3 month' as date)
-	and l_returnflag = 'R'
-	and c_nationkey = n_nationkey
-group by
-	c_custkey,
-	c_name,
-	c_acctbal,
-	c_phone,
-	n_name,
-	c_address,
-	c_comment
-order by
-	revenue desc
-LIMIT 20;",active,2022-05-27 16:26:18.828957+00
-1653668794.305771,dbt3,17303,10,postgres,psql,,,2022-05-27 16:26:27.632872+00,2022-05-27 16:26:27.617217+00,2022-05-27 16:26:27.617438+00,"explain (analyze, buffers)
-select
-	sum(l_extendedprice * l_discount) as revenue
-from
-	lineitem
-where
-	l_shipdate >= date '1996-01-01'
-	and l_shipdate < cast(date '1996-01-01' + interval '1 year' as date)
-	and l_discount between 0.06 - 0.01 and 0.06 + 0.01
-	and l_quantity < 25;",active,2022-05-27 16:26:27.645936+00
-1653668794.305771,dbt3,17316,10,postgres,psql,,-1,2022-05-27 16:26:32.943536+00,2022-05-27 16:26:32.947103+00,2022-05-27 16:26:32.94737+00,"explain (analyze, buffers)
-select
+ctime,datid,datname,pid,leader_pid,usesysid,usename,application_name,client_addr,client_hostname,client_port,backend_start,xact_start,query_start,state_change,wait_event_type,wait_event,state,backend_xid,backend_xmin,query_id,query,backend_type
+1654125964.512213,,,8598,,,,"",,,,2022-06-01 23:26:03.380564+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654125964.512213,,,8600,,10,postgres,"",,,,2022-06-01 23:26:03.38088+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654125964.512213,16384,dbt3,8712,,10,postgres,psql,,,-1,2022-06-01 23:26:04.508165+00,2022-06-01 23:26:04.509234+00,2022-06-01 23:26:04.509234+00,2022-06-01 23:26:04.509235+00,,,active,,3769,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV, HEADER);",client backend
+1654125964.512213,16384,dbt3,8713,,10,postgres,psql,,,-1,2022-06-01 23:26:04.510823+00,2022-06-01 23:26:04.512213+00,2022-06-01 23:26:04.512213+00,2022-06-01 23:26:04.512214+00,,,active,,3769,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV, HEADER);",client backend
+1654125964.512213,16384,dbt3,8716,,10,postgres,psql,,,-1,2022-06-01 23:26:04.51116+00,2022-06-01 23:26:04.512213+00,2022-06-01 23:26:04.512213+00,2022-06-01 23:26:04.512214+00,,,active,,3769,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV, HEADER);",client backend
+1654125964.512213,,,8596,,,,"",,,,2022-06-01 23:26:03.380254+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654125964.512213,,,8595,,,,"",,,,2022-06-01 23:26:03.380097+00,,,,Activity,CheckpointerMain,,,,,"",checkpointer
+1654125964.512213,,,8597,,,,"",,,,2022-06-01 23:26:03.380408+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654126024.553514,,,8598,,,,"",,,,2022-06-01 23:26:03.380564+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654126024.553514,,,8600,,10,postgres,"",,,,2022-06-01 23:26:03.38088+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654126024.553514,16384,dbt3,9287,,10,postgres,psql,,,-1,2022-06-01 23:26:50.308817+00,2022-06-01 23:26:50.32435+00,2022-06-01 23:26:50.324519+00,2022-06-01 23:26:50.32452+00,,,active,,3809,,"select
 	c_name,
 	c_custkey,
 	o_orderkey,
@@ -147,7 +28,7 @@ where
 			lineitem
 		group by
 			l_orderkey having
-				sum(l_quantity) > 314
+				sum(l_quantity) > 312
 	)
 	and c_custkey = o_custkey
 	and o_orderkey = l_orderkey
@@ -160,19 +41,8 @@ group by
 order by
 	o_totalprice desc,
 	o_orderdate
-LIMIT 100;",active,2022-05-27 16:26:32.947371+00
-1653668794.305771,dbt3,17304,10,postgres,psql,,,2022-05-27 16:26:27.637403+00,2022-05-27 16:26:27.617217+00,2022-05-27 16:26:27.617438+00,"explain (analyze, buffers)
-select
-	sum(l_extendedprice * l_discount) as revenue
-from
-	lineitem
-where
-	l_shipdate >= date '1996-01-01'
-	and l_shipdate < cast(date '1996-01-01' + interval '1 year' as date)
-	and l_discount between 0.06 - 0.01 and 0.06 + 0.01
-	and l_quantity < 25;",active,2022-05-27 16:26:27.641501+00
-1653668794.305771,dbt3,17318,10,postgres,psql,,,2022-05-27 16:26:32.964456+00,2022-05-27 16:26:32.947103+00,2022-05-27 16:26:32.94737+00,"explain (analyze, buffers)
-select
+LIMIT 100;",client backend
+1654126024.553514,16384,dbt3,9288,9287,10,postgres,psql,,,,2022-06-01 23:26:50.339637+00,2022-06-01 23:26:50.32435+00,2022-06-01 23:26:50.324519+00,2022-06-01 23:26:50.35524+00,,,active,,3809,,"select
 	c_name,
 	c_custkey,
 	o_orderkey,
@@ -191,7 +61,7 @@ where
 			lineitem
 		group by
 			l_orderkey having
-				sum(l_quantity) > 314
+				sum(l_quantity) > 312
 	)
 	and c_custkey = o_custkey
 	and o_orderkey = l_orderkey
@@ -204,9 +74,8 @@ group by
 order by
 	o_totalprice desc,
 	o_orderdate
-LIMIT 100;",active,2022-05-27 16:26:32.993258+00
-1653668794.305771,dbt3,17317,10,postgres,psql,,,2022-05-27 16:26:32.970193+00,2022-05-27 16:26:32.947103+00,2022-05-27 16:26:32.94737+00,"explain (analyze, buffers)
-select
+LIMIT 100;",parallel worker
+1654126024.553514,16384,dbt3,9289,9287,10,postgres,psql,,,,2022-06-01 23:26:50.34964+00,2022-06-01 23:26:50.32435+00,2022-06-01 23:26:50.324519+00,2022-06-01 23:26:50.36215+00,,,active,,3809,,"select
 	c_name,
 	c_custkey,
 	o_orderkey,
@@ -225,7 +94,7 @@ where
 			lineitem
 		group by
 			l_orderkey having
-				sum(l_quantity) > 314
+				sum(l_quantity) > 312
 	)
 	and c_custkey = o_custkey
 	and o_orderkey = l_orderkey
@@ -238,17 +107,353 @@ group by
 order by
 	o_totalprice desc,
 	o_orderdate
-LIMIT 100;",active,2022-05-27 16:26:32.98233+00
-1653668794.305771,dbt3,17326,10,postgres,psql,,-1,2022-05-27 16:26:34.280421+00,2022-05-27 16:26:34.306229+00,2022-05-27 16:26:34.306229+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:26:34.306231+00
-1653668794.305771,dbt3,17328,10,postgres,psql,,-1,2022-05-27 16:26:34.280999+00,2022-05-27 16:26:34.283982+00,2022-05-27 16:26:34.283982+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:26:34.283984+00
-1653668794.305771,dbt3,17329,10,postgres,psql,,-1,2022-05-27 16:26:34.28794+00,2022-05-27 16:26:34.305771+00,2022-05-27 16:26:34.305771+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:26:34.305773+00
-1653668794.305771,,16625,,,"",,,2022-05-27 16:25:33.146113+00,,,"",,
-1653668794.305771,,16624,,,"",,,2022-05-27 16:25:33.145947+00,,,"",,
-1653668794.305771,,16626,,,"",,,2022-05-27 16:25:33.146293+00,,,"",,
-1653668854.335308,,16627,,,"",,,2022-05-27 16:25:33.146448+00,,,"",,
-1653668854.335308,,16629,10,postgres,"",,,2022-05-27 16:25:33.146785+00,,,"",,
-1653668854.335308,dbt3,17372,10,postgres,psql,,-1,2022-05-27 16:26:50.538475+00,2022-05-27 16:26:50.550902+00,2022-05-27 16:26:50.551178+00,"explain (analyze, buffers)
-select
+LIMIT 100;",parallel worker
+1654126024.553514,16384,dbt3,9313,,10,postgres,psql,,,-1,2022-06-01 23:26:58.800671+00,2022-06-01 23:26:58.816207+00,2022-06-01 23:26:58.816413+00,2022-06-01 23:26:58.816415+00,IO,DataFileRead,active,,3813,,"select
+	supp_nation,
+	cust_nation,
+	l_year,
+	sum(volume) as revenue
+from
+	(
+		select
+			n1.n_name as supp_nation,
+			n2.n_name as cust_nation,
+			extract(year from l_shipdate) as l_year,
+			l_extendedprice * (1 - l_discount) as volume
+		from
+			supplier,
+			lineitem,
+			orders,
+			customer,
+			nation n1,
+			nation n2
+		where
+			s_suppkey = l_suppkey
+			and o_orderkey = l_orderkey
+			and c_custkey = o_custkey
+			and s_nationkey = n1.n_nationkey
+			and c_nationkey = n2.n_nationkey
+			and (
+				(n1.n_name = 'EGYPT' and n2.n_name = 'JAPAN')
+				or (n1.n_name = 'JAPAN' and n2.n_name = 'EGYPT')
+			)
+			and l_shipdate between date '1995-01-01' and date '1996-12-31'
+	) as shipping
+group by
+	supp_nation,
+	cust_nation,
+	l_year
+order by
+	supp_nation,
+	cust_nation,
+	l_year;",client backend
+1654126024.553514,16384,dbt3,9220,,10,postgres,psql,,,-1,2022-06-01 23:26:40.304353+00,2022-06-01 23:26:40.310506+00,2022-06-01 23:26:40.310683+00,2022-06-01 23:26:40.310685+00,,,active,,3781,,"select
+	c_custkey,
+	c_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue,
+	c_acctbal,
+	n_name,
+	c_address,
+	c_phone,
+	c_comment
+from
+	customer,
+	orders,
+	lineitem,
+	nation
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and o_orderdate >= date '1994-12-01'
+	and o_orderdate < cast(date '1994-12-01' + interval '3 month' as date)
+	and l_returnflag = 'R'
+	and c_nationkey = n_nationkey
+group by
+	c_custkey,
+	c_name,
+	c_acctbal,
+	c_phone,
+	n_name,
+	c_address,
+	c_comment
+order by
+	revenue desc
+LIMIT 20;",client backend
+1654126024.553514,16384,dbt3,9315,9313,10,postgres,psql,,,,2022-06-01 23:26:58.845605+00,2022-06-01 23:26:58.816207+00,2022-06-01 23:26:58.816413+00,2022-06-01 23:26:58.861608+00,,,active,,3813,,"select
+	supp_nation,
+	cust_nation,
+	l_year,
+	sum(volume) as revenue
+from
+	(
+		select
+			n1.n_name as supp_nation,
+			n2.n_name as cust_nation,
+			extract(year from l_shipdate) as l_year,
+			l_extendedprice * (1 - l_discount) as volume
+		from
+			supplier,
+			lineitem,
+			orders,
+			customer,
+			nation n1,
+			nation n2
+		where
+			s_suppkey = l_suppkey
+			and o_orderkey = l_orderkey
+			and c_custkey = o_custkey
+			and s_nationkey = n1.n_nationkey
+			and c_nationkey = n2.n_nationkey
+			and (
+				(n1.n_name = 'EGYPT' and n2.n_name = 'JAPAN')
+				or (n1.n_name = 'JAPAN' and n2.n_name = 'EGYPT')
+			)
+			and l_shipdate between date '1995-01-01' and date '1996-12-31'
+	) as shipping
+group by
+	supp_nation,
+	cust_nation,
+	l_year
+order by
+	supp_nation,
+	cust_nation,
+	l_year;",parallel worker
+1654126024.553514,16384,dbt3,9314,9313,10,postgres,psql,,,,2022-06-01 23:26:58.844639+00,2022-06-01 23:26:58.816207+00,2022-06-01 23:26:58.816413+00,2022-06-01 23:26:58.858999+00,LWLock,BufferMapping,active,,3813,,"select
+	supp_nation,
+	cust_nation,
+	l_year,
+	sum(volume) as revenue
+from
+	(
+		select
+			n1.n_name as supp_nation,
+			n2.n_name as cust_nation,
+			extract(year from l_shipdate) as l_year,
+			l_extendedprice * (1 - l_discount) as volume
+		from
+			supplier,
+			lineitem,
+			orders,
+			customer,
+			nation n1,
+			nation n2
+		where
+			s_suppkey = l_suppkey
+			and o_orderkey = l_orderkey
+			and c_custkey = o_custkey
+			and s_nationkey = n1.n_nationkey
+			and c_nationkey = n2.n_nationkey
+			and (
+				(n1.n_name = 'EGYPT' and n2.n_name = 'JAPAN')
+				or (n1.n_name = 'JAPAN' and n2.n_name = 'EGYPT')
+			)
+			and l_shipdate between date '1995-01-01' and date '1996-12-31'
+	) as shipping
+group by
+	supp_nation,
+	cust_nation,
+	l_year
+order by
+	supp_nation,
+	cust_nation,
+	l_year;",parallel worker
+1654126024.553514,16384,dbt3,9320,,10,postgres,psql,,,-1,2022-06-01 23:27:02.093653+00,2022-06-01 23:27:02.109368+00,2022-06-01 23:27:02.10946+00,2022-06-01 23:27:02.109461+00,IO,DataFileWrite,active,3813,3813,,"COPY lineitem
+FROM '/tmp/dss/lineitem.tbl.u4'
+USING DELIMITERS '|';",client backend
+1654126024.553514,16384,dbt3,9222,9220,10,postgres,psql,,,,2022-06-01 23:26:40.321375+00,2022-06-01 23:26:40.310506+00,2022-06-01 23:26:40.310683+00,2022-06-01 23:26:40.32801+00,IPC,MessageQueueSend,active,,3781,,"select
+	c_custkey,
+	c_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue,
+	c_acctbal,
+	n_name,
+	c_address,
+	c_phone,
+	c_comment
+from
+	customer,
+	orders,
+	lineitem,
+	nation
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and o_orderdate >= date '1994-12-01'
+	and o_orderdate < cast(date '1994-12-01' + interval '3 month' as date)
+	and l_returnflag = 'R'
+	and c_nationkey = n_nationkey
+group by
+	c_custkey,
+	c_name,
+	c_acctbal,
+	c_phone,
+	n_name,
+	c_address,
+	c_comment
+order by
+	revenue desc
+LIMIT 20;",parallel worker
+1654126024.553514,16384,dbt3,9221,9220,10,postgres,psql,,,,2022-06-01 23:26:40.321844+00,2022-06-01 23:26:40.310506+00,2022-06-01 23:26:40.310683+00,2022-06-01 23:26:40.33343+00,IPC,MessageQueueSend,active,,3781,,"select
+	c_custkey,
+	c_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue,
+	c_acctbal,
+	n_name,
+	c_address,
+	c_phone,
+	c_comment
+from
+	customer,
+	orders,
+	lineitem,
+	nation
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and o_orderdate >= date '1994-12-01'
+	and o_orderdate < cast(date '1994-12-01' + interval '3 month' as date)
+	and l_returnflag = 'R'
+	and c_nationkey = n_nationkey
+group by
+	c_custkey,
+	c_name,
+	c_acctbal,
+	c_phone,
+	n_name,
+	c_address,
+	c_comment
+order by
+	revenue desc
+LIMIT 20;",parallel worker
+1654126024.553514,16384,dbt3,9329,,10,postgres,psql,,,-1,2022-06-01 23:27:04.53604+00,2022-06-01 23:27:04.553427+00,2022-06-01 23:27:04.553427+00,2022-06-01 23:27:04.553428+00,,,active,,3813,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",client backend
+1654126024.553514,16384,dbt3,9328,,10,postgres,psql,,,-1,2022-06-01 23:27:04.540604+00,2022-06-01 23:27:04.551062+00,2022-06-01 23:27:04.551062+00,2022-06-01 23:27:04.551063+00,,,active,,3813,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",client backend
+1654126024.553514,16384,dbt3,9330,,10,postgres,psql,,,-1,2022-06-01 23:27:04.537626+00,2022-06-01 23:27:04.546144+00,2022-06-01 23:27:04.546144+00,2022-06-01 23:27:04.546145+00,,,active,,3813,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_database) TO STDOUT (FORMAT CSV);",client backend
+1654126024.553514,16384,dbt3,9331,,10,postgres,psql,,,-1,2022-06-01 23:27:04.542638+00,2022-06-01 23:27:04.553514+00,2022-06-01 23:27:04.553514+00,2022-06-01 23:27:04.553516+00,,,active,,3813,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654126024.553514,,,8596,,,,"",,,,2022-06-01 23:26:03.380254+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654126024.553514,,,8595,,,,"",,,,2022-06-01 23:26:03.380097+00,,,,Timeout,CheckpointWriteDelay,,,,,"",checkpointer
+1654126024.553514,,,8597,,,,"",,,,2022-06-01 23:26:03.380408+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654126084.569285,,,8598,,,,"",,,,2022-06-01 23:26:03.380564+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654126084.569285,,,8600,,10,postgres,"",,,,2022-06-01 23:26:03.38088+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654126084.569285,16384,dbt3,9287,,10,postgres,psql,,,-1,2022-06-01 23:26:50.308817+00,2022-06-01 23:26:50.32435+00,2022-06-01 23:26:50.324519+00,2022-06-01 23:26:50.32452+00,,,active,,3809,,"select
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice,
+	sum(l_quantity)
+from
+	customer,
+	orders,
+	lineitem
+where
+	o_orderkey in (
+		select
+			l_orderkey
+		from
+			lineitem
+		group by
+			l_orderkey having
+				sum(l_quantity) > 312
+	)
+	and c_custkey = o_custkey
+	and o_orderkey = l_orderkey
+group by
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice
+order by
+	o_totalprice desc,
+	o_orderdate
+LIMIT 100;",client backend
+1654126084.569285,16384,dbt3,9288,9287,10,postgres,psql,,,,2022-06-01 23:26:50.339637+00,2022-06-01 23:26:50.32435+00,2022-06-01 23:26:50.324519+00,2022-06-01 23:26:50.35524+00,,,active,,3809,,"select
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice,
+	sum(l_quantity)
+from
+	customer,
+	orders,
+	lineitem
+where
+	o_orderkey in (
+		select
+			l_orderkey
+		from
+			lineitem
+		group by
+			l_orderkey having
+				sum(l_quantity) > 312
+	)
+	and c_custkey = o_custkey
+	and o_orderkey = l_orderkey
+group by
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice
+order by
+	o_totalprice desc,
+	o_orderdate
+LIMIT 100;",parallel worker
+1654126084.569285,16384,dbt3,9289,9287,10,postgres,psql,,,,2022-06-01 23:26:50.34964+00,2022-06-01 23:26:50.32435+00,2022-06-01 23:26:50.324519+00,2022-06-01 23:26:50.36215+00,,,active,,3809,,"select
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice,
+	sum(l_quantity)
+from
+	customer,
+	orders,
+	lineitem
+where
+	o_orderkey in (
+		select
+			l_orderkey
+		from
+			lineitem
+		group by
+			l_orderkey having
+				sum(l_quantity) > 312
+	)
+	and c_custkey = o_custkey
+	and o_orderkey = l_orderkey
+group by
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice
+order by
+	o_totalprice desc,
+	o_orderdate
+LIMIT 100;",parallel worker
+1654126084.569285,16384,dbt3,9358,,10,postgres,psql,,,-1,2022-06-01 23:27:18.937387+00,2022-06-01 23:27:18.943565+00,2022-06-01 23:27:18.943722+00,2022-06-01 23:27:18.943723+00,,,active,,3813,,"select
+	l_returnflag,
+	l_linestatus,
+	sum(l_quantity) as sum_qty,
+	sum(l_extendedprice) as sum_base_price,
+	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	avg(l_quantity) as avg_qty,
+	avg(l_extendedprice) as avg_price,
+	avg(l_discount) as avg_disc,
+	count(*) as count_order
+from
+	lineitem
+where
+	l_shipdate <= date '1998-12-01' - interval '62 days'
+group by
+	l_returnflag,
+	l_linestatus
+order by
+	l_returnflag,
+	l_linestatus;",client backend
+1654126084.569285,16384,dbt3,9344,,10,postgres,psql,,,-1,2022-06-01 23:27:06.071649+00,2022-06-01 23:27:06.089805+00,2022-06-01 23:27:06.08999+00,2022-06-01 23:27:06.089992+00,IO,DataFileRead,active,,3813,,"select
 	nation,
 	o_year,
 	sum(amount) as sum_profit
@@ -272,49 +477,15 @@ from
 			and p_partkey = l_partkey
 			and o_orderkey = l_orderkey
 			and s_nationkey = n_nationkey
-			and p_name like '%midnight%'
+			and p_name like '%misty%'
 	) as profit
 group by
 	nation,
 	o_year
 order by
 	nation,
-	o_year desc;",active,2022-05-27 16:26:50.55118+00
-1653668854.335308,dbt3,17373,10,postgres,psql,,,2022-05-27 16:26:50.588064+00,2022-05-27 16:26:50.550902+00,2022-05-27 16:26:50.551178+00,"explain (analyze, buffers)
-select
-	nation,
-	o_year,
-	sum(amount) as sum_profit
-from
-	(
-		select
-			n_name as nation,
-			extract(year from o_orderdate) as o_year,
-			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
-		from
-			part,
-			supplier,
-			lineitem,
-			partsupp,
-			orders,
-			nation
-		where
-			s_suppkey = l_suppkey
-			and ps_suppkey = l_suppkey
-			and ps_partkey = l_partkey
-			and p_partkey = l_partkey
-			and o_orderkey = l_orderkey
-			and s_nationkey = n_nationkey
-			and p_name like '%midnight%'
-	) as profit
-group by
-	nation,
-	o_year
-order by
-	nation,
-	o_year desc;",active,2022-05-27 16:26:50.593075+00
-1653668854.335308,dbt3,17403,10,postgres,psql,,-1,2022-05-27 16:27:12.426097+00,2022-05-27 16:27:12.429286+00,2022-05-27 16:27:12.429531+00,"explain (analyze, buffers)
-select
+	o_year desc;",client backend
+1654126084.569285,16384,dbt3,9360,9358,10,postgres,psql,,,,2022-06-01 23:27:18.959644+00,2022-06-01 23:27:18.943565+00,2022-06-01 23:27:18.943722+00,2022-06-01 23:27:18.966335+00,,,active,,3813,,"select
 	l_returnflag,
 	l_linestatus,
 	sum(l_quantity) as sum_qty,
@@ -328,48 +499,14 @@ select
 from
 	lineitem
 where
-	l_shipdate <= date '1998-12-01' - interval '82 days'
+	l_shipdate <= date '1998-12-01' - interval '62 days'
 group by
 	l_returnflag,
 	l_linestatus
 order by
 	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:27:12.429532+00
-1653668854.335308,dbt3,17374,10,postgres,psql,,,2022-05-27 16:26:50.588609+00,2022-05-27 16:26:50.550902+00,2022-05-27 16:26:50.551178+00,"explain (analyze, buffers)
-select
-	nation,
-	o_year,
-	sum(amount) as sum_profit
-from
-	(
-		select
-			n_name as nation,
-			extract(year from o_orderdate) as o_year,
-			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
-		from
-			part,
-			supplier,
-			lineitem,
-			partsupp,
-			orders,
-			nation
-		where
-			s_suppkey = l_suppkey
-			and ps_suppkey = l_suppkey
-			and ps_partkey = l_partkey
-			and p_partkey = l_partkey
-			and o_orderkey = l_orderkey
-			and s_nationkey = n_nationkey
-			and p_name like '%midnight%'
-	) as profit
-group by
-	nation,
-	o_year
-order by
-	nation,
-	o_year desc;",active,2022-05-27 16:26:50.599238+00
-1653668854.335308,dbt3,17405,10,postgres,psql,,,2022-05-27 16:27:12.446065+00,2022-05-27 16:27:12.429286+00,2022-05-27 16:27:12.429531+00,"explain (analyze, buffers)
-select
+	l_linestatus;",parallel worker
+1654126084.569285,16384,dbt3,9359,9358,10,postgres,psql,,,,2022-06-01 23:27:18.960149+00,2022-06-01 23:27:18.943565+00,2022-06-01 23:27:18.943722+00,2022-06-01 23:27:18.973181+00,,,active,,3813,,"select
 	l_returnflag,
 	l_linestatus,
 	sum(l_quantity) as sum_qty,
@@ -383,151 +520,830 @@ select
 from
 	lineitem
 where
-	l_shipdate <= date '1998-12-01' - interval '82 days'
+	l_shipdate <= date '1998-12-01' - interval '62 days'
 group by
 	l_returnflag,
 	l_linestatus
 order by
 	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:27:12.452603+00
-1653668854.335308,dbt3,17316,10,postgres,psql,,-1,2022-05-27 16:26:32.943536+00,2022-05-27 16:26:32.947103+00,2022-05-27 16:26:32.94737+00,"explain (analyze, buffers)
-select
-	c_name,
-	c_custkey,
-	o_orderkey,
-	o_orderdate,
-	o_totalprice,
-	sum(l_quantity)
-from
-	customer,
-	orders,
-	lineitem
-where
-	o_orderkey in (
-		select
-			l_orderkey
-		from
-			lineitem
-		group by
-			l_orderkey having
-				sum(l_quantity) > 314
-	)
-	and c_custkey = o_custkey
-	and o_orderkey = l_orderkey
-group by
-	c_name,
-	c_custkey,
-	o_orderkey,
-	o_orderdate,
-	o_totalprice
-order by
-	o_totalprice desc,
-	o_orderdate
-LIMIT 100;",active,2022-05-27 16:26:32.947371+00
-1653668854.335308,dbt3,17404,10,postgres,psql,,,2022-05-27 16:27:12.447642+00,2022-05-27 16:27:12.429286+00,2022-05-27 16:27:12.429531+00,"explain (analyze, buffers)
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
-from
-	lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '82 days'
-group by
-	l_returnflag,
-	l_linestatus
-order by
-	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:27:12.458185+00
-1653668854.335308,dbt3,17318,10,postgres,psql,,,2022-05-27 16:26:32.964456+00,2022-05-27 16:26:32.947103+00,2022-05-27 16:26:32.94737+00,"explain (analyze, buffers)
-select
-	c_name,
-	c_custkey,
-	o_orderkey,
-	o_orderdate,
-	o_totalprice,
-	sum(l_quantity)
-from
-	customer,
-	orders,
-	lineitem
-where
-	o_orderkey in (
-		select
-			l_orderkey
-		from
-			lineitem
-		group by
-			l_orderkey having
-				sum(l_quantity) > 314
-	)
-	and c_custkey = o_custkey
-	and o_orderkey = l_orderkey
-group by
-	c_name,
-	c_custkey,
-	o_orderkey,
-	o_orderdate,
-	o_totalprice
-order by
-	o_totalprice desc,
-	o_orderdate
-LIMIT 100;",active,2022-05-27 16:26:32.993258+00
-1653668854.335308,dbt3,17317,10,postgres,psql,,,2022-05-27 16:26:32.970193+00,2022-05-27 16:26:32.947103+00,2022-05-27 16:26:32.94737+00,"explain (analyze, buffers)
-select
-	c_name,
-	c_custkey,
-	o_orderkey,
-	o_orderdate,
-	o_totalprice,
-	sum(l_quantity)
-from
-	customer,
-	orders,
-	lineitem
-where
-	o_orderkey in (
-		select
-			l_orderkey
-		from
-			lineitem
-		group by
-			l_orderkey having
-				sum(l_quantity) > 314
-	)
-	and c_custkey = o_custkey
-	and o_orderkey = l_orderkey
-group by
-	c_name,
-	c_custkey,
-	o_orderkey,
-	o_orderdate,
-	o_totalprice
-order by
-	o_totalprice desc,
-	o_orderdate
-LIMIT 100;",active,2022-05-27 16:26:32.98233+00
-1653668854.335308,dbt3,17431,10,postgres,psql,,-1,2022-05-27 16:27:28.604688+00,2022-05-27 16:27:28.608101+00,2022-05-27 16:27:28.608294+00,"COPY lineitem
+	l_linestatus;",parallel worker
+1654126084.569285,16384,dbt3,9405,,10,postgres,psql,,,-1,2022-06-01 23:27:45.853689+00,2022-06-01 23:27:45.870058+00,2022-06-01 23:27:45.870153+00,2022-06-01 23:27:45.870154+00,,,active,3827,3827,,"COPY lineitem
 FROM '/tmp/dss/lineitem.tbl.u5'
-USING DELIMITERS '|';",active,2022-05-27 16:27:28.608295+00
-1653668854.335308,dbt3,17439,10,postgres,psql,,-1,2022-05-27 16:27:34.309149+00,2022-05-27 16:27:34.322611+00,2022-05-27 16:27:34.322611+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:27:34.322613+00
-1653668854.335308,dbt3,17441,10,postgres,psql,,-1,2022-05-27 16:27:34.31955+00,,2022-05-27 16:27:34.335032+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",idle,2022-05-27 16:27:34.346231+00
-1653668854.335308,dbt3,17442,10,postgres,psql,,-1,2022-05-27 16:27:34.319585+00,2022-05-27 16:27:34.335308+00,2022-05-27 16:27:34.335308+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:27:34.33531+00
-1653668854.335308,dbt3,17443,10,postgres,psql,,-1,2022-05-27 16:27:34.329974+00,2022-05-27 16:27:34.338689+00,2022-05-27 16:27:34.338689+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:27:34.338691+00
-1653668854.335308,,16625,,,"",,,2022-05-27 16:25:33.146113+00,,,"",,
-1653668854.335308,,16624,,,"",,,2022-05-27 16:25:33.145947+00,,,"",,
-1653668854.335308,,16626,,,"",,,2022-05-27 16:25:33.146293+00,,,"",,
-1653668914.344801,,16627,,,"",,,2022-05-27 16:25:33.146448+00,,,"",,
-1653668914.344801,,16629,10,postgres,"",,,2022-05-27 16:25:33.146785+00,,,"",,
-1653668914.344801,dbt3,17495,10,postgres,psql,,-1,2022-05-27 16:28:25.08141+00,2022-05-27 16:28:25.092164+00,2022-05-27 16:28:25.092479+00,"explain (analyze, buffers)
-select
+USING DELIMITERS '|';",client backend
+1654126084.569285,16384,dbt3,9346,9344,10,postgres,psql,,,,2022-06-01 23:27:06.127676+00,2022-06-01 23:27:06.089805+00,2022-06-01 23:27:06.08999+00,2022-06-01 23:27:06.137767+00,IO,DataFileRead,active,,3813,,"select
+	nation,
+	o_year,
+	sum(amount) as sum_profit
+from
+	(
+		select
+			n_name as nation,
+			extract(year from o_orderdate) as o_year,
+			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+		from
+			part,
+			supplier,
+			lineitem,
+			partsupp,
+			orders,
+			nation
+		where
+			s_suppkey = l_suppkey
+			and ps_suppkey = l_suppkey
+			and ps_partkey = l_partkey
+			and p_partkey = l_partkey
+			and o_orderkey = l_orderkey
+			and s_nationkey = n_nationkey
+			and p_name like '%misty%'
+	) as profit
+group by
+	nation,
+	o_year
+order by
+	nation,
+	o_year desc;",parallel worker
+1654126084.569285,16384,dbt3,9345,9344,10,postgres,psql,,,,2022-06-01 23:27:06.130633+00,2022-06-01 23:27:06.089805+00,2022-06-01 23:27:06.08999+00,2022-06-01 23:27:06.142429+00,,,active,,3813,,"select
+	nation,
+	o_year,
+	sum(amount) as sum_profit
+from
+	(
+		select
+			n_name as nation,
+			extract(year from o_orderdate) as o_year,
+			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+		from
+			part,
+			supplier,
+			lineitem,
+			partsupp,
+			orders,
+			nation
+		where
+			s_suppkey = l_suppkey
+			and ps_suppkey = l_suppkey
+			and ps_partkey = l_partkey
+			and p_partkey = l_partkey
+			and o_orderkey = l_orderkey
+			and s_nationkey = n_nationkey
+			and p_name like '%misty%'
+	) as profit
+group by
+	nation,
+	o_year
+order by
+	nation,
+	o_year desc;",parallel worker
+1654126084.569285,16384,dbt3,9414,,10,postgres,psql,,,-1,2022-06-01 23:28:04.551647+00,,2022-06-01 23:28:04.562286+00,2022-06-01 23:28:04.566229+00,,,idle,,,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",client backend
+1654126084.569285,16384,dbt3,9413,,10,postgres,psql,,,-1,2022-06-01 23:28:04.55462+00,,,2022-06-01 23:28:04.571447+00,Client,ClientRead,idle,,,,"",client backend
+1654126084.569285,16384,dbt3,9415,,10,postgres,psql,,,-1,2022-06-01 23:28:04.558616+00,2022-06-01 23:28:04.569285+00,2022-06-01 23:28:04.569285+00,2022-06-01 23:28:04.569286+00,,,active,,3827,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654126084.569285,16384,dbt3,9416,,10,postgres,psql,,,-1,2022-06-01 23:28:04.556637+00,2022-06-01 23:28:04.568968+00,2022-06-01 23:28:04.568968+00,2022-06-01 23:28:04.568969+00,,,active,,3827,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",client backend
+1654126084.569285,,,8596,,,,"",,,,2022-06-01 23:26:03.380254+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654126084.569285,,,8595,,,,"",,,,2022-06-01 23:26:03.380097+00,,,,Timeout,CheckpointWriteDelay,,,,,"",checkpointer
+1654126084.569285,,,8597,,,,"",,,,2022-06-01 23:26:03.380408+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654126144.582305,,,8598,,,,"",,,,2022-06-01 23:26:03.380564+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654126144.582305,,,8600,,10,postgres,"",,,,2022-06-01 23:26:03.38088+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654126144.582305,16384,dbt3,9525,,10,postgres,psql,,,-1,2022-06-01 23:28:45.964686+00,2022-06-01 23:28:45.9802+00,2022-06-01 23:28:45.980408+00,2022-06-01 23:28:45.98041+00,,,active,,3842,,"select
+	supp_nation,
+	cust_nation,
+	l_year,
+	sum(volume) as revenue
+from
+	(
+		select
+			n1.n_name as supp_nation,
+			n2.n_name as cust_nation,
+			extract(year from l_shipdate) as l_year,
+			l_extendedprice * (1 - l_discount) as volume
+		from
+			supplier,
+			lineitem,
+			orders,
+			customer,
+			nation n1,
+			nation n2
+		where
+			s_suppkey = l_suppkey
+			and o_orderkey = l_orderkey
+			and c_custkey = o_custkey
+			and s_nationkey = n1.n_nationkey
+			and c_nationkey = n2.n_nationkey
+			and (
+				(n1.n_name = 'SAUDI ARABIA' and n2.n_name = 'CANADA')
+				or (n1.n_name = 'CANADA' and n2.n_name = 'SAUDI ARABIA')
+			)
+			and l_shipdate between date '1995-01-01' and date '1996-12-31'
+	) as shipping
+group by
+	supp_nation,
+	cust_nation,
+	l_year
+order by
+	supp_nation,
+	cust_nation,
+	l_year;",client backend
+1654126144.582305,16384,dbt3,9552,,10,postgres,psql,,,-1,2022-06-01 23:29:02.984893+00,2022-06-01 23:29:02.990981+00,2022-06-01 23:29:02.991136+00,2022-06-01 23:29:02.991138+00,,,active,,3851,,"select
+	n_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue
+from
+	customer,
+	orders,
+	lineitem,
+	supplier,
+	nation,
+	region
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and l_suppkey = s_suppkey
+	and c_nationkey = s_nationkey
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'ASIA'
+	and o_orderdate >= date '1994-01-01'
+	and o_orderdate < date '1994-01-01' + interval '1 year'
+group by
+	n_name
+order by
+	revenue desc;",client backend
+1654126144.582305,16384,dbt3,9554,9552,10,postgres,psql,,,,2022-06-01 23:29:03.01864+00,2022-06-01 23:29:02.990981+00,2022-06-01 23:29:02.991136+00,2022-06-01 23:29:03.0272+00,,,active,,3851,,"select
+	n_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue
+from
+	customer,
+	orders,
+	lineitem,
+	supplier,
+	nation,
+	region
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and l_suppkey = s_suppkey
+	and c_nationkey = s_nationkey
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'ASIA'
+	and o_orderdate >= date '1994-01-01'
+	and o_orderdate < date '1994-01-01' + interval '1 year'
+group by
+	n_name
+order by
+	revenue desc;",parallel worker
+1654126144.582305,16384,dbt3,9481,,10,postgres,psql,,,-1,2022-06-01 23:28:32.6734+00,2022-06-01 23:28:32.679608+00,2022-06-01 23:28:32.679857+00,2022-06-01 23:28:32.679859+00,,,active,,3840,,"select
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice,
+	sum(l_quantity)
+from
+	customer,
+	orders,
+	lineitem
+where
+	o_orderkey in (
+		select
+			l_orderkey
+		from
+			lineitem
+		group by
+			l_orderkey having
+				sum(l_quantity) > 315
+	)
+	and c_custkey = o_custkey
+	and o_orderkey = l_orderkey
+group by
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice
+order by
+	o_totalprice desc,
+	o_orderdate
+LIMIT 100;",client backend
+1654126144.582305,16384,dbt3,9553,9552,10,postgres,psql,,,,2022-06-01 23:29:03.020604+00,2022-06-01 23:29:02.990981+00,2022-06-01 23:29:02.991136+00,2022-06-01 23:29:03.032314+00,,,active,,3851,,"select
+	n_name,
+	sum(l_extendedprice * (1 - l_discount)) as revenue
+from
+	customer,
+	orders,
+	lineitem,
+	supplier,
+	nation,
+	region
+where
+	c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and l_suppkey = s_suppkey
+	and c_nationkey = s_nationkey
+	and s_nationkey = n_nationkey
+	and n_regionkey = r_regionkey
+	and r_name = 'ASIA'
+	and o_orderdate >= date '1994-01-01'
+	and o_orderdate < date '1994-01-01' + interval '1 year'
+group by
+	n_name
+order by
+	revenue desc;",parallel worker
+1654126144.582305,16384,dbt3,9483,9481,10,postgres,psql,,,,2022-06-01 23:28:32.69021+00,2022-06-01 23:28:32.679608+00,2022-06-01 23:28:32.679857+00,2022-06-01 23:28:32.703431+00,,,active,,3840,,"select
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice,
+	sum(l_quantity)
+from
+	customer,
+	orders,
+	lineitem
+where
+	o_orderkey in (
+		select
+			l_orderkey
+		from
+			lineitem
+		group by
+			l_orderkey having
+				sum(l_quantity) > 315
+	)
+	and c_custkey = o_custkey
+	and o_orderkey = l_orderkey
+group by
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice
+order by
+	o_totalprice desc,
+	o_orderdate
+LIMIT 100;",parallel worker
+1654126144.582305,16384,dbt3,9482,9481,10,postgres,psql,,,,2022-06-01 23:28:32.690699+00,2022-06-01 23:28:32.679608+00,2022-06-01 23:28:32.679857+00,2022-06-01 23:28:32.702526+00,,,active,,3840,,"select
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice,
+	sum(l_quantity)
+from
+	customer,
+	orders,
+	lineitem
+where
+	o_orderkey in (
+		select
+			l_orderkey
+		from
+			lineitem
+		group by
+			l_orderkey having
+				sum(l_quantity) > 315
+	)
+	and c_custkey = o_custkey
+	and o_orderkey = l_orderkey
+group by
+	c_name,
+	c_custkey,
+	o_orderkey,
+	o_orderdate,
+	o_totalprice
+order by
+	o_totalprice desc,
+	o_orderdate
+LIMIT 100;",parallel worker
+1654126144.582305,16384,dbt3,9562,,10,postgres,psql,,,-1,2022-06-01 23:29:04.564413+00,2022-06-01 23:29:04.568657+00,2022-06-01 23:29:04.568657+00,2022-06-01 23:29:04.56866+00,,,active,,3851,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",client backend
+1654126144.582305,16384,dbt3,9526,9525,10,postgres,psql,,,,2022-06-01 23:28:46.007636+00,2022-06-01 23:28:45.9802+00,2022-06-01 23:28:45.980408+00,2022-06-01 23:28:46.023297+00,,,active,,3842,,"select
+	supp_nation,
+	cust_nation,
+	l_year,
+	sum(volume) as revenue
+from
+	(
+		select
+			n1.n_name as supp_nation,
+			n2.n_name as cust_nation,
+			extract(year from l_shipdate) as l_year,
+			l_extendedprice * (1 - l_discount) as volume
+		from
+			supplier,
+			lineitem,
+			orders,
+			customer,
+			nation n1,
+			nation n2
+		where
+			s_suppkey = l_suppkey
+			and o_orderkey = l_orderkey
+			and c_custkey = o_custkey
+			and s_nationkey = n1.n_nationkey
+			and c_nationkey = n2.n_nationkey
+			and (
+				(n1.n_name = 'SAUDI ARABIA' and n2.n_name = 'CANADA')
+				or (n1.n_name = 'CANADA' and n2.n_name = 'SAUDI ARABIA')
+			)
+			and l_shipdate between date '1995-01-01' and date '1996-12-31'
+	) as shipping
+group by
+	supp_nation,
+	cust_nation,
+	l_year
+order by
+	supp_nation,
+	cust_nation,
+	l_year;",parallel worker
+1654126144.582305,16384,dbt3,9564,,10,postgres,psql,,,-1,2022-06-01 23:29:04.55982+00,2022-06-01 23:29:04.571829+00,2022-06-01 23:29:04.571829+00,2022-06-01 23:29:04.57183+00,,,active,,3851,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",client backend
+1654126144.582305,16384,dbt3,9565,,10,postgres,psql,,,-1,2022-06-01 23:29:04.565157+00,2022-06-01 23:29:04.582305+00,2022-06-01 23:29:04.582305+00,2022-06-01 23:29:04.582307+00,,,active,,3851,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654126144.582305,16384,dbt3,9566,,10,postgres,psql,,,-1,2022-06-01 23:29:04.568649+00,2022-06-01 23:29:04.58402+00,2022-06-01 23:29:04.58402+00,2022-06-01 23:29:04.584022+00,,,active,,3851,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_database) TO STDOUT (FORMAT CSV);",client backend
+1654126144.582305,,,8596,,,,"",,,,2022-06-01 23:26:03.380254+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654126144.582305,,,8595,,,,"",,,,2022-06-01 23:26:03.380097+00,,,,Timeout,CheckpointWriteDelay,,,,,"",checkpointer
+1654126144.582305,,,8597,,,,"",,,,2022-06-01 23:26:03.380408+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654126204.617308,,,8598,,,,"",,,,2022-06-01 23:26:03.380564+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654126204.617308,,,8600,,10,postgres,"",,,,2022-06-01 23:26:03.38088+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654126204.617308,16384,dbt3,9733,,10,postgres,psql,,,-1,2022-06-01 23:30:02.793299+00,2022-06-01 23:30:02.800348+00,2022-06-01 23:30:02.80579+00,2022-06-01 23:30:02.805792+00,LWLock,BufferMapping,active,3877,3877,,"select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue1
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue1
+	)
+order by
+	s_suppkey;",client backend
+1654126204.617308,16384,dbt3,9702,,10,postgres,psql,,,-1,2022-06-01 23:29:51.002595+00,2022-06-01 23:29:51.008039+00,2022-06-01 23:29:51.008309+00,2022-06-01 23:29:51.008311+00,LWLock,BufferMapping,active,,3873,,"select
+	nation,
+	o_year,
+	sum(amount) as sum_profit
+from
+	(
+		select
+			n_name as nation,
+			extract(year from o_orderdate) as o_year,
+			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+		from
+			part,
+			supplier,
+			lineitem,
+			partsupp,
+			orders,
+			nation
+		where
+			s_suppkey = l_suppkey
+			and ps_suppkey = l_suppkey
+			and ps_partkey = l_partkey
+			and p_partkey = l_partkey
+			and o_orderkey = l_orderkey
+			and s_nationkey = n_nationkey
+			and p_name like '%magenta%'
+	) as profit
+group by
+	nation,
+	o_year
+order by
+	nation,
+	o_year desc;",client backend
+1654126204.617308,16384,dbt3,9703,,10,postgres,psql,,,-1,2022-06-01 23:29:51.003161+00,2022-06-01 23:29:51.008153+00,2022-06-01 23:29:51.008301+00,2022-06-01 23:29:51.008302+00,,,active,,3873,,"select
+	supp_nation,
+	cust_nation,
+	l_year,
+	sum(volume) as revenue
+from
+	(
+		select
+			n1.n_name as supp_nation,
+			n2.n_name as cust_nation,
+			extract(year from l_shipdate) as l_year,
+			l_extendedprice * (1 - l_discount) as volume
+		from
+			supplier,
+			lineitem,
+			orders,
+			customer,
+			nation n1,
+			nation n2
+		where
+			s_suppkey = l_suppkey
+			and o_orderkey = l_orderkey
+			and c_custkey = o_custkey
+			and s_nationkey = n1.n_nationkey
+			and c_nationkey = n2.n_nationkey
+			and (
+				(n1.n_name = 'JAPAN' and n2.n_name = 'SAUDI ARABIA')
+				or (n1.n_name = 'SAUDI ARABIA' and n2.n_name = 'JAPAN')
+			)
+			and l_shipdate between date '1995-01-01' and date '1996-12-31'
+	) as shipping
+group by
+	supp_nation,
+	cust_nation,
+	l_year
+order by
+	supp_nation,
+	cust_nation,
+	l_year;",client backend
+1654126204.617308,16384,dbt3,9705,9703,10,postgres,psql,,,,2022-06-01 23:29:51.018815+00,2022-06-01 23:29:51.008153+00,2022-06-01 23:29:51.008301+00,2022-06-01 23:29:51.024223+00,,,active,,3873,,"select
+	supp_nation,
+	cust_nation,
+	l_year,
+	sum(volume) as revenue
+from
+	(
+		select
+			n1.n_name as supp_nation,
+			n2.n_name as cust_nation,
+			extract(year from l_shipdate) as l_year,
+			l_extendedprice * (1 - l_discount) as volume
+		from
+			supplier,
+			lineitem,
+			orders,
+			customer,
+			nation n1,
+			nation n2
+		where
+			s_suppkey = l_suppkey
+			and o_orderkey = l_orderkey
+			and c_custkey = o_custkey
+			and s_nationkey = n1.n_nationkey
+			and c_nationkey = n2.n_nationkey
+			and (
+				(n1.n_name = 'JAPAN' and n2.n_name = 'SAUDI ARABIA')
+				or (n1.n_name = 'SAUDI ARABIA' and n2.n_name = 'JAPAN')
+			)
+			and l_shipdate between date '1995-01-01' and date '1996-12-31'
+	) as shipping
+group by
+	supp_nation,
+	cust_nation,
+	l_year
+order by
+	supp_nation,
+	cust_nation,
+	l_year;",parallel worker
+1654126204.617308,16384,dbt3,9704,9703,10,postgres,psql,,,,2022-06-01 23:29:51.019215+00,2022-06-01 23:29:51.008153+00,2022-06-01 23:29:51.008301+00,2022-06-01 23:29:51.030836+00,LWLock,BufferMapping,active,,3873,,"select
+	supp_nation,
+	cust_nation,
+	l_year,
+	sum(volume) as revenue
+from
+	(
+		select
+			n1.n_name as supp_nation,
+			n2.n_name as cust_nation,
+			extract(year from l_shipdate) as l_year,
+			l_extendedprice * (1 - l_discount) as volume
+		from
+			supplier,
+			lineitem,
+			orders,
+			customer,
+			nation n1,
+			nation n2
+		where
+			s_suppkey = l_suppkey
+			and o_orderkey = l_orderkey
+			and c_custkey = o_custkey
+			and s_nationkey = n1.n_nationkey
+			and c_nationkey = n2.n_nationkey
+			and (
+				(n1.n_name = 'JAPAN' and n2.n_name = 'SAUDI ARABIA')
+				or (n1.n_name = 'SAUDI ARABIA' and n2.n_name = 'JAPAN')
+			)
+			and l_shipdate between date '1995-01-01' and date '1996-12-31'
+	) as shipping
+group by
+	supp_nation,
+	cust_nation,
+	l_year
+order by
+	supp_nation,
+	cust_nation,
+	l_year;",parallel worker
+1654126204.617308,16384,dbt3,9707,9702,10,postgres,psql,,,,2022-06-01 23:29:51.032612+00,2022-06-01 23:29:51.008039+00,2022-06-01 23:29:51.008309+00,2022-06-01 23:29:51.043729+00,LWLock,BufferMapping,active,,3873,,"select
+	nation,
+	o_year,
+	sum(amount) as sum_profit
+from
+	(
+		select
+			n_name as nation,
+			extract(year from o_orderdate) as o_year,
+			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+		from
+			part,
+			supplier,
+			lineitem,
+			partsupp,
+			orders,
+			nation
+		where
+			s_suppkey = l_suppkey
+			and ps_suppkey = l_suppkey
+			and ps_partkey = l_partkey
+			and p_partkey = l_partkey
+			and o_orderkey = l_orderkey
+			and s_nationkey = n_nationkey
+			and p_name like '%magenta%'
+	) as profit
+group by
+	nation,
+	o_year
+order by
+	nation,
+	o_year desc;",parallel worker
+1654126204.617308,16384,dbt3,9706,9702,10,postgres,psql,,,,2022-06-01 23:29:51.029727+00,2022-06-01 23:29:51.008039+00,2022-06-01 23:29:51.008309+00,2022-06-01 23:29:51.043964+00,LWLock,BufferMapping,active,,3873,,"select
+	nation,
+	o_year,
+	sum(amount) as sum_profit
+from
+	(
+		select
+			n_name as nation,
+			extract(year from o_orderdate) as o_year,
+			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
+		from
+			part,
+			supplier,
+			lineitem,
+			partsupp,
+			orders,
+			nation
+		where
+			s_suppkey = l_suppkey
+			and ps_suppkey = l_suppkey
+			and ps_partkey = l_partkey
+			and p_partkey = l_partkey
+			and o_orderkey = l_orderkey
+			and s_nationkey = n_nationkey
+			and p_name like '%magenta%'
+	) as profit
+group by
+	nation,
+	o_year
+order by
+	nation,
+	o_year desc;",parallel worker
+1654126204.617308,16384,dbt3,9734,9733,10,postgres,psql,,,,2022-06-01 23:30:02.818961+00,2022-06-01 23:30:02.800348+00,2022-06-01 23:30:02.80579+00,2022-06-01 23:30:02.827924+00,LWLock,BufferMapping,active,,3877,,"select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue1
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue1
+	)
+order by
+	s_suppkey;",parallel worker
+1654126204.617308,16384,dbt3,9735,9733,10,postgres,psql,,,,2022-06-01 23:30:02.817861+00,2022-06-01 23:30:02.800348+00,2022-06-01 23:30:02.80579+00,2022-06-01 23:30:02.828816+00,,,active,,3877,,"select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue1
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue1
+	)
+order by
+	s_suppkey;",parallel worker
+1654126204.617308,16384,dbt3,9746,,10,postgres,psql,,,-1,2022-06-01 23:30:04.584837+00,2022-06-01 23:30:04.587648+00,2022-06-01 23:30:04.587648+00,2022-06-01 23:30:04.58765+00,,,active,,3877,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",client backend
+1654126204.617308,16384,dbt3,9747,,10,postgres,psql,,,-1,2022-06-01 23:30:04.598671+00,2022-06-01 23:30:04.617308+00,2022-06-01 23:30:04.617308+00,2022-06-01 23:30:04.61731+00,,,active,,3877,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654126204.617308,,,8596,,,,"",,,,2022-06-01 23:26:03.380254+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654126204.617308,,,8595,,,,"",,,,2022-06-01 23:26:03.380097+00,,,,Activity,CheckpointerMain,,,,,"",checkpointer
+1654126204.617308,,,8597,,,,"",,,,2022-06-01 23:26:03.380408+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654126264.607768,,,8598,,,,"",,,,2022-06-01 23:26:03.380564+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654126264.607768,,,8600,,10,postgres,"",,,,2022-06-01 23:26:03.38088+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654126264.607768,16384,dbt3,9775,,10,postgres,psql,,,-1,2022-06-01 23:30:30.498968+00,2022-06-01 23:30:30.505842+00,2022-06-01 23:30:30.506003+00,2022-06-01 23:30:30.506005+00,,,active,,3882,,"select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%accounts%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",client backend
+1654126264.607768,16384,dbt3,9804,,10,postgres,psql,,,-1,2022-06-01 23:30:51.278103+00,2022-06-01 23:30:51.284737+00,2022-06-01 23:30:51.290709+00,2022-06-01 23:30:51.290711+00,,,active,3886,3886,,"select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue3
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue3
+	)
+order by
+	s_suppkey;",client backend
+1654126264.607768,16384,dbt3,9760,,10,postgres,psql,,,-1,2022-06-01 23:30:09.378719+00,2022-06-01 23:30:09.400585+00,2022-06-01 23:30:09.400757+00,2022-06-01 23:30:09.400759+00,LWLock,BufferMapping,active,,3877,,"select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%accounts%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",client backend
+1654126264.607768,16384,dbt3,9762,9760,10,postgres,psql,,,,2022-06-01 23:30:09.414683+00,2022-06-01 23:30:09.400585+00,2022-06-01 23:30:09.400757+00,2022-06-01 23:30:09.421988+00,,,active,,3877,,"select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%accounts%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",parallel worker
+1654126264.607768,16384,dbt3,9761,9760,10,postgres,psql,,,,2022-06-01 23:30:09.415236+00,2022-06-01 23:30:09.400585+00,2022-06-01 23:30:09.400757+00,2022-06-01 23:30:09.43206+00,IO,DataFileRead,active,,3877,,"select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%accounts%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",parallel worker
+1654126264.607768,16384,dbt3,9806,9804,10,postgres,psql,,,,2022-06-01 23:30:51.304524+00,2022-06-01 23:30:51.284737+00,2022-06-01 23:30:51.290709+00,2022-06-01 23:30:51.313978+00,IPC,MessageQueueSend,active,,3886,,"select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue3
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue3
+	)
+order by
+	s_suppkey;",parallel worker
+1654126264.607768,16384,dbt3,9805,9804,10,postgres,psql,,,,2022-06-01 23:30:51.307655+00,2022-06-01 23:30:51.284737+00,2022-06-01 23:30:51.290709+00,2022-06-01 23:30:51.315981+00,IPC,MessageQueueSend,active,,3886,,"select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue3
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue3
+	)
+order by
+	s_suppkey;",parallel worker
+1654126264.607768,16384,dbt3,9776,9775,10,postgres,psql,,,,2022-06-01 23:30:30.528679+00,2022-06-01 23:30:30.505842+00,2022-06-01 23:30:30.506003+00,2022-06-01 23:30:30.545205+00,LWLock,BufferMapping,active,,3882,,"select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%accounts%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",parallel worker
+1654126264.607768,16384,dbt3,9777,9775,10,postgres,psql,,,,2022-06-01 23:30:30.53267+00,2022-06-01 23:30:30.505842+00,2022-06-01 23:30:30.506003+00,2022-06-01 23:30:30.547523+00,,,active,,3882,,"select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%accounts%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",parallel worker
+1654126264.607768,16384,dbt3,9807,9804,10,postgres,psql,,,,2022-06-01 23:31:01.85665+00,2022-06-01 23:30:51.284737+00,2022-06-01 23:30:51.290709+00,2022-06-01 23:31:01.864145+00,IO,DataFileRead,active,,3886,,"select
+	s_suppkey,
+	s_name,
+	s_address,
+	s_phone,
+	total_revenue
+from
+	supplier,
+	revenue3
+where
+	s_suppkey = supplier_no
+	and total_revenue = (
+		select
+			max(total_revenue)
+		from
+			revenue3
+	)
+order by
+	s_suppkey;",parallel worker
+1654126264.607768,16384,dbt3,9815,,10,postgres,psql,,,-1,2022-06-01 23:31:04.594701+00,2022-06-01 23:31:04.599585+00,2022-06-01 23:31:04.599585+00,2022-06-01 23:31:04.599587+00,,,active,,3886,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_database) TO STDOUT (FORMAT CSV);",client backend
+1654126264.607768,16384,dbt3,9817,,10,postgres,psql,,,-1,2022-06-01 23:31:04.599017+00,2022-06-01 23:31:04.602165+00,2022-06-01 23:31:04.602165+00,2022-06-01 23:31:04.602167+00,,,active,,3886,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",client backend
+1654126264.607768,16384,dbt3,9816,,10,postgres,psql,,,-1,2022-06-01 23:31:04.600271+00,2022-06-01 23:31:04.606761+00,2022-06-01 23:31:04.606761+00,2022-06-01 23:31:04.606763+00,,,active,,3886,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",client backend
+1654126264.607768,16384,dbt3,9818,,10,postgres,psql,,,-1,2022-06-01 23:31:04.600841+00,2022-06-01 23:31:04.607768+00,2022-06-01 23:31:04.607768+00,2022-06-01 23:31:04.60777+00,,,active,,3886,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654126264.607768,,,8596,,,,"",,,,2022-06-01 23:26:03.380254+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654126264.607768,,,8595,,,,"",,,,2022-06-01 23:26:03.380097+00,,,,Activity,CheckpointerMain,,,,,"",checkpointer
+1654126264.607768,,,8597,,,,"",,,,2022-06-01 23:26:03.380408+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654126324.633463,,,8598,,,,"",,,,2022-06-01 23:26:03.380564+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654126324.633463,,,8600,,10,postgres,"",,,,2022-06-01 23:26:03.38088+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654126324.633463,16384,dbt3,9913,,10,postgres,psql,,,-1,2022-06-01 23:31:57.324857+00,2022-06-01 23:31:57.33118+00,2022-06-01 23:31:57.331404+00,2022-06-01 23:31:57.331406+00,IO,DataFileRead,active,,3901,,"select
 	s_acctbal,
 	s_name,
 	n_name,
@@ -545,11 +1361,11 @@ from
 where
 	p_partkey = ps_partkey
 	and s_suppkey = ps_suppkey
-	and p_size = 22
-	and p_type like '%TIN'
+	and p_size = 29
+	and p_type like '%COPPER'
 	and s_nationkey = n_nationkey
 	and n_regionkey = r_regionkey
-	and r_name = 'MIDDLE EAST'
+	and r_name = 'ASIA'
 	and ps_supplycost = (
 		select
 			min(ps_supplycost)
@@ -563,190 +1379,35 @@ where
 			and s_suppkey = ps_suppkey
 			and s_nationkey = n_nationkey
 			and n_regionkey = r_regionkey
-			and r_name = 'MIDDLE EAST'
+			and r_name = 'ASIA'
 	)
 order by
 	s_acctbal desc,
 	n_name,
 	s_name,
 	p_partkey
-LIMIT 100;",active,2022-05-27 16:28:25.092481+00
-1653668914.344801,dbt3,17506,10,postgres,psql,,-1,2022-05-27 16:28:34.342617+00,,,"",idle,2022-05-27 16:28:34.347176+00
-1653668914.344801,dbt3,17403,10,postgres,psql,,-1,2022-05-27 16:27:12.426097+00,2022-05-27 16:27:12.429286+00,2022-05-27 16:27:12.429531+00,"explain (analyze, buffers)
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
+LIMIT 100;",client backend
+1654126324.633463,16384,dbt3,9939,,10,postgres,psql,,,-1,2022-06-01 23:31:59.430015+00,2022-06-01 23:31:59.436377+00,2022-06-01 23:31:59.436538+00,2022-06-01 23:31:59.436539+00,IO,DataFileRead,active,,3905,,"select
+	c_count,
+	count(*) as custdist
 from
-	lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '82 days'
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%deposits%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
 group by
-	l_returnflag,
-	l_linestatus
+	c_count
 order by
-	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:27:12.429532+00
-1653668914.344801,dbt3,17504,10,postgres,psql,,-1,2022-05-27 16:28:34.329398+00,2022-05-27 16:28:34.344801+00,2022-05-27 16:28:34.344801+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:28:34.344803+00
-1653668914.344801,dbt3,17405,10,postgres,psql,,,2022-05-27 16:27:12.446065+00,2022-05-27 16:27:12.429286+00,2022-05-27 16:27:12.429531+00,"explain (analyze, buffers)
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
-from
-	lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '82 days'
-group by
-	l_returnflag,
-	l_linestatus
-order by
-	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:27:12.452603+00
-1653668914.344801,dbt3,17481,10,postgres,psql,,-1,2022-05-27 16:28:07.533467+00,2022-05-27 16:28:07.540033+00,2022-05-27 16:28:07.540282+00,"explain (analyze, buffers)
-select
-	n_name,
-	sum(l_extendedprice * (1 - l_discount)) as revenue
-from
-	customer,
-	orders,
-	lineitem,
-	supplier,
-	nation,
-	region
-where
-	c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and l_suppkey = s_suppkey
-	and c_nationkey = s_nationkey
-	and s_nationkey = n_nationkey
-	and n_regionkey = r_regionkey
-	and r_name = 'AMERICA'
-	and o_orderdate >= date '1996-01-01'
-	and o_orderdate < date '1996-01-01' + interval '1 year'
-group by
-	n_name
-order by
-	revenue desc;",active,2022-05-27 16:28:07.540284+00
-1653668914.344801,dbt3,17404,10,postgres,psql,,,2022-05-27 16:27:12.447642+00,2022-05-27 16:27:12.429286+00,2022-05-27 16:27:12.429531+00,"explain (analyze, buffers)
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
-from
-	lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '82 days'
-group by
-	l_returnflag,
-	l_linestatus
-order by
-	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:27:12.458185+00
-1653668914.344801,dbt3,17482,10,postgres,psql,,,2022-05-27 16:28:07.563364+00,2022-05-27 16:28:07.540033+00,2022-05-27 16:28:07.540282+00,"explain (analyze, buffers)
-select
-	n_name,
-	sum(l_extendedprice * (1 - l_discount)) as revenue
-from
-	customer,
-	orders,
-	lineitem,
-	supplier,
-	nation,
-	region
-where
-	c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and l_suppkey = s_suppkey
-	and c_nationkey = s_nationkey
-	and s_nationkey = n_nationkey
-	and n_regionkey = r_regionkey
-	and r_name = 'AMERICA'
-	and o_orderdate >= date '1996-01-01'
-	and o_orderdate < date '1996-01-01' + interval '1 year'
-group by
-	n_name
-order by
-	revenue desc;",active,2022-05-27 16:28:07.567237+00
-1653668914.344801,dbt3,17483,10,postgres,psql,,,2022-05-27 16:28:07.566397+00,2022-05-27 16:28:07.540033+00,2022-05-27 16:28:07.540282+00,"explain (analyze, buffers)
-select
-	n_name,
-	sum(l_extendedprice * (1 - l_discount)) as revenue
-from
-	customer,
-	orders,
-	lineitem,
-	supplier,
-	nation,
-	region
-where
-	c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and l_suppkey = s_suppkey
-	and c_nationkey = s_nationkey
-	and s_nationkey = n_nationkey
-	and n_regionkey = r_regionkey
-	and r_name = 'AMERICA'
-	and o_orderdate >= date '1996-01-01'
-	and o_orderdate < date '1996-01-01' + interval '1 year'
-group by
-	n_name
-order by
-	revenue desc;",active,2022-05-27 16:28:07.579661+00
-1653668914.344801,dbt3,17505,10,postgres,psql,,-1,2022-05-27 16:28:34.329954+00,,,"",idle,2022-05-27 16:28:34.34455+00
-1653668914.344801,,16625,,,"",,,2022-05-27 16:25:33.146113+00,,,"",,
-1653668914.344801,,16624,,,"",,,2022-05-27 16:25:33.145947+00,,,"",,
-1653668914.344801,,16626,,,"",,,2022-05-27 16:25:33.146293+00,,,"",,
-1653668974.355797,,16627,,,"",,,2022-05-27 16:25:33.146448+00,,,"",,
-1653668974.355797,,16629,10,postgres,"",,,2022-05-27 16:25:33.146785+00,,,"",,
-1653668974.355797,dbt3,17631,10,postgres,psql,,-1,2022-05-27 16:29:32.880197+00,2022-05-27 16:29:32.883188+00,2022-05-27 16:29:32.883565+00,"explain (analyze, buffers)
-select
-	n_name,
-	sum(l_extendedprice * (1 - l_discount)) as revenue
-from
-	customer,
-	orders,
-	lineitem,
-	supplier,
-	nation,
-	region
-where
-	c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and l_suppkey = s_suppkey
-	and c_nationkey = s_nationkey
-	and s_nationkey = n_nationkey
-	and n_regionkey = r_regionkey
-	and r_name = 'ASIA'
-	and o_orderdate >= date '1996-01-01'
-	and o_orderdate < date '1996-01-01' + interval '1 year'
-group by
-	n_name
-order by
-	revenue desc;",active,2022-05-27 16:29:32.883567+00
-1653668974.355797,dbt3,17519,10,postgres,psql,,-1,2022-05-27 16:28:38.106756+00,2022-05-27 16:28:38.109691+00,2022-05-27 16:28:38.10996+00,"explain (analyze, buffers)
-select
+	custdist desc,
+	c_count desc;",client backend
+1654126324.633463,16384,dbt3,9831,,10,postgres,psql,,,-1,2022-06-01 23:31:17.65531+00,2022-06-01 23:31:17.661835+00,2022-06-01 23:31:17.662009+00,2022-06-01 23:31:17.66201+00,,,active,,3886,,"select
 	c_name,
 	c_custkey,
 	o_orderkey,
@@ -778,9 +1439,8 @@ group by
 order by
 	o_totalprice desc,
 	o_orderdate
-LIMIT 100;",active,2022-05-27 16:28:38.109962+00
-1653668974.355797,dbt3,17521,10,postgres,psql,,,2022-05-27 16:28:38.121309+00,2022-05-27 16:28:38.109691+00,2022-05-27 16:28:38.10996+00,"explain (analyze, buffers)
-select
+LIMIT 100;",client backend
+1654126324.633463,16384,dbt3,9833,9831,10,postgres,psql,,,,2022-06-01 23:31:17.679844+00,2022-06-01 23:31:17.661835+00,2022-06-01 23:31:17.662009+00,2022-06-01 23:31:17.686839+00,,,active,,3886,,"select
 	c_name,
 	c_custkey,
 	o_orderkey,
@@ -812,9 +1472,8 @@ group by
 order by
 	o_totalprice desc,
 	o_orderdate
-LIMIT 100;",active,2022-05-27 16:28:38.125723+00
-1653668974.355797,dbt3,17520,10,postgres,psql,,,2022-05-27 16:28:38.121842+00,2022-05-27 16:28:38.109691+00,2022-05-27 16:28:38.10996+00,"explain (analyze, buffers)
-select
+LIMIT 100;",parallel worker
+1654126324.633463,16384,dbt3,9832,9831,10,postgres,psql,,,,2022-06-01 23:31:17.68764+00,2022-06-01 23:31:17.661835+00,2022-06-01 23:31:17.662009+00,2022-06-01 23:31:17.69486+00,,,active,,3886,,"select
 	c_name,
 	c_custkey,
 	o_orderkey,
@@ -846,185 +1505,54 @@ group by
 order by
 	o_totalprice desc,
 	o_orderdate
-LIMIT 100;",active,2022-05-27 16:28:38.137057+00
-1653668974.355797,dbt3,17618,10,postgres,psql,,-1,2022-05-27 16:29:29.061374+00,2022-05-27 16:29:29.064657+00,2022-05-27 16:29:29.064889+00,"explain (analyze, buffers)
-select
-	s_name,
-	s_address
-from
-	supplier,
-	nation
-where
-	s_suppkey in (
-		select
-			ps_suppkey
-		from
-			partsupp
-		where
-			ps_partkey in (
-				select
-					p_partkey
-				from
-					part
-				where
-					p_name like 'light%'
-			)
-			and ps_availqty > (
-				select
-					0.5 * sum(l_quantity)
-				from
-					lineitem
-				where
-					l_partkey = ps_partkey
-					and l_suppkey = ps_suppkey
-					and l_shipdate >= '1995-01-01'
-					and l_shipdate < cast(date '1995-01-01' + interval '1 year' as date)
-			)
-	)
-	and s_nationkey = n_nationkey
-	and n_name = 'EGYPT'
-order by
-	s_name;",active,2022-05-27 16:29:29.064891+00
-1653668974.355797,dbt3,17633,10,postgres,psql,,,2022-05-27 16:29:32.905631+00,2022-05-27 16:29:32.883188+00,2022-05-27 16:29:32.883565+00,"explain (analyze, buffers)
-select
-	n_name,
-	sum(l_extendedprice * (1 - l_discount)) as revenue
-from
-	customer,
-	orders,
-	lineitem,
-	supplier,
-	nation,
-	region
-where
-	c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and l_suppkey = s_suppkey
-	and c_nationkey = s_nationkey
-	and s_nationkey = n_nationkey
-	and n_regionkey = r_regionkey
-	and r_name = 'ASIA'
-	and o_orderdate >= date '1996-01-01'
-	and o_orderdate < date '1996-01-01' + interval '1 year'
-group by
-	n_name
-order by
-	revenue desc;",active,2022-05-27 16:29:32.910171+00
-1653668974.355797,dbt3,17632,10,postgres,psql,,,2022-05-27 16:29:32.906157+00,2022-05-27 16:29:32.883188+00,2022-05-27 16:29:32.883565+00,"explain (analyze, buffers)
-select
-	n_name,
-	sum(l_extendedprice * (1 - l_discount)) as revenue
-from
-	customer,
-	orders,
-	lineitem,
-	supplier,
-	nation,
-	region
-where
-	c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and l_suppkey = s_suppkey
-	and c_nationkey = s_nationkey
-	and s_nationkey = n_nationkey
-	and n_regionkey = r_regionkey
-	and r_name = 'ASIA'
-	and o_orderdate >= date '1996-01-01'
-	and o_orderdate < date '1996-01-01' + interval '1 year'
-group by
-	n_name
-order by
-	revenue desc;",active,2022-05-27 16:29:32.917238+00
-1653668974.355797,dbt3,17619,10,postgres,psql,,,2022-05-27 16:29:29.073295+00,2022-05-27 16:29:29.064657+00,2022-05-27 16:29:29.064889+00,"explain (analyze, buffers)
-select
-	s_name,
-	s_address
-from
-	supplier,
-	nation
-where
-	s_suppkey in (
-		select
-			ps_suppkey
-		from
-			partsupp
-		where
-			ps_partkey in (
-				select
-					p_partkey
-				from
-					part
-				where
-					p_name like 'light%'
-			)
-			and ps_availqty > (
-				select
-					0.5 * sum(l_quantity)
-				from
-					lineitem
-				where
-					l_partkey = ps_partkey
-					and l_suppkey = ps_suppkey
-					and l_shipdate >= '1995-01-01'
-					and l_shipdate < cast(date '1995-01-01' + interval '1 year' as date)
-			)
-	)
-	and s_nationkey = n_nationkey
-	and n_name = 'EGYPT'
-order by
-	s_name;",active,2022-05-27 16:29:29.077279+00
-1653668974.355797,dbt3,17643,10,postgres,psql,,-1,2022-05-27 16:29:34.344493+00,,2022-05-27 16:29:34.355142+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",idle,2022-05-27 16:29:34.360524+00
-1653668974.355797,dbt3,17641,10,postgres,psql,,-1,2022-05-27 16:29:34.343992+00,2022-05-27 16:29:34.355837+00,2022-05-27 16:29:34.355837+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:29:34.355839+00
-1653668974.355797,dbt3,17644,10,postgres,psql,,-1,2022-05-27 16:29:34.34627+00,2022-05-27 16:29:34.355797+00,2022-05-27 16:29:34.355797+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:29:34.355798+00
-1653668974.355797,dbt3,17645,10,postgres,psql,,-1,2022-05-27 16:29:34.356392+00,,,"",idle,2022-05-27 16:29:34.364675+00
-1653668974.355797,dbt3,17642,10,postgres,psql,,-1,2022-05-27 16:29:34.357042+00,2022-05-27 16:29:34.364207+00,2022-05-27 16:29:34.364207+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:29:34.36421+00
-1653668974.355797,,16625,,,"",,,2022-05-27 16:25:33.146113+00,,,"",,
-1653668974.355797,,16624,,,"",,,2022-05-27 16:25:33.145947+00,,,"",,
-1653668974.355797,,16626,,,"",,,2022-05-27 16:25:33.146293+00,,,"",,
-1653669034.360640,,16627,,,"",,,2022-05-27 16:25:33.146448+00,,,"",,
-1653669034.360640,,16629,10,postgres,"",,,2022-05-27 16:25:33.146785+00,,,"",,
-1653669034.360640,dbt3,17786,10,postgres,psql,,-1,2022-05-27 16:30:30.870639+00,2022-05-27 16:30:30.873848+00,2022-05-27 16:30:30.874177+00,"explain (analyze, buffers)
-select
-	supp_nation,
-	cust_nation,
-	l_year,
-	sum(volume) as revenue
+LIMIT 100;",parallel worker
+1654126324.633463,16384,dbt3,9940,9939,10,postgres,psql,,,,2022-06-01 23:31:59.442624+00,2022-06-01 23:31:59.436377+00,2022-06-01 23:31:59.436538+00,2022-06-01 23:31:59.449266+00,,,active,,3905,,"select
+	c_count,
+	count(*) as custdist
 from
 	(
 		select
-			n1.n_name as supp_nation,
-			n2.n_name as cust_nation,
-			extract(year from l_shipdate) as l_year,
-			l_extendedprice * (1 - l_discount) as volume
+			c_custkey,
+			count(o_orderkey)
 		from
-			supplier,
-			lineitem,
-			orders,
-			customer,
-			nation n1,
-			nation n2
-		where
-			s_suppkey = l_suppkey
-			and o_orderkey = l_orderkey
-			and c_custkey = o_custkey
-			and s_nationkey = n1.n_nationkey
-			and c_nationkey = n2.n_nationkey
-			and (
-				(n1.n_name = 'UNITED KINGDOM' and n2.n_name = 'UNITED STATES')
-				or (n1.n_name = 'UNITED STATES' and n2.n_name = 'UNITED KINGDOM')
-			)
-			and l_shipdate between date '1995-01-01' and date '1996-12-31'
-	) as shipping
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%deposits%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
 group by
-	supp_nation,
-	cust_nation,
-	l_year
+	c_count
 order by
-	supp_nation,
-	cust_nation,
-	l_year;",active,2022-05-27 16:30:30.87418+00
-1653669034.360640,dbt3,17728,10,postgres,psql,,-1,2022-05-27 16:30:05.480898+00,2022-05-27 16:30:05.484027+00,2022-05-27 16:30:05.484294+00,"explain (analyze, buffers)
-select
+	custdist desc,
+	c_count desc;",parallel worker
+1654126324.633463,16384,dbt3,9941,9939,10,postgres,psql,,,,2022-06-01 23:31:59.44313+00,2022-06-01 23:31:59.436377+00,2022-06-01 23:31:59.436538+00,2022-06-01 23:31:59.449243+00,IO,DataFileRead,active,,3905,,"select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%deposits%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",parallel worker
+1654126324.633463,16384,dbt3,9951,,10,postgres,psql,,,-1,2022-06-01 23:32:04.624664+00,2022-06-01 23:32:04.633463+00,2022-06-01 23:32:04.633463+00,2022-06-01 23:32:04.633465+00,,,active,,3905,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654126324.633463,,,8596,,,,"",,,,2022-06-01 23:26:03.380254+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654126324.633463,,,8595,,,,"",,,,2022-06-01 23:26:03.380097+00,,,,Activity,CheckpointerMain,,,,,"",checkpointer
+1654126324.633463,,,8597,,,,"",,,,2022-06-01 23:26:03.380408+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654126384.647586,,,8598,,,,"",,,,2022-06-01 23:26:03.380564+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654126384.647586,,,8600,,10,postgres,"",,,,2022-06-01 23:26:03.38088+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654126384.647586,16384,dbt3,10021,,10,postgres,psql,,,-1,2022-06-01 23:32:28.355918+00,2022-06-01 23:32:28.362733+00,2022-06-01 23:32:28.362927+00,2022-06-01 23:32:28.362929+00,LWLock,BufferMapping,active,,3915,,"select
 	nation,
 	o_year,
 	sum(amount) as sum_profit
@@ -1048,16 +1576,138 @@ from
 			and p_partkey = l_partkey
 			and o_orderkey = l_orderkey
 			and s_nationkey = n_nationkey
-			and p_name like '%lime%'
+			and p_name like '%orchid%'
 	) as profit
 group by
 	nation,
 	o_year
 order by
 	nation,
-	o_year desc;",active,2022-05-27 16:30:05.484296+00
-1653669034.360640,dbt3,17730,10,postgres,psql,,,2022-05-27 16:30:05.504916+00,2022-05-27 16:30:05.484027+00,2022-05-27 16:30:05.484294+00,"explain (analyze, buffers)
-select
+	o_year desc;",client backend
+1654126384.647586,16384,dbt3,9939,,10,postgres,psql,,,-1,2022-06-01 23:31:59.430015+00,2022-06-01 23:31:59.436377+00,2022-06-01 23:31:59.436538+00,2022-06-01 23:31:59.436539+00,IPC,MessageQueueReceive,active,,3905,,"select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%deposits%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",client backend
+1654126384.647586,16384,dbt3,9979,,10,postgres,psql,,,-1,2022-06-01 23:32:11.630954+00,2022-06-01 23:32:11.637323+00,2022-06-01 23:32:11.637485+00,2022-06-01 23:32:11.637486+00,,,active,,3909,,"select
+	l_returnflag,
+	l_linestatus,
+	sum(l_quantity) as sum_qty,
+	sum(l_extendedprice) as sum_base_price,
+	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	avg(l_quantity) as avg_qty,
+	avg(l_extendedprice) as avg_price,
+	avg(l_discount) as avg_disc,
+	count(*) as count_order
+from
+	lineitem
+where
+	l_shipdate <= date '1998-12-01' - interval '115 days'
+group by
+	l_returnflag,
+	l_linestatus
+order by
+	l_returnflag,
+	l_linestatus;",client backend
+1654126384.647586,16384,dbt3,9981,9979,10,postgres,psql,,,,2022-06-01 23:32:11.649343+00,2022-06-01 23:32:11.637323+00,2022-06-01 23:32:11.637485+00,2022-06-01 23:32:11.656619+00,LWLock,BufferMapping,active,,3909,,"select
+	l_returnflag,
+	l_linestatus,
+	sum(l_quantity) as sum_qty,
+	sum(l_extendedprice) as sum_base_price,
+	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	avg(l_quantity) as avg_qty,
+	avg(l_extendedprice) as avg_price,
+	avg(l_discount) as avg_disc,
+	count(*) as count_order
+from
+	lineitem
+where
+	l_shipdate <= date '1998-12-01' - interval '115 days'
+group by
+	l_returnflag,
+	l_linestatus
+order by
+	l_returnflag,
+	l_linestatus;",parallel worker
+1654126384.647586,16384,dbt3,9980,9979,10,postgres,psql,,,,2022-06-01 23:32:11.651622+00,2022-06-01 23:32:11.637323+00,2022-06-01 23:32:11.637485+00,2022-06-01 23:32:11.667751+00,,,active,,3909,,"select
+	l_returnflag,
+	l_linestatus,
+	sum(l_quantity) as sum_qty,
+	sum(l_extendedprice) as sum_base_price,
+	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	avg(l_quantity) as avg_qty,
+	avg(l_extendedprice) as avg_price,
+	avg(l_discount) as avg_disc,
+	count(*) as count_order
+from
+	lineitem
+where
+	l_shipdate <= date '1998-12-01' - interval '115 days'
+group by
+	l_returnflag,
+	l_linestatus
+order by
+	l_returnflag,
+	l_linestatus;",parallel worker
+1654126384.647586,16384,dbt3,9940,9939,10,postgres,psql,,,,2022-06-01 23:31:59.442624+00,2022-06-01 23:31:59.436377+00,2022-06-01 23:31:59.436538+00,2022-06-01 23:31:59.449266+00,LWLock,BufferMapping,active,,3905,,"select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%deposits%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",parallel worker
+1654126384.647586,16384,dbt3,9941,9939,10,postgres,psql,,,,2022-06-01 23:31:59.44313+00,2022-06-01 23:31:59.436377+00,2022-06-01 23:31:59.436538+00,2022-06-01 23:31:59.449243+00,LWLock,BufferMapping,active,,3905,,"select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%deposits%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;",parallel worker
+1654126384.647586,16384,dbt3,10023,10021,10,postgres,psql,,,,2022-06-01 23:32:28.387706+00,2022-06-01 23:32:28.362733+00,2022-06-01 23:32:28.362927+00,2022-06-01 23:32:28.40375+00,,,active,,3915,,"select
 	nation,
 	o_year,
 	sum(amount) as sum_profit
@@ -1081,16 +1731,15 @@ from
 			and p_partkey = l_partkey
 			and o_orderkey = l_orderkey
 			and s_nationkey = n_nationkey
-			and p_name like '%lime%'
+			and p_name like '%orchid%'
 	) as profit
 group by
 	nation,
 	o_year
 order by
 	nation,
-	o_year desc;",active,2022-05-27 16:30:05.509971+00
-1653669034.360640,dbt3,17729,10,postgres,psql,,,2022-05-27 16:30:05.508844+00,2022-05-27 16:30:05.484027+00,2022-05-27 16:30:05.484294+00,"explain (analyze, buffers)
-select
+	o_year desc;",parallel worker
+1654126384.647586,16384,dbt3,10022,10021,10,postgres,psql,,,,2022-06-01 23:32:28.39367+00,2022-06-01 23:32:28.362733+00,2022-06-01 23:32:28.362927+00,2022-06-01 23:32:28.405486+00,IO,DataFileRead,active,,3915,,"select
 	nation,
 	o_year,
 	sum(amount) as sum_profit
@@ -1114,413 +1763,69 @@ from
 			and p_partkey = l_partkey
 			and o_orderkey = l_orderkey
 			and s_nationkey = n_nationkey
-			and p_name like '%lime%'
+			and p_name like '%orchid%'
 	) as profit
 group by
 	nation,
 	o_year
 order by
 	nation,
-	o_year desc;",active,2022-05-27 16:30:05.522764+00
-1653669034.360640,dbt3,17770,10,postgres,psql,,-1,2022-05-27 16:30:14.094303+00,2022-05-27 16:30:14.100727+00,2022-05-27 16:30:14.106819+00,"explain (analyze, buffers)
-select
-	s_suppkey,
-	s_name,
-	s_address,
-	s_phone,
-	total_revenue
+	o_year desc;",parallel worker
+1654126384.647586,16384,dbt3,10033,,10,postgres,psql,,,-1,2022-06-01 23:33:04.635519+00,2022-06-01 23:33:04.638946+00,2022-06-01 23:33:04.638946+00,2022-06-01 23:33:04.638948+00,,,active,,3915,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_database) TO STDOUT (FORMAT CSV);",client backend
+1654126384.647586,16384,dbt3,10032,,10,postgres,psql,,,-1,2022-06-01 23:33:04.633486+00,2022-06-01 23:33:04.643612+00,2022-06-01 23:33:04.643612+00,2022-06-01 23:33:04.643615+00,,,active,,3915,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",client backend
+1654126384.647586,16384,dbt3,10034,,10,postgres,psql,,,-1,2022-06-01 23:33:04.642257+00,2022-06-01 23:33:04.647586+00,2022-06-01 23:33:04.647586+00,2022-06-01 23:33:04.647587+00,,,active,,3915,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654126384.647586,16384,dbt3,10035,,10,postgres,psql,,,-1,2022-06-01 23:33:04.643045+00,2022-06-01 23:33:04.649156+00,2022-06-01 23:33:04.649156+00,2022-06-01 23:33:04.649158+00,LWLock,BufferMapping,active,,3915,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",client backend
+1654126384.647586,16384,dbt3,10036,,10,postgres,psql,,,-1,2022-06-01 23:33:04.64824+00,2022-06-01 23:33:04.651161+00,2022-06-01 23:33:04.651161+00,2022-06-01 23:33:04.651163+00,,,active,,,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",client backend
+1654126384.647586,,,8596,,,,"",,,,2022-06-01 23:26:03.380254+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654126384.647586,,,8595,,,,"",,,,2022-06-01 23:26:03.380097+00,,,,Activity,CheckpointerMain,,,,,"",checkpointer
+1654126384.647586,,,8597,,,,"",,,,2022-06-01 23:26:03.380408+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654126444.644227,,,8598,,,,"",,,,2022-06-01 23:26:03.380564+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654126444.644227,,,8600,,10,postgres,"",,,,2022-06-01 23:26:03.38088+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654126444.644227,16384,dbt3,10094,,10,postgres,psql,,,-1,2022-06-01 23:33:19.996616+00,2022-06-01 23:33:19.999455+00,2022-06-01 23:33:19.999558+00,2022-06-01 23:33:19.999558+00,,,active,,3923,,"select
+	l_returnflag,
+	l_linestatus,
+	sum(l_quantity) as sum_qty,
+	sum(l_extendedprice) as sum_base_price,
+	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	avg(l_quantity) as avg_qty,
+	avg(l_extendedprice) as avg_price,
+	avg(l_discount) as avg_disc,
+	count(*) as count_order
 from
-	supplier,
-	revenue1
+	lineitem
 where
-	s_suppkey = supplier_no
-	and total_revenue = (
-		select
-			max(total_revenue)
-		from
-			revenue1
-	)
-order by
-	s_suppkey;",active,2022-05-27 16:30:14.106821+00
-1653669034.360640,dbt3,17787,10,postgres,psql,,,2022-05-27 16:30:30.902415+00,2022-05-27 16:30:30.873848+00,2022-05-27 16:30:30.874177+00,"explain (analyze, buffers)
-select
-	supp_nation,
-	cust_nation,
-	l_year,
-	sum(volume) as revenue
-from
-	(
-		select
-			n1.n_name as supp_nation,
-			n2.n_name as cust_nation,
-			extract(year from l_shipdate) as l_year,
-			l_extendedprice * (1 - l_discount) as volume
-		from
-			supplier,
-			lineitem,
-			orders,
-			customer,
-			nation n1,
-			nation n2
-		where
-			s_suppkey = l_suppkey
-			and o_orderkey = l_orderkey
-			and c_custkey = o_custkey
-			and s_nationkey = n1.n_nationkey
-			and c_nationkey = n2.n_nationkey
-			and (
-				(n1.n_name = 'UNITED KINGDOM' and n2.n_name = 'UNITED STATES')
-				or (n1.n_name = 'UNITED STATES' and n2.n_name = 'UNITED KINGDOM')
-			)
-			and l_shipdate between date '1995-01-01' and date '1996-12-31'
-	) as shipping
+	l_shipdate <= date '1998-12-01' - interval '107 days'
 group by
-	supp_nation,
-	cust_nation,
-	l_year
+	l_returnflag,
+	l_linestatus
 order by
-	supp_nation,
-	cust_nation,
-	l_year;",active,2022-05-27 16:30:30.908379+00
-1653669034.360640,dbt3,17788,10,postgres,psql,,,2022-05-27 16:30:30.898419+00,2022-05-27 16:30:30.873848+00,2022-05-27 16:30:30.874177+00,"explain (analyze, buffers)
-select
-	supp_nation,
-	cust_nation,
-	l_year,
-	sum(volume) as revenue
-from
-	(
-		select
-			n1.n_name as supp_nation,
-			n2.n_name as cust_nation,
-			extract(year from l_shipdate) as l_year,
-			l_extendedprice * (1 - l_discount) as volume
-		from
-			supplier,
-			lineitem,
-			orders,
-			customer,
-			nation n1,
-			nation n2
-		where
-			s_suppkey = l_suppkey
-			and o_orderkey = l_orderkey
-			and c_custkey = o_custkey
-			and s_nationkey = n1.n_nationkey
-			and c_nationkey = n2.n_nationkey
-			and (
-				(n1.n_name = 'UNITED KINGDOM' and n2.n_name = 'UNITED STATES')
-				or (n1.n_name = 'UNITED STATES' and n2.n_name = 'UNITED KINGDOM')
-			)
-			and l_shipdate between date '1995-01-01' and date '1996-12-31'
-	) as shipping
-group by
-	supp_nation,
-	cust_nation,
-	l_year
-order by
-	supp_nation,
-	cust_nation,
-	l_year;",active,2022-05-27 16:30:30.909254+00
-1653669034.360640,dbt3,17772,10,postgres,psql,,,2022-05-27 16:30:14.119654+00,2022-05-27 16:30:14.100727+00,2022-05-27 16:30:14.106819+00,"explain (analyze, buffers)
-select
-	s_suppkey,
-	s_name,
-	s_address,
-	s_phone,
-	total_revenue
-from
-	supplier,
-	revenue1
-where
-	s_suppkey = supplier_no
-	and total_revenue = (
-		select
-			max(total_revenue)
-		from
-			revenue1
-	)
-order by
-	s_suppkey;",active,2022-05-27 16:30:14.123601+00
-1653669034.360640,dbt3,17771,10,postgres,psql,,,2022-05-27 16:30:14.117304+00,2022-05-27 16:30:14.100727+00,2022-05-27 16:30:14.106819+00,"explain (analyze, buffers)
-select
-	s_suppkey,
-	s_name,
-	s_address,
-	s_phone,
-	total_revenue
-from
-	supplier,
-	revenue1
-where
-	s_suppkey = supplier_no
-	and total_revenue = (
-		select
-			max(total_revenue)
-		from
-			revenue1
-	)
-order by
-	s_suppkey;",active,2022-05-27 16:30:14.124995+00
-1653669034.360640,dbt3,17774,10,postgres,psql,,,2022-05-27 16:30:28.878037+00,2022-05-27 16:30:14.100727+00,2022-05-27 16:30:14.106819+00,"explain (analyze, buffers)
-select
-	s_suppkey,
-	s_name,
-	s_address,
-	s_phone,
-	total_revenue
-from
-	supplier,
-	revenue1
-where
-	s_suppkey = supplier_no
-	and total_revenue = (
-		select
-			max(total_revenue)
-		from
-			revenue1
-	)
-order by
-	s_suppkey;",active,2022-05-27 16:30:28.882312+00
-1653669034.360640,dbt3,17797,10,postgres,psql,,-1,2022-05-27 16:30:34.345666+00,2022-05-27 16:30:34.36064+00,2022-05-27 16:30:34.36064+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:30:34.360641+00
-1653669034.360640,dbt3,17798,10,postgres,psql,,-1,2022-05-27 16:30:34.347976+00,2022-05-27 16:30:34.35728+00,2022-05-27 16:30:34.35728+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:30:34.357282+00
-1653669034.360640,dbt3,17799,10,postgres,psql,,-1,2022-05-27 16:30:34.349807+00,2022-05-27 16:30:34.362855+00,2022-05-27 16:30:34.362855+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:30:34.362857+00
-1653669034.360640,dbt3,17796,10,postgres,psql,,-1,2022-05-27 16:30:34.3494+00,2022-05-27 16:30:34.356554+00,2022-05-27 16:30:34.356554+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:30:34.356557+00
-1653669034.360640,,16625,,,"",,,2022-05-27 16:25:33.146113+00,,,"",,
-1653669034.360640,,16624,,,"",,,2022-05-27 16:25:33.145947+00,,,"",,
-1653669034.360640,,16626,,,"",,,2022-05-27 16:25:33.146293+00,,,"",,
-1653669094.391886,,16627,,,"",,,2022-05-27 16:25:33.146448+00,,,"",,
-1653669094.391886,,16629,10,postgres,"",,,2022-05-27 16:25:33.146785+00,,,"",,
-1653669094.391886,dbt3,17826,10,postgres,psql,,-1,2022-05-27 16:30:51.395163+00,2022-05-27 16:30:51.39831+00,2022-05-27 16:30:51.398538+00,"explain (analyze, buffers)
-select
-	c_count,
-	count(*) as custdist
-from
-	(
-		select
-			c_custkey,
-			count(o_orderkey)
-		from
-			customer left outer join orders on
-				c_custkey = o_custkey
-				and o_comment not like '%express%accounts%'
-		group by
-			c_custkey
-	) as c_orders (c_custkey, c_count)
-group by
-	c_count
-order by
-	custdist desc,
-	c_count desc;",active,2022-05-27 16:30:51.398539+00
-1653669094.391886,dbt3,17855,10,postgres,psql,,-1,2022-05-27 16:31:26.043384+00,2022-05-27 16:31:26.047009+00,2022-05-27 16:31:26.053045+00,"explain (analyze, buffers)
-select
-	s_suppkey,
-	s_name,
-	s_address,
-	s_phone,
-	total_revenue
-from
-	supplier,
-	revenue3
-where
-	s_suppkey = supplier_no
-	and total_revenue = (
-		select
-			max(total_revenue)
-		from
-			revenue3
-	)
-order by
-	s_suppkey;",active,2022-05-27 16:31:26.053047+00
-1653669094.391886,dbt3,17857,10,postgres,psql,,,2022-05-27 16:31:26.066745+00,2022-05-27 16:31:26.047009+00,2022-05-27 16:31:26.053045+00,"explain (analyze, buffers)
-select
-	s_suppkey,
-	s_name,
-	s_address,
-	s_phone,
-	total_revenue
-from
-	supplier,
-	revenue3
-where
-	s_suppkey = supplier_no
-	and total_revenue = (
-		select
-			max(total_revenue)
-		from
-			revenue3
-	)
-order by
-	s_suppkey;",active,2022-05-27 16:31:26.075186+00
-1653669094.391886,dbt3,17856,10,postgres,psql,,,2022-05-27 16:31:26.067302+00,2022-05-27 16:31:26.047009+00,2022-05-27 16:31:26.053045+00,"explain (analyze, buffers)
-select
-	s_suppkey,
-	s_name,
-	s_address,
-	s_phone,
-	total_revenue
-from
-	supplier,
-	revenue3
-where
-	s_suppkey = supplier_no
-	and total_revenue = (
-		select
-			max(total_revenue)
-		from
-			revenue3
-	)
-order by
-	s_suppkey;",active,2022-05-27 16:31:26.08681+00
-1653669094.391886,dbt3,17812,10,postgres,psql,,-1,2022-05-27 16:30:48.776585+00,2022-05-27 16:30:48.780181+00,2022-05-27 16:30:48.780432+00,"explain (analyze, buffers)
-select
-	c_count,
-	count(*) as custdist
-from
-	(
-		select
-			c_custkey,
-			count(o_orderkey)
-		from
-			customer left outer join orders on
-				c_custkey = o_custkey
-				and o_comment not like '%express%accounts%'
-		group by
-			c_custkey
-	) as c_orders (c_custkey, c_count)
-group by
-	c_count
-order by
-	custdist desc,
-	c_count desc;",active,2022-05-27 16:30:48.780434+00
-1653669094.391886,dbt3,17827,10,postgres,psql,,,2022-05-27 16:30:51.406347+00,2022-05-27 16:30:51.39831+00,2022-05-27 16:30:51.398538+00,"explain (analyze, buffers)
-select
-	c_count,
-	count(*) as custdist
-from
-	(
-		select
-			c_custkey,
-			count(o_orderkey)
-		from
-			customer left outer join orders on
-				c_custkey = o_custkey
-				and o_comment not like '%express%accounts%'
-		group by
-			c_custkey
-	) as c_orders (c_custkey, c_count)
-group by
-	c_count
-order by
-	custdist desc,
-	c_count desc;",active,2022-05-27 16:30:51.410118+00
-1653669094.391886,dbt3,17828,10,postgres,psql,,,2022-05-27 16:30:51.408682+00,2022-05-27 16:30:51.39831+00,2022-05-27 16:30:51.398538+00,"explain (analyze, buffers)
-select
-	c_count,
-	count(*) as custdist
-from
-	(
-		select
-			c_custkey,
-			count(o_orderkey)
-		from
-			customer left outer join orders on
-				c_custkey = o_custkey
-				and o_comment not like '%express%accounts%'
-		group by
-			c_custkey
-	) as c_orders (c_custkey, c_count)
-group by
-	c_count
-order by
-	custdist desc,
-	c_count desc;",active,2022-05-27 16:30:51.415067+00
-1653669094.391886,dbt3,17813,10,postgres,psql,,,2022-05-27 16:30:48.788494+00,2022-05-27 16:30:48.780181+00,2022-05-27 16:30:48.780432+00,"explain (analyze, buffers)
-select
-	c_count,
-	count(*) as custdist
-from
-	(
-		select
-			c_custkey,
-			count(o_orderkey)
-		from
-			customer left outer join orders on
-				c_custkey = o_custkey
-				and o_comment not like '%express%accounts%'
-		group by
-			c_custkey
-	) as c_orders (c_custkey, c_count)
-group by
-	c_count
-order by
-	custdist desc,
-	c_count desc;",active,2022-05-27 16:30:48.792501+00
-1653669094.391886,dbt3,17814,10,postgres,psql,,,2022-05-27 16:30:48.794577+00,2022-05-27 16:30:48.780181+00,2022-05-27 16:30:48.780432+00,"explain (analyze, buffers)
-select
-	c_count,
-	count(*) as custdist
-from
-	(
-		select
-			c_custkey,
-			count(o_orderkey)
-		from
-			customer left outer join orders on
-				c_custkey = o_custkey
-				and o_comment not like '%express%accounts%'
-		group by
-			c_custkey
-	) as c_orders (c_custkey, c_count)
-group by
-	c_count
-order by
-	custdist desc,
-	c_count desc;",active,2022-05-27 16:30:48.798735+00
-1653669094.391886,dbt3,17866,10,postgres,psql,,-1,2022-05-27 16:31:34.372198+00,2022-05-27 16:31:34.378044+00,2022-05-27 16:31:34.378044+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:31:34.378046+00
-1653669094.391886,dbt3,17867,10,postgres,psql,,-1,2022-05-27 16:31:34.37348+00,2022-05-27 16:31:34.391886+00,2022-05-27 16:31:34.391886+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:31:34.391888+00
-1653669094.391886,dbt3,17869,10,postgres,psql,,-1,2022-05-27 16:31:34.378634+00,,2022-05-27 16:31:34.392109+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",idle,2022-05-27 16:31:34.39581+00
-1653669094.391886,,16625,,,"",,,2022-05-27 16:25:33.146113+00,,,"",,
-1653669094.391886,,16624,,,"",,,2022-05-27 16:25:33.145947+00,,,"",,
-1653669094.391886,,16626,,,"",,,2022-05-27 16:25:33.146293+00,,,"",,
-1653669154.422929,,16627,,,"",,,2022-05-27 16:25:33.146448+00,,,"",,
-1653669154.422929,,16629,10,postgres,"",,,2022-05-27 16:25:33.146785+00,,,"",,
-1653669154.422929,dbt3,17924,10,postgres,psql,,-1,2022-05-27 16:32:09.957786+00,2022-05-27 16:32:09.960269+00,2022-05-27 16:32:09.960508+00,"explain (analyze, buffers)
-select
-	c_name,
-	c_custkey,
-	o_orderkey,
+	l_returnflag,
+	l_linestatus;",client backend
+1654126444.644227,16384,dbt3,10148,,10,postgres,psql,,,-1,2022-06-01 23:33:52.217383+00,2022-06-01 23:33:52.223226+00,2022-06-01 23:33:52.223351+00,2022-06-01 23:33:52.223352+00,,,active,,3932,,"select
+	l_orderkey,
+	sum(l_extendedprice * (1 - l_discount)) as revenue,
 	o_orderdate,
-	o_totalprice,
-	sum(l_quantity)
+	o_shippriority
 from
 	customer,
 	orders,
 	lineitem
 where
-	o_orderkey in (
-		select
-			l_orderkey
-		from
-			lineitem
-		group by
-			l_orderkey having
-				sum(l_quantity) > 315
-	)
+	c_mktsegment = 'BUILDING'
 	and c_custkey = o_custkey
-	and o_orderkey = l_orderkey
+	and l_orderkey = o_orderkey
+	and o_orderdate < date '1995-03-18'
+	and l_shipdate > date '1995-03-18'
 group by
-	c_name,
-	c_custkey,
-	o_orderkey,
+	l_orderkey,
 	o_orderdate,
-	o_totalprice
+	o_shippriority
 order by
-	o_totalprice desc,
+	revenue desc,
 	o_orderdate
-LIMIT 100;",active,2022-05-27 16:32:09.96051+00
-1653669154.422929,dbt3,17962,10,postgres,psql,,-1,2022-05-27 16:32:28.956695+00,2022-05-27 16:32:28.959475+00,2022-05-27 16:32:28.959812+00,"explain (analyze, buffers)
-select
+LIMIT 10;",client backend
+1654126444.644227,16384,dbt3,10176,,10,postgres,psql,,,-1,2022-06-01 23:33:59.088667+00,2022-06-01 23:33:59.104683+00,2022-06-01 23:33:59.1049+00,2022-06-01 23:33:59.104902+00,,,active,,3936,,"select
 	s_name,
 	count(*) as numwait
 from
@@ -1553,60 +1858,102 @@ where
 			and l3.l_receiptdate > l3.l_commitdate
 	)
 	and s_nationkey = n_nationkey
-	and n_name = 'ROMANIA'
+	and n_name = 'ETHIOPIA'
 group by
 	s_name
 order by
 	numwait desc,
 	s_name
-LIMIT 100;",active,2022-05-27 16:32:28.959814+00
-1653669154.422929,dbt3,17950,10,postgres,psql,,-1,2022-05-27 16:32:28.792592+00,2022-05-27 16:32:28.795599+00,2022-05-27 16:32:28.795959+00,"explain (analyze, buffers)
-select
-	s_acctbal,
-	s_name,
-	n_name,
-	p_partkey,
-	p_mfgr,
-	s_address,
-	s_phone,
-	s_comment
+LIMIT 100;",client backend
+1654126444.644227,16384,dbt3,10095,10094,10,postgres,psql,,,,2022-06-01 23:33:20.002201+00,2022-06-01 23:33:19.999455+00,2022-06-01 23:33:19.999558+00,2022-06-01 23:33:20.005024+00,,,active,,3923,,"select
+	l_returnflag,
+	l_linestatus,
+	sum(l_quantity) as sum_qty,
+	sum(l_extendedprice) as sum_base_price,
+	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	avg(l_quantity) as avg_qty,
+	avg(l_extendedprice) as avg_price,
+	avg(l_discount) as avg_disc,
+	count(*) as count_order
 from
-	part,
-	supplier,
-	partsupp,
-	nation,
-	region
+	lineitem
 where
-	p_partkey = ps_partkey
-	and s_suppkey = ps_suppkey
-	and p_size = 35
-	and p_type like '%BRASS'
-	and s_nationkey = n_nationkey
-	and n_regionkey = r_regionkey
-	and r_name = 'AMERICA'
-	and ps_supplycost = (
-		select
-			min(ps_supplycost)
-		from
-			partsupp,
-			supplier,
-			nation,
-			region
-		where
-			p_partkey = ps_partkey
-			and s_suppkey = ps_suppkey
-			and s_nationkey = n_nationkey
-			and n_regionkey = r_regionkey
-			and r_name = 'AMERICA'
-	)
+	l_shipdate <= date '1998-12-01' - interval '107 days'
+group by
+	l_returnflag,
+	l_linestatus
 order by
-	s_acctbal desc,
-	n_name,
-	s_name,
-	p_partkey
-LIMIT 100;",active,2022-05-27 16:32:28.795961+00
-1653669154.422929,dbt3,17963,10,postgres,psql,,,2022-05-27 16:32:28.975224+00,2022-05-27 16:32:28.959475+00,2022-05-27 16:32:28.959812+00,"explain (analyze, buffers)
-select
+	l_returnflag,
+	l_linestatus;",parallel worker
+1654126444.644227,16384,dbt3,10096,10094,10,postgres,psql,,,,2022-06-01 23:33:20.00237+00,2022-06-01 23:33:19.999455+00,2022-06-01 23:33:19.999558+00,2022-06-01 23:33:20.005024+00,,,active,,3923,,"select
+	l_returnflag,
+	l_linestatus,
+	sum(l_quantity) as sum_qty,
+	sum(l_extendedprice) as sum_base_price,
+	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
+	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
+	avg(l_quantity) as avg_qty,
+	avg(l_extendedprice) as avg_price,
+	avg(l_discount) as avg_disc,
+	count(*) as count_order
+from
+	lineitem
+where
+	l_shipdate <= date '1998-12-01' - interval '107 days'
+group by
+	l_returnflag,
+	l_linestatus
+order by
+	l_returnflag,
+	l_linestatus;",parallel worker
+1654126444.644227,16384,dbt3,10150,10148,10,postgres,psql,,,,2022-06-01 23:33:52.230301+00,2022-06-01 23:33:52.223226+00,2022-06-01 23:33:52.223351+00,2022-06-01 23:33:52.238877+00,,,active,,3932,,"select
+	l_orderkey,
+	sum(l_extendedprice * (1 - l_discount)) as revenue,
+	o_orderdate,
+	o_shippriority
+from
+	customer,
+	orders,
+	lineitem
+where
+	c_mktsegment = 'BUILDING'
+	and c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and o_orderdate < date '1995-03-18'
+	and l_shipdate > date '1995-03-18'
+group by
+	l_orderkey,
+	o_orderdate,
+	o_shippriority
+order by
+	revenue desc,
+	o_orderdate
+LIMIT 10;",parallel worker
+1654126444.644227,16384,dbt3,10149,10148,10,postgres,psql,,,,2022-06-01 23:33:52.230745+00,2022-06-01 23:33:52.223226+00,2022-06-01 23:33:52.223351+00,2022-06-01 23:33:52.248427+00,,,active,,3932,,"select
+	l_orderkey,
+	sum(l_extendedprice * (1 - l_discount)) as revenue,
+	o_orderdate,
+	o_shippriority
+from
+	customer,
+	orders,
+	lineitem
+where
+	c_mktsegment = 'BUILDING'
+	and c_custkey = o_custkey
+	and l_orderkey = o_orderkey
+	and o_orderdate < date '1995-03-18'
+	and l_shipdate > date '1995-03-18'
+group by
+	l_orderkey,
+	o_orderdate,
+	o_shippriority
+order by
+	revenue desc,
+	o_orderdate
+LIMIT 10;",parallel worker
+1654126444.644227,16384,dbt3,10177,10176,10,postgres,psql,,,,2022-06-01 23:33:59.132651+00,2022-06-01 23:33:59.104683+00,2022-06-01 23:33:59.1049+00,2022-06-01 23:33:59.148559+00,,,active,,3936,,"select
 	s_name,
 	count(*) as numwait
 from
@@ -1639,15 +1986,14 @@ where
 			and l3.l_receiptdate > l3.l_commitdate
 	)
 	and s_nationkey = n_nationkey
-	and n_name = 'ROMANIA'
+	and n_name = 'ETHIOPIA'
 group by
 	s_name
 order by
 	numwait desc,
 	s_name
-LIMIT 100;",active,2022-05-27 16:32:28.979507+00
-1653669154.422929,dbt3,17964,10,postgres,psql,,,2022-05-27 16:32:28.981181+00,2022-05-27 16:32:28.959475+00,2022-05-27 16:32:28.959812+00,"explain (analyze, buffers)
-select
+LIMIT 100;",parallel worker
+1654126444.644227,16384,dbt3,10178,10176,10,postgres,psql,,,,2022-06-01 23:33:59.13364+00,2022-06-01 23:33:59.104683+00,2022-06-01 23:33:59.1049+00,2022-06-01 23:33:59.149111+00,IPC,BtreePage,active,,3936,,"select
 	s_name,
 	count(*) as numwait
 from
@@ -1680,607 +2026,16 @@ where
 			and l3.l_receiptdate > l3.l_commitdate
 	)
 	and s_nationkey = n_nationkey
-	and n_name = 'ROMANIA'
+	and n_name = 'ETHIOPIA'
 group by
 	s_name
 order by
 	numwait desc,
 	s_name
-LIMIT 100;",active,2022-05-27 16:32:28.994233+00
-1653669154.422929,dbt3,17925,10,postgres,psql,,,2022-05-27 16:32:09.96924+00,2022-05-27 16:32:09.960269+00,2022-05-27 16:32:09.960508+00,"explain (analyze, buffers)
-select
-	c_name,
-	c_custkey,
-	o_orderkey,
-	o_orderdate,
-	o_totalprice,
-	sum(l_quantity)
-from
-	customer,
-	orders,
-	lineitem
-where
-	o_orderkey in (
-		select
-			l_orderkey
-		from
-			lineitem
-		group by
-			l_orderkey having
-				sum(l_quantity) > 315
-	)
-	and c_custkey = o_custkey
-	and o_orderkey = l_orderkey
-group by
-	c_name,
-	c_custkey,
-	o_orderkey,
-	o_orderdate,
-	o_totalprice
-order by
-	o_totalprice desc,
-	o_orderdate
-LIMIT 100;",active,2022-05-27 16:32:09.974331+00
-1653669154.422929,dbt3,17926,10,postgres,psql,,,2022-05-27 16:32:09.969457+00,2022-05-27 16:32:09.960269+00,2022-05-27 16:32:09.960508+00,"explain (analyze, buffers)
-select
-	c_name,
-	c_custkey,
-	o_orderkey,
-	o_orderdate,
-	o_totalprice,
-	sum(l_quantity)
-from
-	customer,
-	orders,
-	lineitem
-where
-	o_orderkey in (
-		select
-			l_orderkey
-		from
-			lineitem
-		group by
-			l_orderkey having
-				sum(l_quantity) > 315
-	)
-	and c_custkey = o_custkey
-	and o_orderkey = l_orderkey
-group by
-	c_name,
-	c_custkey,
-	o_orderkey,
-	o_orderdate,
-	o_totalprice
-order by
-	o_totalprice desc,
-	o_orderdate
-LIMIT 100;",active,2022-05-27 16:32:09.972149+00
-1653669154.422929,dbt3,17972,10,postgres,psql,,-1,2022-05-27 16:32:34.406127+00,2022-05-27 16:32:34.422929+00,2022-05-27 16:32:34.422929+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:32:34.422932+00
-1653669154.422929,dbt3,17973,10,postgres,psql,,-1,2022-05-27 16:32:34.400441+00,2022-05-27 16:32:34.413628+00,2022-05-27 16:32:34.413628+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:32:34.41363+00
-1653669154.422929,dbt3,17975,10,postgres,psql,,-1,2022-05-27 16:32:34.40766+00,2022-05-27 16:32:34.420337+00,2022-05-27 16:32:34.420337+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:32:34.42034+00
-1653669154.422929,,16625,,,"",,,2022-05-27 16:25:33.146113+00,,,"",,
-1653669154.422929,,16624,,,"",,,2022-05-27 16:25:33.145947+00,,,"",,
-1653669154.422929,,16626,,,"",,,2022-05-27 16:25:33.146293+00,,,"",,
-1653669214.401975,,16627,,,"",,,2022-05-27 16:25:33.146448+00,,,"",,
-1653669214.401975,,16629,10,postgres,"",,,2022-05-27 16:25:33.146785+00,,,"",,
-1653669214.401975,dbt3,18073,10,postgres,psql,,-1,2022-05-27 16:33:12.546406+00,2022-05-27 16:33:12.549862+00,2022-05-27 16:33:12.550128+00,"explain (analyze, buffers)
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
-from
-	lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '74 days'
-group by
-	l_returnflag,
-	l_linestatus
-order by
-	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:33:12.550129+00
-1653669214.401975,dbt3,18016,10,postgres,psql,,-1,2022-05-27 16:32:45.554454+00,2022-05-27 16:32:45.56704+00,2022-05-27 16:32:45.567883+00,"explain (analyze, buffers)
-select
-	c_count,
-	count(*) as custdist
-from
-	(
-		select
-			c_custkey,
-			count(o_orderkey)
-		from
-			customer left outer join orders on
-				c_custkey = o_custkey
-				and o_comment not like '%special%accounts%'
-		group by
-			c_custkey
-	) as c_orders (c_custkey, c_count)
-group by
-	c_count
-order by
-	custdist desc,
-	c_count desc;",active,2022-05-27 16:32:45.567885+00
-1653669214.401975,dbt3,18059,10,postgres,psql,,-1,2022-05-27 16:33:06.302331+00,2022-05-27 16:33:06.306115+00,2022-05-27 16:33:06.306366+00,"explain (analyze, buffers)
-select
-	nation,
-	o_year,
-	sum(amount) as sum_profit
-from
-	(
-		select
-			n_name as nation,
-			extract(year from o_orderdate) as o_year,
-			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
-		from
-			part,
-			supplier,
-			lineitem,
-			partsupp,
-			orders,
-			nation
-		where
-			s_suppkey = l_suppkey
-			and ps_suppkey = l_suppkey
-			and ps_partkey = l_partkey
-			and p_partkey = l_partkey
-			and o_orderkey = l_orderkey
-			and s_nationkey = n_nationkey
-			and p_name like '%olive%'
-	) as profit
-group by
-	nation,
-	o_year
-order by
-	nation,
-	o_year desc;",active,2022-05-27 16:33:06.306368+00
-1653669214.401975,dbt3,18018,10,postgres,psql,,,2022-05-27 16:32:45.583429+00,2022-05-27 16:32:45.56704+00,2022-05-27 16:32:45.567883+00,"explain (analyze, buffers)
-select
-	c_count,
-	count(*) as custdist
-from
-	(
-		select
-			c_custkey,
-			count(o_orderkey)
-		from
-			customer left outer join orders on
-				c_custkey = o_custkey
-				and o_comment not like '%special%accounts%'
-		group by
-			c_custkey
-	) as c_orders (c_custkey, c_count)
-group by
-	c_count
-order by
-	custdist desc,
-	c_count desc;",active,2022-05-27 16:32:45.594718+00
-1653669214.401975,dbt3,18017,10,postgres,psql,,,2022-05-27 16:32:45.583986+00,2022-05-27 16:32:45.56704+00,2022-05-27 16:32:45.567883+00,"explain (analyze, buffers)
-select
-	c_count,
-	count(*) as custdist
-from
-	(
-		select
-			c_custkey,
-			count(o_orderkey)
-		from
-			customer left outer join orders on
-				c_custkey = o_custkey
-				and o_comment not like '%special%accounts%'
-		group by
-			c_custkey
-	) as c_orders (c_custkey, c_count)
-group by
-	c_count
-order by
-	custdist desc,
-	c_count desc;",active,2022-05-27 16:32:45.588853+00
-1653669214.401975,dbt3,18075,10,postgres,psql,,,2022-05-27 16:33:12.557713+00,2022-05-27 16:33:12.549862+00,2022-05-27 16:33:12.550128+00,"explain (analyze, buffers)
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
-from
-	lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '74 days'
-group by
-	l_returnflag,
-	l_linestatus
-order by
-	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:33:12.565597+00
-1653669214.401975,dbt3,18074,10,postgres,psql,,,2022-05-27 16:33:12.558232+00,2022-05-27 16:33:12.549862+00,2022-05-27 16:33:12.550128+00,"explain (analyze, buffers)
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
-from
-	lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '74 days'
-group by
-	l_returnflag,
-	l_linestatus
-order by
-	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:33:12.564104+00
-1653669214.401975,dbt3,18061,10,postgres,psql,,,2022-05-27 16:33:06.327501+00,2022-05-27 16:33:06.306115+00,2022-05-27 16:33:06.306366+00,"explain (analyze, buffers)
-select
-	nation,
-	o_year,
-	sum(amount) as sum_profit
-from
-	(
-		select
-			n_name as nation,
-			extract(year from o_orderdate) as o_year,
-			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
-		from
-			part,
-			supplier,
-			lineitem,
-			partsupp,
-			orders,
-			nation
-		where
-			s_suppkey = l_suppkey
-			and ps_suppkey = l_suppkey
-			and ps_partkey = l_partkey
-			and p_partkey = l_partkey
-			and o_orderkey = l_orderkey
-			and s_nationkey = n_nationkey
-			and p_name like '%olive%'
-	) as profit
-group by
-	nation,
-	o_year
-order by
-	nation,
-	o_year desc;",active,2022-05-27 16:33:06.339613+00
-1653669214.401975,dbt3,18060,10,postgres,psql,,,2022-05-27 16:33:06.336857+00,2022-05-27 16:33:06.306115+00,2022-05-27 16:33:06.306366+00,"explain (analyze, buffers)
-select
-	nation,
-	o_year,
-	sum(amount) as sum_profit
-from
-	(
-		select
-			n_name as nation,
-			extract(year from o_orderdate) as o_year,
-			l_extendedprice * (1 - l_discount) - ps_supplycost * l_quantity as amount
-		from
-			part,
-			supplier,
-			lineitem,
-			partsupp,
-			orders,
-			nation
-		where
-			s_suppkey = l_suppkey
-			and ps_suppkey = l_suppkey
-			and ps_partkey = l_partkey
-			and p_partkey = l_partkey
-			and o_orderkey = l_orderkey
-			and s_nationkey = n_nationkey
-			and p_name like '%olive%'
-	) as profit
-group by
-	nation,
-	o_year
-order by
-	nation,
-	o_year desc;",active,2022-05-27 16:33:06.343039+00
-1653669214.401975,dbt3,18087,10,postgres,psql,,-1,2022-05-27 16:33:34.393271+00,2022-05-27 16:33:34.4012+00,2022-05-27 16:33:34.4012+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:33:34.401203+00
-1653669214.401975,dbt3,18083,10,postgres,psql,,-1,2022-05-27 16:33:34.394393+00,2022-05-27 16:33:34.400536+00,2022-05-27 16:33:34.400536+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:33:34.400538+00
-1653669214.401975,dbt3,18086,10,postgres,psql,,-1,2022-05-27 16:33:34.396384+00,2022-05-27 16:33:34.401975+00,2022-05-27 16:33:34.401975+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:33:34.401977+00
-1653669214.401975,dbt3,18084,10,postgres,psql,,-1,2022-05-27 16:33:34.394913+00,2022-05-27 16:33:34.401461+00,2022-05-27 16:33:34.401461+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:33:34.401462+00
-1653669214.401975,dbt3,18085,10,postgres,psql,,-1,2022-05-27 16:33:34.397378+00,2022-05-27 16:33:34.401767+00,2022-05-27 16:33:34.401767+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:33:34.401769+00
-1653669214.401975,,16625,,,"",,,2022-05-27 16:25:33.146113+00,,,"",,
-1653669214.401975,,16624,,,"",,,2022-05-27 16:25:33.145947+00,,,"",,
-1653669214.401975,,16626,,,"",,,2022-05-27 16:25:33.146293+00,,,"",,
-1653669274.424823,,16627,,,"",,,2022-05-27 16:25:33.146448+00,,,"",,
-1653669274.424823,,16629,10,postgres,"",,,2022-05-27 16:25:33.146785+00,,,"",,
-1653669274.424823,dbt3,18148,10,postgres,psql,,-1,2022-05-27 16:34:30.910394+00,2022-05-27 16:34:30.912742+00,2022-05-27 16:34:30.912935+00,"explain (analyze, buffers)
-select
-	p_brand,
-	p_type,
-	p_size,
-	count(distinct ps_suppkey) as supplier_cnt
-from
-	partsupp,
-	part
-where
-	p_partkey = ps_partkey
-	and p_brand <> 'Brand#54'
-	and p_type not like 'SMALL POLISHED%'
-	and p_size in (32, 17, 41, 19, 16, 10, 45, 4)
-	and ps_suppkey not in (
-		select
-			s_suppkey
-		from
-			supplier
-		where
-			s_comment like '%Customer%Complaints%'
-	)
-group by
-	p_brand,
-	p_type,
-	p_size
-order by
-	supplier_cnt desc,
-	p_brand,
-	p_type,
-	p_size;",active,2022-05-27 16:34:30.912937+00
-1653669274.424823,dbt3,18154,10,postgres,psql,,,2022-05-27 16:34:30.918557+00,2022-05-27 16:34:30.912742+00,2022-05-27 16:34:30.912935+00,"explain (analyze, buffers)
-select
-	p_brand,
-	p_type,
-	p_size,
-	count(distinct ps_suppkey) as supplier_cnt
-from
-	partsupp,
-	part
-where
-	p_partkey = ps_partkey
-	and p_brand <> 'Brand#54'
-	and p_type not like 'SMALL POLISHED%'
-	and p_size in (32, 17, 41, 19, 16, 10, 45, 4)
-	and ps_suppkey not in (
-		select
-			s_suppkey
-		from
-			supplier
-		where
-			s_comment like '%Customer%Complaints%'
-	)
-group by
-	p_brand,
-	p_type,
-	p_size
-order by
-	supplier_cnt desc,
-	p_brand,
-	p_type,
-	p_size;",active,2022-05-27 16:34:30.921516+00
-1653669274.424823,dbt3,18116,10,postgres,psql,,-1,2022-05-27 16:34:08.996965+00,2022-05-27 16:34:09.006734+00,2022-05-27 16:34:09.007024+00,"explain (analyze, buffers)
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
-from
-	lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '66 days'
-group by
-	l_returnflag,
-	l_linestatus
-order by
-	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:34:09.007026+00
-1653669274.424823,dbt3,18155,10,postgres,psql,,,2022-05-27 16:34:30.919788+00,2022-05-27 16:34:30.912742+00,2022-05-27 16:34:30.912935+00,"explain (analyze, buffers)
-select
-	p_brand,
-	p_type,
-	p_size,
-	count(distinct ps_suppkey) as supplier_cnt
-from
-	partsupp,
-	part
-where
-	p_partkey = ps_partkey
-	and p_brand <> 'Brand#54'
-	and p_type not like 'SMALL POLISHED%'
-	and p_size in (32, 17, 41, 19, 16, 10, 45, 4)
-	and ps_suppkey not in (
-		select
-			s_suppkey
-		from
-			supplier
-		where
-			s_comment like '%Customer%Complaints%'
-	)
-group by
-	p_brand,
-	p_type,
-	p_size
-order by
-	supplier_cnt desc,
-	p_brand,
-	p_type,
-	p_size;",active,2022-05-27 16:34:30.922454+00
-1653669274.424823,dbt3,18158,10,postgres,psql,,-1,2022-05-27 16:34:30.939496+00,2022-05-27 16:34:30.942033+00,2022-05-27 16:34:30.94233+00,"explain (analyze, buffers)
-select
-	s_name,
-	s_address
-from
-	supplier,
-	nation
-where
-	s_suppkey in (
-		select
-			ps_suppkey
-		from
-			partsupp
-		where
-			ps_partkey in (
-				select
-					p_partkey
-				from
-					part
-				where
-					p_name like 'spring%'
-			)
-			and ps_availqty > (
-				select
-					0.5 * sum(l_quantity)
-				from
-					lineitem
-				where
-					l_partkey = ps_partkey
-					and l_suppkey = ps_suppkey
-					and l_shipdate >= '1993-01-01'
-					and l_shipdate < cast(date '1993-01-01' + interval '1 year' as date)
-			)
-	)
-	and s_nationkey = n_nationkey
-	and n_name = 'CHINA'
-order by
-	s_name;",active,2022-05-27 16:34:30.942331+00
-1653669274.424823,dbt3,18169,10,postgres,psql,,-1,2022-05-27 16:34:34.407111+00,2022-05-27 16:34:34.41027+00,2022-05-27 16:34:34.41027+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:34:34.410272+00
-1653669274.424823,dbt3,18170,10,postgres,psql,,-1,2022-05-27 16:34:34.421714+00,2022-05-27 16:34:34.424823+00,2022-05-27 16:34:34.424823+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:34:34.424825+00
-1653669274.424823,dbt3,18118,10,postgres,psql,,,2022-05-27 16:34:09.02188+00,2022-05-27 16:34:09.006734+00,2022-05-27 16:34:09.007024+00,"explain (analyze, buffers)
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
-from
-	lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '66 days'
-group by
-	l_returnflag,
-	l_linestatus
-order by
-	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:34:09.027861+00
-1653669274.424823,dbt3,18117,10,postgres,psql,,,2022-05-27 16:34:09.024402+00,2022-05-27 16:34:09.006734+00,2022-05-27 16:34:09.007024+00,"explain (analyze, buffers)
-select
-	l_returnflag,
-	l_linestatus,
-	sum(l_quantity) as sum_qty,
-	sum(l_extendedprice) as sum_base_price,
-	sum(l_extendedprice * (1 - l_discount)) as sum_disc_price,
-	sum(l_extendedprice * (1 - l_discount) * (1 + l_tax)) as sum_charge,
-	avg(l_quantity) as avg_qty,
-	avg(l_extendedprice) as avg_price,
-	avg(l_discount) as avg_disc,
-	count(*) as count_order
-from
-	lineitem
-where
-	l_shipdate <= date '1998-12-01' - interval '66 days'
-group by
-	l_returnflag,
-	l_linestatus
-order by
-	l_returnflag,
-	l_linestatus;",active,2022-05-27 16:34:09.037571+00
-1653669274.424823,dbt3,18168,10,postgres,psql,,-1,2022-05-27 16:34:34.42178+00,,,"",idle,2022-05-27 16:34:34.428617+00
-1653669274.424823,,16625,,,"",,,2022-05-27 16:25:33.146113+00,,,"",,
-1653669274.424823,,16624,,,"",,,2022-05-27 16:25:33.145947+00,,,"",,
-1653669274.424823,,16626,,,"",,,2022-05-27 16:25:33.146293+00,,,"",,
-1653669334.414808,,16627,,,"",,,2022-05-27 16:25:33.146448+00,,,"",,
-1653669334.414808,,16629,10,postgres,"",,,2022-05-27 16:25:33.146785+00,,,"",,
-1653669334.414808,dbt3,18212,10,postgres,psql,,-1,2022-05-27 16:35:11.014287+00,2022-05-27 16:35:11.027309+00,2022-05-27 16:35:11.027557+00,"explain (analyze, buffers)
-select
-	l_orderkey,
-	sum(l_extendedprice * (1 - l_discount)) as revenue,
-	o_orderdate,
-	o_shippriority
-from
-	customer,
-	orders,
-	lineitem
-where
-	c_mktsegment = 'BUILDING'
-	and c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and o_orderdate < date '1995-03-12'
-	and l_shipdate > date '1995-03-12'
-group by
-	l_orderkey,
-	o_orderdate,
-	o_shippriority
-order by
-	revenue desc,
-	o_orderdate
-LIMIT 10;",active,2022-05-27 16:35:11.027559+00
-1653669334.414808,dbt3,18214,10,postgres,psql,,,2022-05-27 16:35:11.04551+00,2022-05-27 16:35:11.027309+00,2022-05-27 16:35:11.027557+00,"explain (analyze, buffers)
-select
-	l_orderkey,
-	sum(l_extendedprice * (1 - l_discount)) as revenue,
-	o_orderdate,
-	o_shippriority
-from
-	customer,
-	orders,
-	lineitem
-where
-	c_mktsegment = 'BUILDING'
-	and c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and o_orderdate < date '1995-03-12'
-	and l_shipdate > date '1995-03-12'
-group by
-	l_orderkey,
-	o_orderdate,
-	o_shippriority
-order by
-	revenue desc,
-	o_orderdate
-LIMIT 10;",active,2022-05-27 16:35:11.05012+00
-1653669334.414808,dbt3,18277,10,postgres,psql,,-1,2022-05-27 16:35:34.404591+00,2022-05-27 16:35:34.407213+00,2022-05-27 16:35:34.407213+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:35:34.407215+00
-1653669334.414808,dbt3,18213,10,postgres,psql,,,2022-05-27 16:35:11.045409+00,2022-05-27 16:35:11.027309+00,2022-05-27 16:35:11.027557+00,"explain (analyze, buffers)
-select
-	l_orderkey,
-	sum(l_extendedprice * (1 - l_discount)) as revenue,
-	o_orderdate,
-	o_shippriority
-from
-	customer,
-	orders,
-	lineitem
-where
-	c_mktsegment = 'BUILDING'
-	and c_custkey = o_custkey
-	and l_orderkey = o_orderkey
-	and o_orderdate < date '1995-03-12'
-	and l_shipdate > date '1995-03-12'
-group by
-	l_orderkey,
-	o_orderdate,
-	o_shippriority
-order by
-	revenue desc,
-	o_orderdate
-LIMIT 10;",active,2022-05-27 16:35:11.058271+00
-1653669334.414808,dbt3,18279,10,postgres,psql,,-1,2022-05-27 16:35:34.411745+00,2022-05-27 16:35:34.414808+00,2022-05-27 16:35:34.414808+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:35:34.41481+00
-1653669334.414808,dbt3,18280,10,postgres,psql,,-1,2022-05-27 16:35:34.414351+00,2022-05-27 16:35:34.416948+00,2022-05-27 16:35:34.416948+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:35:34.416949+00
-1653669334.414808,,16625,,,"",,,2022-05-27 16:25:33.146113+00,,,"",,
-1653669334.414808,,16624,,,"",,,2022-05-27 16:25:33.145947+00,,,"",,
-1653669334.414808,,16626,,,"",,,2022-05-27 16:25:33.146293+00,,,"",,
+LIMIT 100;",parallel worker
+1654126444.644227,16384,dbt3,10186,,10,postgres,psql,,,-1,2022-06-01 23:34:04.637646+00,2022-06-01 23:34:04.644227+00,2022-06-01 23:34:04.644227+00,2022-06-01 23:34:04.644229+00,,,active,,3936,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654126444.644227,16384,dbt3,10188,,10,postgres,psql,,,-1,2022-06-01 23:34:04.641309+00,2022-06-01 23:34:04.644078+00,2022-06-01 23:34:04.644078+00,2022-06-01 23:34:04.64408+00,,,active,,3936,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",client backend
+1654126444.644227,16384,dbt3,10189,,10,postgres,psql,,,-1,2022-06-01 23:34:04.650676+00,2022-06-01 23:34:04.654317+00,2022-06-01 23:34:04.654317+00,2022-06-01 23:34:04.654318+00,,,active,,3936,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",client backend
+1654126444.644227,,,8596,,,,"",,,,2022-06-01 23:26:03.380254+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654126444.644227,,,8595,,,,"",,,,2022-06-01 23:26:03.380097+00,,,,Activity,CheckpointerMain,,,,,"",checkpointer
+1654126444.644227,,,8597,,,,"",,,,2022-06-01 23:26:03.380408+00,,,,Activity,WalWriterMain,,,,,"",walwriter

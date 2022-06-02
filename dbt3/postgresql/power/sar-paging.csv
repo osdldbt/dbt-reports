@@ -1,4 +1,0 @@
-# hostname;interval;timestamp;pgpgin/s;pgpgout/s;fault/s;majflt/s;pgfree/s;pgscank/s;pgscand/s;pgsteal/s;%vmeff
-pgsql1.dbt2.internal;60;1653527593;0.07;79280.93;6697.53;0.00;26103.65;0.00;0.00;0.00;0.00
-pgsql1.dbt2.internal;60;1653527653;0.07;94.87;6043.45;0.00;7701.90;0.00;0.00;0.00;0.00
-pgsql1.dbt2.internal;60;1653527713;0.07;122.27;10051.47;0.00;17592.72;0.00;0.00;0.00;0.00

@@ -1,6 +1,17 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	cntrycode,
 	count(*) as numcust,
@@ -14,7 +25,7 @@ from
 			customer
 		where
 			substring(c_phone from 1 for 2) in
-				('14', '20', '21', '30', '15', '33', '17')
+				('16', '13', '26', '19', '28', '22', '17')
 			and c_acctbal > (
 				select
 					avg(c_acctbal)
@@ -23,7 +34,7 @@ from
 				where
 					c_acctbal > 0.00
 					and substring(c_phone from 1 for 2) in
-						('14', '20', '21', '30', '15', '33', '17')
+						('16', '13', '26', '19', '28', '22', '17')
 			)
 			and not exists (
 				select
@@ -38,62 +49,90 @@ group by
 	cntrycode
 order by
 	cntrycode;
-                                                                                          QUERY PLAN                                                                                          
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Finalize GroupAggregate  (cost=122418.07..122424.84 rows=25 width=72) (actual time=1623.015..1637.141 rows=7 loops=1)
-   Group Key: (SUBSTRING(customer.c_phone FROM 1 FOR 2))
-   Buffers: shared hit=605437 read=92046
-   InitPlan 1 (returns $1)
-     ->  Finalize Aggregate  (cost=50274.05..50274.06 rows=1 width=32) (actual time=494.461..496.770 rows=1 loops=1)
-           Buffers: shared hit=6 read=37200
-           ->  Gather  (cost=50273.82..50274.03 rows=2 width=32) (actual time=494.436..496.755 rows=3 loops=1)
-                 Workers Planned: 2
-                 Workers Launched: 2
-                 Buffers: shared hit=6 read=37200
-                 ->  Partial Aggregate  (cost=49273.82..49273.83 rows=1 width=32) (actual time=480.894..480.896 rows=1 loops=3)
-                       Buffers: shared hit=6 read=37200
-                       ->  Parallel Bitmap Heap Scan on customer customer_1  (cost=8767.02..48869.75 rows=161628 width=6) (actual time=105.839..430.083 rows=127593 loops=3)
-                             Recheck Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{14,20,21,30,15,33,17}'::text[])) AND (c_acctbal > 0.00))
-                             Heap Blocks: exact=11319
-                             Buffers: shared hit=6 read=37200
-                             ->  Bitmap Index Scan on customer_c_phone_c_acctbal_c_custkey_idx  (cost=0.00..8670.04 rows=387907 width=0) (actual time=101.207..101.207 rows=382779 loops=1)
-                                   Index Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{14,20,21,30,15,33,17}'::text[])) AND (c_acctbal > 0.00))
-                                   Buffers: shared hit=6 read=1340
-   ->  Gather Merge  (cost=72144.01..72149.85 rows=50 width=72) (actual time=1622.991..1634.786 rows=21 loops=1)
-         Workers Planned: 2
-         Params Evaluated: $1
-         Workers Launched: 2
-         Buffers: shared hit=605437 read=92046
-         ->  Sort  (cost=71143.99..71144.05 rows=25 width=72) (actual time=1109.261..1109.272 rows=7 loops=3)
-               Sort Key: (SUBSTRING(customer.c_phone FROM 1 FOR 2))
-               Sort Method: quicksort  Memory: 25kB
-               Buffers: shared hit=605431 read=54846
-               Worker 0:  Sort Method: quicksort  Memory: 25kB
-               Worker 1:  Sort Method: quicksort  Memory: 25kB
-               ->  Partial HashAggregate  (cost=71142.97..71143.41 rows=25 width=72) (actual time=1109.183..1109.199 rows=7 loops=3)
-                     Group Key: SUBSTRING(customer.c_phone FROM 1 FOR 2)
-                     Batches: 1  Memory Usage: 24kB
-                     Buffers: shared hit=605416 read=54845
-                     Worker 0:  Batches: 1  Memory Usage: 24kB
-                     Worker 1:  Batches: 1  Memory Usage: 24kB
-                     ->  Nested Loop Anti Join  (cost=3357.51..70948.72 rows=25900 width=38) (actual time=74.531..1080.795 rows=21316 loops=3)
-                           Buffers: shared hit=605416 read=54845
-                           ->  Parallel Bitmap Heap Scan on customer  (cost=3357.08..40768.66 rows=59108 width=26) (actual time=73.268..331.445 rows=63753 loops=3)
-                                 Recheck Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{14,20,21,30,15,33,17}'::text[])) AND (c_acctbal > $1))
-                                 Heap Blocks: exact=11693
-                                 Buffers: shared hit=7 read=36424
-                                 ->  Bitmap Index Scan on customer_c_phone_c_acctbal_c_custkey_idx  (cost=0.00..3321.61 rows=141859 width=0) (actual time=71.675..71.676 rows=191258 loops=1)
-                                       Index Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{14,20,21,30,15,33,17}'::text[])) AND (c_acctbal > $1))
-                                       Buffers: shared hit=6 read=677
-                           ->  Index Only Scan using orders_o_custkey_idx on orders  (cost=0.43..1.18 rows=18 width=4) (actual time=0.011..0.011 rows=1 loops=191258)
-                                 Index Cond: (o_custkey = customer.c_custkey)
-                                 Heap Fetches: 6313
-                                 Buffers: shared hit=605409 read=18421
- Planning:
-   Buffers: shared hit=329 read=71
- Planning Time: 2.537 ms
- Execution Time: 1637.529 ms
-(53 rows)
+NOTICE:  duration: 1034.260 ms  plan:
+Query Text: select
+	cntrycode,
+	count(*) as numcust,
+	sum(c_acctbal) as totacctbal
+from
+	(
+		select
+			substring(c_phone from 1 for 2) as cntrycode,
+			c_acctbal
+		from
+			customer
+		where
+			substring(c_phone from 1 for 2) in
+				('16', '13', '26', '19', '28', '22', '17')
+			and c_acctbal > (
+				select
+					avg(c_acctbal)
+				from
+					customer
+				where
+					c_acctbal > 0.00
+					and substring(c_phone from 1 for 2) in
+						('16', '13', '26', '19', '28', '22', '17')
+			)
+			and not exists (
+				select
+					*
+				from
+					orders
+				where
+					o_custkey = c_custkey
+			)
+	) as vip
+group by
+	cntrycode
+order by
+	cntrycode;
+Finalize GroupAggregate  (cost=121574.76..121581.53 rows=25 width=72) (actual time=1028.861..1034.238 rows=7 loops=1)
+  Group Key: (SUBSTRING(customer.c_phone FROM 1 FOR 2))
+  InitPlan 1 (returns $1)
+    ->  Finalize Aggregate  (cost=49981.97..49981.98 rows=1 width=32) (actual time=362.581..364.570 rows=1 loops=1)
+          ->  Gather  (cost=49981.75..49981.96 rows=2 width=32) (actual time=361.919..364.550 rows=3 loops=1)
+                Workers Planned: 2
+                Workers Launched: 2
+                ->  Partial Aggregate  (cost=48981.75..48981.76 rows=1 width=32) (actual time=353.883..353.885 rows=1 loops=3)
+                      ->  Parallel Bitmap Heap Scan on customer customer_1  (cost=8582.16..48587.52 rows=157690 width=6) (actual time=113.320..317.160 rows=127364 loops=3)
+                            Recheck Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{16,13,26,19,28,22,17}'::text[])) AND (c_acctbal > 0.00))
+                            Heap Blocks: exact=13560
+                            ->  Bitmap Index Scan on customer_c_phone_c_acctbal_c_custkey_idx  (cost=0.00..8487.54 rows=378456 width=0) (actual time=107.851..107.851 rows=382093 loops=1)
+                                  Index Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{16,13,26,19,28,22,17}'::text[])) AND (c_acctbal > 0.00))
+  ->  Gather Merge  (cost=71592.78..71598.62 rows=50 width=72) (actual time=1028.843..1032.208 rows=21 loops=1)
+        Workers Planned: 2
+        Params Evaluated: $1
+        Workers Launched: 2
+        ->  Sort  (cost=70592.76..70592.82 rows=25 width=72) (actual time=649.136..649.139 rows=7 loops=3)
+              Sort Key: (SUBSTRING(customer.c_phone FROM 1 FOR 2))
+              Sort Method: quicksort  Memory: 25kB
+              Worker 0:  Sort Method: quicksort  Memory: 25kB
+              Worker 1:  Sort Method: quicksort  Memory: 25kB
+              ->  Partial HashAggregate  (cost=70591.74..70592.18 rows=25 width=72) (actual time=649.055..649.063 rows=7 loops=3)
+                    Group Key: SUBSTRING(customer.c_phone FROM 1 FOR 2)
+                    Batches: 1  Memory Usage: 24kB
+                    Worker 0:  Batches: 1  Memory Usage: 24kB
+                    Worker 1:  Batches: 1  Memory Usage: 24kB
+                    ->  Nested Loop Anti Join  (cost=3306.97..70406.39 rows=24714 width=38) (actual time=63.902..635.353 rows=21076 loops=3)
+                          ->  Parallel Bitmap Heap Scan on customer  (cost=3306.53..40695.81 rows=58030 width=26) (actual time=63.788..223.812 rows=63662 loops=3)
+                                Recheck Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{16,13,26,19,28,22,17}'::text[])) AND (c_acctbal > $1))
+                                Heap Blocks: exact=10913
+                                ->  Bitmap Index Scan on customer_c_phone_c_acctbal_c_custkey_idx  (cost=0.00..3271.71 rows=139271 width=0) (actual time=61.169..61.169 rows=190987 loops=1)
+                                      Index Cond: ((SUBSTRING(c_phone FROM 1 FOR 2) = ANY ('{16,13,26,19,28,22,17}'::text[])) AND (c_acctbal > $1))
+                          ->  Index Only Scan using orders_o_custkey_idx on orders  (cost=0.43..1.17 rows=17 width=4) (actual time=0.006..0.006 rows=1 loops=190987)
+                                Index Cond: (o_custkey = customer.c_custkey)
+                                Heap Fetches: 7333
+ cntrycode | numcust | totacctbal  
+-----------+---------+-------------
+ 13        |    9027 | 67602460.51
+ 16        |    8976 | 67278645.42
+ 17        |    9074 | 68119637.57
+ 19        |    9094 | 68257354.97
+ 22        |    9004 | 67341822.93
+ 26        |    9021 | 67744996.92
+ 28        |    9033 | 67690071.79
+(7 rows)
 
 COMMIT;
 COMMIT

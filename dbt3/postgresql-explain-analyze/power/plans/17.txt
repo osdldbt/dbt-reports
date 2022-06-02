@@ -1,7 +1,6 @@
 BEGIN;
 BEGIN
 EXPLAIN
-explain (analyze, buffers)
 select
 	sum(l_extendedprice) / 7.0 as avg_yearly
 from
@@ -9,8 +8,8 @@ from
 	part
 where
 	p_partkey = l_partkey
-	and p_brand = 'Brand#41'
-	and p_container = 'MED CASE'
+	and p_brand = 'Brand#44'
+	and p_container = 'WRAP DRUM'
 	and l_quantity < (
 		select
 			0.2 * avg(l_quantity)
@@ -19,3 +18,19 @@ where
 		where
 			l_partkey = p_partkey
 	);
+                                                                       QUERY PLAN                                                                       
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=102924.56..102924.58 rows=1 width=32)
+   ->  Nested Loop  (cost=6.17..102872.85 rows=20684 width=8)
+         ->  Index Only Scan using part_p_container_p_brand_p_partkey_idx on part  (cost=0.43..89.81 rows=2069 width=4)
+               Index Cond: ((p_container = 'WRAP DRUM'::bpchar) AND (p_brand = 'Brand#44'::bpchar))
+         ->  Index Scan using lineitem_l_partkey_l_quantity_l_shipmode_idx on lineitem  (cost=5.75..49.58 rows=10 width=17)
+               Index Cond: ((l_partkey = part.p_partkey) AND (l_quantity < (SubPlan 1)))
+               SubPlan 1
+                 ->  Aggregate  (cost=5.17..5.18 rows=1 width=32)
+                       ->  Index Only Scan using lineitem_l_partkey_l_quantity_l_shipmode_idx on lineitem lineitem_1  (cost=0.56..5.09 rows=30 width=5)
+                             Index Cond: (l_partkey = part.p_partkey)
+(10 rows)
+
+COMMIT;
+COMMIT

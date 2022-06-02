@@ -1,34 +1,52 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	sum(l_extendedprice * l_discount) as revenue
 from
 	lineitem
 where
-	l_shipdate >= date '1996-01-01'
-	and l_shipdate < cast(date '1996-01-01' + interval '1 year' as date)
-	and l_discount between 0.09 - 0.01 and 0.09 + 0.01
+	l_shipdate >= date '1994-01-01'
+	and l_shipdate < cast(date '1994-01-01' + interval '1 year' as date)
+	and l_discount between 0.06 - 0.01 and 0.06 + 0.01
 	and l_quantity < 25;
-                                                                                        QUERY PLAN                                                                                         
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Finalize Aggregate  (cost=1722426.08..1722426.09 rows=1 width=32) (actual time=13411.260..13415.152 rows=1 loops=1)
-   Buffers: shared hit=2568 read=1153452 dirtied=1261
-   ->  Gather  (cost=1722425.86..1722426.07 rows=2 width=32) (actual time=13411.156..13415.136 rows=3 loops=1)
-         Workers Planned: 2
-         Workers Launched: 2
-         Buffers: shared hit=2568 read=1153452 dirtied=1261
-         ->  Partial Aggregate  (cost=1721425.86..1721425.87 rows=1 width=32) (actual time=13408.931..13408.932 rows=1 loops=3)
-               Buffers: shared hit=2568 read=1153452 dirtied=1261
-               ->  Parallel Seq Scan on lineitem  (cost=0.00..1718939.25 rows=497322 width=12) (actual time=0.031..12955.582 rows=398432 loops=3)
-                     Filter: ((l_shipdate >= '1996-01-01'::date) AND (l_shipdate < '1997-01-01'::date) AND (l_discount >= 0.08) AND (l_discount <= 0.10) AND (l_quantity < '25'::numeric))
-                     Rows Removed by Filter: 19596677
-                     Buffers: shared hit=2568 read=1153452 dirtied=1261
- Planning:
-   Buffers: shared hit=238 read=21
- Planning Time: 1.044 ms
- Execution Time: 13415.231 ms
-(16 rows)
+NOTICE:  duration: 11636.395 ms  plan:
+Query Text: select
+	sum(l_extendedprice * l_discount) as revenue
+from
+	lineitem
+where
+	l_shipdate >= date '1994-01-01'
+	and l_shipdate < cast(date '1994-01-01' + interval '1 year' as date)
+	and l_discount between 0.06 - 0.01 and 0.06 + 0.01
+	and l_quantity < 25;
+Finalize Aggregate  (cost=1722469.49..1722469.50 rows=1 width=32) (actual time=11635.008..11636.385 rows=1 loops=1)
+  WAL: records=7 fpi=7 bytes=32945
+  ->  Gather  (cost=1722469.27..1722469.48 rows=2 width=32) (actual time=11634.990..11636.370 rows=3 loops=1)
+        Workers Planned: 2
+        Workers Launched: 2
+        WAL: records=7 fpi=7 bytes=32945
+        ->  Partial Aggregate  (cost=1721469.27..1721469.28 rows=1 width=32) (actual time=11621.664..11621.665 rows=1 loops=3)
+              WAL: records=7 fpi=7 bytes=32945
+              ->  Parallel Seq Scan on lineitem  (cost=0.00..1718935.84 rows=506685 width=12) (actual time=0.033..11256.350 rows=396372 loops=3)
+                    Filter: ((l_shipdate >= '1994-01-01'::date) AND (l_shipdate < '1995-01-01'::date) AND (l_discount >= 0.05) AND (l_discount <= 0.07) AND (l_quantity < '25'::numeric))
+                    Rows Removed by Filter: 19598738
+                    WAL: records=7 fpi=7 bytes=32945
+     revenue     
+-----------------
+ 1337827371.5996
+(1 row)
 
 COMMIT;
 COMMIT

@@ -1,7 +1,6 @@
 BEGIN;
 BEGIN
 EXPLAIN
-explain (analyze, buffers)
 select
 	c_name,
 	c_custkey,
@@ -21,7 +20,7 @@ where
 			lineitem
 		group by
 			l_orderkey having
-				sum(l_quantity) > 314
+				sum(l_quantity) > 312
 	)
 	and c_custkey = o_custkey
 	and o_orderkey = l_orderkey
@@ -35,3 +34,35 @@ order by
 	o_totalprice desc,
 	o_orderdate
 LIMIT 100;
+                                                                                              QUERY PLAN                                                                                               
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=3595615.97..3595616.22 rows=100 width=75)
+   ->  Sort  (cost=3595615.97..3596968.00 rows=540812 width=75)
+         Sort Key: orders.o_totalprice DESC, orders.o_orderdate
+         ->  Finalize GroupAggregate  (cost=3506590.32..3574946.53 rows=540812 width=75)
+               Group Key: customer.c_custkey, orders.o_orderkey
+               ->  Gather Merge  (cost=3506590.32..3563679.62 rows=450676 width=75)
+                     Workers Planned: 2
+                     ->  Partial GroupAggregate  (cost=3505590.30..3510660.40 rows=225338 width=75)
+                           Group Key: customer.c_custkey, orders.o_orderkey
+                           ->  Sort  (cost=3505590.30..3506153.64 rows=225338 width=48)
+                                 Sort Key: customer.c_custkey, orders.o_orderkey
+                                 ->  Nested Loop  (cost=2486311.75..3478622.30 rows=225338 width=48)
+                                       ->  Hash Join  (cost=2486311.19..3037498.59 rows=56344 width=51)
+                                             Hash Cond: (orders.o_orderkey = lineitem_1.l_orderkey)
+                                             ->  Parallel Hash Join  (cost=53591.95..477865.33 rows=6255630 width=43)
+                                                   Hash Cond: (orders.o_custkey = customer.c_custkey)
+                                                   ->  Parallel Seq Scan on orders  (cost=0.00..330879.30 rows=6255630 width=24)
+                                                   ->  Parallel Hash  (cost=42116.20..42116.20 rows=625020 width=23)
+                                                         ->  Parallel Seq Scan on customer  (cost=0.00..42116.20 rows=625020 width=23)
+                                             ->  Hash  (cost=2430499.91..2430499.91 rows=135226 width=8)
+                                                   ->  GroupAggregate  (cost=0.56..2429147.65 rows=135226 width=8)
+                                                         Group Key: lineitem_1.l_orderkey
+                                                         Filter: (sum(lineitem_1.l_quantity) > '312'::numeric)
+                                                         ->  Index Only Scan using lineitem_l_orderkey_l_suppkey_l_quantity_idx on lineitem lineitem_1  (cost=0.56..2122843.38 rows=60043823 width=13)
+                                       ->  Index Only Scan using lineitem_l_orderkey_l_suppkey_l_quantity_idx on lineitem  (cost=0.56..6.35 rows=148 width=13)
+                                             Index Cond: (l_orderkey = orders.o_orderkey)
+(26 rows)
+
+COMMIT;
+COMMIT

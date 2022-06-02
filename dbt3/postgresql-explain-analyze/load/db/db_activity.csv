@@ -1,265 +1,375 @@
-ctime,datname,pid,usesysid,usename,application_name,client_addr,client_port,backend_start,xact_start,query_start,query,state,state_change
-1653667915.539285,,15574,,,"",,,2022-05-27 16:11:51.81696+00,,,"",,
-1653667915.539285,,15576,10,postgres,"",,,2022-05-27 16:11:51.8174+00,,,"",,
-1653667915.539285,dbt3,15641,10,postgres,psql,,-1,2022-05-27 16:11:55.368502+00,2022-05-27 16:11:55.369871+00,2022-05-27 16:11:55.369871+00,COPY supplier FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 2' USING DELIMITERS '|';,active,2022-05-27 16:11:55.369871+00
-1653667915.539285,dbt3,15642,10,postgres,psql,,-1,2022-05-27 16:11:55.368721+00,2022-05-27 16:11:55.369861+00,2022-05-27 16:11:55.369861+00,COPY supplier FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 1' USING DELIMITERS '|';,active,2022-05-27 16:11:55.369861+00
-1653667915.539285,dbt3,15643,10,postgres,psql,,-1,2022-05-27 16:11:55.368914+00,2022-05-27 16:11:55.37006+00,2022-05-27 16:11:55.37006+00,COPY supplier FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 3' USING DELIMITERS '|';,active,2022-05-27 16:11:55.37006+00
-1653667915.539285,dbt3,15644,10,postgres,psql,,-1,2022-05-27 16:11:55.369097+00,2022-05-27 16:11:55.370188+00,2022-05-27 16:11:55.370188+00,COPY supplier FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 5' USING DELIMITERS '|';,active,2022-05-27 16:11:55.370188+00
-1653667915.539285,dbt3,15645,10,postgres,psql,,-1,2022-05-27 16:11:55.369301+00,2022-05-27 16:11:55.371809+00,2022-05-27 16:11:55.371809+00,COPY supplier FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 4' USING DELIMITERS '|';,active,2022-05-27 16:11:55.37181+00
-1653667915.539285,dbt3,15650,10,postgres,psql,,-1,2022-05-27 16:11:55.371596+00,2022-05-27 16:11:55.372861+00,2022-05-27 16:11:55.372861+00,COPY supplier FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 6' USING DELIMITERS '|';,active,2022-05-27 16:11:55.372862+00
-1653667915.539285,dbt3,15672,10,postgres,psql,,-1,2022-05-27 16:11:55.53683+00,2022-05-27 16:11:55.539285+00,2022-05-27 16:11:55.539285+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV, HEADER);",active,2022-05-27 16:11:55.539285+00
-1653667915.539285,dbt3,15669,10,postgres,psql,,-1,2022-05-27 16:11:55.534913+00,2022-05-27 16:11:55.539321+00,2022-05-27 16:11:55.539321+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV, HEADER);",active,2022-05-27 16:11:55.539322+00
-1653667915.539285,dbt3,15670,10,postgres,psql,,-1,2022-05-27 16:11:55.534732+00,2022-05-27 16:11:55.539667+00,2022-05-27 16:11:55.539667+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV, HEADER);",active,2022-05-27 16:11:55.539668+00
-1653667915.539285,dbt3,15671,10,postgres,psql,,-1,2022-05-27 16:11:55.539203+00,,,"",idle,2022-05-27 16:11:55.541453+00
-1653667915.539285,,15572,,,"",,,2022-05-27 16:11:51.816608+00,,,"",,
-1653667915.539285,,15571,,,"",,,2022-05-27 16:11:51.816467+00,,,"",,
-1653667915.539285,,15573,,,"",,,2022-05-27 16:11:51.816783+00,,,"",,
-1653667975.531905,,15574,,,"",,,2022-05-27 16:11:51.81696+00,,,"",,
-1653667975.531905,,15576,10,postgres,"",,,2022-05-27 16:11:51.8174+00,,,"",,
-1653667975.531905,dbt3,15698,10,postgres,psql,,-1,2022-05-27 16:12:29.510714+00,2022-05-27 16:12:29.515907+00,2022-05-27 16:12:29.515907+00,COPY partsupp FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T S -o -C 6 -S 1' USING DELIMITERS '|';,active,2022-05-27 16:12:29.515908+00
-1653667975.531905,dbt3,15699,10,postgres,psql,,-1,2022-05-27 16:12:29.510973+00,2022-05-27 16:12:29.515607+00,2022-05-27 16:12:29.515607+00,COPY partsupp FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T S -o -C 6 -S 3' USING DELIMITERS '|';,active,2022-05-27 16:12:29.515609+00
-1653667975.531905,dbt3,15700,10,postgres,psql,,-1,2022-05-27 16:12:29.511287+00,2022-05-27 16:12:29.516905+00,2022-05-27 16:12:29.516905+00,COPY partsupp FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T S -o -C 6 -S 2' USING DELIMITERS '|';,active,2022-05-27 16:12:29.516906+00
-1653667975.531905,dbt3,15701,10,postgres,psql,,-1,2022-05-27 16:12:29.51158+00,2022-05-27 16:12:29.517906+00,2022-05-27 16:12:29.517906+00,COPY partsupp FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T S -o -C 6 -S 4' USING DELIMITERS '|';,active,2022-05-27 16:12:29.517907+00
-1653667975.531905,dbt3,15702,10,postgres,psql,,-1,2022-05-27 16:12:29.511854+00,2022-05-27 16:12:29.516546+00,2022-05-27 16:12:29.516546+00,COPY partsupp FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T S -o -C 6 -S 6' USING DELIMITERS '|';,active,2022-05-27 16:12:29.516548+00
-1653667975.531905,dbt3,15703,10,postgres,psql,,-1,2022-05-27 16:12:29.516621+00,2022-05-27 16:12:29.518426+00,2022-05-27 16:12:29.518426+00,COPY partsupp FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T S -o -C 6 -S 5' USING DELIMITERS '|';,active,2022-05-27 16:12:29.518427+00
-1653667975.531905,dbt3,15717,10,postgres,psql,,-1,2022-05-27 16:12:55.528519+00,2022-05-27 16:12:55.533144+00,2022-05-27 16:12:55.533144+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:12:55.533146+00
-1653667975.531905,dbt3,15718,10,postgres,psql,,-1,2022-05-27 16:12:55.528956+00,2022-05-27 16:12:55.531905+00,2022-05-27 16:12:55.531905+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:12:55.531907+00
-1653667975.531905,dbt3,15720,10,postgres,psql,,-1,2022-05-27 16:12:55.531549+00,2022-05-27 16:12:55.534151+00,2022-05-27 16:12:55.534151+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:12:55.534153+00
-1653667975.531905,,15572,,,"",,,2022-05-27 16:11:51.816608+00,,,"",,
-1653667975.531905,,15571,,,"",,,2022-05-27 16:11:51.816467+00,,,"",,
-1653667975.531905,,15573,,,"",,,2022-05-27 16:11:51.816783+00,,,"",,
-1653668035.567740,,15574,,,"",,,2022-05-27 16:11:51.81696+00,,,"",,
-1653668035.567740,,15576,10,postgres,"",,,2022-05-27 16:11:51.8174+00,,,"",,
-1653668035.567740,dbt3,15746,10,postgres,psql,,-1,2022-05-27 16:13:19.131815+00,2022-05-27 16:13:19.135177+00,2022-05-27 16:13:19.135177+00,COPY orders FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 1' USING DELIMITERS '|';,active,2022-05-27 16:13:19.135178+00
-1653668035.567740,dbt3,15747,10,postgres,psql,,-1,2022-05-27 16:13:19.13219+00,2022-05-27 16:13:19.134655+00,2022-05-27 16:13:19.134655+00,COPY orders FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 3' USING DELIMITERS '|';,active,2022-05-27 16:13:19.134657+00
-1653668035.567740,dbt3,15749,10,postgres,psql,,-1,2022-05-27 16:13:19.134665+00,2022-05-27 16:13:19.137836+00,2022-05-27 16:13:19.137836+00,COPY orders FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 4' USING DELIMITERS '|';,active,2022-05-27 16:13:19.137838+00
-1653668035.567740,dbt3,15750,10,postgres,psql,,-1,2022-05-27 16:13:19.135594+00,2022-05-27 16:13:19.137973+00,2022-05-27 16:13:19.137973+00,COPY orders FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 2' USING DELIMITERS '|';,active,2022-05-27 16:13:19.137974+00
-1653668035.567740,dbt3,15748,10,postgres,psql,,-1,2022-05-27 16:13:19.135101+00,2022-05-27 16:13:19.137979+00,2022-05-27 16:13:19.137979+00,COPY orders FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 6' USING DELIMITERS '|';,active,2022-05-27 16:13:19.13798+00
-1653668035.567740,dbt3,15753,10,postgres,psql,,-1,2022-05-27 16:13:19.137452+00,2022-05-27 16:13:19.139738+00,2022-05-27 16:13:19.139738+00,COPY orders FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 5' USING DELIMITERS '|';,active,2022-05-27 16:13:19.13974+00
-1653668035.567740,dbt3,15758,,,"",,,2022-05-27 16:13:21.903387+00,2022-05-27 16:13:34.205515+00,2022-05-27 16:13:34.205515+00,autovacuum: VACUUM ANALYZE public.partsupp,active,2022-05-27 16:13:34.205516+00
-1653668035.567740,dbt3,15766,10,postgres,psql,,-1,2022-05-27 16:13:55.55361+00,2022-05-27 16:13:55.562076+00,2022-05-27 16:13:55.562076+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:13:55.562078+00
-1653668035.567740,dbt3,15767,10,postgres,psql,,-1,2022-05-27 16:13:55.551228+00,,,"",idle,2022-05-27 16:13:55.573045+00
-1653668035.567740,dbt3,15769,10,postgres,psql,,-1,2022-05-27 16:13:55.565026+00,2022-05-27 16:13:55.56774+00,2022-05-27 16:13:55.56774+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:13:55.567742+00
-1653668035.567740,,15572,,,"",,,2022-05-27 16:11:51.816608+00,,,"",,
-1653668035.567740,,15571,,,"",,,2022-05-27 16:11:51.816467+00,,,"",,
-1653668035.567740,,15573,,,"",,,2022-05-27 16:11:51.816783+00,,,"",,
-1653668095.586150,,15574,,,"",,,2022-05-27 16:11:51.81696+00,,,"",,
-1653668095.586150,,15576,10,postgres,"",,,2022-05-27 16:11:51.8174+00,,,"",,
-1653668095.586150,dbt3,15777,10,postgres,psql,,-1,2022-05-27 16:14:21.405738+00,2022-05-27 16:14:21.408223+00,2022-05-27 16:14:21.408223+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 2' USING DELIMITERS '|';,active,2022-05-27 16:14:21.408224+00
-1653668095.586150,dbt3,15778,10,postgres,psql,,-1,2022-05-27 16:14:21.406418+00,2022-05-27 16:14:21.408337+00,2022-05-27 16:14:21.408337+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 1' USING DELIMITERS '|';,active,2022-05-27 16:14:21.408338+00
-1653668095.586150,dbt3,15780,10,postgres,psql,,-1,2022-05-27 16:14:21.407645+00,2022-05-27 16:14:21.409568+00,2022-05-27 16:14:21.409568+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 4' USING DELIMITERS '|';,active,2022-05-27 16:14:21.409569+00
-1653668095.586150,dbt3,15783,10,postgres,psql,,-1,2022-05-27 16:14:21.409857+00,2022-05-27 16:14:21.411806+00,2022-05-27 16:14:21.411806+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 3' USING DELIMITERS '|';,active,2022-05-27 16:14:21.411807+00
-1653668095.586150,dbt3,15779,10,postgres,psql,,-1,2022-05-27 16:14:21.409195+00,2022-05-27 16:14:21.412514+00,2022-05-27 16:14:21.412514+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 6' USING DELIMITERS '|';,active,2022-05-27 16:14:21.412515+00
-1653668095.586150,dbt3,15785,10,postgres,psql,,-1,2022-05-27 16:14:21.41118+00,2022-05-27 16:14:21.412889+00,2022-05-27 16:14:21.412889+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 5' USING DELIMITERS '|';,active,2022-05-27 16:14:21.41289+00
-1653668095.586150,dbt3,15758,,,"",,,2022-05-27 16:13:21.903387+00,2022-05-27 16:14:41.308153+00,2022-05-27 16:14:41.308153+00,autovacuum: VACUUM ANALYZE public.customer,active,2022-05-27 16:14:41.308153+00
-1653668095.586150,dbt3,15789,,,"",,,2022-05-27 16:14:21.939368+00,2022-05-27 16:14:21.964708+00,2022-05-27 16:14:21.964708+00,autovacuum: VACUUM ANALYZE public.orders,active,2022-05-27 16:14:21.964709+00
-1653668095.586150,dbt3,15798,10,postgres,psql,,-1,2022-05-27 16:14:55.566098+00,2022-05-27 16:14:55.58615+00,2022-05-27 16:14:55.58615+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:14:55.586151+00
-1653668095.586150,,15572,,,"",,,2022-05-27 16:11:51.816608+00,,,"",,
-1653668095.586150,,15571,,,"",,,2022-05-27 16:11:51.816467+00,,,"",,
-1653668095.586150,,15573,,,"",,,2022-05-27 16:11:51.816783+00,,,"",,
-1653668155.559847,,15574,,,"",,,2022-05-27 16:11:51.81696+00,,,"",,
-1653668155.559847,,15576,10,postgres,"",,,2022-05-27 16:11:51.8174+00,,,"",,
-1653668155.559847,dbt3,15777,10,postgres,psql,,-1,2022-05-27 16:14:21.405738+00,2022-05-27 16:14:21.408223+00,2022-05-27 16:14:21.408223+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 2' USING DELIMITERS '|';,active,2022-05-27 16:14:21.408224+00
-1653668155.559847,dbt3,15778,10,postgres,psql,,-1,2022-05-27 16:14:21.406418+00,2022-05-27 16:14:21.408337+00,2022-05-27 16:14:21.408337+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 1' USING DELIMITERS '|';,active,2022-05-27 16:14:21.408338+00
-1653668155.559847,dbt3,15780,10,postgres,psql,,-1,2022-05-27 16:14:21.407645+00,2022-05-27 16:14:21.409568+00,2022-05-27 16:14:21.409568+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 4' USING DELIMITERS '|';,active,2022-05-27 16:14:21.409569+00
-1653668155.559847,dbt3,15783,10,postgres,psql,,-1,2022-05-27 16:14:21.409857+00,2022-05-27 16:14:21.411806+00,2022-05-27 16:14:21.411806+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 3' USING DELIMITERS '|';,active,2022-05-27 16:14:21.411807+00
-1653668155.559847,dbt3,15779,10,postgres,psql,,-1,2022-05-27 16:14:21.409195+00,2022-05-27 16:14:21.412514+00,2022-05-27 16:14:21.412514+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 6' USING DELIMITERS '|';,active,2022-05-27 16:14:21.412515+00
-1653668155.559847,dbt3,15785,10,postgres,psql,,-1,2022-05-27 16:14:21.41118+00,2022-05-27 16:14:21.412889+00,2022-05-27 16:14:21.412889+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 5' USING DELIMITERS '|';,active,2022-05-27 16:14:21.41289+00
-1653668155.559847,dbt3,15810,10,postgres,psql,,-1,2022-05-27 16:15:55.555251+00,2022-05-27 16:15:55.55805+00,2022-05-27 16:15:55.55805+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:15:55.558051+00
-1653668155.559847,dbt3,15789,,,"",,,2022-05-27 16:14:21.939368+00,2022-05-27 16:14:21.964708+00,2022-05-27 16:14:21.964708+00,autovacuum: VACUUM ANALYZE public.orders,active,2022-05-27 16:14:21.964709+00
-1653668155.559847,dbt3,15812,10,postgres,psql,,-1,2022-05-27 16:15:55.55694+00,2022-05-27 16:15:55.559847+00,2022-05-27 16:15:55.559847+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:15:55.559849+00
-1653668155.559847,dbt3,15811,10,postgres,psql,,-1,2022-05-27 16:15:55.55697+00,,2022-05-27 16:15:55.559692+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",idle,2022-05-27 16:15:55.562785+00
-1653668155.559847,,15572,,,"",,,2022-05-27 16:11:51.816608+00,,,"",,
-1653668155.559847,,15571,,,"",,,2022-05-27 16:11:51.816467+00,,,"",,
-1653668155.559847,,15573,,,"",,,2022-05-27 16:11:51.816783+00,,,"",,
-1653668215.581198,,15574,,,"",,,2022-05-27 16:11:51.81696+00,,,"",,
-1653668215.581198,,15576,10,postgres,"",,,2022-05-27 16:11:51.8174+00,,,"",,
-1653668215.581198,dbt3,15777,10,postgres,psql,,-1,2022-05-27 16:14:21.405738+00,2022-05-27 16:14:21.408223+00,2022-05-27 16:14:21.408223+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 2' USING DELIMITERS '|';,active,2022-05-27 16:14:21.408224+00
-1653668215.581198,dbt3,15778,10,postgres,psql,,-1,2022-05-27 16:14:21.406418+00,2022-05-27 16:14:21.408337+00,2022-05-27 16:14:21.408337+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 1' USING DELIMITERS '|';,active,2022-05-27 16:14:21.408338+00
-1653668215.581198,dbt3,15780,10,postgres,psql,,-1,2022-05-27 16:14:21.407645+00,2022-05-27 16:14:21.409568+00,2022-05-27 16:14:21.409568+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 4' USING DELIMITERS '|';,active,2022-05-27 16:14:21.409569+00
-1653668215.581198,dbt3,15783,10,postgres,psql,,-1,2022-05-27 16:14:21.409857+00,2022-05-27 16:14:21.411806+00,2022-05-27 16:14:21.411806+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 3' USING DELIMITERS '|';,active,2022-05-27 16:14:21.411807+00
-1653668215.581198,dbt3,15779,10,postgres,psql,,-1,2022-05-27 16:14:21.409195+00,2022-05-27 16:14:21.412514+00,2022-05-27 16:14:21.412514+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 6' USING DELIMITERS '|';,active,2022-05-27 16:14:21.412515+00
-1653668215.581198,dbt3,15785,10,postgres,psql,,-1,2022-05-27 16:14:21.41118+00,2022-05-27 16:14:21.412889+00,2022-05-27 16:14:21.412889+00,COPY lineitem FROM PROGRAM '/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 5' USING DELIMITERS '|';,active,2022-05-27 16:14:21.41289+00
-1653668215.581198,dbt3,15826,10,postgres,psql,,-1,2022-05-27 16:16:55.572394+00,2022-05-27 16:16:55.575107+00,2022-05-27 16:16:55.575107+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:16:55.575109+00
-1653668215.581198,dbt3,15825,10,postgres,psql,,-1,2022-05-27 16:16:55.564055+00,2022-05-27 16:16:55.566743+00,2022-05-27 16:16:55.566743+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:16:55.566745+00
-1653668215.581198,dbt3,15823,10,postgres,psql,,-1,2022-05-27 16:16:55.575372+00,2022-05-27 16:16:55.581198+00,2022-05-27 16:16:55.581198+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:16:55.581199+00
-1653668215.581198,dbt3,15827,10,postgres,psql,,-1,2022-05-27 16:16:55.578734+00,,2022-05-27 16:16:55.581653+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",idle,2022-05-27 16:16:55.583723+00
-1653668215.581198,,15572,,,"",,,2022-05-27 16:11:51.816608+00,,,"",,
-1653668215.581198,,15571,,,"",,,2022-05-27 16:11:51.816467+00,,,"",,
-1653668215.581198,,15573,,,"",,,2022-05-27 16:11:51.816783+00,,,"",,
-1653668275.598995,,15574,,,"",,,2022-05-27 16:11:51.81696+00,,,"",,
-1653668275.598995,,15576,10,postgres,"",,,2022-05-27 16:11:51.8174+00,,,"",,
-1653668275.598995,dbt3,15924,10,postgres,psql,,,2022-05-27 16:17:27.965723+00,2022-05-27 16:17:26.95768+00,2022-05-27 16:17:26.95768+00,"
+ctime,datid,datname,pid,leader_pid,usesysid,usename,application_name,client_addr,client_hostname,client_port,backend_start,xact_start,query_start,state_change,wait_event_type,wait_event,state,backend_xid,backend_xmin,query_id,query,backend_type
+1654125270.979895,,,7588,,,,"",,,,2022-06-01 23:14:29.766816+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654125270.979895,,,7590,,10,postgres,"",,,,2022-06-01 23:14:29.767204+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654125270.979895,16384,dbt3,7657,,10,postgres,psql,,,-1,2022-06-01 23:14:30.889048+00,2022-06-01 23:14:30.891588+00,2022-06-01 23:14:30.891588+00,2022-06-01 23:14:30.891589+00,,,active,,3615,,"COPY supplier
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 5'
+USING DELIMITERS '|';",client backend
+1654125270.979895,16384,dbt3,7655,,10,postgres,psql,,,-1,2022-06-01 23:14:30.888382+00,2022-06-01 23:14:30.88947+00,2022-06-01 23:14:30.88947+00,2022-06-01 23:14:30.88947+00,,,active,,3615,,"COPY supplier
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 1'
+USING DELIMITERS '|';",client backend
+1654125270.979895,16384,dbt3,7656,,10,postgres,psql,,,-1,2022-06-01 23:14:30.888851+00,2022-06-01 23:14:30.891477+00,2022-06-01 23:14:30.891477+00,2022-06-01 23:14:30.891478+00,,,active,,3615,,"COPY supplier
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 3'
+USING DELIMITERS '|';",client backend
+1654125270.979895,16384,dbt3,7658,,10,postgres,psql,,,-1,2022-06-01 23:14:30.889317+00,2022-06-01 23:14:30.890755+00,2022-06-01 23:14:30.890755+00,2022-06-01 23:14:30.890756+00,,,active,,3615,,"COPY supplier
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 2'
+USING DELIMITERS '|';",client backend
+1654125270.979895,16384,dbt3,7663,,10,postgres,psql,,,-1,2022-06-01 23:14:30.89194+00,2022-06-01 23:14:30.893288+00,2022-06-01 23:14:30.893288+00,2022-06-01 23:14:30.893289+00,,,active,,3615,,"COPY supplier
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 4'
+USING DELIMITERS '|';",client backend
+1654125270.979895,16384,dbt3,7680,,10,postgres,psql,,,-1,2022-06-01 23:14:30.969201+00,2022-06-01 23:14:30.972822+00,2022-06-01 23:14:30.972822+00,2022-06-01 23:14:30.972824+00,,,active,,3615,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV, HEADER);",client backend
+1654125270.979895,16384,dbt3,7661,,10,postgres,psql,,,-1,2022-06-01 23:14:30.90243+00,2022-06-01 23:14:30.907765+00,2022-06-01 23:14:30.907765+00,2022-06-01 23:14:30.907766+00,,,active,,3615,,"COPY supplier
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T s -o -C 6 -S 6'
+USING DELIMITERS '|';",client backend
+1654125270.979895,16384,dbt3,7681,,10,postgres,psql,,,-1,2022-06-01 23:14:30.975452+00,,,2022-06-01 23:14:30.978154+00,Client,ClientRead,idle,,,,"",client backend
+1654125270.979895,16384,dbt3,7683,,10,postgres,psql,,,-1,2022-06-01 23:14:30.975795+00,2022-06-01 23:14:30.978174+00,2022-06-01 23:14:30.978174+00,2022-06-01 23:14:30.978174+00,,,active,,3615,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV, HEADER);",client backend
+1654125270.979895,16384,dbt3,7682,,10,postgres,psql,,,-1,2022-06-01 23:14:30.975452+00,2022-06-01 23:14:30.979895+00,2022-06-01 23:14:30.979895+00,2022-06-01 23:14:30.979896+00,,,active,,3615,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV, HEADER);",client backend
+1654125270.979895,,,7586,,,,"",,,,2022-06-01 23:14:29.766405+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654125270.979895,,,7585,,,,"",,,,2022-06-01 23:14:29.76628+00,,,,Activity,CheckpointerMain,,,,,"",checkpointer
+1654125270.979895,,,7587,,,,"",,,,2022-06-01 23:14:29.766619+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654125330.987584,,,7588,,,,"",,,,2022-06-01 23:14:29.766816+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654125330.987584,,,7590,,10,postgres,"",,,,2022-06-01 23:14:29.767204+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654125330.987584,16384,dbt3,7729,,10,postgres,psql,,,-1,2022-06-01 23:15:24.938193+00,2022-06-01 23:15:24.944592+00,2022-06-01 23:15:24.944592+00,2022-06-01 23:15:24.944593+00,,,active,,3638,,"COPY customer
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T c -o -C 6 -S 2'
+USING DELIMITERS '|';",client backend
+1654125330.987584,16384,dbt3,7728,,10,postgres,psql,,,-1,2022-06-01 23:15:24.93839+00,2022-06-01 23:15:24.943819+00,2022-06-01 23:15:24.943819+00,2022-06-01 23:15:24.943821+00,,,active,,3638,,"COPY customer
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T c -o -C 6 -S 1'
+USING DELIMITERS '|';",client backend
+1654125330.987584,16384,dbt3,7732,,10,postgres,psql,,,-1,2022-06-01 23:15:24.939233+00,2022-06-01 23:15:24.945904+00,2022-06-01 23:15:24.945904+00,2022-06-01 23:15:24.945905+00,,,active,,3638,,"COPY customer
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T c -o -C 6 -S 6'
+USING DELIMITERS '|';",client backend
+1654125330.987584,16384,dbt3,7731,,10,postgres,psql,,,-1,2022-06-01 23:15:24.939619+00,2022-06-01 23:15:24.946125+00,2022-06-01 23:15:24.946125+00,2022-06-01 23:15:24.946127+00,,,active,,3638,,"COPY customer
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T c -o -C 6 -S 4'
+USING DELIMITERS '|';",client backend
+1654125330.987584,16384,dbt3,7730,,10,postgres,psql,,,-1,2022-06-01 23:15:24.94208+00,2022-06-01 23:15:24.94802+00,2022-06-01 23:15:24.94802+00,2022-06-01 23:15:24.948021+00,,,active,,3638,,"COPY customer
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T c -o -C 6 -S 3'
+USING DELIMITERS '|';",client backend
+1654125330.987584,16384,dbt3,7733,,10,postgres,psql,,,-1,2022-06-01 23:15:24.944165+00,2022-06-01 23:15:24.946157+00,2022-06-01 23:15:24.946157+00,2022-06-01 23:15:24.946158+00,,,active,,3638,,"COPY customer
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T c -o -C 6 -S 5'
+USING DELIMITERS '|';",client backend
+1654125330.987584,16384,dbt3,7747,,10,postgres,psql,,,-1,2022-06-01 23:15:30.98263+00,2022-06-01 23:15:30.987584+00,2022-06-01 23:15:30.987584+00,2022-06-01 23:15:30.987586+00,,,active,,3638,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654125330.987584,16384,dbt3,7748,,10,postgres,psql,,,-1,2022-06-01 23:15:30.986613+00,,,,,,,,,,"",client backend
+1654125330.987584,,,7586,,,,"",,,,2022-06-01 23:14:29.766405+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654125330.987584,,,7585,,,,"",,,,2022-06-01 23:14:29.76628+00,,,,Timeout,CheckpointWriteDelay,,,,,"",checkpointer
+1654125330.987584,,,7587,,,,"",,,,2022-06-01 23:14:29.766619+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654125391.015687,,,7588,,,,"",,,,2022-06-01 23:14:29.766816+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654125391.015687,,,7590,,10,postgres,"",,,,2022-06-01 23:14:29.767204+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654125391.015687,16384,dbt3,7758,,10,postgres,psql,,,-1,2022-06-01 23:15:40.356325+00,2022-06-01 23:15:40.3592+00,2022-06-01 23:15:40.3592+00,2022-06-01 23:15:40.359202+00,,,active,3644,3644,,"COPY orders
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 1'
+USING DELIMITERS '|';",client backend
+1654125391.015687,16384,dbt3,7760,,10,postgres,psql,,,-1,2022-06-01 23:15:40.357102+00,2022-06-01 23:15:40.359438+00,2022-06-01 23:15:40.359438+00,2022-06-01 23:15:40.359439+00,,,active,3647,3644,,"COPY orders
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 3'
+USING DELIMITERS '|';",client backend
+1654125391.015687,16384,dbt3,7759,,10,postgres,psql,,,-1,2022-06-01 23:15:40.35719+00,2022-06-01 23:15:40.359704+00,2022-06-01 23:15:40.359704+00,2022-06-01 23:15:40.359705+00,,,active,3649,3644,,"COPY orders
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 2'
+USING DELIMITERS '|';",client backend
+1654125391.015687,16384,dbt3,7761,,10,postgres,psql,,,-1,2022-06-01 23:15:40.35838+00,2022-06-01 23:15:40.360757+00,2022-06-01 23:15:40.360757+00,2022-06-01 23:15:40.360759+00,,,active,3645,3644,,"COPY orders
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 6'
+USING DELIMITERS '|';",client backend
+1654125391.015687,16384,dbt3,7762,,10,postgres,psql,,,-1,2022-06-01 23:15:40.358905+00,2022-06-01 23:15:40.361353+00,2022-06-01 23:15:40.361353+00,2022-06-01 23:15:40.361354+00,,,active,3646,3644,,"COPY orders
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 4'
+USING DELIMITERS '|';",client backend
+1654125391.015687,16384,dbt3,7766,,10,postgres,psql,,,-1,2022-06-01 23:15:40.361237+00,2022-06-01 23:15:40.364569+00,2022-06-01 23:15:40.364569+00,2022-06-01 23:15:40.364571+00,,,active,3648,3644,,"COPY orders
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T O -o -C 6 -S 5'
+USING DELIMITERS '|';",client backend
+1654125391.015687,16384,dbt3,7770,,,,"",,,,2022-06-01 23:15:59.856055+00,2022-06-01 23:15:59.953456+00,2022-06-01 23:15:59.953456+00,2022-06-01 23:15:59.953457+00,Timeout,VacuumDelay,active,,3644,,autovacuum: VACUUM ANALYZE public.partsupp,autovacuum worker
+1654125391.015687,16384,dbt3,7778,,10,postgres,psql,,,-1,2022-06-01 23:16:30.985559+00,2022-06-01 23:16:30.993147+00,2022-06-01 23:16:30.993147+00,2022-06-01 23:16:30.993149+00,,,active,,3644,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",client backend
+1654125391.015687,16384,dbt3,7782,,10,postgres,psql,,,-1,2022-06-01 23:16:31.008461+00,2022-06-01 23:16:31.015687+00,2022-06-01 23:16:31.015687+00,2022-06-01 23:16:31.015688+00,,,active,,3644,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654125391.015687,,,7586,,,,"",,,,2022-06-01 23:14:29.766405+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654125391.015687,,,7585,,,,"",,,,2022-06-01 23:14:29.76628+00,,,,Timeout,CheckpointWriteDelay,,,,,"",checkpointer
+1654125391.015687,,,7587,,,,"",,,,2022-06-01 23:14:29.766619+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654125450.996531,,,7588,,,,"",,,,2022-06-01 23:14:29.766816+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654125450.996531,,,7590,,10,postgres,"",,,,2022-06-01 23:14:29.767204+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654125450.996531,16384,dbt3,7789,,10,postgres,psql,,,-1,2022-06-01 23:16:36.734436+00,2022-06-01 23:16:36.737675+00,2022-06-01 23:16:36.737675+00,2022-06-01 23:16:36.737676+00,LWLock,WALWrite,active,3651,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 1'
+USING DELIMITERS '|';",client backend
+1654125450.996531,16384,dbt3,7790,,10,postgres,psql,,,-1,2022-06-01 23:16:36.734917+00,2022-06-01 23:16:36.73722+00,2022-06-01 23:16:36.73722+00,2022-06-01 23:16:36.737221+00,LWLock,WALWrite,active,3652,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 2'
+USING DELIMITERS '|';",client backend
+1654125450.996531,16384,dbt3,7792,,10,postgres,psql,,,-1,2022-06-01 23:16:36.735757+00,2022-06-01 23:16:36.740813+00,2022-06-01 23:16:36.740813+00,2022-06-01 23:16:36.740814+00,LWLock,WALWrite,active,3653,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 6'
+USING DELIMITERS '|';",client backend
+1654125450.996531,16384,dbt3,7791,,10,postgres,psql,,,-1,2022-06-01 23:16:36.736171+00,2022-06-01 23:16:36.739688+00,2022-06-01 23:16:36.739688+00,2022-06-01 23:16:36.73969+00,LWLock,WALWrite,active,3654,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 3'
+USING DELIMITERS '|';",client backend
+1654125450.996531,16384,dbt3,7795,,10,postgres,psql,,,-1,2022-06-01 23:16:36.740885+00,2022-06-01 23:16:36.743222+00,2022-06-01 23:16:36.743222+00,2022-06-01 23:16:36.743224+00,LWLock,WALWrite,active,3655,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 4'
+USING DELIMITERS '|';",client backend
+1654125450.996531,16384,dbt3,7797,,10,postgres,psql,,,-1,2022-06-01 23:16:36.742037+00,2022-06-01 23:16:36.744287+00,2022-06-01 23:16:36.744287+00,2022-06-01 23:16:36.744288+00,LWLock,WALWrite,active,3650,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 5'
+USING DELIMITERS '|';",client backend
+1654125450.996531,16384,dbt3,7809,,10,postgres,psql,,,-1,2022-06-01 23:17:30.993615+00,2022-06-01 23:17:30.996531+00,2022-06-01 23:17:30.996531+00,2022-06-01 23:17:30.996533+00,,,active,,3650,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654125450.996531,16384,dbt3,7801,,,,"",,,,2022-06-01 23:16:59.879186+00,2022-06-01 23:16:59.907013+00,2022-06-01 23:16:59.907013+00,2022-06-01 23:16:59.907013+00,LWLock,WALWrite,active,,3650,,autovacuum: VACUUM ANALYZE public.orders,autovacuum worker
+1654125450.996531,16384,dbt3,7810,,10,postgres,psql,,,-1,2022-06-01 23:17:30.995653+00,2022-06-01 23:17:30.998068+00,2022-06-01 23:17:30.998068+00,2022-06-01 23:17:30.998069+00,,,active,,3650,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",client backend
+1654125450.996531,,,7586,,,,"",,,,2022-06-01 23:14:29.766405+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654125450.996531,,,7585,,,,"",,,,2022-06-01 23:14:29.76628+00,,,,Timeout,CheckpointWriteDelay,,,,,"",checkpointer
+1654125450.996531,,,7587,,,,"",,,,2022-06-01 23:14:29.766619+00,,,,IO,WALSync,,,,,"",walwriter
+1654125511.009430,,,7588,,,,"",,,,2022-06-01 23:14:29.766816+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654125511.009430,,,7590,,10,postgres,"",,,,2022-06-01 23:14:29.767204+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654125511.009430,16384,dbt3,7789,,10,postgres,psql,,,-1,2022-06-01 23:16:36.734436+00,2022-06-01 23:16:36.737675+00,2022-06-01 23:16:36.737675+00,2022-06-01 23:16:36.737676+00,Lock,extend,active,3651,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 1'
+USING DELIMITERS '|';",client backend
+1654125511.009430,16384,dbt3,7790,,10,postgres,psql,,,-1,2022-06-01 23:16:36.734917+00,2022-06-01 23:16:36.73722+00,2022-06-01 23:16:36.73722+00,2022-06-01 23:16:36.737221+00,,,active,3652,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 2'
+USING DELIMITERS '|';",client backend
+1654125511.009430,16384,dbt3,7792,,10,postgres,psql,,,-1,2022-06-01 23:16:36.735757+00,2022-06-01 23:16:36.740813+00,2022-06-01 23:16:36.740813+00,2022-06-01 23:16:36.740814+00,LWLock,BufferContent,active,3653,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 6'
+USING DELIMITERS '|';",client backend
+1654125511.009430,16384,dbt3,7791,,10,postgres,psql,,,-1,2022-06-01 23:16:36.736171+00,2022-06-01 23:16:36.739688+00,2022-06-01 23:16:36.739688+00,2022-06-01 23:16:36.73969+00,,,active,3654,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 3'
+USING DELIMITERS '|';",client backend
+1654125511.009430,16384,dbt3,7795,,10,postgres,psql,,,-1,2022-06-01 23:16:36.740885+00,2022-06-01 23:16:36.743222+00,2022-06-01 23:16:36.743222+00,2022-06-01 23:16:36.743224+00,LWLock,BufferContent,active,3655,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 4'
+USING DELIMITERS '|';",client backend
+1654125511.009430,16384,dbt3,7797,,10,postgres,psql,,,-1,2022-06-01 23:16:36.742037+00,2022-06-01 23:16:36.744287+00,2022-06-01 23:16:36.744287+00,2022-06-01 23:16:36.744288+00,Lock,extend,active,3650,3650,,"COPY lineitem
+FROM PROGRAM
+'/mnt/home/mark.wong/src/dbt3/src/dbgen/dbgen -s 10 -T L -o -C 6 -S 5'
+USING DELIMITERS '|';",client backend
+1654125511.009430,16384,dbt3,7824,,10,postgres,psql,,,-1,2022-06-01 23:18:31.006838+00,2022-06-01 23:18:31.00943+00,2022-06-01 23:18:31.00943+00,2022-06-01 23:18:31.009431+00,,,active,,3650,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654125511.009430,16384,dbt3,7825,,10,postgres,psql,,,-1,2022-06-01 23:18:31.00723+00,2022-06-01 23:18:31.014908+00,2022-06-01 23:18:31.014908+00,2022-06-01 23:18:31.014909+00,,,active,,3650,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",client backend
+1654125511.009430,16384,dbt3,7827,,10,postgres,psql,,,-1,2022-06-01 23:18:31.007689+00,2022-06-01 23:18:31.012908+00,2022-06-01 23:18:31.012908+00,2022-06-01 23:18:31.012909+00,,,active,,3650,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",client backend
+1654125511.009430,,,7586,,,,"",,,,2022-06-01 23:14:29.766405+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654125511.009430,,,7585,,,,"",,,,2022-06-01 23:14:29.76628+00,,,,Timeout,CheckpointWriteDelay,,,,,"",checkpointer
+1654125511.009430,,,7587,,,,"",,,,2022-06-01 23:14:29.766619+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654125571.101308,,,7588,,,,"",,,,2022-06-01 23:14:29.766816+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654125571.101308,,,7590,,10,postgres,"",,,,2022-06-01 23:14:29.767204+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654125571.101308,16384,dbt3,7923,,10,postgres,psql,,,-1,2022-06-01 23:19:30.619436+00,2022-06-01 23:19:30.626451+00,2022-06-01 23:19:30.626451+00,2022-06-01 23:19:30.626452+00,,,active,,3661,,VACUUM ANALYZE supplier;,client backend
+1654125571.101308,16384,dbt3,7878,,10,postgres,psql,,,-1,2022-06-01 23:19:28.796852+00,2022-06-01 23:19:28.801382+00,2022-06-01 23:19:28.801382+00,2022-06-01 23:19:28.801383+00,,,active,3661,3661,,"
+CREATE UNIQUE INDEX pk_part
+ON part (p_partkey)
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7877,,10,postgres,psql,,,-1,2022-06-01 23:19:28.797145+00,2022-06-01 23:19:28.806558+00,2022-06-01 23:19:28.806558+00,2022-06-01 23:19:28.806559+00,IO,BufFileWrite,active,3668,3661,,"
 CREATE UNIQUE INDEX pk_lineitem
 ON lineitem (l_orderkey, l_linenumber)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:27.981467+00
-1653668275.598995,dbt3,15925,10,postgres,psql,,,2022-05-27 16:17:27.97902+00,2022-05-27 16:17:26.951109+00,2022-05-27 16:17:26.951109+00,"
-CREATE INDEX lineitem_l_partkey_l_quantity_l_shipmode_idx
-ON lineitem (l_partkey, l_quantity, l_shipmode)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:27.989385+00
-1653668275.598995,dbt3,15877,10,postgres,psql,,-1,2022-05-27 16:17:26.940133+00,2022-05-27 16:17:26.943645+00,2022-05-27 16:17:26.943645+00,"
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7876,,10,postgres,psql,,,-1,2022-06-01 23:19:28.799335+00,2022-06-01 23:19:28.80189+00,2022-06-01 23:19:28.80189+00,2022-06-01 23:19:28.80189+00,,,active,3662,3661,,"
 CREATE INDEX partsupp_ps_suppkey_idx
 ON partsupp (ps_suppkey)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.943645+00
-1653668275.598995,dbt3,15935,10,postgres,psql,,-1,2022-05-27 16:17:55.588451+00,2022-05-27 16:17:55.598995+00,2022-05-27 16:17:55.598995+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:17:55.598997+00
-1653668275.598995,dbt3,15881,10,postgres,psql,,-1,2022-05-27 16:17:26.9479+00,2022-05-27 16:17:26.953775+00,2022-05-27 16:17:26.953775+00,"
-CREATE UNIQUE INDEX pk_partsupp
-ON partsupp (ps_partkey, ps_suppkey)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.953777+00
-1653668275.598995,dbt3,15889,10,postgres,psql,,-1,2022-05-27 16:17:26.949656+00,2022-05-27 16:17:26.951109+00,2022-05-27 16:17:26.951109+00,"
-CREATE INDEX lineitem_l_partkey_l_quantity_l_shipmode_idx
-ON lineitem (l_partkey, l_quantity, l_shipmode)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.95111+00
-1653668275.598995,dbt3,15888,10,postgres,psql,,-1,2022-05-27 16:17:26.949579+00,2022-05-27 16:17:26.952173+00,2022-05-27 16:17:26.952173+00,"
-CREATE INDEX lineitem_l_shipdate_idx
-ON lineitem USING BRIN (l_shipdate);",active,2022-05-27 16:17:26.952174+00
-1653668275.598995,dbt3,15884,10,postgres,psql,,-1,2022-05-27 16:17:26.954667+00,2022-05-27 16:17:26.957659+00,2022-05-27 16:17:26.957659+00,"
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7875,,10,postgres,psql,,,-1,2022-06-01 23:19:28.800873+00,2022-06-01 23:19:28.804611+00,2022-06-01 23:19:28.804611+00,2022-06-01 23:19:28.804612+00,,,active,3665,3661,,"
+CREATE INDEX part_p_type_p_partkey_idx
+ON part(p_type, p_partkey)
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7874,,10,postgres,psql,,,-1,2022-06-01 23:19:28.801321+00,2022-06-01 23:19:28.804212+00,2022-06-01 23:19:28.804212+00,2022-06-01 23:19:28.804213+00,,,active,3664,3661,,"
 CREATE INDEX part_p_container_p_brand_p_partkey_idx
 ON part(p_container, p_brand, p_partkey)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.95766+00
-1653668275.598995,dbt3,15883,10,postgres,psql,,-1,2022-05-27 16:17:26.953081+00,2022-05-27 16:17:26.95768+00,2022-05-27 16:17:26.95768+00,"
-CREATE UNIQUE INDEX pk_lineitem
-ON lineitem (l_orderkey, l_linenumber)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.957681+00
-1653668275.598995,dbt3,15901,10,postgres,psql,,-1,2022-05-27 16:17:26.964457+00,2022-05-27 16:17:26.967709+00,2022-05-27 16:17:26.967709+00,"
-CREATE INDEX lineitem_l_orderkey_l_suppkey_l_quantity_idx
-ON lineitem (l_orderkey, l_suppkey, l_quantity)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.96771+00
-1653668275.598995,dbt3,15894,10,postgres,psql,,-1,2022-05-27 16:17:26.965127+00,2022-05-27 16:17:26.967455+00,2022-05-27 16:17:26.967455+00,"
-CREATE INDEX orders_o_orderkey_o_orderdate_idx
-ON orders (o_orderkey, o_orderdate)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.967456+00
-1653668275.598995,dbt3,15892,10,postgres,psql,,-1,2022-05-27 16:17:26.964579+00,2022-05-27 16:17:26.970471+00,2022-05-27 16:17:26.970471+00,"
-CREATE UNIQUE INDEX pk_orders
-ON orders (o_orderkey) WITH (fillfactor = 100);",active,2022-05-27 16:17:26.970472+00
-1653668275.598995,dbt3,15895,10,postgres,psql,,-1,2022-05-27 16:17:26.96666+00,2022-05-27 16:17:26.97011+00,2022-05-27 16:17:26.97011+00,"
-CREATE INDEX lineitem_l_orderkey_l_suppkey_idx
-ON lineitem (l_orderkey, l_suppkey)
-WITH (fillfactor = 100)
-WHERE l_commitdate < l_receiptdate;",active,2022-05-27 16:17:26.970111+00
-1653668275.598995,dbt3,15885,10,postgres,psql,,-1,2022-05-27 16:17:26.970546+00,2022-05-27 16:17:26.991257+00,2022-05-27 16:17:26.991257+00,"
-CREATE INDEX orders_o_orderdate_idx
-ON orders USING BRIN (o_orderdate);",active,2022-05-27 16:17:26.991258+00
-1653668275.598995,dbt3,15887,10,postgres,psql,,-1,2022-05-27 16:17:26.97083+00,2022-05-27 16:17:26.978276+00,2022-05-27 16:17:26.978276+00,"
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7885,,10,postgres,psql,,,-1,2022-06-01 23:19:28.801098+00,2022-06-01 23:19:28.805393+00,2022-06-01 23:19:28.805393+00,2022-06-01 23:19:28.805394+00,IO,DataFileWrite,active,3666,3661,,"
 CREATE INDEX lineitem_l_orderkey_idx_l_returnflag
 ON lineitem (l_orderkey)
 WITH (fillfactor = 100)
-WHERE l_returnflag = 'R';",active,2022-05-27 16:17:26.978277+00
-1653668275.598995,dbt3,15900,10,postgres,psql,,-1,2022-05-27 16:17:26.985669+00,2022-05-27 16:17:26.998168+00,2022-05-27 16:17:26.998168+00,"
-CREATE INDEX lineitem_l_partkey_l_suppkey_l_shipdate_l_quantity_idx
-ON lineitem (l_partkey, l_suppkey, l_shipdate, l_quantity)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.998169+00
-1653668275.598995,dbt3,15906,10,postgres,psql,,-1,2022-05-27 16:17:26.973404+00,2022-05-27 16:17:26.989304+00,2022-05-27 16:17:26.989304+00,"
-CREATE INDEX lineitem_l_receiptdate_idx
-ON lineitem USING BRIN (l_receiptdate);",active,2022-05-27 16:17:26.989305+00
-1653668275.598995,dbt3,15907,10,postgres,psql,,-1,2022-05-27 16:17:26.980494+00,2022-05-27 16:17:26.984559+00,2022-05-27 16:17:26.984559+00,"
-CREATE INDEX customer_c_phone_c_acctbal_c_custkey_idx
-ON customer (substring(c_phone from 1 for 2), c_acctbal, c_custkey)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.984559+00
-1653668275.598995,dbt3,15910,10,postgres,psql,,-1,2022-05-27 16:17:26.987571+00,2022-05-27 16:17:26.989272+00,2022-05-27 16:17:26.989272+00,"
+WHERE l_returnflag = 'R';",client backend
+1654125571.101308,16384,dbt3,7931,,10,postgres,psql,,,-1,2022-06-01 23:19:31.058661+00,2022-06-01 23:19:31.069615+00,2022-06-01 23:19:31.069615+00,2022-06-01 23:19:31.069618+00,,,active,,3661,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",client backend
+1654125571.101308,16384,dbt3,7884,,10,postgres,psql,,,-1,2022-06-01 23:19:28.803433+00,2022-06-01 23:19:28.806395+00,2022-06-01 23:19:28.806395+00,2022-06-01 23:19:28.806396+00,LWLock,BufferMapping,active,3667,3661,,"
+CREATE INDEX orders_o_orderdate_idx
+ON orders USING BRIN (o_orderdate);",client backend
+1654125571.101308,16384,dbt3,7889,,10,postgres,psql,,,-1,2022-06-01 23:19:28.802775+00,2022-06-01 23:19:28.814458+00,2022-06-01 23:19:28.814458+00,2022-06-01 23:19:28.814459+00,,,active,3674,3661,,"
 CREATE INDEX orders_o_custkey_idx
 ON orders (o_custkey)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.989273+00
-1653668275.598995,dbt3,15902,10,postgres,psql,,-1,2022-05-27 16:17:26.985979+00,2022-05-27 16:17:27.008696+00,2022-05-27 16:17:27.008696+00,"
-CREATE INDEX customer_c_mktsegment_c_custkey_idx
-ON customer (c_mktsegment, c_custkey)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:27.008697+00
-1653668275.598995,dbt3,15904,10,postgres,psql,,-1,2022-05-27 16:17:26.986485+00,2022-05-27 16:17:27.008063+00,2022-05-27 16:17:27.008063+00,"
-CREATE INDEX lineitem_l_orderkey_idx_part2
-ON lineitem (l_orderkey)
-WITH (fillfactor = 100)
-WHERE l_commitdate < l_receiptdate
-  AND l_shipdate < l_commitdate;",active,2022-05-27 16:17:27.008065+00
-1653668275.598995,,15572,,,"",,,2022-05-27 16:11:51.816608+00,,,"",,
-1653668275.598995,,15571,,,"",,,2022-05-27 16:11:51.816467+00,,,"",,
-1653668275.598995,,15573,,,"",,,2022-05-27 16:11:51.816783+00,,,"",,
-1653668335.618422,,15574,,,"",,,2022-05-27 16:11:51.81696+00,,,"",,
-1653668335.618422,,15576,10,postgres,"",,,2022-05-27 16:11:51.8174+00,,,"",,
-1653668335.618422,dbt3,15924,10,postgres,psql,,,2022-05-27 16:17:27.965723+00,2022-05-27 16:17:26.95768+00,2022-05-27 16:17:26.95768+00,"
-CREATE UNIQUE INDEX pk_lineitem
-ON lineitem (l_orderkey, l_linenumber)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:27.981467+00
-1653668335.618422,dbt3,15925,10,postgres,psql,,,2022-05-27 16:17:27.97902+00,2022-05-27 16:17:26.951109+00,2022-05-27 16:17:26.951109+00,"
-CREATE INDEX lineitem_l_partkey_l_quantity_l_shipmode_idx
-ON lineitem (l_partkey, l_quantity, l_shipmode)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:27.989385+00
-1653668335.618422,dbt3,15969,10,postgres,psql,,-1,2022-05-27 16:18:55.596307+00,,2022-05-27 16:18:55.60857+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, numbackends, xact_commit, xact_rollback, blks_read, blks_hit, tup_returned, tup_fetched, tup_inserted, tup_updated, tup_deleted FROM pg_stat_database) TO STDOUT (FORMAT CSV);",idle,2022-05-27 16:18:55.621446+00
-1653668335.618422,dbt3,15971,10,postgres,psql,,-1,2022-05-27 16:18:55.604618+00,2022-05-27 16:18:55.618422+00,2022-05-27 16:18:55.618422+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:18:55.618425+00
-1653668335.618422,dbt3,15972,10,postgres,psql,,-1,2022-05-27 16:18:55.606583+00,2022-05-27 16:18:55.609592+00,2022-05-27 16:18:55.609592+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:18:55.609593+00
-1653668335.618422,dbt3,15889,10,postgres,psql,,-1,2022-05-27 16:17:26.949656+00,2022-05-27 16:17:26.951109+00,2022-05-27 16:17:26.951109+00,"
-CREATE INDEX lineitem_l_partkey_l_quantity_l_shipmode_idx
-ON lineitem (l_partkey, l_quantity, l_shipmode)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.95111+00
-1653668335.618422,dbt3,15888,10,postgres,psql,,-1,2022-05-27 16:17:26.949579+00,2022-05-27 16:17:26.952173+00,2022-05-27 16:17:26.952173+00,"
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7886,,10,postgres,psql,,,-1,2022-06-01 23:19:28.80606+00,2022-06-01 23:19:28.809908+00,2022-06-01 23:19:28.809908+00,2022-06-01 23:19:28.809909+00,LWLock,BufferMapping,active,3670,3661,,"
+CREATE UNIQUE INDEX pk_partsupp
+ON partsupp (ps_partkey, ps_suppkey)
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7879,,10,postgres,psql,,,-1,2022-06-01 23:19:28.803057+00,2022-06-01 23:19:28.80805+00,2022-06-01 23:19:28.80805+00,2022-06-01 23:19:28.808051+00,LWLock,BufferMapping,active,3677,3661,,"
+CREATE UNIQUE INDEX pk_orders
+ON orders (o_orderkey) WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7891,,10,postgres,psql,,,-1,2022-06-01 23:19:28.806379+00,2022-06-01 23:19:28.813291+00,2022-06-01 23:19:28.813291+00,2022-06-01 23:19:28.813292+00,LWLock,BufferMapping,active,3673,3661,,"
 CREATE INDEX lineitem_l_shipdate_idx
-ON lineitem USING BRIN (l_shipdate);",active,2022-05-27 16:17:26.952174+00
-1653668335.618422,dbt3,15883,10,postgres,psql,,-1,2022-05-27 16:17:26.953081+00,2022-05-27 16:17:26.95768+00,2022-05-27 16:17:26.95768+00,"
-CREATE UNIQUE INDEX pk_lineitem
-ON lineitem (l_orderkey, l_linenumber)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.957681+00
-1653668335.618422,dbt3,15901,10,postgres,psql,,-1,2022-05-27 16:17:26.964457+00,2022-05-27 16:17:26.967709+00,2022-05-27 16:17:26.967709+00,"
-CREATE INDEX lineitem_l_orderkey_l_suppkey_l_quantity_idx
-ON lineitem (l_orderkey, l_suppkey, l_quantity)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.96771+00
-1653668335.618422,dbt3,15895,10,postgres,psql,,-1,2022-05-27 16:17:26.96666+00,2022-05-27 16:17:26.97011+00,2022-05-27 16:17:26.97011+00,"
-CREATE INDEX lineitem_l_orderkey_l_suppkey_idx
-ON lineitem (l_orderkey, l_suppkey)
-WITH (fillfactor = 100)
-WHERE l_commitdate < l_receiptdate;",active,2022-05-27 16:17:26.970111+00
-1653668335.618422,dbt3,15887,10,postgres,psql,,-1,2022-05-27 16:17:26.97083+00,2022-05-27 16:17:26.978276+00,2022-05-27 16:17:26.978276+00,"
+ON lineitem USING BRIN (l_shipdate);",client backend
+1654125571.101308,16384,dbt3,7897,7876,10,postgres,psql,,,,2022-06-01 23:19:28.808351+00,2022-06-01 23:19:28.80189+00,2022-06-01 23:19:28.80189+00,2022-06-01 23:19:28.819151+00,,,active,,3661,,"
+CREATE INDEX partsupp_ps_suppkey_idx
+ON partsupp (ps_suppkey)
+WITH (fillfactor = 100);",parallel worker
+1654125571.101308,16384,dbt3,7904,7885,10,postgres,psql,,,,2022-06-01 23:19:28.80856+00,2022-06-01 23:19:28.805393+00,2022-06-01 23:19:28.805393+00,2022-06-01 23:19:28.815043+00,,,active,,3661,,"
 CREATE INDEX lineitem_l_orderkey_idx_l_returnflag
 ON lineitem (l_orderkey)
 WITH (fillfactor = 100)
-WHERE l_returnflag = 'R';",active,2022-05-27 16:17:26.978277+00
-1653668335.618422,dbt3,15900,10,postgres,psql,,-1,2022-05-27 16:17:26.985669+00,2022-05-27 16:17:26.998168+00,2022-05-27 16:17:26.998168+00,"
+WHERE l_returnflag = 'R';",parallel worker
+1654125571.101308,16384,dbt3,7893,,10,postgres,psql,,,-1,2022-06-01 23:19:28.80521+00,2022-06-01 23:19:28.822578+00,2022-06-01 23:19:28.822578+00,2022-06-01 23:19:28.822579+00,LWLock,BufferMapping,active,3682,3661,,"
+CREATE INDEX customer_c_nationkey_c_custkey_idx
+ON customer (c_nationkey, c_custkey)
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7887,,10,postgres,psql,,,-1,2022-06-01 23:19:28.809657+00,2022-06-01 23:19:28.815475+00,2022-06-01 23:19:28.815475+00,2022-06-01 23:19:28.815476+00,LWLock,BufferMapping,active,3675,3661,,"
+CREATE INDEX lineitem_l_orderkey_l_suppkey_idx
+ON lineitem (l_orderkey, l_suppkey)
+WITH (fillfactor = 100)
+WHERE l_commitdate < l_receiptdate;",client backend
+1654125571.101308,16384,dbt3,7890,,10,postgres,psql,,,-1,2022-06-01 23:19:28.808166+00,2022-06-01 23:19:28.812844+00,2022-06-01 23:19:28.812844+00,2022-06-01 23:19:28.812845+00,,,active,3672,3661,,"
 CREATE INDEX lineitem_l_partkey_l_suppkey_l_shipdate_l_quantity_idx
 ON lineitem (l_partkey, l_suppkey, l_shipdate, l_quantity)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.998169+00
-1653668335.618422,dbt3,15906,10,postgres,psql,,-1,2022-05-27 16:17:26.973404+00,2022-05-27 16:17:26.989304+00,2022-05-27 16:17:26.989304+00,"
-CREATE INDEX lineitem_l_receiptdate_idx
-ON lineitem USING BRIN (l_receiptdate);",active,2022-05-27 16:17:26.989305+00
-1653668335.618422,dbt3,15904,10,postgres,psql,,-1,2022-05-27 16:17:26.986485+00,2022-05-27 16:17:27.008063+00,2022-05-27 16:17:27.008063+00,"
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7881,,10,postgres,psql,,,-1,2022-06-01 23:19:28.812541+00,2022-06-01 23:19:28.816592+00,2022-06-01 23:19:28.816592+00,2022-06-01 23:19:28.816593+00,,,active,3676,3661,,"
 CREATE INDEX lineitem_l_orderkey_idx_part2
 ON lineitem (l_orderkey)
 WITH (fillfactor = 100)
 WHERE l_commitdate < l_receiptdate
-  AND l_shipdate < l_commitdate;",active,2022-05-27 16:17:27.008065+00
-1653668335.618422,,15572,,,"",,,2022-05-27 16:11:51.816608+00,,,"",,
-1653668335.618422,,15571,,,"",,,2022-05-27 16:11:51.816467+00,,,"",,
-1653668335.618422,,15573,,,"",,,2022-05-27 16:11:51.816783+00,,,"",,
-1653668395.616202,,15574,,,"",,,2022-05-27 16:11:51.81696+00,,,"",,
-1653668395.616202,,15576,10,postgres,"",,,2022-05-27 16:11:51.8174+00,,,"",,
-1653668395.616202,dbt3,15982,10,postgres,psql,,-1,2022-05-27 16:19:55.610865+00,2022-05-27 16:19:55.613887+00,2022-05-27 16:19:55.613887+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, a.indexrelname, idx_scan, idx_tup_read, idx_tup_fetch, idx_blks_read, idx_blks_hit FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:19:55.613888+00
-1653668395.616202,dbt3,15983,10,postgres,psql,,-1,2022-05-27 16:19:55.610877+00,2022-05-27 16:19:55.613494+00,2022-05-27 16:19:55.613494+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, a.schemaname, a.relname, seq_scan, seq_tup_read, idx_scan, idx_tup_fetch, n_tup_ins, n_tup_upd, n_tup_del, n_tup_hot_upd, n_live_tup, n_dead_tup, heap_blks_read, heap_blks_hit, idx_blks_read, idx_blks_hit, toast_blks_read, toast_blks_hit, tidx_blks_read, tidx_blks_hit FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:19:55.613496+00
-1653668395.616202,dbt3,15985,10,postgres,psql,,-1,2022-05-27 16:19:55.613892+00,2022-05-27 16:19:55.616202+00,2022-05-27 16:19:55.616202+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:19:55.616204+00
-1653668395.616202,dbt3,15889,10,postgres,psql,,-1,2022-05-27 16:17:26.949656+00,2022-05-27 16:17:26.951109+00,2022-05-27 16:17:26.951109+00,"
-CREATE INDEX lineitem_l_partkey_l_quantity_l_shipmode_idx
-ON lineitem (l_partkey, l_quantity, l_shipmode)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.95111+00
-1653668395.616202,dbt3,15883,10,postgres,psql,,-1,2022-05-27 16:17:26.953081+00,2022-05-27 16:17:26.95768+00,2022-05-27 16:17:26.95768+00,"
-CREATE UNIQUE INDEX pk_lineitem
-ON lineitem (l_orderkey, l_linenumber)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.957681+00
-1653668395.616202,dbt3,15901,10,postgres,psql,,-1,2022-05-27 16:17:26.964457+00,2022-05-27 16:17:26.967709+00,2022-05-27 16:17:26.967709+00,"
+  AND l_shipdate < l_commitdate;",client backend
+1654125571.101308,16384,dbt3,7892,,10,postgres,psql,,,-1,2022-06-01 23:19:28.813458+00,2022-06-01 23:19:28.819218+00,2022-06-01 23:19:28.819218+00,2022-06-01 23:19:28.819219+00,,,active,3681,3661,,"
+CREATE UNIQUE INDEX pk_customer
+ON customer (c_custkey)
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7888,,10,postgres,psql,,,-1,2022-06-01 23:19:28.807948+00,2022-06-01 23:19:28.823046+00,2022-06-01 23:19:28.823046+00,2022-06-01 23:19:28.823047+00,,,active,3687,3661,,"
+CREATE INDEX orders_o_orderkey_o_orderdate_idx
+ON orders (o_orderkey, o_orderdate)
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7895,,10,postgres,psql,,,-1,2022-06-01 23:19:28.814074+00,2022-06-01 23:19:28.827141+00,2022-06-01 23:19:28.827141+00,2022-06-01 23:19:28.827142+00,,,active,3680,3661,,"
 CREATE INDEX lineitem_l_orderkey_l_suppkey_l_quantity_idx
 ON lineitem (l_orderkey, l_suppkey, l_quantity)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.96771+00
-1653668395.616202,dbt3,15895,10,postgres,psql,,-1,2022-05-27 16:17:26.96666+00,2022-05-27 16:17:26.97011+00,2022-05-27 16:17:26.97011+00,"
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7933,,10,postgres,psql,,,-1,2022-06-01 23:19:31.080556+00,2022-06-01 23:19:31.101308+00,2022-06-01 23:19:31.101308+00,2022-06-01 23:19:31.101311+00,,,active,,3661,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654125571.101308,16384,dbt3,7894,,10,postgres,psql,,,-1,2022-06-01 23:19:28.813866+00,2022-06-01 23:19:28.817555+00,2022-06-01 23:19:28.817555+00,2022-06-01 23:19:28.817556+00,,,active,3684,3661,,"
+CREATE INDEX part_p_size_idx
+ON part USING BRIN (p_size);",client backend
+1654125571.101308,16384,dbt3,7901,7874,10,postgres,psql,,,,2022-06-01 23:19:28.815846+00,2022-06-01 23:19:28.804212+00,2022-06-01 23:19:28.804212+00,2022-06-01 23:19:28.81724+00,,,active,,3661,,"
+CREATE INDEX part_p_container_p_brand_p_partkey_idx
+ON part(p_container, p_brand, p_partkey)
+WITH (fillfactor = 100);",parallel worker
+1654125571.101308,16384,dbt3,7896,7878,10,postgres,psql,,,,2022-06-01 23:19:28.816073+00,2022-06-01 23:19:28.801382+00,2022-06-01 23:19:28.801382+00,2022-06-01 23:19:28.819626+00,IO,BufFileWrite,active,,3661,,"
+CREATE UNIQUE INDEX pk_part
+ON part (p_partkey)
+WITH (fillfactor = 100);",parallel worker
+1654125571.101308,16384,dbt3,7907,,10,postgres,psql,,,-1,2022-06-01 23:19:28.817172+00,2022-06-01 23:19:28.821175+00,2022-06-01 23:19:28.821175+00,2022-06-01 23:19:28.821176+00,,,active,3686,3661,,"
+CREATE INDEX part_ios_test1
+ON part USING btree (p_size, p_partkey, p_brand, p_type)
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7905,,10,postgres,psql,,,-1,2022-06-01 23:19:28.815251+00,2022-06-01 23:19:28.825001+00,2022-06-01 23:19:28.825001+00,2022-06-01 23:19:28.825002+00,,,active,3688,3661,,"
+CREATE INDEX lineitem_l_partkey_l_quantity_l_shipmode_idx
+ON lineitem (l_partkey, l_quantity, l_shipmode)
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7903,7875,10,postgres,psql,,,,2022-06-01 23:19:28.814936+00,2022-06-01 23:19:28.804611+00,2022-06-01 23:19:28.804611+00,2022-06-01 23:19:28.825793+00,,,active,,3661,,"
+CREATE INDEX part_p_type_p_partkey_idx
+ON part(p_type, p_partkey)
+WITH (fillfactor = 100);",parallel worker
+1654125571.101308,16384,dbt3,7902,,10,postgres,psql,,,-1,2022-06-01 23:19:28.816041+00,2022-06-01 23:19:28.824746+00,2022-06-01 23:19:28.824746+00,2022-06-01 23:19:28.824747+00,,,active,3683,3661,,"
+CREATE INDEX lineitem_l_receiptdate_idx
+ON lineitem USING BRIN (l_receiptdate);",client backend
+1654125571.101308,16384,dbt3,7898,,10,postgres,psql,,,-1,2022-06-01 23:19:28.821305+00,2022-06-01 23:19:28.825765+00,2022-06-01 23:19:28.825765+00,2022-06-01 23:19:28.825766+00,LWLock,BufferMapping,active,3679,3661,,"
+CREATE INDEX customer_c_phone_c_acctbal_c_custkey_idx
+ON customer (substring(c_phone from 1 for 2), c_acctbal, c_custkey)
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7909,,10,postgres,psql,,,-1,2022-06-01 23:19:28.821972+00,2022-06-01 23:19:28.823391+00,2022-06-01 23:19:28.823391+00,2022-06-01 23:19:28.823391+00,LWLock,BufferMapping,active,3678,3661,,"
+CREATE INDEX customer_c_mktsegment_c_custkey_idx
+ON customer (c_mktsegment, c_custkey)
+WITH (fillfactor = 100);",client backend
+1654125571.101308,16384,dbt3,7906,7877,10,postgres,psql,,,,2022-06-01 23:19:28.822934+00,2022-06-01 23:19:28.806558+00,2022-06-01 23:19:28.806558+00,2022-06-01 23:19:28.825834+00,,,active,,3661,,"
+CREATE UNIQUE INDEX pk_lineitem
+ON lineitem (l_orderkey, l_linenumber)
+WITH (fillfactor = 100);",parallel worker
+1654125571.101308,16384,dbt3,7900,,10,postgres,psql,,,-1,2022-06-01 23:19:28.8156+00,2022-06-01 23:19:28.825663+00,2022-06-01 23:19:28.825663+00,2022-06-01 23:19:28.825663+00,,,active,3689,3661,,"
+CREATE INDEX customer_c_phone_idx_c_acctbal
+ON customer (substr(c_phone::text, 1, 2))
+WHERE c_acctbal > 0.00;",client backend
+1654125571.101308,,,7586,,,,"",,,,2022-06-01 23:14:29.766405+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654125571.101308,,,7585,,,,"",,,,2022-06-01 23:14:29.76628+00,,,,Timeout,CheckpointWriteDelay,,,,,"",checkpointer
+1654125571.101308,,,7587,,,,"",,,,2022-06-01 23:14:29.766619+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654125631.203452,,,7588,,,,"",,,,2022-06-01 23:14:29.766816+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654125631.203452,,,7590,,10,postgres,"",,,,2022-06-01 23:14:29.767204+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654125631.203452,16384,dbt3,7964,,10,postgres,psql,,,-1,2022-06-01 23:20:31.134348+00,2022-06-01 23:20:31.203452+00,2022-06-01 23:20:31.203452+00,2022-06-01 23:20:31.203454+00,,,active,,3666,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654125631.203452,16384,dbt3,7877,,10,postgres,psql,,,-1,2022-06-01 23:19:28.797145+00,2022-06-01 23:19:28.806558+00,2022-06-01 23:19:28.806558+00,2022-06-01 23:19:28.806559+00,,,active,3668,3661,,"
+CREATE UNIQUE INDEX pk_lineitem
+ON lineitem (l_orderkey, l_linenumber)
+WITH (fillfactor = 100);",client backend
+1654125631.203452,16384,dbt3,7885,,10,postgres,psql,,,-1,2022-06-01 23:19:28.801098+00,2022-06-01 23:19:28.805393+00,2022-06-01 23:19:28.805393+00,2022-06-01 23:19:28.805394+00,,,active,3666,3661,,"
+CREATE INDEX lineitem_l_orderkey_idx_l_returnflag
+ON lineitem (l_orderkey)
+WITH (fillfactor = 100)
+WHERE l_returnflag = 'R';",client backend
+1654125631.203452,16384,dbt3,7889,,10,postgres,psql,,,-1,2022-06-01 23:19:28.802775+00,2022-06-01 23:19:28.814458+00,2022-06-01 23:19:28.814458+00,2022-06-01 23:19:28.814459+00,IO,DataFileExtend,active,3674,3661,,"
+CREATE INDEX orders_o_custkey_idx
+ON orders (o_custkey)
+WITH (fillfactor = 100);",client backend
+1654125631.203452,16384,dbt3,7891,,10,postgres,psql,,,-1,2022-06-01 23:19:28.806379+00,2022-06-01 23:19:28.813291+00,2022-06-01 23:19:28.813291+00,2022-06-01 23:19:28.813292+00,,,active,3673,3661,,"
+CREATE INDEX lineitem_l_shipdate_idx
+ON lineitem USING BRIN (l_shipdate);",client backend
+1654125631.203452,16384,dbt3,7904,7885,10,postgres,psql,,,,2022-06-01 23:19:28.80856+00,2022-06-01 23:19:28.805393+00,2022-06-01 23:19:28.805393+00,2022-06-01 23:19:28.815043+00,,,active,,3661,,"
+CREATE INDEX lineitem_l_orderkey_idx_l_returnflag
+ON lineitem (l_orderkey)
+WITH (fillfactor = 100)
+WHERE l_returnflag = 'R';",parallel worker
+1654125631.203452,16384,dbt3,7887,,10,postgres,psql,,,-1,2022-06-01 23:19:28.809657+00,2022-06-01 23:19:28.815475+00,2022-06-01 23:19:28.815475+00,2022-06-01 23:19:28.815476+00,,,active,3675,3661,,"
 CREATE INDEX lineitem_l_orderkey_l_suppkey_idx
 ON lineitem (l_orderkey, l_suppkey)
 WITH (fillfactor = 100)
-WHERE l_commitdate < l_receiptdate;",active,2022-05-27 16:17:26.970111+00
-1653668395.616202,dbt3,15900,10,postgres,psql,,-1,2022-05-27 16:17:26.985669+00,2022-05-27 16:17:26.998168+00,2022-05-27 16:17:26.998168+00,"
+WHERE l_commitdate < l_receiptdate;",client backend
+1654125631.203452,16384,dbt3,7890,,10,postgres,psql,,,-1,2022-06-01 23:19:28.808166+00,2022-06-01 23:19:28.812844+00,2022-06-01 23:19:28.812844+00,2022-06-01 23:19:28.812845+00,IO,BufFileWrite,active,3672,3661,,"
 CREATE INDEX lineitem_l_partkey_l_suppkey_l_shipdate_l_quantity_idx
 ON lineitem (l_partkey, l_suppkey, l_shipdate, l_quantity)
-WITH (fillfactor = 100);",active,2022-05-27 16:17:26.998169+00
-1653668395.616202,,15572,,,"",,,2022-05-27 16:11:51.816608+00,,,"",,
-1653668395.616202,,15571,,,"",,,2022-05-27 16:11:51.816467+00,,,"",,
-1653668395.616202,,15573,,,"",,,2022-05-27 16:11:51.816783+00,,,"",,
-1653668455.634638,,15574,,,"",,,2022-05-27 16:11:51.81696+00,,,"",,
-1653668455.634638,,15576,10,postgres,"",,,2022-05-27 16:11:51.8174+00,,,"",,
-1653668455.634638,dbt3,15992,10,postgres,psql,,-1,2022-05-27 16:20:46.216479+00,2022-05-27 16:20:46.218172+00,2022-05-27 16:20:46.218172+00,VACUUM ANALYZE lineitem;,active,2022-05-27 16:20:46.218173+00
-1653668455.634638,dbt3,16004,10,postgres,psql,,-1,2022-05-27 16:20:55.624687+00,2022-05-27 16:20:55.634638+00,2022-05-27 16:20:55.634638+00,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, datname, pid, usesysid, usename, application_name, client_addr, client_port, backend_start, xact_start, query_start, query , state, state_change FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",active,2022-05-27 16:20:55.63464+00
-1653668455.634638,,15572,,,"",,,2022-05-27 16:11:51.816608+00,,,"",,
-1653668455.634638,,15571,,,"",,,2022-05-27 16:11:51.816467+00,,,"",,
-1653668455.634638,,15573,,,"",,,2022-05-27 16:11:51.816783+00,,,"",,
+WITH (fillfactor = 100);",client backend
+1654125631.203452,16384,dbt3,7881,,10,postgres,psql,,,-1,2022-06-01 23:19:28.812541+00,2022-06-01 23:19:28.816592+00,2022-06-01 23:19:28.816592+00,2022-06-01 23:19:28.816593+00,LWLock,BufferMapping,active,3676,3661,,"
+CREATE INDEX lineitem_l_orderkey_idx_part2
+ON lineitem (l_orderkey)
+WITH (fillfactor = 100)
+WHERE l_commitdate < l_receiptdate
+  AND l_shipdate < l_commitdate;",client backend
+1654125631.203452,16384,dbt3,7888,,10,postgres,psql,,,-1,2022-06-01 23:19:28.807948+00,2022-06-01 23:19:28.823046+00,2022-06-01 23:19:28.823046+00,2022-06-01 23:19:28.823047+00,,,active,3687,3661,,"
+CREATE INDEX orders_o_orderkey_o_orderdate_idx
+ON orders (o_orderkey, o_orderdate)
+WITH (fillfactor = 100);",client backend
+1654125631.203452,16384,dbt3,7895,,10,postgres,psql,,,-1,2022-06-01 23:19:28.814074+00,2022-06-01 23:19:28.827141+00,2022-06-01 23:19:28.827141+00,2022-06-01 23:19:28.827142+00,,,active,3680,3661,,"
+CREATE INDEX lineitem_l_orderkey_l_suppkey_l_quantity_idx
+ON lineitem (l_orderkey, l_suppkey, l_quantity)
+WITH (fillfactor = 100);",client backend
+1654125631.203452,16384,dbt3,7905,,10,postgres,psql,,,-1,2022-06-01 23:19:28.815251+00,2022-06-01 23:19:28.825001+00,2022-06-01 23:19:28.825001+00,2022-06-01 23:19:28.825002+00,,,active,3688,3661,,"
+CREATE INDEX lineitem_l_partkey_l_quantity_l_shipmode_idx
+ON lineitem (l_partkey, l_quantity, l_shipmode)
+WITH (fillfactor = 100);",client backend
+1654125631.203452,16384,dbt3,7902,,10,postgres,psql,,,-1,2022-06-01 23:19:28.816041+00,2022-06-01 23:19:28.824746+00,2022-06-01 23:19:28.824746+00,2022-06-01 23:19:28.824747+00,LWLock,BufferMapping,active,3683,3661,,"
+CREATE INDEX lineitem_l_receiptdate_idx
+ON lineitem USING BRIN (l_receiptdate);",client backend
+1654125631.203452,16384,dbt3,7906,7877,10,postgres,psql,,,,2022-06-01 23:19:28.822934+00,2022-06-01 23:19:28.806558+00,2022-06-01 23:19:28.806558+00,2022-06-01 23:19:28.825834+00,LWLock,BufferMapping,active,,3661,,"
+CREATE UNIQUE INDEX pk_lineitem
+ON lineitem (l_orderkey, l_linenumber)
+WITH (fillfactor = 100);",parallel worker
+1654125631.203452,,,7586,,,,"",,,,2022-06-01 23:14:29.766405+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1654125631.203452,,,7585,,,,"",,,,2022-06-01 23:14:29.76628+00,,,,IO,DataFileSync,,,,,"",checkpointer
+1654125631.203452,,,7587,,,,"",,,,2022-06-01 23:14:29.766619+00,,,,Activity,WalWriterMain,,,,,"",walwriter
+1654125691.076508,,,7588,,,,"",,,,2022-06-01 23:14:29.766816+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1654125691.076508,,,7590,,10,postgres,"",,,,2022-06-01 23:14:29.767204+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1654125691.076508,16384,dbt3,7984,,10,postgres,psql,,,-1,2022-06-01 23:21:31.068729+00,2022-06-01 23:21:31.07845+00,2022-06-01 23:21:31.07845+00,2022-06-01 23:21:31.078451+00,,,active,,3672,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, relname, pid, mode, granted FROM pg_locks, pg_class WHERE relfilenode = relation ORDER BY relname) TO STDOUT (FORMAT CSV);",client backend
+1654125691.076508,16384,dbt3,7982,,10,postgres,psql,,,-1,2022-06-01 23:21:31.054898+00,2022-06-01 23:21:31.067641+00,2022-06-01 23:21:31.067641+00,2022-06-01 23:21:31.067642+00,,,active,,3672,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_statio_all_tables a, pg_stat_all_tables b WHERE a.relid = b.relid) TO STDOUT (FORMAT CSV);",client backend
+1654125691.076508,16384,dbt3,7985,,10,postgres,psql,,,-1,2022-06-01 23:21:31.063821+00,2022-06-01 23:21:31.076508+00,2022-06-01 23:21:31.076508+00,2022-06-01 23:21:31.076509+00,,,active,,3672,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_activity) TO STDOUT (FORMAT CSV);",client backend
+1654125691.076508,16384,dbt3,7983,,10,postgres,psql,,,-1,2022-06-01 23:21:31.061597+00,2022-06-01 23:21:31.073509+00,2022-06-01 23:21:31.073509+00,2022-06-01 23:21:31.073511+00,,,active,,3672,,"COPY (SELECT EXTRACT(EPOCH FROM TRANSACTION_TIMESTAMP()) AS ctime, * FROM pg_stat_all_indexes a, pg_statio_all_indexes b WHERE a.indexrelid = b.indexrelid) TO STDOUT (FORMAT CSV);",client backend
+1654125691.076508,16384,dbt3,7890,,10,postgres,psql,,,-1,2022-06-01 23:19:28.808166+00,2022-06-01 23:19:28.812844+00,2022-06-01 23:19:28.812844+00,2022-06-01 23:19:28.812845+00,,,active,3672,3661,,"
+CREATE INDEX lineitem_l_partkey_l_suppkey_l_shipdate_l_quantity_idx
+ON lineitem (l_partkey, l_suppkey, l_shipdate, l_quantity)
+WITH (fillfactor = 100);",client backend
+1654125691.076508,16384,dbt3,7895,,10,postgres,psql,,,-1,2022-06-01 23:19:28.814074+00,2022-06-01 23:19:28.827141+00,2022-06-01 23:19:28.827141+00,2022-06-01 23:19:28.827142+00,,,active,3680,3661,,"
+CREATE INDEX lineitem_l_orderkey_l_suppkey_l_quantity_idx
+ON lineitem (l_orderkey, l_suppkey, l_quantity)
+WITH (fillfactor = 100);",client backend
+1654125691.076508,16384,dbt3,7905,,10,postgres,psql,,,-1,2022-06-01 23:19:28.815251+00,2022-06-01 23:19:28.825001+00,2022-06-01 23:19:28.825001+00,2022-06-01 23:19:28.825002+00,,,active,3688,3661,,"
+CREATE INDEX lineitem_l_partkey_l_quantity_l_shipmode_idx
+ON lineitem (l_partkey, l_quantity, l_shipmode)
+WITH (fillfactor = 100);",client backend
+1654125691.076508,,,7586,,,,"",,,,2022-06-01 23:14:29.766405+00,,,,Activity,BgWriterHibernate,,,,,"",background writer
+1654125691.076508,,,7585,,,,"",,,,2022-06-01 23:14:29.76628+00,,,,Activity,CheckpointerMain,,,,,"",checkpointer
+1654125691.076508,,,7587,,,,"",,,,2022-06-01 23:14:29.766619+00,,,,Activity,WalWriterMain,,,,,"",walwriter

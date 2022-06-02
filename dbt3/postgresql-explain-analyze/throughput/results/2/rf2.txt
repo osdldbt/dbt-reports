@@ -1,11 +1,41 @@
-Fri May 27 16:27:11 UTC 2022: Stream 4 : Starting Refresh Stream 2...
+Wed Jun  1 23:27:30 UTC 2022: Stream 4 : Starting Refresh Stream 2...
+LOAD
+SET
+SET
+SET
+SET
+SET
 BEGIN
 CREATE TABLE
 COPY 15000
 CREATE INDEX
 ANALYZE
+NOTICE:  duration: 671.396 ms  plan:
+Query Text: DELETE FROM lineitem
+USING tmp_orderkey4
+WHERE l_orderkey = orderkey;
+Delete on lineitem  (cost=445676.55..617347.80 rows=0 width=0) (actual time=671.393..671.394 rows=0 loops=1)
+  WAL: records=60182 fpi=1684 bytes=13558392
+  ->  Merge Join  (cost=445676.55..617347.80 rows=2224572 width=12) (actual time=303.187..535.941 rows=59726 loops=1)
+        Merge Cond: (tmp_orderkey4.orderkey = lineitem.l_orderkey)
+        WAL: records=456 fpi=456 bytes=362744
+        ->  Index Scan using tmp_orderkey4_orderkey_idx on tmp_orderkey4  (cost=0.29..467.29 rows=15000 width=10) (actual time=0.011..5.778 rows=15000 loops=1)
+        ->  Index Scan using pk_lineitem on lineitem  (cost=0.56..148533015.67 rows=60163856 width=14) (actual time=0.063..437.017 rows=299615 loops=1)
+              WAL: records=456 fpi=456 bytes=362744
 DELETE 59726
+NOTICE:  duration: 163.683 ms  plan:
+Query Text: DELETE FROM orders
+USING tmp_orderkey4
+WHERE o_orderkey = orderkey;
+Delete on orders  (cost=4820.92..7082.25 rows=0 width=0) (actual time=163.679..163.681 rows=0 loops=1)
+  WAL: records=15263 fpi=551 bytes=3241533
+  ->  Merge Join  (cost=4820.92..7082.25 rows=15000 width=12) (actual time=66.747..142.013 rows=15000 loops=1)
+        Merge Cond: (orders.o_orderkey = tmp_orderkey4.orderkey)
+        WAL: records=263 fpi=263 bytes=86161
+        ->  Index Scan using pk_orders on orders  (cost=0.43..1428093.20 rows=15043503 width=14) (actual time=0.054..100.527 rows=75000 loops=1)
+              WAL: records=263 fpi=263 bytes=86161
+        ->  Index Scan using tmp_orderkey4_orderkey_idx on tmp_orderkey4  (cost=0.29..467.29 rows=15000 width=10) (actual time=0.010..4.955 rows=15000 loops=1)
 DELETE 15000
 COMMIT
-Fri May 27 16:27:12 UTC 2022: Stream 4 : Refresh Stream 2 completed.
+Wed Jun  1 23:27:31 UTC 2022: Stream 4 : Refresh Stream 2 completed.
 Stream 4 : Elapsed time for Refresh Stream 2 : 1 seconds

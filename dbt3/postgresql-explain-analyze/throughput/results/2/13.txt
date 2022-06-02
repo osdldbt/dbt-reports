@@ -1,6 +1,17 @@
+load 'auto_explain';
+LOAD
+set auto_explain.log_min_duration to 0;
+SET
+set auto_explain.log_analyze to on;
+SET
+set auto_explain.log_wal to on;
+SET
+set auto_explain.log_timing to on;
+SET
+set auto_explain.log_level to notice;
+SET
 BEGIN;
 BEGIN
-explain (analyze, buffers)
 select
 	c_count,
 	count(*) as custdist
@@ -21,41 +32,96 @@ group by
 order by
 	custdist desc,
 	c_count desc;
-                                                                                       QUERY PLAN                                                                                       
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Sort  (cost=1556169.88..1556170.38 rows=200 width=16) (actual time=76647.581..76647.706 rows=46 loops=1)
-   Sort Key: (count(*)) DESC, (count(orders.o_orderkey)) DESC
-   Sort Method: quicksort  Memory: 27kB
-   Buffers: shared hit=5390934 read=14230346 written=754
-   ->  HashAggregate  (cost=1556160.23..1556162.23 rows=200 width=16) (actual time=76647.506..76647.639 rows=46 loops=1)
-         Group Key: count(orders.o_orderkey)
-         Batches: 1  Memory Usage: 40kB
-         Buffers: shared hit=5390931 read=14230346 written=754
-         ->  Finalize GroupAggregate  (cost=1000.89..1533658.85 rows=1500092 width=12) (actual time=12.936..75647.331 rows=1500000 loops=1)
-               Group Key: customer.c_custkey
-               Buffers: shared hit=5390931 read=14230346 written=754
-               ->  Gather Merge  (cost=1000.89..1503657.01 rows=3000184 width=12) (actual time=12.860..74113.874 rows=1500000 loops=1)
-                     Workers Planned: 2
-                     Workers Launched: 2
-                     Buffers: shared hit=5390931 read=14230346 written=754
-                     ->  Partial GroupAggregate  (cost=0.86..1156361.31 rows=1500092 width=12) (actual time=0.400..63103.400 rows=500000 loops=3)
-                           Group Key: customer.c_custkey
-                           Buffers: shared hit=5390931 read=14230346 written=754
-                           ->  Nested Loop Left Join  (cost=0.86..1110305.40 rows=6210998 width=12) (actual time=0.268..60487.853 rows=5112987 loops=3)
-                                 Buffers: shared hit=5390931 read=14230346 written=754
-                                 ->  Parallel Index Only Scan using pk_customer on customer  (cost=0.43..28595.27 rows=625038 width=4) (actual time=0.069..332.340 rows=500000 loops=3)
-                                       Heap Fetches: 0
-                                       Buffers: shared hit=71 read=3697 written=1
-                                 ->  Index Scan using orders_o_custkey_idx on orders  (cost=0.43..1.55 rows=18 width=12) (actual time=0.014..0.115 rows=10 loops=1500000)
-                                       Index Cond: (o_custkey = customer.c_custkey)
-                                       Filter: ((o_comment)::text !~~ '%express%accounts%'::text)
-                                       Rows Removed by Filter: 0
-                                       Buffers: shared hit=5390860 read=14226649 written=753
- Planning:
-   Buffers: shared hit=277 read=64
- Planning Time: 2.943 ms
- Execution Time: 76648.008 ms
-(32 rows)
+NOTICE:  duration: 68104.400 ms  plan:
+Query Text: select
+	c_count,
+	count(*) as custdist
+from
+	(
+		select
+			c_custkey,
+			count(o_orderkey)
+		from
+			customer left outer join orders on
+				c_custkey = o_custkey
+				and o_comment not like '%express%accounts%'
+		group by
+			c_custkey
+	) as c_orders (c_custkey, c_count)
+group by
+	c_count
+order by
+	custdist desc,
+	c_count desc;
+Sort  (cost=1537708.04..1537708.54 rows=200 width=16) (actual time=68095.069..68104.365 rows=46 loops=1)
+  Sort Key: (count(*)) DESC, (count(orders.o_orderkey)) DESC
+  Sort Method: quicksort  Memory: 27kB
+  ->  HashAggregate  (cost=1537698.39..1537700.39 rows=200 width=16) (actual time=68094.982..68104.288 rows=46 loops=1)
+        Group Key: count(orders.o_orderkey)
+        Batches: 1  Memory Usage: 40kB
+        ->  Finalize GroupAggregate  (cost=1000.89..1515197.66 rows=1500049 width=12) (actual time=27.543..67162.900 rows=1500000 loops=1)
+              Group Key: customer.c_custkey
+              ->  Gather Merge  (cost=1000.89..1485196.68 rows=3000098 width=12) (actual time=27.473..65779.139 rows=1500000 loops=1)
+                    Workers Planned: 2
+                    Workers Launched: 2
+                    ->  Partial GroupAggregate  (cost=0.86..1137910.91 rows=1500049 width=12) (actual time=0.278..56396.868 rows=500000 loops=3)
+                          Group Key: customer.c_custkey
+                          ->  Nested Loop Left Join  (cost=0.86..1091541.80 rows=6273724 width=12) (actual time=0.144..54056.519 rows=5112987 loops=3)
+                                ->  Parallel Index Only Scan using pk_customer on customer  (cost=0.43..28594.88 rows=625020 width=4) (actual time=0.073..303.827 rows=500000 loops=3)
+                                      Heap Fetches: 0
+                                ->  Index Scan using orders_o_custkey_idx on orders  (cost=0.43..1.53 rows=17 width=12) (actual time=0.013..0.103 rows=10 loops=1500000)
+                                      Index Cond: (o_custkey = customer.c_custkey)
+                                      Filter: ((o_comment)::text !~~ '%express%accounts%'::text)
+                                      Rows Removed by Filter: 0
+ c_count | custdist 
+---------+----------
+       0 |   500017
+      10 |    65927
+       9 |    65303
+      11 |    62521
+       8 |    58343
+      12 |    55656
+      13 |    49883
+      19 |    46725
+       7 |    46518
+      18 |    46039
+      14 |    45528
+      20 |    45390
+      17 |    45181
+      16 |    43733
+      15 |    43606
+      21 |    42424
+      22 |    37880
+       6 |    33022
+      23 |    32541
+      24 |    26696
+      25 |    21191
+       5 |    19646
+      26 |    15932
+      27 |    11608
+       4 |     9990
+      28 |     8135
+      29 |     5615
+       3 |     3986
+      30 |     3766
+      31 |     2368
+      32 |     1476
+       2 |     1188
+      33 |      865
+      34 |      490
+      35 |      262
+       1 |      237
+      36 |      145
+      37 |       84
+      38 |       30
+      39 |       25
+      40 |       15
+      41 |        5
+      42 |        3
+      45 |        2
+      43 |        2
+      44 |        1
+(46 rows)
 
 COMMIT;
 COMMIT

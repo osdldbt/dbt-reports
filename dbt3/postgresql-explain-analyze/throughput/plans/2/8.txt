@@ -1,11 +1,10 @@
 BEGIN;
 BEGIN
 EXPLAIN
-explain (analyze, buffers)
 select
 	o_year,
 	sum(case
-		when nation = 'UNITED STATES' then volume
+		when nation = 'SAUDI ARABIA' then volume
 		else 0
 	end) / sum(volume) as mkt_share
 from
@@ -30,12 +29,56 @@ from
 			and o_custkey = c_custkey
 			and c_nationkey = n1.n_nationkey
 			and n1.n_regionkey = r_regionkey
-			and r_name = 'AMERICA'
+			and r_name = 'MIDDLE EAST'
 			and s_nationkey = n2.n_nationkey
 			and o_orderdate between date '1995-01-01' and date '1996-12-31'
-			and p_type = 'LARGE BURNISHED STEEL'
+			and p_type = 'LARGE PLATED BRASS'
 	) as all_nations
 group by
 	o_year
 order by
 	o_year;
+                                                                                    QUERY PLAN                                                                                     
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ Finalize GroupAggregate  (cost=1258175.65..1259107.10 rows=2406 width=64)
+   Group Key: (EXTRACT(year FROM orders.o_orderdate))
+   ->  Gather Merge  (cost=1258175.65..1258998.83 rows=4812 width=96)
+         Workers Planned: 2
+         ->  Partial GroupAggregate  (cost=1257175.62..1257443.38 rows=2406 width=96)
+               Group Key: (EXTRACT(year FROM orders.o_orderdate))
+               ->  Sort  (cost=1257175.62..1257200.70 rows=10029 width=70)
+                     Sort Key: (EXTRACT(year FROM orders.o_orderdate))
+                     ->  Hash Join  (cost=1254342.54..1256509.10 rows=10029 width=70)
+                           Hash Cond: (supplier.s_nationkey = n2.n_nationkey)
+                           ->  Parallel Hash Join  (cost=1254340.97..1256451.68 rows=10029 width=20)
+                                 Hash Cond: (supplier.s_suppkey = lineitem.l_suppkey)
+                                 ->  Parallel Index Only Scan using supplier_s_nationkey_s_suppkey_idx on supplier  (cost=0.29..1912.96 rows=41667 width=8)
+                                 ->  Parallel Hash  (cost=1254215.32..1254215.32 rows=10029 width=20)
+                                       ->  Hash Join  (cost=862889.60..1254215.32 rows=10029 width=20)
+                                             Hash Cond: (orders.o_custkey = customer.c_custkey)
+                                             ->  Parallel Hash Join  (cost=847540.31..1236817.70 rows=50144 width=24)
+                                                   Hash Cond: (orders.o_orderkey = lineitem.l_orderkey)
+                                                   ->  Parallel Seq Scan on orders  (cost=0.00..362157.46 rows=1882656 width=16)
+                                                         Filter: ((o_orderdate >= '1995-01-01'::date) AND (o_orderdate <= '1996-12-31'::date))
+                                                   ->  Parallel Hash  (cost=843221.00..843221.00 rows=235225 width=24)
+                                                         ->  Nested Loop  (cost=0.99..843221.00 rows=235225 width=24)
+                                                               ->  Parallel Index Only Scan using part_p_type_p_partkey_idx on part  (cost=0.43..458.68 rows=7835 width=4)
+                                                                     Index Cond: (p_type = 'LARGE PLATED BRASS'::text)
+                                                               ->  Index Scan using lineitem_l_partkey_l_quantity_l_shipmode_idx on lineitem  (cost=0.56..107.26 rows=30 width=28)
+                                                                     Index Cond: (l_partkey = part.p_partkey)
+                                             ->  Hash  (cost=10427.17..10427.17 rows=300010 width=4)
+                                                   ->  Nested Loop  (cost=0.56..10427.17 rows=300010 width=4)
+                                                         ->  Nested Loop  (cost=0.14..13.95 rows=5 width=4)
+                                                               Join Filter: (n1.n_regionkey = region.r_regionkey)
+                                                               ->  Index Scan using pk_nation on nation n1  (cost=0.14..12.51 rows=25 width=8)
+                                                               ->  Materialize  (cost=0.00..1.07 rows=1 width=4)
+                                                                     ->  Seq Scan on region  (cost=0.00..1.06 rows=1 width=4)
+                                                                           Filter: (r_name = 'MIDDLE EAST'::bpchar)
+                                                         ->  Index Only Scan using customer_c_nationkey_c_custkey_idx on customer  (cost=0.43..1482.62 rows=60002 width=8)
+                                                               Index Cond: (c_nationkey = n1.n_nationkey)
+                           ->  Hash  (cost=1.25..1.25 rows=25 width=30)
+                                 ->  Seq Scan on nation n2  (cost=0.00..1.25 rows=25 width=30)
+(38 rows)
+
+COMMIT;
+COMMIT
