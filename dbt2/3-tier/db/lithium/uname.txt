@@ -1,1 +1,1 @@
-GNU/Linux x86_64 5.15.32-gentoo-r1-x86_64-zbkstdxg5
+GNU/Linux x86_64 6.1.12-200.fc37.x86_64

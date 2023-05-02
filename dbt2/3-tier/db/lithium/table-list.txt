@@ -1,9 +1,0 @@
-customer
-district
-history
-item
-new_order
-order_line
-orders
-stock
-warehouse

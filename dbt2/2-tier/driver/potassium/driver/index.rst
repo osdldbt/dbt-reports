@@ -2,58 +2,90 @@
 Database Test 2 pidstat driver Charts
 ================================================================================
 
-.. image:: pidstat-driver-RSS.png
-   :target: pidstat-driver-RSS.png
+.. image:: ../sysstat/pidstat/pidstat-11407-CPU.png
+   :target: ../sysstat/pidstat/pidstat-11407-CPU.png
    :width: 100%
 
-.. image:: pidstat-driver-VSZ.png
-   :target: pidstat-driver-VSZ.png
+.. image:: ../sysstat/pidstat/pidstat-11407-MEM.png
+   :target: ../sysstat/pidstat/pidstat-11407-MEM.png
    :width: 100%
 
-.. image:: pidstat-driver-X.CPU.png
-   :target: pidstat-driver-X.CPU.png
+.. image:: ../sysstat/pidstat/pidstat-11407-RSS.png
+   :target: ../sysstat/pidstat/pidstat-11407-RSS.png
    :width: 100%
 
-.. image:: pidstat-driver-X.MEM.png
-   :target: pidstat-driver-X.MEM.png
+.. image:: ../sysstat/pidstat/pidstat-11407-StkRef.png
+   :target: ../sysstat/pidstat/pidstat-11407-StkRef.png
    :width: 100%
 
-.. image:: pidstat-driver-X.system.png
-   :target: pidstat-driver-X.system.png
+.. image:: ../sysstat/pidstat/pidstat-11407-StkSize.png
+   :target: ../sysstat/pidstat/pidstat-11407-StkSize.png
    :width: 100%
 
-.. image:: pidstat-driver-X.usr.png
-   :target: pidstat-driver-X.usr.png
+.. image:: ../sysstat/pidstat/pidstat-11407-VSZ.png
+   :target: ../sysstat/pidstat/pidstat-11407-VSZ.png
    :width: 100%
 
-.. image:: pidstat-driver-X.wait.png
-   :target: pidstat-driver-X.wait.png
+.. image:: ../sysstat/pidstat/pidstat-11407-cpu-stacked.png
+   :target: ../sysstat/pidstat/pidstat-11407-cpu-stacked.png
    :width: 100%
 
-.. image:: pidstat-driver-cswch.s.png
-   :target: pidstat-driver-cswch.s.png
+.. image:: ../sysstat/pidstat/pidstat-11407-cswch_s.png
+   :target: ../sysstat/pidstat/pidstat-11407-cswch_s.png
    :width: 100%
 
-.. image:: pidstat-driver-fd.nr.png
-   :target: pidstat-driver-fd.nr.png
+.. image:: ../sysstat/pidstat/pidstat-11407-fd-nr.png
+   :target: ../sysstat/pidstat/pidstat-11407-fd-nr.png
    :width: 100%
 
-.. image:: pidstat-driver-iodelay.png
-   :target: pidstat-driver-iodelay.png
+.. image:: ../sysstat/pidstat/pidstat-11407-guest.png
+   :target: ../sysstat/pidstat/pidstat-11407-guest.png
    :width: 100%
 
-.. image:: pidstat-driver-kB_rd.s.png
-   :target: pidstat-driver-kB_rd.s.png
+.. image:: ../sysstat/pidstat/pidstat-11407-io.png
+   :target: ../sysstat/pidstat/pidstat-11407-io.png
    :width: 100%
 
-.. image:: pidstat-driver-kB_wr.s.png
-   :target: pidstat-driver-kB_wr.s.png
+.. image:: ../sysstat/pidstat/pidstat-11407-iodelay.png
+   :target: ../sysstat/pidstat/pidstat-11407-iodelay.png
    :width: 100%
 
-.. image:: pidstat-driver-nvcswch.s.png
-   :target: pidstat-driver-nvcswch.s.png
+.. image:: ../sysstat/pidstat/pidstat-11407-kB_ccwr_s.png
+   :target: ../sysstat/pidstat/pidstat-11407-kB_ccwr_s.png
    :width: 100%
 
-.. image:: pidstat-driver-threads.png
-   :target: pidstat-driver-threads.png
+.. image:: ../sysstat/pidstat/pidstat-11407-kB_rd_s.png
+   :target: ../sysstat/pidstat/pidstat-11407-kB_rd_s.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-11407-kB_wr_s.png
+   :target: ../sysstat/pidstat/pidstat-11407-kB_wr_s.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-11407-majflt_s.png
+   :target: ../sysstat/pidstat/pidstat-11407-majflt_s.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-11407-minflt_s.png
+   :target: ../sysstat/pidstat/pidstat-11407-minflt_s.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-11407-nvcswch_s.png
+   :target: ../sysstat/pidstat/pidstat-11407-nvcswch_s.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-11407-system.png
+   :target: ../sysstat/pidstat/pidstat-11407-system.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-11407-threads.png
+   :target: ../sysstat/pidstat/pidstat-11407-threads.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-11407-usr.png
+   :target: ../sysstat/pidstat/pidstat-11407-usr.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-11407-wait.png
+   :target: ../sysstat/pidstat/pidstat-11407-wait.png
    :width: 100%

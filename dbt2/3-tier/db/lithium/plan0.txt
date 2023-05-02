@@ -6,7 +6,7 @@ SELECT no_o_id FROM new_order WHERE no_w_id = 1 AND no_d_id = 1;
 
                                         QUERY PLAN                                        
 ------------------------------------------------------------------------------------------
- Index Only Scan using pk_new_order on new_order  (cost=0.42..3788.33 rows=64404 width=4)
+ Index Only Scan using pk_new_order on new_order  (cost=0.43..7263.67 rows=13044 width=4)
    Index Cond: ((no_w_id = 1) AND (no_d_id = 1))
 (2 rows)
 
@@ -15,27 +15,27 @@ DELETE FROM new_order WHERE no_o_id = 1 AND no_w_id = 1 AND no_d_id = 1;
 
                                      QUERY PLAN                                     
 ------------------------------------------------------------------------------------
- Delete on new_order  (cost=0.42..2.67 rows=0 width=0)
-   ->  Index Scan using pk_new_order on new_order  (cost=0.42..2.67 rows=1 width=6)
+ Delete on new_order  (cost=0.43..8.45 rows=0 width=0)
+   ->  Index Scan using pk_new_order on new_order  (cost=0.43..8.45 rows=1 width=6)
          Index Cond: ((no_w_id = 1) AND (no_d_id = 1) AND (no_o_id = 1))
 (3 rows)
 
 EXPLAIN 
 SELECT o_c_id FROM orders WHERE o_id = 1 AND o_w_id = 1 AND o_d_id = 1;
 
-                               QUERY PLAN                               
-------------------------------------------------------------------------
- Index Scan using pk_orders on orders  (cost=0.43..2.67 rows=1 width=4)
+                               QUERY PLAN                                
+-------------------------------------------------------------------------
+ Index Scan using pk_orders on orders  (cost=0.43..11.97 rows=2 width=4)
    Index Cond: ((o_w_id = 1) AND (o_d_id = 1) AND (o_id = 1))
 (2 rows)
 
 EXPLAIN 
 UPDATE orders SET o_carrier_id = 1 WHERE o_id = 1 AND o_w_id = 1 AND o_d_id = 1;
 
-                                  QUERY PLAN                                   
--------------------------------------------------------------------------------
- Update on orders  (cost=0.43..2.67 rows=0 width=0)
-   ->  Index Scan using pk_orders on orders  (cost=0.43..2.67 rows=1 width=10)
+                                   QUERY PLAN                                   
+--------------------------------------------------------------------------------
+ Update on orders  (cost=0.43..11.97 rows=0 width=0)
+   ->  Index Scan using pk_orders on orders  (cost=0.43..11.97 rows=2 width=10)
          Index Cond: ((o_w_id = 1) AND (o_d_id = 1) AND (o_id = 1))
 (3 rows)
 
@@ -44,8 +44,8 @@ UPDATE order_line SET ol_delivery_d = current_timestamp WHERE ol_o_id = 1 AND ol
 
                                        QUERY PLAN                                        
 -----------------------------------------------------------------------------------------
- Update on order_line  (cost=0.56..14.44 rows=0 width=0)
-   ->  Index Scan using pk_order_line on order_line  (cost=0.56..14.44 rows=23 width=14)
+ Update on order_line  (cost=0.57..79.82 rows=0 width=0)
+   ->  Index Scan using pk_order_line on order_line  (cost=0.57..79.82 rows=21 width=14)
          Index Cond: ((ol_w_id = 1) AND (ol_d_id = 1) AND (ol_o_id = 1))
 (3 rows)
 
@@ -54,8 +54,8 @@ SELECT SUM(ol_amount * ol_quantity) FROM order_line WHERE ol_o_id = 1 AND ol_w_i
 
                                        QUERY PLAN                                       
 ----------------------------------------------------------------------------------------
- Aggregate  (cost=14.44..14.47 rows=1 width=4)
-   ->  Index Scan using pk_order_line on order_line  (cost=0.56..14.33 rows=23 width=8)
+ Aggregate  (cost=79.82..79.83 rows=1 width=4)
+   ->  Index Scan using pk_order_line on order_line  (cost=0.57..79.72 rows=21 width=8)
          Index Cond: ((ol_w_id = 1) AND (ol_d_id = 1) AND (ol_o_id = 1))
 (3 rows)
 
@@ -64,8 +64,8 @@ UPDATE customer SET c_delivery_cnt = c_delivery_cnt + 1, c_balance = c_balance +
 
                                     QUERY PLAN                                     
 -----------------------------------------------------------------------------------
- Update on customer  (cost=0.29..2.54 rows=0 width=0)
-   ->  Index Scan using pk_customer on customer  (cost=0.29..2.54 rows=1 width=32)
+ Update on customer  (cost=0.43..8.46 rows=0 width=0)
+   ->  Index Scan using pk_customer on customer  (cost=0.43..8.46 rows=1 width=32)
          Index Cond: ((c_w_id = 1) AND (c_d_id = 1) AND (c_id = 1))
 (3 rows)
 
@@ -77,39 +77,35 @@ SELECT w_tax FROM warehouse WHERE w_id = 1;
 
                                   QUERY PLAN                                  
 ------------------------------------------------------------------------------
- Index Scan using pk_warehouse on warehouse  (cost=0.12..2.36 rows=1 width=4)
+ Index Scan using pk_warehouse on warehouse  (cost=0.14..8.16 rows=1 width=4)
    Index Cond: (w_id = 1)
 (2 rows)
 
 EXPLAIN 
 SELECT d_tax, d_next_o_id FROM district WHERE d_w_id = 1 AND d_id = 1;
 
-                                QUERY PLAN                                
---------------------------------------------------------------------------
- Bitmap Heap Scan on district  (cost=1.25..2.38 rows=1 width=8)
-   Recheck Cond: ((d_w_id = 1) AND (d_id = 1))
-   ->  Bitmap Index Scan on pk_district  (cost=0.00..1.25 rows=1 width=0)
-         Index Cond: ((d_w_id = 1) AND (d_id = 1))
-(4 rows)
+                                 QUERY PLAN                                 
+----------------------------------------------------------------------------
+ Index Scan using pk_district on district  (cost=0.28..8.29 rows=1 width=8)
+   Index Cond: ((d_w_id = 1) AND (d_id = 1))
+(2 rows)
 
 EXPLAIN 
 UPDATE district SET d_next_o_id = d_next_o_id + 1 WHERE d_w_id = 1 AND d_id = 1;
 
-                                   QUERY PLAN                                   
---------------------------------------------------------------------------------
- Update on district  (cost=1.25..2.38 rows=0 width=0)
-   ->  Bitmap Heap Scan on district  (cost=1.25..2.38 rows=1 width=10)
-         Recheck Cond: ((d_w_id = 1) AND (d_id = 1))
-         ->  Bitmap Index Scan on pk_district  (cost=0.00..1.25 rows=1 width=0)
-               Index Cond: ((d_w_id = 1) AND (d_id = 1))
-(5 rows)
+                                    QUERY PLAN                                     
+-----------------------------------------------------------------------------------
+ Update on district  (cost=0.28..8.30 rows=0 width=0)
+   ->  Index Scan using pk_district on district  (cost=0.28..8.30 rows=1 width=10)
+         Index Cond: ((d_w_id = 1) AND (d_id = 1))
+(3 rows)
 
 EXPLAIN 
 SELECT c_discount, c_last, c_credit FROM customer WHERE c_w_id = 1 AND c_d_id = 1 AND c_id = 1;
 
                                  QUERY PLAN                                  
 -----------------------------------------------------------------------------
- Index Scan using pk_customer on customer  (cost=0.29..2.53 rows=1 width=19)
+ Index Scan using pk_customer on customer  (cost=0.43..8.45 rows=1 width=19)
    Index Cond: ((c_w_id = 1) AND (c_d_id = 1) AND (c_id = 1))
 (2 rows)
 
@@ -118,8 +114,8 @@ INSERT INTO new_order (no_o_id, no_d_id, no_w_id) VALUES (-1, 1, 1);
 
                       QUERY PLAN                       
 -------------------------------------------------------
- Insert on new_order  (cost=0.00..0.03 rows=0 width=0)
-   ->  Result  (cost=0.00..0.03 rows=1 width=12)
+ Insert on new_order  (cost=0.00..0.01 rows=0 width=0)
+   ->  Result  (cost=0.00..0.01 rows=1 width=12)
 (2 rows)
 
 EXPLAIN 
@@ -127,8 +123,8 @@ INSERT INTO orders (o_id, o_d_id, o_w_id, o_c_id, o_entry_d, o_carrier_id, o_ol_
 
                      QUERY PLAN                     
 ----------------------------------------------------
- Insert on orders  (cost=0.00..0.03 rows=0 width=0)
-   ->  Result  (cost=0.00..0.03 rows=1 width=36)
+ Insert on orders  (cost=0.00..0.01 rows=0 width=0)
+   ->  Result  (cost=0.00..0.01 rows=1 width=36)
 (2 rows)
 
 EXPLAIN 
@@ -136,7 +132,7 @@ SELECT i_price, i_name, i_data FROM item WHERE i_id = 1;
 
                              QUERY PLAN                              
 ---------------------------------------------------------------------
- Index Scan using pk_item on item  (cost=0.29..2.53 rows=1 width=85)
+ Index Scan using pk_item on item  (cost=0.29..8.31 rows=1 width=85)
    Index Cond: (i_id = 1)
 (2 rows)
 
@@ -145,7 +141,7 @@ SELECT s_quantity, s_dist_01, s_data FROM stock WHERE s_i_id = 1 AND s_w_id = 1;
 
                               QUERY PLAN                               
 -----------------------------------------------------------------------
- Index Scan using pk_stock on stock  (cost=0.42..2.66 rows=1 width=83)
+ Index Scan using pk_stock on stock  (cost=0.43..8.46 rows=1 width=83)
    Index Cond: ((s_w_id = 1) AND (s_i_id = 1))
 (2 rows)
 
@@ -154,8 +150,8 @@ UPDATE stock SET s_quantity = s_quantity - 10 WHERE s_i_id = 1 AND s_w_id = 1;
 
                                  QUERY PLAN                                  
 -----------------------------------------------------------------------------
- Update on stock  (cost=0.42..2.66 rows=0 width=0)
-   ->  Index Scan using pk_stock on stock  (cost=0.42..2.66 rows=1 width=10)
+ Update on stock  (cost=0.43..8.46 rows=0 width=0)
+   ->  Index Scan using pk_stock on stock  (cost=0.43..8.46 rows=1 width=10)
          Index Cond: ((s_w_id = 1) AND (s_i_id = 1))
 (3 rows)
 
@@ -164,8 +160,8 @@ INSERT INTO order_line (ol_o_id, ol_d_id, ol_w_id, ol_number, ol_i_id, ol_supply
 
                        QUERY PLAN                       
 --------------------------------------------------------
- Insert on order_line  (cost=0.00..0.03 rows=0 width=0)
-   ->  Result  (cost=0.00..0.03 rows=1 width=106)
+ Insert on order_line  (cost=0.00..0.01 rows=0 width=0)
+   ->  Result  (cost=0.00..0.01 rows=1 width=106)
 (2 rows)
 
 ------------------------
@@ -176,7 +172,7 @@ SELECT c_id FROM customer WHERE c_w_id = 1 AND c_d_id = 1 AND c_last = 'BARBARBA
 
                                    QUERY PLAN                                    
 ---------------------------------------------------------------------------------
- Index Only Scan using i_customer on customer  (cost=0.41..1.60 rows=2 width=21)
+ Index Only Scan using i_customer on customer  (cost=0.56..8.60 rows=2 width=21)
    Index Cond: ((c_w_id = 1) AND (c_d_id = 1) AND (c_last = 'BARBARBAR'::text))
 (2 rows)
 
@@ -185,7 +181,7 @@ SELECT c_first, c_middle, c_last, c_balance FROM customer WHERE c_w_id = 1 AND c
 
                                  QUERY PLAN                                  
 -----------------------------------------------------------------------------
- Index Scan using pk_customer on customer  (cost=0.29..2.53 rows=1 width=44)
+ Index Scan using pk_customer on customer  (cost=0.43..8.45 rows=1 width=37)
    Index Cond: ((c_w_id = 1) AND (c_d_id = 1) AND (c_id = 1))
 (2 rows)
 
@@ -194,9 +190,9 @@ SELECT o_id, o_carrier_id, o_entry_d, o_ol_cnt FROM orders WHERE o_w_id = 1 AND 
 
                                    QUERY PLAN                                   
 --------------------------------------------------------------------------------
- Sort  (cost=40.39..40.57 rows=69 width=20)
+ Sort  (cost=79.34..79.40 rows=21 width=20)
    Sort Key: o_id DESC
-   ->  Index Scan using i_orders on orders  (cost=0.43..38.29 rows=69 width=20)
+   ->  Index Scan using i_orders on orders  (cost=0.43..78.88 rows=21 width=20)
          Index Cond: ((o_w_id = 1) AND (o_d_id = 1) AND (o_c_id = 1))
 (4 rows)
 
@@ -205,7 +201,7 @@ SELECT ol_i_id, ol_supply_w_id, ol_quantity, ol_amount, ol_delivery_d FROM order
 
                                     QUERY PLAN                                     
 -----------------------------------------------------------------------------------
- Index Scan using pk_order_line on order_line  (cost=0.56..14.33 rows=23 width=24)
+ Index Scan using pk_order_line on order_line  (cost=0.57..79.72 rows=21 width=24)
    Index Cond: ((ol_w_id = 1) AND (ol_d_id = 1) AND (ol_o_id = 1))
 (2 rows)
 
@@ -217,7 +213,7 @@ SELECT w_name, w_street_1, w_street_2, w_city, w_state, w_zip FROM warehouse WHE
 
                                   QUERY PLAN                                   
 -------------------------------------------------------------------------------
- Index Scan using pk_warehouse on warehouse  (cost=0.12..2.36 rows=1 width=73)
+ Index Scan using pk_warehouse on warehouse  (cost=0.14..8.16 rows=1 width=91)
    Index Cond: (w_id = 1)
 (2 rows)
 
@@ -226,40 +222,36 @@ UPDATE warehouse SET w_ytd = w_ytd + 1.0 WHERE w_id = 1;
 
                                      QUERY PLAN                                      
 -------------------------------------------------------------------------------------
- Update on warehouse  (cost=0.12..2.37 rows=0 width=0)
-   ->  Index Scan using pk_warehouse on warehouse  (cost=0.12..2.37 rows=1 width=28)
+ Update on warehouse  (cost=0.14..8.17 rows=0 width=0)
+   ->  Index Scan using pk_warehouse on warehouse  (cost=0.14..8.17 rows=1 width=28)
          Index Cond: (w_id = 1)
 (3 rows)
 
 EXPLAIN 
 SELECT d_name, d_street_1, d_street_2, d_city, d_state, d_zip FROM district WHERE d_id = 1 AND d_w_id = 1;
 
-                                QUERY PLAN                                
---------------------------------------------------------------------------
- Bitmap Heap Scan on district  (cost=1.25..2.38 rows=1 width=92)
-   Recheck Cond: ((d_w_id = 1) AND (d_id = 1))
-   ->  Bitmap Index Scan on pk_district  (cost=0.00..1.25 rows=1 width=0)
-         Index Cond: ((d_w_id = 1) AND (d_id = 1))
-(4 rows)
+                                 QUERY PLAN                                  
+-----------------------------------------------------------------------------
+ Index Scan using pk_district on district  (cost=0.28..8.29 rows=1 width=91)
+   Index Cond: ((d_w_id = 1) AND (d_id = 1))
+(2 rows)
 
 EXPLAIN 
 UPDATE district SET d_ytd = d_ytd + 1.0 WHERE d_id = 1 AND d_w_id = 1;
 
-                                   QUERY PLAN                                   
---------------------------------------------------------------------------------
- Update on district  (cost=1.25..2.39 rows=0 width=0)
-   ->  Bitmap Heap Scan on district  (cost=1.25..2.39 rows=1 width=28)
-         Recheck Cond: ((d_w_id = 1) AND (d_id = 1))
-         ->  Bitmap Index Scan on pk_district  (cost=0.00..1.25 rows=1 width=0)
-               Index Cond: ((d_w_id = 1) AND (d_id = 1))
-(5 rows)
+                                    QUERY PLAN                                     
+-----------------------------------------------------------------------------------
+ Update on district  (cost=0.28..8.30 rows=0 width=0)
+   ->  Index Scan using pk_district on district  (cost=0.28..8.30 rows=1 width=28)
+         Index Cond: ((d_w_id = 1) AND (d_id = 1))
+(3 rows)
 
 EXPLAIN 
 SELECT c_id FROM customer WHERE c_w_id = 1 AND c_d_id = 1 AND c_last = 'BARBARBAR' ORDER BY c_first ASC;
 
                                    QUERY PLAN                                    
 ---------------------------------------------------------------------------------
- Index Only Scan using i_customer on customer  (cost=0.41..1.60 rows=2 width=21)
+ Index Only Scan using i_customer on customer  (cost=0.56..8.60 rows=2 width=21)
    Index Cond: ((c_w_id = 1) AND (c_d_id = 1) AND (c_last = 'BARBARBAR'::text))
 (2 rows)
 
@@ -268,7 +260,7 @@ SELECT c_first, c_middle, c_last, c_street_1, c_street_2, c_city, c_state, c_zip
 
                                   QUERY PLAN                                  
 ------------------------------------------------------------------------------
- Index Scan using pk_customer on customer  (cost=0.29..2.53 rows=1 width=731)
+ Index Scan using pk_customer on customer  (cost=0.43..8.45 rows=1 width=727)
    Index Cond: ((c_w_id = 1) AND (c_d_id = 1) AND (c_id = 1))
 (2 rows)
 
@@ -277,8 +269,8 @@ UPDATE customer SET c_balance = c_balance - 1.0, c_ytd_payment = c_ytd_payment +
 
                                     QUERY PLAN                                     
 -----------------------------------------------------------------------------------
- Update on customer  (cost=0.29..2.54 rows=0 width=0)
-   ->  Index Scan using pk_customer on customer  (cost=0.29..2.54 rows=1 width=50)
+ Update on customer  (cost=0.43..8.46 rows=0 width=0)
+   ->  Index Scan using pk_customer on customer  (cost=0.43..8.46 rows=1 width=50)
          Index Cond: ((c_w_id = 1) AND (c_d_id = 1) AND (c_id = 1))
 (3 rows)
 
@@ -288,8 +280,8 @@ UPDATE customer SET c_balance = c_balance - 1.0, c_ytd_payment = c_ytd_payment +
 
                                      QUERY PLAN                                     
 ------------------------------------------------------------------------------------
- Update on customer  (cost=0.29..2.54 rows=0 width=0)
-   ->  Index Scan using pk_customer on customer  (cost=0.29..2.54 rows=1 width=566)
+ Update on customer  (cost=0.43..8.46 rows=0 width=0)
+   ->  Index Scan using pk_customer on customer  (cost=0.43..8.46 rows=1 width=566)
          Index Cond: ((c_w_id = 1) AND (c_d_id = 1) AND (c_id = 1))
 (3 rows)
 
@@ -298,8 +290,8 @@ INSERT INTO history (h_c_id, h_c_d_id, h_c_w_id, h_d_id, h_w_id, h_date, h_amoun
 
                      QUERY PLAN                      
 -----------------------------------------------------
- Insert on history  (cost=0.00..0.03 rows=0 width=0)
-   ->  Result  (cost=0.00..0.03 rows=1 width=98)
+ Insert on history  (cost=0.00..0.01 rows=0 width=0)
+   ->  Result  (cost=0.00..0.01 rows=1 width=98)
 (2 rows)
 
 -----------------------
@@ -308,27 +300,32 @@ Stock-Level Transaction
 EXPLAIN 
 SELECT d_next_o_id FROM district WHERE d_w_id = 1 AND d_id = 1;
 
-                                QUERY PLAN                                
---------------------------------------------------------------------------
- Bitmap Heap Scan on district  (cost=1.25..2.38 rows=1 width=4)
-   Recheck Cond: ((d_w_id = 1) AND (d_id = 1))
-   ->  Bitmap Index Scan on pk_district  (cost=0.00..1.25 rows=1 width=0)
-         Index Cond: ((d_w_id = 1) AND (d_id = 1))
-(4 rows)
+                                 QUERY PLAN                                 
+----------------------------------------------------------------------------
+ Index Scan using pk_district on district  (cost=0.28..8.29 rows=1 width=4)
+   Index Cond: ((d_w_id = 1) AND (d_id = 1))
+(2 rows)
 
 EXPLAIN 
 SELECT count(*) FROM order_line, stock, district WHERE d_id = 1 AND d_w_id = 1 AND d_id = ol_d_id AND d_w_id = ol_w_id AND ol_i_id = s_i_id AND ol_w_id = s_w_id AND s_quantity < 15 AND ol_o_id BETWEEN (1) AND (20);
 
-                                                         QUERY PLAN                                                         
-----------------------------------------------------------------------------------------------------------------------------
- Aggregate  (cost=5.71..5.74 rows=1 width=8)
-   ->  Nested Loop  (cost=1.11..5.70 rows=1 width=0)
-         ->  Nested Loop  (cost=0.98..4.40 rows=1 width=8)
-               ->  Index Scan using pk_order_line on order_line  (cost=0.56..2.81 rows=1 width=12)
-                     Index Cond: ((ol_w_id = 1) AND (ol_d_id = 1) AND (ol_o_id >= 1) AND (ol_o_id <= 20))
-               ->  Index Only Scan using pk_stock on stock  (cost=0.42..1.56 rows=1 width=8)
-                     Index Cond: ((s_w_id = 1) AND (s_i_id = order_line.ol_i_id) AND (s_quantity < '15'::double precision))
-         ->  Index Only Scan using pk_district on district  (cost=0.14..1.28 rows=1 width=8)
+                                                               QUERY PLAN                                                               
+----------------------------------------------------------------------------------------------------------------------------------------
+ Aggregate  (cost=8555.95..8555.96 rows=1 width=8)
+   ->  Nested Loop  (cost=1042.05..8555.76 rows=79 width=0)
+         ->  Index Only Scan using pk_district on district  (cost=0.28..4.29 rows=1 width=8)
                Index Cond: ((d_w_id = 1) AND (d_id = 1))
-(9 rows)
+         ->  Gather  (cost=1041.77..8550.67 rows=79 width=8)
+               Workers Planned: 1
+               ->  Nested Loop  (cost=41.77..7542.77 rows=46 width=8)
+                     ->  Parallel Bitmap Heap Scan on order_line  (cost=41.33..4363.44 rows=646 width=12)
+                           Recheck Cond: ((ol_w_id = 1) AND (ol_d_id = 1) AND (ol_o_id >= 1) AND (ol_o_id <= 20))
+                           ->  Bitmap Index Scan on pk_order_line  (cost=0.00..41.05 rows=1099 width=0)
+                                 Index Cond: ((ol_w_id = 1) AND (ol_d_id = 1) AND (ol_o_id >= 1) AND (ol_o_id <= 20))
+                     ->  Memoize  (cost=0.45..4.99 rows=1 width=8)
+                           Cache Key: order_line.ol_i_id
+                           Cache Mode: logical
+                           ->  Index Only Scan using pk_stock on stock  (cost=0.43..4.98 rows=1 width=8)
+                                 Index Cond: ((s_w_id = 1) AND (s_i_id = order_line.ol_i_id) AND (s_quantity < '15'::double precision))
+(16 rows)
 

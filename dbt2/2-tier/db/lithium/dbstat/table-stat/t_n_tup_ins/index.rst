@@ -1,0 +1,39 @@
+================================================================================
+Database Test 2 Table n_tup_ins Charts
+================================================================================
+
+.. image:: ../../table/pgsql-public.customer-n_tup_ins.png
+   :target: ../../table/pgsql-public.customer-n_tup_ins.png
+   :width: 100%
+
+.. image:: ../../table/pgsql-public.district-n_tup_ins.png
+   :target: ../../table/pgsql-public.district-n_tup_ins.png
+   :width: 100%
+
+.. image:: ../../table/pgsql-public.history-n_tup_ins.png
+   :target: ../../table/pgsql-public.history-n_tup_ins.png
+   :width: 100%
+
+.. image:: ../../table/pgsql-public.item-n_tup_ins.png
+   :target: ../../table/pgsql-public.item-n_tup_ins.png
+   :width: 100%
+
+.. image:: ../../table/pgsql-public.new_order-n_tup_ins.png
+   :target: ../../table/pgsql-public.new_order-n_tup_ins.png
+   :width: 100%
+
+.. image:: ../../table/pgsql-public.order_line-n_tup_ins.png
+   :target: ../../table/pgsql-public.order_line-n_tup_ins.png
+   :width: 100%
+
+.. image:: ../../table/pgsql-public.orders-n_tup_ins.png
+   :target: ../../table/pgsql-public.orders-n_tup_ins.png
+   :width: 100%
+
+.. image:: ../../table/pgsql-public.stock-n_tup_ins.png
+   :target: ../../table/pgsql-public.stock-n_tup_ins.png
+   :width: 100%
+
+.. image:: ../../table/pgsql-public.warehouse-n_tup_ins.png
+   :target: ../../table/pgsql-public.warehouse-n_tup_ins.png
+   :width: 100%

@@ -1,0 +1,51 @@
+setting locale: en_US.utf8
+altered mode detected
+
+database table cardinalities:
+warehouses = 10
+districts = 100
+customers = 3000
+items = 100000
+orders = 3000
+stock = 100000
+new-orders = 900
+
+ transaction  mix threshold keying thinking
+new order    0.45      0.45      0        0
+payment      0.43      0.88      0        0
+order status 0.04      0.92      0        0
+delivery     0.04      0.96      0        0
+stock level  0.04      1.00      0        0
+
+w_id range 1 to 10
+10 terminals per warehouse
+3600 second steady state duration
+
+[3900] pinned to processor 3.
+driver is starting to ramp up at time 1683036397
+driver will ramp up in 0 seconds
+will stop test at time 1683039997
+
+4 out of 4 processors available
+starting 4 driver process(es) (1 database connection per process)
+each fork will cover 2.500000 warehouse(s)
+
+[3908] pinned to processor 0.
+[3908] seed 4341121825493032721
+[3900] seed 9978673821167366483
+[3900] assigned part 3: warehouses 8 to 10.
+[3908] assigned part 0: warehouses 1 to 2.
+[3911] pinned to processor 2.
+[3911] seed 6264598604959691573
+[3911] assigned part 2: warehouses 6 to 7.
+[3910] pinned to processor 1.
+[3910] seed 11805246696965668953
+[3910] assigned part 1: warehouses 3 to 5.
+[3900] terminals started
+[3908] terminals started
+[3910] terminals started
+[3911] terminals started
+[3911] driver is exiting normally
+[3908] driver is exiting normally
+[3900] driver is exiting normally
+[3910] driver is exiting normally

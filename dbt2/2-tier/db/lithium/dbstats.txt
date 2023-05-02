@@ -1,3 +1,0 @@
-mkdir: missing operand
-Try 'mkdir --help' for more information.
-/usr/bin/dbt2-pgsql-db-stat: line 60: pg_config: command not found
