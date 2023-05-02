@@ -2,58 +2,90 @@
 Database Test 2 pidstat client Charts
 ================================================================================
 
-.. image:: pidstat-client-RSS.png
-   :target: pidstat-client-RSS.png
+.. image:: ../sysstat/pidstat/pidstat-8890-CPU.png
+   :target: ../sysstat/pidstat/pidstat-8890-CPU.png
    :width: 100%
 
-.. image:: pidstat-client-VSZ.png
-   :target: pidstat-client-VSZ.png
+.. image:: ../sysstat/pidstat/pidstat-8890-MEM.png
+   :target: ../sysstat/pidstat/pidstat-8890-MEM.png
    :width: 100%
 
-.. image:: pidstat-client-X.CPU.png
-   :target: pidstat-client-X.CPU.png
+.. image:: ../sysstat/pidstat/pidstat-8890-RSS.png
+   :target: ../sysstat/pidstat/pidstat-8890-RSS.png
    :width: 100%
 
-.. image:: pidstat-client-X.MEM.png
-   :target: pidstat-client-X.MEM.png
+.. image:: ../sysstat/pidstat/pidstat-8890-StkRef.png
+   :target: ../sysstat/pidstat/pidstat-8890-StkRef.png
    :width: 100%
 
-.. image:: pidstat-client-X.system.png
-   :target: pidstat-client-X.system.png
+.. image:: ../sysstat/pidstat/pidstat-8890-StkSize.png
+   :target: ../sysstat/pidstat/pidstat-8890-StkSize.png
    :width: 100%
 
-.. image:: pidstat-client-X.usr.png
-   :target: pidstat-client-X.usr.png
+.. image:: ../sysstat/pidstat/pidstat-8890-VSZ.png
+   :target: ../sysstat/pidstat/pidstat-8890-VSZ.png
    :width: 100%
 
-.. image:: pidstat-client-X.wait.png
-   :target: pidstat-client-X.wait.png
+.. image:: ../sysstat/pidstat/pidstat-8890-cpu-stacked.png
+   :target: ../sysstat/pidstat/pidstat-8890-cpu-stacked.png
    :width: 100%
 
-.. image:: pidstat-client-cswch.s.png
-   :target: pidstat-client-cswch.s.png
+.. image:: ../sysstat/pidstat/pidstat-8890-cswch_s.png
+   :target: ../sysstat/pidstat/pidstat-8890-cswch_s.png
    :width: 100%
 
-.. image:: pidstat-client-fd.nr.png
-   :target: pidstat-client-fd.nr.png
+.. image:: ../sysstat/pidstat/pidstat-8890-fd-nr.png
+   :target: ../sysstat/pidstat/pidstat-8890-fd-nr.png
    :width: 100%
 
-.. image:: pidstat-client-iodelay.png
-   :target: pidstat-client-iodelay.png
+.. image:: ../sysstat/pidstat/pidstat-8890-guest.png
+   :target: ../sysstat/pidstat/pidstat-8890-guest.png
    :width: 100%
 
-.. image:: pidstat-client-kB_rd.s.png
-   :target: pidstat-client-kB_rd.s.png
+.. image:: ../sysstat/pidstat/pidstat-8890-io.png
+   :target: ../sysstat/pidstat/pidstat-8890-io.png
    :width: 100%
 
-.. image:: pidstat-client-kB_wr.s.png
-   :target: pidstat-client-kB_wr.s.png
+.. image:: ../sysstat/pidstat/pidstat-8890-iodelay.png
+   :target: ../sysstat/pidstat/pidstat-8890-iodelay.png
    :width: 100%
 
-.. image:: pidstat-client-nvcswch.s.png
-   :target: pidstat-client-nvcswch.s.png
+.. image:: ../sysstat/pidstat/pidstat-8890-kB_ccwr_s.png
+   :target: ../sysstat/pidstat/pidstat-8890-kB_ccwr_s.png
    :width: 100%
 
-.. image:: pidstat-client-threads.png
-   :target: pidstat-client-threads.png
+.. image:: ../sysstat/pidstat/pidstat-8890-kB_rd_s.png
+   :target: ../sysstat/pidstat/pidstat-8890-kB_rd_s.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-8890-kB_wr_s.png
+   :target: ../sysstat/pidstat/pidstat-8890-kB_wr_s.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-8890-majflt_s.png
+   :target: ../sysstat/pidstat/pidstat-8890-majflt_s.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-8890-minflt_s.png
+   :target: ../sysstat/pidstat/pidstat-8890-minflt_s.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-8890-nvcswch_s.png
+   :target: ../sysstat/pidstat/pidstat-8890-nvcswch_s.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-8890-system.png
+   :target: ../sysstat/pidstat/pidstat-8890-system.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-8890-threads.png
+   :target: ../sysstat/pidstat/pidstat-8890-threads.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-8890-usr.png
+   :target: ../sysstat/pidstat/pidstat-8890-usr.png
+   :width: 100%
+
+.. image:: ../sysstat/pidstat/pidstat-8890-wait.png
+   :target: ../sysstat/pidstat/pidstat-8890-wait.png
    :width: 100%

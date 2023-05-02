@@ -1,8 +1,8 @@
-Mon Apr 25 16:04:17 UTC 2022
+Fri Apr 28 04:39:41 PM PDT 2023
 
-Command line: src/scripts/dbt2-run-workload -a pgsql -c 10 -w 1 -o /tmp/2-tier -d 300 -n -s 100 -u -H 10.1.1.3 -r
+Command line: /usr/local/bin/dbt2-run-workload -a pgsql -A -d 3600 -w 10 -D dbt2 -s 100 -H 192.168.122.91 -o /tmp/2-tier.10 -r -n
 RDBMS: pgsql
 Database Name: dbt2
-Database Scale Factor: 1 warehouses
-Test Duration: 300 seconds
-Database Connections: 10
+Database Scale Factor: 10 warehouses
+Test Duration: 3600 seconds
+Database Connections: 

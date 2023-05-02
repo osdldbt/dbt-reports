@@ -1,8 +1,9 @@
 setting locale: en_US.utf8
+altered mode detected
 
 database table cardinalities:
-warehouses = 1
-districts = 10
+warehouses = 10
+districts = 100
 customers = 3000
 items = 100000
 orders = 3000
@@ -16,20 +17,20 @@ order status 0.04      0.92      0        0
 delivery     0.04      0.96      0        0
 stock level  0.04      1.00      0        0
 
-w_id range 1 to 1
+w_id range 1 to 10
 10 terminals per warehouse
-300 second steady state duration
+3600 second steady state duration
 
-[1721] pinned to processor 0.
-driver is starting to ramp up at time 1650902659
-driver will ramp up in 1 seconds
-will stop test at time 1650902960
+[11407] pinned to processor 0.
+driver is starting to ramp up at time 1682725184
+driver will ramp up in 0 seconds
+will stop test at time 1682728784
 
-6 out of 6 processors available
-starting 1 driver process(es)
-each fork will cover 1.000000 warehouse(s)
+1 out of 1 processors available
+starting 1 driver process(es) (1 database connection per process)
+each fork will cover 10.000000 warehouse(s)
 
-[1721] seed 6337803329747414549
-[1721] assigned part 0: warehosues 1 to 1.
-[1721] terminals started
-[1721] driver is exiting normally
+[11407] seed 1279350313197225972
+[11407] assigned part 0: warehouses 1 to 10.
+[11407] terminals started
+[11407] driver is exiting normally

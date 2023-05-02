@@ -3,14 +3,14 @@
 ------------  -----  --------------------  -----------  -----------  -----
  Transaction      %   Average     90th %        Total    Rollbacks      %
 ============  =====  =========  =========  ===========  ===========  =====
-    Delivery   3.94      0.005      0.006         6575            0   0.00
-   New Order  45.17      0.002      0.002        75437          751   1.00
-Order Status   4.04      0.001      0.001         6747            0   0.00
-     Payment  42.85      0.001      0.002        71563            0   0.00
- Stock Level   4.00      0.001      0.001         6687            0   0.00
+    Delivery   4.01      0.011      0.016        18712            0   0.00
+   New Order  44.91      0.009      0.013       209637         2092   1.00
+Order Status   3.97      0.004      0.007        18522            0   0.00
+     Payment  43.08      0.006      0.009       201097            0   0.00
+ Stock Level   4.04      0.004      0.005        18852            0   0.00
 ============  =====  =========  =========  ===========  ===========  =====
 
-* 15037.28 new-order transactions per minute (NOTPM)
-* 5.0 minute duration
-* 0 total unknown errors
-* 0.0 minutes(s) ramping up
+* Throughput: 3493.95 new-order transactions per minute (NOTPM)
+* Duration: 60.0 minute(s)
+* Unknown Errors: 0
+* Ramp Up Time: 0.0 minute(s)

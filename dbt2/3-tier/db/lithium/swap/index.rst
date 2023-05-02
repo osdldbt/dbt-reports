@@ -2,6 +2,6 @@
 Database Test 2 db swap Charts
 ================================================================================
 
-.. image:: ../sar/sar-swap.png
-   :target: ../sar/sar-swap.png
+.. image:: ../sysstat/sar/swap/sar-swap-activity.png
+   :target: ../sysstat/sar/swap/sar-swap-activity.png
    :width: 100%

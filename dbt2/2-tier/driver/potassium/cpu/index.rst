@@ -2,34 +2,22 @@
 Database Test 2 driver cpu Charts
 ================================================================================
 
-.. image:: ../sar/sar-cpu-all.png
-   :target: ../sar/sar-cpu-all.png
+.. image:: ../sysstat/sar/cpu/sar-cpu-all-busy.png
+   :target: ../sysstat/sar/cpu/sar-cpu-all-busy.png
    :width: 100%
 
-.. image:: ../sar/sar-cpu1.png
-   :target: ../sar/sar-cpu1.png
+.. image:: ../sysstat/sar/cpu/sar-cpu-0-stacked.png
+   :target: ../sysstat/sar/cpu/sar-cpu-0-stacked.png
    :width: 100%
 
-.. image:: ../sar/sar-cpu5.png
-   :target: ../sar/sar-cpu5.png
+.. image:: ../sysstat/sar/cpu/sar-cpu-0-busy.png
+   :target: ../sysstat/sar/cpu/sar-cpu-0-busy.png
    :width: 100%
 
-.. image:: ../sar/sar-cpu2.png
-   :target: ../sar/sar-cpu2.png
+.. image:: ../sysstat/sar/cpu/sar-cpu-agg-stacked.png
+   :target: ../sysstat/sar/cpu/sar-cpu-agg-stacked.png
    :width: 100%
 
-.. image:: ../sar/sar-cpu4.png
-   :target: ../sar/sar-cpu4.png
-   :width: 100%
-
-.. image:: ../sar/sar-cpu3.png
-   :target: ../sar/sar-cpu3.png
-   :width: 100%
-
-.. image:: ../sar/sar-cpu0.png
-   :target: ../sar/sar-cpu0.png
-   :width: 100%
-
-.. image:: ../sar/sar-cpu.png
-   :target: ../sar/sar-cpu.png
+.. image:: ../sysstat/sar/cpu/sar-cpu-agg-busy.png
+   :target: ../sysstat/sar/cpu/sar-cpu-agg-busy.png
    :width: 100%
