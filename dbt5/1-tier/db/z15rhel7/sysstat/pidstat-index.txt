@@ -1,0 +1,278 @@
+PID Command
+1 /usr/lib/systemd/systemd --system --deserialize 29
+2 kthreadd
+6 ksoftirqd/0
+7 migration/0
+9 rcu_sched
+11 migration/1
+12 ksoftirqd/1
+15 migration/2
+16 ksoftirqd/2
+19 migration/3
+20 ksoftirqd/3
+25 khungtaskd
+42 kswapd0
+44 khugepaged
+53 hwrng
+111 kauditd
+328 sleep 60
+347 kworker/2:1H
+375 xfsaild/vda3
+411 kworker/0:0
+436 sleep 60
+474 /usr/lib/systemd/systemd-journald
+526 sleep 60
+569 kworker/2:0
+587 /sbin/auditd
+612 /usr/lib/systemd/systemd-logind
+613 /usr/lib/polkit-1/polkitd --no-debug
+615 /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+631 sleep 60
+644 /usr/sbin/chronyd
+688 kworker/3:1H
+698 kworker/0:1H
+734 sleep 60
+765 kworker/1:1H
+797 /usr/sbin/NetworkManager --no-daemon
+825 /sbin/dhclient -d -q -sf /usr/libexec/nm-dhcp-helper -pf /var/run/dhclient-eth0.pid -lf /var/lib/NetworkManager/dhclient-5fb06b
+840 sleep 60
+929 sleep 60
+1101 /usr/sbin/rsyslogd -n
+1176 rhnsd
+1319 /usr/libexec/postfix/master -w
+1322 qmgr -l -t unix -u
+1977 /usr/bin/python2 -Es /usr/sbin/tuned -l -P
+2188 /usr/sbin/sshd -D
+2248 /usr/bin/rhsmcertd
+2340 /usr/sbin/crond -n
+3631 kworker/3:1
+6865 sshd: markwkm [priv]
+6869 sshd: markwkm@pts/0
+6870 -zsh
+7696 /usr/local/bin/postgres -D /home/markwkm/.local/dbt5
+7697 postgres: checkpointer
+7698 postgres: background writer
+7700 postgres: walwriter
+7701 postgres: autovacuum launcher
+7702 postgres: logical replication launcher
+8240 sshd: markwkm [priv]
+8247 sshd: markwkm@pts/4
+8248 -zsh
+8644 kworker/1:0
+12502 sshd: markwkm [priv]
+12506 sshd: markwkm@pts/1
+12507 -zsh
+12528 sshd: markwkm [priv]
+12532 sshd: markwkm@pts/6
+12533 -zsh
+12555 tmux a
+13016 kworker/0:0
+13090 pickup -l -t unix -u
+14122 kworker/3:0
+15284 kworker/2:0
+18073 -zsh
+19502 tmux
+19503 -zsh
+22213 kworker/1:1
+26867 kworker/2:1
+27023 kworker/0:2
+27495 /bin/sh /home/markwkm/.local/src/dbt5/builds/release/dbt5 run -i /home/markwkm/.local/egen -d 3600 -u 2 --stats pgsql /tmp/resu
+27497 /bin/bash /home/markwkm/.local/src/dbt5/builds/release/dbt5-run -i /home/markwkm/.local/egen -d 3600 -u 2 --stats pgsql /tmp/re
+27516 /bin/bash /home/markwkm/.local/src/dbt5/builds/release/dbt5-run -i /home/markwkm/.local/egen -d 3600 -u 2 --stats pgsql /tmp/re
+27518 /home/markwkm/.local/egen/bin/BrokerageHouseMain -d dbt5 -o /tmp/results/bh
+27520 /bin/bash /home/markwkm/.local/src/dbt5/builds/release/dbt5-run -i /home/markwkm/.local/egen -d 3600 -u 2 --stats pgsql /tmp/re
+27522 /home/markwkm/.local/egen/bin/MarketExchangeMain -c 5000 -t 5000 -i /home/markwkm/.local/egen/flat_in -o /tmp/results/mee
+27536 /bin/bash /home/markwkm/.local/src/dbt5/builds/release/dbt5-run -i /home/markwkm/.local/egen -d 3600 -u 2 --stats pgsql /tmp/re
+27538 /home/markwkm/.local/egen/bin/DriverMain -c 5000 -t 5000 -f 500 -w 300 -d 3600 -y 1000 -u 2 -n 0 -i /home/markwkm/.local/egen/f
+27550 sar -o /tmp/results/db/z15rhel7/sysstat/sar.datafile 60
+27552 sadc 60 -z -S ALL /tmp/results/db/z15rhel7/sysstat/sar.datafile
+27609 /bin/sh /home/markwkm/.local/src/touchstone-tools/builds/release/ts-pgsql-stat -o /tmp/results/db/z15rhel7/dbstat
+27647 postgres: markwkm dbt5 [local] idle
+27648 postgres: markwkm dbt5 [local] idle
+27652 pidstat -h -l -d -r -u -w 60
+27656 postgres: markwkm dbt5 [local] SELECT
+27661 postgres: markwkm dbt5 [local] SELECT
+27663 sleep 3600
+27674 kworker/2:2
+27734 sleep 60
+27855 kworker/0:1
+27878 sleep 60
+27964 sleep 60
+28059 sleep 60
+28148 sleep 60
+28176 kworker/2:0
+28302 sleep 60
+28329 sshd: markwkm [priv]
+28334 sshd: markwkm@pts/7
+28335 -zsh
+28494 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28495 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28496 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28497 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28498 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28499 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28500 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28501 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28502 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28503 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28504 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28505 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28506 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28507 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28508 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28509 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28510 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28511 sleep 60
+28512 postgres: markwkm dbt5 [local] authentication
+28513 postgres: markwkm dbt5 [local] startup
+28514 postgres: markwkm dbt5 [local] startup
+28515 postgres: markwkm dbt5 [local] startup
+28516 /usr/local/bin/postgres -D /home/markwkm/.local/dbt5
+28517 postgres: markwkm dbt5 [local] startup
+28518 postgres: markwkm dbt5 [local] startup
+28519 postgres: markwkm dbt5 [local] authentication
+28520 postgres: markwkm dbt5 [local] startup
+28521 postgres: markwkm dbt5 [local] startup
+28522 postgres: markwkm dbt5 [local] authentication
+28523 postgres: markwkm dbt5 [local] authentication
+28524 postgres: markwkm dbt5 [local] startup
+28525 postgres: markwkm dbt5 [local] startup
+28526 postgres: markwkm dbt5 [local] startup
+28581 kworker/0:1
+28638 sleep 60
+28726 sleep 60
+28816 sleep 60
+28850 kworker/2:1
+28891 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28892 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28893 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28894 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28895 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28896 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28897 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28902 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28903 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28904 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28907 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+28908 sleep 60
+28910 postgres: markwkm dbt5 [local] idle
+28912 postgres: markwkm dbt5 [local] idle
+28913 postgres: markwkm dbt5 [local] idle
+28914 postgres: markwkm dbt5 [local] idle
+28915 postgres: markwkm dbt5 [local] idle
+28916 postgres: markwkm dbt5 [local] authentication
+28921 postgres: markwkm dbt5 [local] COPY
+28922 postgres: markwkm dbt5 [local] authentication
+28923 postgres: markwkm dbt5 [local] authentication
+28924 postgres: markwkm dbt5 [local] authentication
+28925 postgres: markwkm dbt5 [local] authentication
+28926 postgres: markwkm dbt5 [local] authentication
+28994 sleep 60
+29035 kworker/0:2
+29066 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29067 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29068 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29069 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29070 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29071 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29072 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29073 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29074 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29075 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29076 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29077 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29078 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29079 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29080 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29081 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29082 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29083 sleep 60
+29161 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29162 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29163 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29164 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29165 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29166 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29167 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29168 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29169 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29170 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29171 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29172 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29173 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29174 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29175 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29176 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29177 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29178 sleep 60
+29251 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29252 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29253 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29254 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29255 /bin/sh /home/markwkm/.local/src/touchstone-tools/builds/release/ts-pgsql-stat -o /tmp/results/db/z15rhel7/dbstat
+29256 /bin/sh /home/markwkm/.local/src/touchstone-tools/builds/release/ts-pgsql-stat -o /tmp/results/db/z15rhel7/dbstat
+29257 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29258 /bin/sh /home/markwkm/.local/src/touchstone-tools/builds/release/ts-pgsql-stat -o /tmp/results/db/z15rhel7/dbstat
+29259 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29260 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29261 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29262 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29263 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29264 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29265 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29266 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29267 psql -v ON_ERROR_STOP=1 -X -t --no-align -c COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime
+29268 sleep 60
+29360 sleep 60
+29452 sleep 60
+29545 sleep 60
+29599 kworker/0:1
+29634 sleep 60
+29724 sleep 60
+29755 kworker/2:2
+29819 sleep 60
+29905 sleep 60
+29999 sleep 60
+30097 sleep 60
+30186 sleep 60
+30223 kworker/2:0
+30232 pickup -l -t unix -u
+30281 sleep 60
+30369 sleep 60
+30458 sleep 60
+30547 sleep 60
+30645 sleep 60
+30677 kworker/2:1
+30707 kworker/0:2
+30744 sleep 60
+30833 sleep 60
+30921 sleep 60
+30994 kworker/1:2
+31016 sleep 60
+31060 kworker/u8:0
+31103 kworker/3:2
+31125 sleep 60
+31159 kworker/2:2
+31215 sleep 60
+31307 sleep 60
+31403 sleep 60
+31433 kworker/0:0
+31492 sleep 60
+31586 sleep 60
+31618 kworker/2:0
+31675 sleep 60
+31765 sleep 60
+31854 sleep 60
+31926 kworker/3:0
+31951 sleep 60
+32047 sleep 60
+32081 kworker/2:1
+32112 kworker/0:1
+32147 sleep 60
+32235 sleep 60
+32322 sleep 60
+32411 sleep 60
+32507 sleep 60
+32543 kworker/2:2
+32601 sleep 60
+32703 sleep 60
