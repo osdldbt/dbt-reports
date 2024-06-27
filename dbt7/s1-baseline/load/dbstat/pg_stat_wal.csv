@@ -1,0 +1,2 @@
+ctime,wal_records,wal_fpi,wal_bytes,wal_buffers_full,wal_write,wal_sync,wal_write_time,wal_sync_time,stats_reset
+1719457505.905890,391731780,80949543,1601456571448,17726508,19337751,1597675,0,0,2024-06-13 18:53:49.178489+00

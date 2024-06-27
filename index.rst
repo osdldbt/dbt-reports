@@ -23,3 +23,10 @@ DBT-5
 =====
 
 * `1-Tier example <dbt5/1-tier/report.html>`__
+
+DBT-7
+=====
+
+* `PostgreSQL EXPLAIN ANALYZE Example
+  <dbt7/s1-baseline/report.html>`__: The query results also display the actual
+  query execution plan.

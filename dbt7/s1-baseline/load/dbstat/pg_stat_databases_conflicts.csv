@@ -1,0 +1,6 @@
+ctime,datid,datname,confl_tablespace,confl_lock,confl_snapshot,confl_bufferpin,confl_deadlock
+1719457505.903857,5,postgres,0,0,0,0,0
+1719457505.903857,4263817,dbt7,0,0,0,0,0
+1719457505.903857,1,template1,0,0,0,0,0
+1719457505.903857,4,template0,0,0,0,0,0
+1719457505.903857,4212858,dbt5,0,0,0,0,0

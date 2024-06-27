@@ -1,0 +1,10 @@
+ctime,datname,nspname,relname,locktype,database,relation,page,tuple,virtualxid,transactionid,classid,objid,objsubid,virtualtransaction,pid,mode,granted,fastpath,waitstart
+1719457505.897972,dbt7,pg_catalog,pg_am,relation,4263817,2601,,,,,,,,7/27693,2852857,AccessShareLock,t,t,
+1719457505.897972,dbt7,pg_catalog,pg_index,relation,4263817,2610,,,,,,,,5/42093,2852855,AccessShareLock,t,t,
+1719457505.897972,dbt7,pg_catalog,pg_index_indrelid_index,relation,4263817,2678,,,,,,,,5/42093,2852855,AccessShareLock,t,t,
+1719457505.897972,dbt7,pg_catalog,pg_namespace,relation,4263817,2615,,,,,,,,3/340706,2852853,AccessShareLock,t,t,
+1719457505.897972,dbt7,pg_catalog,pg_namespace_nspname_index,relation,4263817,2684,,,,,,,,3/340706,2852853,AccessShareLock,t,t,
+1719457505.897972,dbt7,pg_catalog,pg_namespace_oid_index,relation,4263817,2685,,,,,,,,3/340706,2852853,AccessShareLock,t,t,
+1719457505.897972,dbt7,pg_catalog,pg_rewrite,relation,4263817,2618,,,,,,,,5/42093,2852855,AccessShareLock,t,t,
+1719457505.897972,dbt7,pg_catalog,pg_rewrite_rel_rulename_index,relation,4263817,2693,,,,,,,,5/42093,2852855,AccessShareLock,t,t,
+1719457505.897972,dbt7,pg_toast,pg_toast_2618,relation,4263817,2838,,,,,,,,5/42093,2852855,AccessShareLock,t,t,

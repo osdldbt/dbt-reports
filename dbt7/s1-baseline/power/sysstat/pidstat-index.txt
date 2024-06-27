@@ -1,0 +1,605 @@
+2 kthreadd
+14 ksoftirqd/0
+16 rcu_preempt
+17 migration/0
+20 migration/1
+21 ksoftirqd/1
+25 migration/2
+26 ksoftirqd/2
+30 migration/3
+31 ksoftirqd/3
+35 migration/4
+36 ksoftirqd/4
+40 migration/5
+41 ksoftirqd/5
+45 migration/6
+46 ksoftirqd/6
+50 migration/7
+51 ksoftirqd/7
+55 migration/8
+56 ksoftirqd/8
+60 migration/9
+61 ksoftirqd/9
+65 migration/10
+66 ksoftirqd/10
+70 migration/11
+71 ksoftirqd/11
+75 migration/12
+76 ksoftirqd/12
+80 migration/13
+81 ksoftirqd/13
+85 migration/14
+86 ksoftirqd/14
+90 migration/15
+91 ksoftirqd/15
+95 migration/16
+96 ksoftirqd/16
+100 migration/17
+101 ksoftirqd/17
+105 migration/18
+106 ksoftirqd/18
+110 migration/19
+111 ksoftirqd/19
+115 migration/20
+116 ksoftirqd/20
+120 migration/21
+121 ksoftirqd/21
+125 migration/22
+126 ksoftirqd/22
+130 migration/23
+131 ksoftirqd/23
+135 migration/24
+136 ksoftirqd/24
+140 migration/25
+141 ksoftirqd/25
+145 migration/26
+146 ksoftirqd/26
+150 migration/27
+151 ksoftirqd/27
+155 migration/28
+156 ksoftirqd/28
+160 migration/29
+161 ksoftirqd/29
+165 migration/30
+166 ksoftirqd/30
+170 migration/31
+171 ksoftirqd/31
+175 migration/32
+176 ksoftirqd/32
+180 migration/33
+181 ksoftirqd/33
+185 migration/34
+186 ksoftirqd/34
+190 migration/35
+191 ksoftirqd/35
+195 migration/36
+196 ksoftirqd/36
+200 migration/37
+201 ksoftirqd/37
+205 migration/38
+206 ksoftirqd/38
+210 migration/39
+211 ksoftirqd/39
+215 migration/40
+216 ksoftirqd/40
+220 migration/41
+221 ksoftirqd/41
+225 migration/42
+226 ksoftirqd/42
+230 migration/43
+231 ksoftirqd/43
+235 migration/44
+236 ksoftirqd/44
+240 migration/45
+241 ksoftirqd/45
+245 migration/46
+246 ksoftirqd/46
+250 migration/47
+251 ksoftirqd/47
+255 migration/48
+256 ksoftirqd/48
+260 migration/49
+261 ksoftirqd/49
+265 migration/50
+266 ksoftirqd/50
+270 migration/51
+271 ksoftirqd/51
+275 migration/52
+276 ksoftirqd/52
+280 migration/53
+281 ksoftirqd/53
+285 migration/54
+286 ksoftirqd/54
+290 migration/55
+291 ksoftirqd/55
+295 migration/56
+296 ksoftirqd/56
+300 migration/57
+301 ksoftirqd/57
+305 migration/58
+306 ksoftirqd/58
+310 migration/59
+311 ksoftirqd/59
+315 migration/60
+316 ksoftirqd/60
+320 migration/61
+321 ksoftirqd/61
+325 migration/62
+326 ksoftirqd/62
+330 migration/63
+331 ksoftirqd/63
+404 khungtaskd
+407 kcompactd0
+409 khugepaged
+474 kworker/32:1H-kblockd
+498 hwrng
+501 kworker/0:1H-kblockd
+501 kworker/0:1H-xfs-log/dm-0
+561 kworker/44:1H-kblockd
+561 kworker/44:1H-xfs-log/dm-0
+571 kworker/16:1H-kblockd
+574 kworker/40:1H-kblockd
+575 kworker/39:1H-kblockd
+576 kworker/27:1H-kblockd
+577 kworker/62:1H-kblockd
+578 kworker/17:1H-kblockd
+607 kworker/22:1H-kblockd
+607 kworker/22:1H-xfs-log/dm-0
+608 kworker/23:1H-kblockd
+609 kworker/52:1H-kblockd
+610 kworker/54:1H-kblockd
+614 kworker/21:1H-kblockd
+617 kworker/57:1H-kblockd
+619 kworker/5:1H-kblockd
+621 kworker/6:1H-kblockd
+622 kworker/58:1H-kblockd
+623 kworker/36:1H-kblockd
+624 kworker/63:1H-kblockd
+626 kworker/18:1H-kblockd
+627 kworker/19:1H-kblockd
+628 kworker/24:1H-kblockd
+629 kworker/59:1H-kblockd
+631 kworker/42:1H-xfs-log/dm-0
+632 kworker/29:1H-kblockd
+636 kworker/13:1H-kblockd
+638 kworker/33:1H-kblockd
+642 kworker/14:1H-kblockd
+646 kworker/35:1H-kblockd
+646 kworker/35:1H-xfs-log/dm-0
+648 kworker/47:1H-kblockd
+648 kworker/47:1H-xfs-log/dm-0
+650 kworker/48:1H-kblockd
+652 kworker/43:1H-kblockd
+654 kworker/1:1H-kblockd
+654 kworker/1:1H-xfs-log/dm-0
+673 kworker/38:1H-kblockd
+675 kworker/3:1H-kblockd
+675 kworker/3:1H-xfs-log/dm-0
+681 kworker/45:1H-kblockd
+693 kworker/60:1H-kblockd
+694 kworker/25:1H-kblockd
+698 kworker/10:1H-kblockd
+699 kworker/49:1H-kblockd
+702 kworker/8:1H-kblockd
+703 kworker/34:1H-kblockd
+705 kworker/12:1H-kblockd
+706 kworker/50:1H-kblockd
+802 kworker/15:1H-kblockd
+806 kworker/30:1H-kblockd
+807 kworker/46:1H-kblockd
+807 kworker/46:1H-xfs-log/dm-0
+869 jbd2/sda3-8
+1195 kworker/7:1H-kblockd
+2027 /lib/systemd/systemd --user
+6909 xfsaild/sdb
+6919 xfsaild/dm-0
+550334 /home/markwkm/.virtualenvs/buildbot/bin/python -c from twisted.scripts import twistd; twistd.run() --no_save --logfile=twistd.log --python=buildbot.tac
+688561 kworker/20:1-events
+688561 kworker/20:1-mm_percpu_wq
+690438 kworker/2:0-cgroup_destroy
+720041 kworker/31:0H-kblockd
+720041 kworker/31:0H-xfs-log/dm-0
+720041 kworker/31:0H-xfs-log/sdb
+799562 kworker/2:1-events
+799562 kworker/2:1-mm_percpu_wq
+799562 kworker/2:1-xfs-buf/dm-0
+1036996 kworker/48:0-events
+1036996 kworker/48:0-mm_percpu_wq
+1055443 kworker/24:2-events
+1055443 kworker/24:2-mm_percpu_wq
+1551375 kworker/61:0-events
+1551375 kworker/61:0-mm_percpu_wq
+1551376 kworker/62:0-events
+1551376 kworker/62:0-mm_percpu_wq
+1841200 kworker/39:1-rcu_par_gp
+2056686 kworker/39:2-rcu_gp
+2126824 kworker/60:2-rcu_gp
+2217641 kworker/38:0-events
+2217641 kworker/38:0-mm_percpu_wq
+2221340 kworker/52:0-events
+2221340 kworker/52:0-mm_percpu_wq
+2221659 kworker/19:2-events
+2221659 kworker/19:2-mm_percpu_wq
+2302035 kworker/14:1-events
+2302035 kworker/14:1-mm_percpu_wq
+2378491 kworker/60:0-events
+2378491 kworker/60:0-mm_percpu_wq
+2378494 kworker/45:2-events
+2378494 kworker/45:2-mm_percpu_wq
+2378497 kworker/4:1-rcu_par_gp
+2440796 kworker/29:2-events
+2440796 kworker/29:2-mm_percpu_wq
+2440796 kworker/29:2-xfs-buf/sdb
+2440797 kworker/30:1-events
+2440797 kworker/30:1-mm_percpu_wq
+2442058 kworker/21:0-events
+2442058 kworker/21:0-mm_percpu_wq
+2443969 kworker/55:1-events
+2443969 kworker/55:1-mm_percpu_wq
+2470700 kworker/56:2-rcu_par_gp
+2503838 kworker/35:0-events
+2503838 kworker/35:0-mm_percpu_wq
+2503839 kworker/56:1-rcu_gp
+2554982 kworker/18:2-events
+2554982 kworker/18:2-events_freezable_power_
+2554982 kworker/18:2-mm_percpu_wq
+2559525 /usr/lib/postgresql/15/bin/postgres -D /pg/data
+2559526 postgres: logger
+2559527 postgres: checkpointer
+2559528 postgres: background writer
+2559530 postgres: walwriter
+2559531 postgres: autovacuum launcher
+2559532 postgres: logical replication launcher
+2614894 kworker/57:3-rcu_par_gp
+2668457 kworker/42:1-events
+2668457 kworker/42:1-mm_percpu_wq
+2698944 kworker/27:1-events
+2698944 kworker/27:1-mm_percpu_wq
+2721877 kworker/41:2-events
+2721877 kworker/41:2-mm_percpu_wq
+2723433 kworker/16:1-events
+2723433 kworker/16:1-mm_percpu_wq
+2723434 kworker/17:2-events
+2723434 kworker/17:2-mm_percpu_wq
+2723623 kworker/22:1-events
+2723623 kworker/22:1-mm_percpu_wq
+2724344 kworker/51:2-events
+2724344 kworker/51:2-mm_percpu_wq
+2725265 kworker/46:0-events
+2725265 kworker/46:0-mm_percpu_wq
+2725276 kworker/43:2-events
+2725276 kworker/43:2-mm_percpu_wq
+2725277 kworker/8:0-events
+2725277 kworker/8:0-mm_percpu_wq
+2725596 kworker/23:1-events
+2725596 kworker/23:1-mm_percpu_wq
+2725980 kworker/37:2-events
+2725980 kworker/37:2-mm_percpu_wq
+2725991 kworker/36:2-events
+2725991 kworker/36:2-mm_percpu_wq
+2751189 kworker/59:2-events
+2751189 kworker/59:2-ipv6_addrconf
+2751189 kworker/59:2-mm_percpu_wq
+2751294 kworker/47:0-events
+2751294 kworker/47:0-mm_percpu_wq
+2809075 kworker/3:0-events
+2809075 kworker/3:0-mm_percpu_wq
+2809075 kworker/3:0-xfs-buf/dm-0
+2809086 kworker/4:2-rcu_gp
+2809787 kworker/25:1-events
+2809787 kworker/25:1-mm_percpu_wq
+2809788 kworker/26:2-events
+2809788 kworker/26:2-mm_percpu_wq
+2809800 kworker/40:1-events
+2809800 kworker/40:1-mm_percpu_wq
+2812644 kworker/9:2-events
+2812644 kworker/9:2-i40e
+2812644 kworker/9:2-mm_percpu_wq
+2814699 kworker/12:1-events
+2814699 kworker/12:1-mm_percpu_wq
+2814716 kworker/13:0-events
+2814716 kworker/13:0-mm_percpu_wq
+2819390 kworker/31:2H-kblockd
+2825709 tmux
+2834777 kworker/53:0-events
+2834777 kworker/53:0-mm_percpu_wq
+2834789 kworker/10:1-events
+2834789 kworker/10:1-mm_percpu_wq
+2834790 kworker/11:0-events
+2834790 kworker/11:0-mm_percpu_wq
+2836576 kworker/15:0-events
+2836576 kworker/15:0-events_power_efficient
+2836576 kworker/15:0-mm_percpu_wq
+2836577 kworker/44:1-events
+2836577 kworker/44:1-events_power_efficient
+2836577 kworker/44:1-mm_percpu_wq
+2836592 kworker/0:2-events
+2836592 kworker/0:2-events_power_efficient
+2836592 kworker/0:2-mm_percpu_wq
+2840083 kworker/31:2-events
+2840083 kworker/31:2-mm_percpu_wq
+2842368 kworker/u128:3-bond0
+2842368 kworker/u128:3-edac-poller
+2842368 kworker/u128:3-events_unbound
+2842368 kworker/u128:3-flush-8:0
+2842368 kworker/u128:3-writeback
+2845938 kworker/u128:0-bond0
+2845938 kworker/u128:0-edac-poller
+2845938 kworker/u128:0-events_unbound
+2845938 kworker/u128:0-flush-8:0
+2845938 kworker/u128:0-poll_mpt3sas0_statu
+2845938 kworker/u128:0-writeback
+2851894 kworker/u128:1-bond0
+2851894 kworker/u128:1-edac-poller
+2851894 kworker/u128:1-events_unbound
+2851894 kworker/u128:1-ext4-rsv-conversion
+2851894 kworker/u128:1-flush-254:0
+2851894 kworker/u128:1-flush-8:0
+2851894 kworker/u128:1-poll_mpt3sas0_statu
+2851894 kworker/u128:1-writeback
+2851908 kworker/u128:4-bond0
+2851908 kworker/u128:4-events_unbound
+2851908 kworker/u128:4-flush-8:0
+2852271 kworker/63:2-events
+2852271 kworker/63:2-mm_percpu_wq
+2852272 kworker/28:0-events
+2852272 kworker/28:0-events_power_efficient
+2852272 kworker/28:0-mm_percpu_wq
+2852273 kworker/34:1-events
+2852273 kworker/34:1-mm_percpu_wq
+2852275 kworker/57:1-events
+2852275 kworker/57:1-mm_percpu_wq
+2852276 kworker/58:1-events
+2852276 kworker/58:1-mm_percpu_wq
+2852278 kworker/6:2-events
+2852278 kworker/6:2-mm_percpu_wq
+2852279 kworker/7:1-events
+2852279 kworker/7:1-mm_percpu_wq
+2852281 kworker/54:2-events
+2852281 kworker/54:2-mm_percpu_wq
+2852544 kworker/33:2-events
+2852544 kworker/33:2-mm_percpu_wq
+2852631 kworker/31:0-events
+2852631 kworker/31:0-mm_percpu_wq
+2852631 kworker/31:0-xfs-sync/dm-0
+2852631 kworker/31:0-xfs-sync/sdb
+2852671 kworker/49:0-events
+2852671 kworker/49:0-mm_percpu_wq
+2852672 kworker/50:1-events
+2852672 kworker/50:1-mm_percpu_wq
+2853635 kworker/1:0-events
+2853635 kworker/1:0-mm_percpu_wq
+2853635 kworker/1:0-xfs-buf/dm-0
+2853646 kworker/5:1-events
+2853646 kworker/5:1-mm_percpu_wq
+2854202 sar -o /tmp/s1-basline/power/sysstat/sar.datafile 60
+2854205 sadc 60 -Z -S XALL /tmp/s1-basline/power/sysstat/sar.datafile
+2854206 ts pgsql-stat -d dbt7 -o /tmp/s1-basline/power/dbstat
+2854243 /bin/sh /tmp/.mount_tsBaAbog/usr/bin/ts-pgsql-stat -d dbt7 -o /tmp/s1-basline/power/dbstat
+2854285 /usr/lib/postgresql/15/bin/psql -X -a -d dbt7 -f /tmp/s1-basline/power/query_0.sql
+2854286 postgres: markwkm dbt7 [local] SELECT
+2854291 pidstat -H -h -l -d -r -s -u -v -w 60
+2854346 kworker/56:0-events
+2854346 kworker/56:0-mm_percpu_wq
+2854356 kworker/39:0-events
+2854356 kworker/39:0-mm_percpu_wq
+2854357 kworker/4:0-events
+2854357 kworker/4:0-mm_percpu_wq
+2854480 sleep 60
+2854683 sleep 60
+2854887 sleep 60
+2855094 sleep 60
+2855180 kworker/u128:2-bond0
+2855181 kworker/u128:5
+2855302 sleep 60
+2855343 kworker/31:1-events
+2855343 kworker/31:1-mm_percpu_wq
+2855343 kworker/31:1-xfs-sync/dm-0
+2855343 kworker/31:1-xfs-sync/sdb
+2855505 sleep 60
+2855708 sleep 60
+2855908 sleep 60
+2856121 sleep 60
+2856328 sleep 60
+2856531 sleep 60
+2856738 sleep 60
+2856942 sleep 60
+2857145 sleep 60
+2857348 sleep 60
+2857550 sleep 60
+2857754 sleep 60
+2857957 sleep 60
+2858159 sleep 60
+2858244 kworker/u128:2
+2858244 kworker/u128:2-bond0
+2858244 kworker/u128:2-events_unbound
+2858245 kworker/u128:4-bond0
+2858245 kworker/u128:4-events_unbound
+2858245 kworker/u128:4-flush-8:0
+2858245 kworker/u128:4-poll_mpt3sas0_statu
+2858245 kworker/u128:4-writeback
+2858365 sleep 60
+2858569 sleep 60
+2858772 sleep 60
+2858796 kworker/31:0-events
+2858796 kworker/31:0-mm_percpu_wq
+2858796 kworker/31:0-xfs-sync/dm-0
+2858976 sleep 60
+2859178 sleep 60
+2859381 sleep 60
+2859583 sleep 60
+2859784 sleep 60
+2859907 kworker/31:1-events
+2859907 kworker/31:1-mm_percpu_wq
+2859907 kworker/31:1-xfs-sync/dm-0
+2859907 kworker/31:1-xfs-sync/sdb
+2859914 kworker/31:1H-kblockd
+2859987 sleep 60
+2860188 sleep 60
+2860394 sleep 60
+2860597 sleep 60
+2860799 sleep 60
+2861001 sleep 60
+2861205 sleep 60
+2861271 kworker/31:2
+2861271 kworker/31:2-mm_percpu_wq
+2861410 sleep 60
+2861440 kworker/u128:2-bond0
+2861440 kworker/u128:2-edac-poller
+2861440 kworker/u128:2-events_unbound
+2861440 kworker/u128:2-ext4-rsv-conversion
+2861440 kworker/u128:2-flush-254:0
+2861440 kworker/u128:2-flush-8:0
+2861440 kworker/u128:2-poll_mpt3sas0_statu
+2861440 kworker/u128:2-writeback
+2861614 sleep 60
+2861819 sleep 60
+2862022 sleep 60
+2862234 sleep 60
+2862319 kworker/u128:3
+2862440 sleep 60
+2862643 sleep 60
+2862843 sleep 60
+2863045 sleep 60
+2863247 sleep 60
+2863450 sleep 60
+2863652 sleep 60
+2863856 sleep 60
+2863957 kworker/u128:0-bond0
+2863957 kworker/u128:0-flush-8:0
+2864060 sleep 60
+2864262 sleep 60
+2864346 kworker/u128:3
+2864346 kworker/u128:3-bond0
+2864346 kworker/u128:3-edac-poller
+2864346 kworker/u128:3-flush-8:0
+2864468 sleep 60
+2864672 sleep 60
+2864875 sleep 60
+2864933 kworker/31:0-events
+2864933 kworker/31:0-mm_percpu_wq
+2864933 kworker/31:0-xfs-sync/dm-0
+2864933 kworker/31:0-xfs-sync/sdb
+2865078 sleep 60
+2865281 sleep 60
+2865486 sleep 60
+2865588 kworker/u128:0-bond0
+2865588 kworker/u128:0-flush-8:0
+2865690 sleep 60
+2865892 sleep 60
+2866094 sleep 60
+2866298 sleep 60
+2866382 kworker/u128:4
+2866503 sleep 60
+2866705 sleep 60
+2866908 sleep 60
+2867111 sleep 60
+2867314 sleep 60
+2867517 sleep 60
+2867720 sleep 60
+2867924 sleep 60
+2867950 kworker/31:1-events
+2867950 kworker/31:1-mm_percpu_wq
+2867950 kworker/31:1-xfs-sync/dm-0
+2867950 kworker/31:1-xfs-sync/sdb
+2868129 sleep 60
+2868323 kworker/u128:3-bond0
+2868323 kworker/u128:3-flush-8:0
+2868366 sleep 60
+2868572 sleep 60
+2868773 sleep 60
+2868857 kworker/u128:4
+2868980 sleep 60
+2869182 sleep 60
+2869232 kworker/31:0
+2869232 kworker/31:0-mm_percpu_wq
+2869384 sleep 60
+2869587 sleep 60
+2869789 sleep 60
+2869992 sleep 60
+2870194 sleep 60
+2870398 sleep 60
+2870481 kworker/u128:0
+2870482 kworker/u128:4
+2870607 sleep 60
+2870810 sleep 60
+2871012 sleep 60
+2871216 sleep 60
+2871420 sleep 60
+2871624 sleep 60
+2871827 sleep 60
+2872031 sleep 60
+2872232 sleep 60
+2872434 sleep 60
+2872517 kworker/u128:0-bond0
+2872517 kworker/u128:0-flush-8:0
+2872518 kworker/u128:4-flush-8:0
+2873033 kworker/2:2
+2873040 kworker/u128:5
+2873116 sleep 60
+2873318 sleep 60
+2873521 sleep 60
+2873566 kworker/31:2
+2873566 kworker/31:2-mm_percpu_wq
+2873725 sleep 60
+2873926 sleep 60
+2874130 sleep 60
+2874333 sleep 60
+2874376 kworker/u128:3-bond0
+2874376 kworker/u128:3-edac-poller
+2874376 kworker/u128:3-flush-254:0
+2874376 kworker/u128:3-flush-8:0
+2874376 kworker/u128:3-poll_mpt3sas0_statu
+2874376 kworker/u128:3-writeback
+2874536 sleep 60
+2874738 sleep 60
+2874950 sleep 60
+2875032 kworker/u128:4
+2875032 kworker/u128:4-bond0
+2875032 kworker/u128:4-ext4-rsv-conversion
+2875032 kworker/u128:4-flush-8:0
+2875032 kworker/u128:4-poll_mpt3sas0_statu
+2875155 sleep 60
+2875358 sleep 60
+2875560 sleep 60
+2875762 sleep 60
+2875965 sleep 60
+2876064 kworker/31:0-events
+2876064 kworker/31:0-mm_percpu_wq
+2876064 kworker/31:0-xfs-sync/dm-0
+2876064 kworker/31:0-xfs-sync/sdb
+2876147 kworker/u128:0
+2876178 postgres: parallel worker for PID 2854286
+2876179 postgres: parallel worker for PID 2854286
+2876199 sleep 60
+2876386 kworker/60:1-events
+2876386 kworker/60:1-mm_percpu_wq
+2876453 postgres: parallel worker for PID 2854286
+2876454 postgres
+2876457 postgres
+2876458 postgres
+2876477 sleep 60
+2876694 sleep 60
+2876896 sleep 60
+2877099 sleep 60
+2877183 kworker/u128:1
+2877305 sleep 60
+2877507 sleep 60
+2877709 sleep 60
+2877750 kworker/31:1
+2877914 sleep 60
+2878115 sleep 60
+2878320 sleep 60
+2878521 sleep 60
+2878723 sleep 60
+2878926 sleep 60
+2879129 sleep 60
+2879213 kworker/u128:0-flush-8:16
+2879214 kworker/u128:1
+2879348 sleep 60
+2879550 sleep 60
+3201937 kworker/2:2H-kblockd
+3201937 kworker/2:2H-xfs-log/dm-0
+3203242 kworker/32:6-events
+3203242 kworker/32:6-events_power_efficient
+3203242 kworker/32:6-mm_percpu_wq

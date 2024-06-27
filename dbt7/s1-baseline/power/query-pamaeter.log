@@ -1,0 +1,2322 @@
+BEGIN STREAM 0
+Template: query1.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	AGG_FIELD.01 = SR_RETURN_AMT
+	YEAR.01 = 2000
+	STATE.01 = TN
+	COUNTY.01 = 1
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query1.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query1.tpl', TRANSACTION_TIMESTAMP(), 0, 1, 1008547734);
+	_SEED.01 = 1008547734
+	_QUERY.01 = 1
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query1.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query2.tpl
+	__LIMITA.01 = 
+	YEAR.01 = 2001
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query2.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query2.tpl', TRANSACTION_TIMESTAMP(), 0, 2, 573339567);
+	_SEED.01 = 573339567
+	_QUERY.01 = 2
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query2.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query3.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	MANUFACT.01 = 481
+	MONTH.01 = 12
+	AGGC.01 = ss_net_profit
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query3.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query3.tpl', TRANSACTION_TIMESTAMP(), 0, 3, 537291475);
+	_SEED.01 = 537291475
+	_QUERY.01 = 3
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query3.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query4.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	SELECTONE.01 = t_s_secyear.customer_login
+	YEAR.01 = 2001
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query4.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query4.tpl', TRANSACTION_TIMESTAMP(), 0, 4, 450282871);
+	_SEED.01 = 450282871
+	_QUERY.01 = 4
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query4.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query5.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	SALES_DATE.01 = 2002-08-11
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query5.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query5.tpl', TRANSACTION_TIMESTAMP(), 0, 5, 1911463715);
+	_SEED.01 = 1911463715
+	_QUERY.01 = 5
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query5.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query6.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	MONTH.01 = 1
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query6.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query6.tpl', TRANSACTION_TIMESTAMP(), 0, 6, 401621312);
+	_SEED.01 = 401621312
+	_QUERY.01 = 6
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query6.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query7.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	YEAR.01 = 2001
+	ES.01 = Advanced Degree
+	MS.01 = S
+	GEN.01 = M
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query7.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query7.tpl', TRANSACTION_TIMESTAMP(), 0, 7, 1572105747);
+	_SEED.01 = 1572105747
+	_QUERY.01 = 7
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query7.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query8.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	ZIP.01 = 23062
+	ZIP.02 = 41757
+	ZIP.03 = 72089
+	ZIP.04 = 27384
+	ZIP.05 = 61337
+	ZIP.06 = 39420
+	ZIP.07 = 36196
+	ZIP.08 = 13005
+	ZIP.09 = 42881
+	ZIP.10 = 55393
+	ZIP.11 = 30074
+	ZIP.12 = 76695
+	ZIP.13 = 73527
+	ZIP.14 = 57964
+	ZIP.15 = 15830
+	ZIP.16 = 40928
+	ZIP.17 = 55729
+	ZIP.18 = 27117
+	ZIP.19 = 39356
+	ZIP.20 = 72922
+	ZIP.21 = 84289
+	ZIP.22 = 26675
+	ZIP.23 = 12069
+	ZIP.24 = 22027
+	ZIP.25 = 50093
+	ZIP.26 = 44857
+	ZIP.27 = 30103
+	ZIP.28 = 70241
+	ZIP.29 = 68140
+	ZIP.30 = 72585
+	ZIP.31 = 99437
+	ZIP.32 = 53077
+	ZIP.33 = 35451
+	ZIP.34 = 37172
+	ZIP.35 = 39583
+	ZIP.36 = 86759
+	ZIP.37 = 93298
+	ZIP.38 = 93433
+	ZIP.39 = 66551
+	ZIP.40 = 26591
+	ZIP.41 = 11287
+	ZIP.42 = 59688
+	ZIP.43 = 14429
+	ZIP.44 = 75544
+	ZIP.45 = 69366
+	ZIP.46 = 30119
+	ZIP.47 = 65608
+	ZIP.48 = 44629
+	ZIP.49 = 27682
+	ZIP.50 = 83614
+	ZIP.51 = 10446
+	ZIP.52 = 27350
+	ZIP.53 = 50281
+	ZIP.54 = 48088
+	ZIP.55 = 97911
+	ZIP.56 = 11690
+	ZIP.57 = 27498
+	ZIP.58 = 90273
+	ZIP.59 = 41685
+	ZIP.60 = 46573
+	ZIP.61 = 27627
+	ZIP.62 = 17229
+	ZIP.63 = 10401
+	ZIP.64 = 59548
+	ZIP.65 = 48680
+	ZIP.66 = 19697
+	ZIP.67 = 10485
+	ZIP.68 = 76543
+	ZIP.69 = 11964
+	ZIP.70 = 48384
+	ZIP.71 = 54348
+	ZIP.72 = 95342
+	ZIP.73 = 57943
+	ZIP.74 = 23868
+	ZIP.75 = 58303
+	ZIP.76 = 17708
+	ZIP.77 = 54996
+	ZIP.78 = 98594
+	ZIP.79 = 38120
+	ZIP.80 = 50641
+	ZIP.81 = 12093
+	ZIP.82 = 76984
+	ZIP.83 = 77376
+	ZIP.84 = 22103
+	ZIP.85 = 55019
+	ZIP.86 = 33891
+	ZIP.87 = 18306
+	ZIP.88 = 19024
+	ZIP.89 = 91573
+	ZIP.90 = 10625
+	ZIP.91 = 56261
+	ZIP.92 = 69665
+	ZIP.93 = 31682
+	ZIP.94 = 69302
+	ZIP.95 = 31497
+	ZIP.96 = 74419
+	ZIP.97 = 93944
+	ZIP.98 = 99076
+	ZIP.99 = 16382
+	ZIP.100 = 95055
+	ZIP.101 = 77114
+	ZIP.102 = 24158
+	ZIP.103 = 61945
+	ZIP.104 = 26241
+	ZIP.105 = 74791
+	ZIP.106 = 78416
+	ZIP.107 = 44724
+	ZIP.108 = 39572
+	ZIP.109 = 97717
+	ZIP.110 = 15200
+	ZIP.111 = 26697
+	ZIP.112 = 32686
+	ZIP.113 = 78094
+	ZIP.114 = 67870
+	ZIP.115 = 11515
+	ZIP.116 = 28871
+	ZIP.117 = 44262
+	ZIP.118 = 69847
+	ZIP.119 = 32765
+	ZIP.120 = 55626
+	ZIP.121 = 80364
+	ZIP.122 = 59857
+	ZIP.123 = 52936
+	ZIP.124 = 47877
+	ZIP.125 = 22564
+	ZIP.126 = 69830
+	ZIP.127 = 33048
+	ZIP.128 = 49616
+	ZIP.129 = 19924
+	ZIP.130 = 89233
+	ZIP.131 = 35569
+	ZIP.132 = 92727
+	ZIP.133 = 11901
+	ZIP.134 = 23110
+	ZIP.135 = 63686
+	ZIP.136 = 87708
+	ZIP.137 = 12178
+	ZIP.138 = 27128
+	ZIP.139 = 59920
+	ZIP.140 = 66334
+	ZIP.141 = 46470
+	ZIP.142 = 90462
+	ZIP.143 = 64772
+	ZIP.144 = 53046
+	ZIP.145 = 87835
+	ZIP.146 = 16420
+	ZIP.147 = 99062
+	ZIP.148 = 74293
+	ZIP.149 = 64562
+	ZIP.150 = 28573
+	ZIP.151 = 12273
+	ZIP.152 = 26689
+	ZIP.153 = 58128
+	ZIP.154 = 41408
+	ZIP.155 = 17618
+	ZIP.156 = 21503
+	ZIP.157 = 37173
+	ZIP.158 = 32395
+	ZIP.159 = 52673
+	ZIP.160 = 40339
+	ZIP.161 = 79438
+	ZIP.162 = 23168
+	ZIP.163 = 72688
+	ZIP.164 = 17504
+	ZIP.165 = 93443
+	ZIP.166 = 46636
+	ZIP.167 = 37034
+	ZIP.168 = 28479
+	ZIP.169 = 58627
+	ZIP.170 = 67121
+	ZIP.171 = 13632
+	ZIP.172 = 36814
+	ZIP.173 = 63791
+	ZIP.174 = 53362
+	ZIP.175 = 95708
+	ZIP.176 = 57248
+	ZIP.177 = 34165
+	ZIP.178 = 96316
+	ZIP.179 = 32023
+	ZIP.180 = 91304
+	ZIP.181 = 24944
+	ZIP.182 = 90435
+	ZIP.183 = 13999
+	ZIP.184 = 16321
+	ZIP.185 = 31020
+	ZIP.186 = 79609
+	ZIP.187 = 63811
+	ZIP.188 = 63703
+	ZIP.189 = 40429
+	ZIP.190 = 39076
+	ZIP.191 = 67638
+	ZIP.192 = 33395
+	ZIP.193 = 64373
+	ZIP.194 = 97571
+	ZIP.195 = 82756
+	ZIP.196 = 57663
+	ZIP.197 = 82683
+	ZIP.198 = 16374
+	ZIP.199 = 18965
+	ZIP.200 = 92438
+	ZIP.201 = 76378
+	ZIP.202 = 29207
+	ZIP.203 = 97018
+	ZIP.204 = 80822
+	ZIP.205 = 23686
+	ZIP.206 = 57770
+	ZIP.207 = 79166
+	ZIP.208 = 49987
+	ZIP.209 = 24041
+	ZIP.210 = 60622
+	ZIP.211 = 57771
+	ZIP.212 = 41022
+	ZIP.213 = 44090
+	ZIP.214 = 62000
+	ZIP.215 = 64016
+	ZIP.216 = 86964
+	ZIP.217 = 87108
+	ZIP.218 = 84707
+	ZIP.219 = 33171
+	ZIP.220 = 10964
+	ZIP.221 = 27929
+	ZIP.222 = 45498
+	ZIP.223 = 98815
+	ZIP.224 = 19406
+	ZIP.225 = 15269
+	ZIP.226 = 55484
+	ZIP.227 = 42691
+	ZIP.228 = 27652
+	ZIP.229 = 83440
+	ZIP.230 = 25385
+	ZIP.231 = 38233
+	ZIP.232 = 43114
+	ZIP.233 = 57646
+	ZIP.234 = 10770
+	ZIP.235 = 27127
+	ZIP.236 = 25647
+	ZIP.237 = 78681
+	ZIP.238 = 28265
+	ZIP.239 = 92392
+	ZIP.240 = 13741
+	ZIP.241 = 25651
+	ZIP.242 = 58086
+	ZIP.243 = 33886
+	ZIP.244 = 23393
+	ZIP.245 = 65238
+	ZIP.246 = 46748
+	ZIP.247 = 51094
+	ZIP.248 = 48882
+	ZIP.249 = 68896
+	ZIP.250 = 88961
+	ZIP.251 = 73662
+	ZIP.252 = 63870
+	ZIP.253 = 39556
+	ZIP.254 = 18218
+	ZIP.255 = 92058
+	ZIP.256 = 14212
+	ZIP.257 = 60072
+	ZIP.258 = 11223
+	ZIP.259 = 93151
+	ZIP.260 = 18924
+	ZIP.261 = 68973
+	ZIP.262 = 60075
+	ZIP.263 = 28769
+	ZIP.264 = 85193
+	ZIP.265 = 44224
+	ZIP.266 = 12961
+	ZIP.267 = 36134
+	ZIP.268 = 98638
+	ZIP.269 = 59755
+	ZIP.270 = 79019
+	ZIP.271 = 37469
+	ZIP.272 = 64237
+	ZIP.273 = 64287
+	ZIP.274 = 61301
+	ZIP.275 = 48866
+	ZIP.276 = 41081
+	ZIP.277 = 49555
+	ZIP.278 = 66942
+	ZIP.279 = 62006
+	ZIP.280 = 68868
+	ZIP.281 = 15306
+	ZIP.282 = 53445
+	ZIP.283 = 69650
+	ZIP.284 = 51104
+	ZIP.285 = 43016
+	ZIP.286 = 47914
+	ZIP.287 = 30155
+	ZIP.288 = 54505
+	ZIP.289 = 64536
+	ZIP.290 = 23133
+	ZIP.291 = 45626
+	ZIP.292 = 47422
+	ZIP.293 = 30091
+	ZIP.294 = 18796
+	ZIP.295 = 36359
+	ZIP.296 = 47809
+	ZIP.297 = 56240
+	ZIP.298 = 85237
+	ZIP.299 = 99475
+	ZIP.300 = 69543
+	ZIP.301 = 44036
+	ZIP.302 = 74679
+	ZIP.303 = 82759
+	ZIP.304 = 71308
+	ZIP.305 = 70120
+	ZIP.306 = 87305
+	ZIP.307 = 19385
+	ZIP.308 = 65457
+	ZIP.309 = 24938
+	ZIP.310 = 35747
+	ZIP.311 = 81128
+	ZIP.312 = 16802
+	ZIP.313 = 71210
+	ZIP.314 = 31651
+	ZIP.315 = 73738
+	ZIP.316 = 35049
+	ZIP.317 = 38587
+	ZIP.318 = 20398
+	ZIP.319 = 70299
+	ZIP.320 = 45586
+	ZIP.321 = 18108
+	ZIP.322 = 20635
+	ZIP.323 = 19400
+	ZIP.324 = 42244
+	ZIP.325 = 95303
+	ZIP.326 = 43304
+	ZIP.327 = 25508
+	ZIP.328 = 34363
+	ZIP.329 = 96635
+	ZIP.330 = 64222
+	ZIP.331 = 90642
+	ZIP.332 = 68947
+	ZIP.333 = 97800
+	ZIP.334 = 57706
+	ZIP.335 = 15873
+	ZIP.336 = 48058
+	ZIP.337 = 31457
+	ZIP.338 = 54888
+	ZIP.339 = 16308
+	ZIP.340 = 10094
+	ZIP.341 = 74486
+	ZIP.342 = 25223
+	ZIP.343 = 77897
+	ZIP.344 = 82298
+	ZIP.345 = 67204
+	ZIP.346 = 90513
+	ZIP.347 = 61850
+	ZIP.348 = 40834
+	ZIP.349 = 74807
+	ZIP.350 = 43957
+	ZIP.351 = 17890
+	ZIP.352 = 11440
+	ZIP.353 = 33079
+	ZIP.354 = 92909
+	ZIP.355 = 49293
+	ZIP.356 = 67626
+	ZIP.357 = 40418
+	ZIP.358 = 16241
+	ZIP.359 = 67635
+	ZIP.360 = 13736
+	ZIP.361 = 36668
+	ZIP.362 = 16070
+	ZIP.363 = 11934
+	ZIP.364 = 60770
+	ZIP.365 = 13258
+	ZIP.366 = 65919
+	ZIP.367 = 70095
+	ZIP.368 = 39699
+	ZIP.369 = 10663
+	ZIP.370 = 42596
+	ZIP.371 = 79779
+	ZIP.372 = 24064
+	ZIP.373 = 33504
+	ZIP.374 = 85203
+	ZIP.375 = 55446
+	ZIP.376 = 48748
+	ZIP.377 = 99918
+	ZIP.378 = 36406
+	ZIP.379 = 49613
+	ZIP.380 = 24653
+	ZIP.381 = 40802
+	ZIP.382 = 13796
+	ZIP.383 = 12910
+	ZIP.384 = 65366
+	ZIP.385 = 88732
+	ZIP.386 = 43359
+	ZIP.387 = 42415
+	ZIP.388 = 75571
+	ZIP.389 = 14668
+	ZIP.390 = 24160
+	ZIP.391 = 50066
+	ZIP.392 = 85761
+	ZIP.393 = 91615
+	ZIP.394 = 34844
+	ZIP.395 = 90905
+	ZIP.396 = 24577
+	ZIP.397 = 38096
+	ZIP.398 = 34101
+	ZIP.399 = 34903
+	ZIP.400 = 36165
+	QOY.01 = 1
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query8.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query8.tpl', TRANSACTION_TIMESTAMP(), 0, 8, 1852485832);
+	_SEED.01 = 1852485832
+	_QUERY.01 = 8
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query8.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query9.tpl
+	__LIMITA.01 = 
+	RC.01 = 979
+	RC.02 = 36634
+	RC.03 = 23747
+	RC.04 = 45028
+	RC.05 = 33788
+	AGGCELSE.01 = ss_net_paid_inc_tax
+	AGGCTHEN.01 = ss_ext_tax
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query9.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query9.tpl', TRANSACTION_TIMESTAMP(), 0, 9, 784906943);
+	_SEED.01 = 784906943
+	_QUERY.01 = 9
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query9.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query10.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	YEAR.01 = 2002
+	MONTH.01 = 3
+	COUNTY.01 = Madison County
+	COUNTY.02 = Mason County
+	COUNTY.03 = Chesapeake city
+	COUNTY.04 = Hamilton County
+	COUNTY.05 = Wadena County
+	COUNTY.06 = Etowah County
+	COUNTY.07 = Blaine County
+	COUNTY.08 = Placer County
+	COUNTY.09 = Montgomery County
+	COUNTY.10 = Adair County
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query10.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query10.tpl', TRANSACTION_TIMESTAMP(), 0, 10, 812917941);
+	_SEED.01 = 812917941
+	_QUERY.01 = 10
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query10.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query11.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	SELECTONE.01 = t_s_secyear.customer_birth_country
+	YEAR.01 = 1998
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query11.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query11.tpl', TRANSACTION_TIMESTAMP(), 0, 11, 1934962040);
+	_SEED.01 = 1934962040
+	_QUERY.01 = 11
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query11.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query12.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	CATEGORY.01 = Music
+	CATEGORY.02 = Sports
+	CATEGORY.03 = Shoes
+	SDATE.01 = 1999-06-12
+	YEAR.01 = 1999
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query12.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query12.tpl', TRANSACTION_TIMESTAMP(), 0, 12, 1945638186);
+	_SEED.01 = 1945638186
+	_QUERY.01 = 12
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query12.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query13.tpl
+	__LIMITA.01 = 
+	STATE.01 = ND
+	STATE.02 = KS
+	STATE.03 = VA
+	STATE.04 = AL
+	STATE.05 = TX
+	STATE.06 = GA
+	STATE.07 = OH
+	STATE.08 = MO
+	STATE.09 = AK
+	ES.01 = 4 yr Degree
+	ES.02 = College
+	ES.03 = Secondary
+	MS.01 = W
+	MS.02 = U
+	MS.03 = D
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query13.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query13.tpl', TRANSACTION_TIMESTAMP(), 0, 13, 2028619520);
+	_SEED.01 = 2028619520
+	_QUERY.01 = 13
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query13.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query14.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DAY.01 = 1
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query14.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query14.tpl', TRANSACTION_TIMESTAMP(), 0, 14, 1384808252);
+	_SEED.01 = 1384808252
+	_QUERY.01 = 14
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query14.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query15.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	QOY.01 = 1
+	YEAR.01 = 1998
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query15.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query15.tpl', TRANSACTION_TIMESTAMP(), 0, 15, 1010357490);
+	_SEED.01 = 1010357490
+	_QUERY.01 = 15
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query15.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query16.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	COUNTY_E.01 = Williamson County
+	COUNTY_D.01 = Williamson County
+	COUNTY_C.01 = Williamson County
+	COUNTY_B.01 = Williamson County
+	COUNTY_A.01 = Williamson County
+	COUNTYNUMBER.01 = 1
+	COUNTYNUMBER.02 = 1
+	COUNTYNUMBER.03 = 1
+	COUNTYNUMBER.04 = 1
+	COUNTYNUMBER.05 = 1
+	STATE.01 = MS
+	MONTH.01 = 4
+	YEAR.01 = 1999
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query16.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query16.tpl', TRANSACTION_TIMESTAMP(), 0, 16, 168244808);
+	_SEED.01 = 168244808
+	_QUERY.01 = 16
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query16.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query17.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query17.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query17.tpl', TRANSACTION_TIMESTAMP(), 0, 17, 1602008604);
+	_SEED.01 = 1602008604
+	_QUERY.01 = 17
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query17.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query18.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	MONTH.01 = 3
+	MONTH.02 = 8
+	MONTH.03 = 5
+	MONTH.04 = 7
+	MONTH.05 = 12
+	MONTH.06 = 1
+	STATE.01 = PA
+	STATE.02 = ID
+	STATE.03 = FL
+	STATE.04 = NC
+	STATE.05 = ND
+	STATE.06 = MO
+	STATE.07 = CO
+	ES.01 = 2 yr Degree
+	GEN.01 = M
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query18.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query18.tpl', TRANSACTION_TIMESTAMP(), 0, 18, 1309983679);
+	_SEED.01 = 1309983679
+	_QUERY.01 = 18
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query18.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query19.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	MANAGER.01 = 21
+	MGR_IDX.01 = 1
+	MONTH.01 = 11
+	YEAR.01 = 2001
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query19.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query19.tpl', TRANSACTION_TIMESTAMP(), 0, 19, 409987793);
+	_SEED.01 = 409987793
+	_QUERY.01 = 19
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query19.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query20.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	CATEGORY.01 = Jewelry
+	CATEGORY.02 = Men
+	CATEGORY.03 = Shoes
+	SDATE.01 = 1998-01-11
+	YEAR.01 = 1998
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query20.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query20.tpl', TRANSACTION_TIMESTAMP(), 0, 20, 69165161);
+	_SEED.01 = 69165161
+	_QUERY.01 = 20
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query20.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query21.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	SALES_DATE.01 = 1998-06-06
+	YEAR.01 = 1998
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query21.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query21.tpl', TRANSACTION_TIMESTAMP(), 0, 21, 632446785);
+	_SEED.01 = 632446785
+	_QUERY.01 = 21
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query21.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query22.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	DMS.01 = 1176
+	_LIMIT.01 = 100
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query22.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query22.tpl', TRANSACTION_TIMESTAMP(), 0, 22, 1636546492);
+	_SEED.01 = 1636546492
+	_QUERY.01 = 22
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query22.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query23.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	TOPPERCENT.01 = 95
+	MONTH.01 = 6
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query23.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query23.tpl', TRANSACTION_TIMESTAMP(), 0, 23, 804901283);
+	_SEED.01 = 804901283
+	_QUERY.01 = 23
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query23.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query24.tpl
+	__LIMITA.01 = 
+	COLOR.01 = light
+	COLOR.02 = green
+	AMOUNTONE.01 = ss_ext_sales_price
+	MARKET.01 = 8
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query24.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query24.tpl', TRANSACTION_TIMESTAMP(), 0, 24, 998160939);
+	_SEED.01 = 998160939
+	_QUERY.01 = 24
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query24.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query25.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	AGG.01 = min
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query25.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query25.tpl', TRANSACTION_TIMESTAMP(), 0, 25, 272657157);
+	_SEED.01 = 272657157
+	_QUERY.01 = 25
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query25.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query26.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	YEAR.01 = 2001
+	ES.01 = Advanced Degree
+	MS.01 = M
+	GEN.01 = F
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query26.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query26.tpl', TRANSACTION_TIMESTAMP(), 0, 26, 59963379);
+	_SEED.01 = 59963379
+	_QUERY.01 = 26
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query26.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query27.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	STATE_F.01 = TN
+	STATE_E.01 = TN
+	STATE_D.01 = TN
+	STATE_C.01 = TN
+	STATE_B.01 = TN
+	STATE_A.01 = TN
+	STATENUMBER.01 = 1
+	STATENUMBER.02 = 1
+	STATENUMBER.03 = 1
+	STATENUMBER.04 = 1
+	STATENUMBER.05 = 1
+	STATENUMBER.06 = 1
+	ES.01 = 2 yr Degree
+	MS.01 = S
+	GEN.01 = F
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query27.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query27.tpl', TRANSACTION_TIMESTAMP(), 0, 27, 1665865089);
+	_SEED.01 = 1665865089
+	_QUERY.01 = 27
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query27.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query28.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	WHOLESALECOST.01 = 78
+	WHOLESALECOST.02 = 16
+	WHOLESALECOST.03 = 20
+	WHOLESALECOST.04 = 8
+	WHOLESALECOST.05 = 19
+	WHOLESALECOST.06 = 14
+	COUPONAMT.01 = 10916
+	COUPONAMT.02 = 4127
+	COUPONAMT.03 = 9063
+	COUPONAMT.04 = 8384
+	COUPONAMT.05 = 9361
+	COUPONAMT.06 = 10647
+	LISTPRICE.01 = 25
+	LISTPRICE.02 = 68
+	LISTPRICE.03 = 5
+	LISTPRICE.04 = 69
+	LISTPRICE.05 = 162
+	LISTPRICE.06 = 82
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query28.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query28.tpl', TRANSACTION_TIMESTAMP(), 0, 28, 583618531);
+	_SEED.01 = 583618531
+	_QUERY.01 = 28
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query28.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query29.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	AGG.01 = avg
+	MONTH.01 = 4
+	YEAR.01 = 1999
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query29.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query29.tpl', TRANSACTION_TIMESTAMP(), 0, 29, 333390367);
+	_SEED.01 = 333390367
+	_QUERY.01 = 29
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query29.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query30.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	YEAR.01 = 2001
+	STATE.01 = NE
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query30.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query30.tpl', TRANSACTION_TIMESTAMP(), 0, 30, 995183526);
+	_SEED.01 = 995183526
+	_QUERY.01 = 30
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query30.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query31.tpl
+	__LIMITA.01 = 
+	AGG.01 = ss1.ca_county
+	YEAR.01 = 1999
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query31.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query31.tpl', TRANSACTION_TIMESTAMP(), 0, 31, 1732068341);
+	_SEED.01 = 1732068341
+	_QUERY.01 = 31
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query31.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query32.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	CSDATE.01 = 2000-01-28
+	YEAR.01 = 2000
+	IMID.01 = 662
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query32.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query32.tpl', TRANSACTION_TIMESTAMP(), 0, 32, 1857834661);
+	_SEED.01 = 1857834661
+	_QUERY.01 = 32
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query32.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query33.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	CATEGORY.01 = Electronics
+	GMT.01 = -5
+	COUNTY.01 = 1
+	MONTH.01 = 3
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query33.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query33.tpl', TRANSACTION_TIMESTAMP(), 0, 33, 772249474);
+	_SEED.01 = 772249474
+	_QUERY.01 = 33
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query33.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query34.tpl
+	__LIMITA.01 = 
+	COUNTY_H.01 = Williamson County
+	COUNTY_G.01 = Williamson County
+	COUNTY_F.01 = Williamson County
+	COUNTY_E.01 = Williamson County
+	COUNTY_D.01 = Williamson County
+	COUNTY_C.01 = Williamson County
+	COUNTY_B.01 = Williamson County
+	COUNTY_A.01 = Williamson County
+	COUNTYNUMBER.01 = 1
+	COUNTYNUMBER.02 = 1
+	COUNTYNUMBER.03 = 1
+	COUNTYNUMBER.04 = 1
+	COUNTYNUMBER.05 = 1
+	COUNTYNUMBER.06 = 1
+	COUNTYNUMBER.07 = 1
+	COUNTYNUMBER.08 = 1
+	YEAR.01 = 2000
+	BPTWO.01 = 0-500
+	BPONE.01 = 1001-5000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query34.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query34.tpl', TRANSACTION_TIMESTAMP(), 0, 34, 274693911);
+	_SEED.01 = 274693911
+	_QUERY.01 = 34
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query34.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query35.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	AGGTHREE.01 = stddev_samp
+	AGGTWO.01 = min
+	AGGONE.01 = min
+	YEAR.01 = 1999
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query35.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query35.tpl', TRANSACTION_TIMESTAMP(), 0, 35, 1113938932);
+	_SEED.01 = 1113938932
+	_QUERY.01 = 35
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query35.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_variants/query36a.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	STATE_H.01 = TN
+	STATE_G.01 = TN
+	STATE_F.01 = TN
+	STATE_E.01 = TN
+	STATE_D.01 = TN
+	STATE_C.01 = TN
+	STATE_B.01 = TN
+	STATE_A.01 = TN
+	STATENUMBER.01 = 1
+	STATENUMBER.02 = 1
+	STATENUMBER.03 = 1
+	STATENUMBER.04 = 1
+	STATENUMBER.05 = 1
+	STATENUMBER.06 = 1
+	STATENUMBER.07 = 1
+	STATENUMBER.08 = 1
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_variants/query36a.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_variants/query36a.tpl', TRANSACTION_TIMESTAMP(), 0, 36, 1780423572);
+	_SEED.01 = 1780423572
+	_QUERY.01 = 36
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_variants/query36a.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query37.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	PRICE.01 = 58
+	MANUFACT_ID.01 = 699
+	MANUFACT_ID.02 = 805
+	MANUFACT_ID.03 = 819
+	MANUFACT_ID.04 = 684
+	INVDATE.01 = 2002-01-28
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query37.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query37.tpl', TRANSACTION_TIMESTAMP(), 0, 37, 1577601166);
+	_SEED.01 = 1577601166
+	_QUERY.01 = 37
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query37.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query38.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DMS.01 = 1213
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query38.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query38.tpl', TRANSACTION_TIMESTAMP(), 0, 38, 1909691100);
+	_SEED.01 = 1909691100
+	_QUERY.01 = 38
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query38.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query39.tpl
+	__LIMITA.01 = 
+	YEAR.01 = 1998
+	MONTH.01 = 4
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query39.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query39.tpl', TRANSACTION_TIMESTAMP(), 0, 39, 710151579);
+	_SEED.01 = 710151579
+	_QUERY.01 = 39
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query39.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query40.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	SALES_DATE.01 = 2002-05-13
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query40.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query40.tpl', TRANSACTION_TIMESTAMP(), 0, 40, 2035893922);
+	_SEED.01 = 2035893922
+	_QUERY.01 = 40
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query40.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query41.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	MANUFACT.01 = 976
+	SIZE.01 = medium
+	SIZE.02 = petite
+	SIZE.03 = large
+	SIZE.04 = economy
+	SIZE.05 = N/A
+	SIZE.06 = extra large
+	UNIT.01 = Ton
+	UNIT.02 = Oz
+	UNIT.03 = Unknown
+	UNIT.04 = Box
+	UNIT.05 = Lb
+	UNIT.06 = Ounce
+	UNIT.07 = Gross
+	UNIT.08 = Dram
+	UNIT.09 = Each
+	UNIT.10 = Dozen
+	UNIT.11 = Case
+	UNIT.12 = Tbl
+	UNIT.13 = Pound
+	UNIT.14 = Carton
+	UNIT.15 = Cup
+	UNIT.16 = Bunch
+	COLOR.01 = burlywood
+	COLOR.02 = puff
+	COLOR.03 = pink
+	COLOR.04 = orange
+	COLOR.05 = chartreuse
+	COLOR.06 = dodger
+	COLOR.07 = ghost
+	COLOR.08 = plum
+	COLOR.09 = burnished
+	COLOR.10 = misty
+	COLOR.11 = deep
+	COLOR.12 = peru
+	COLOR.13 = magenta
+	COLOR.14 = metallic
+	COLOR.15 = brown
+	COLOR.16 = lemon
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query41.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query41.tpl', TRANSACTION_TIMESTAMP(), 0, 41, 762563289);
+	_SEED.01 = 762563289
+	_QUERY.01 = 41
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query41.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query42.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	YEAR.01 = 2000
+	MONTH.01 = 12
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query42.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query42.tpl', TRANSACTION_TIMESTAMP(), 0, 42, 760720425);
+	_SEED.01 = 760720425
+	_QUERY.01 = 42
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query42.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query43.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	YEAR.01 = 2002
+	GMT.01 = -5
+	COUNTY.01 = 1
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query43.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query43.tpl', TRANSACTION_TIMESTAMP(), 0, 43, 214381971);
+	_SEED.01 = 214381971
+	_QUERY.01 = 43
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query43.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query44.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	STORE.01 = 1
+	NULLCOLSS.01 = ss_promo_sk
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query44.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query44.tpl', TRANSACTION_TIMESTAMP(), 0, 44, 607979269);
+	_SEED.01 = 607979269
+	_QUERY.01 = 44
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query44.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query45.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	QOY.01 = 2
+	YEAR.01 = 1998
+	GBOBC.01 = ca_county
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query45.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query45.tpl', TRANSACTION_TIMESTAMP(), 0, 45, 946279600);
+	_SEED.01 = 946279600
+	_QUERY.01 = 45
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query45.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query46.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	CITY_E.01 = Fairview
+	CITY_D.01 = Midway
+	CITY_C.01 = Fairview
+	CITY_B.01 = Fairview
+	CITY_A.01 = Midway
+	CITYNUMBER.01 = 1
+	CITYNUMBER.02 = 2
+	CITYNUMBER.03 = 2
+	CITYNUMBER.04 = 1
+	CITYNUMBER.05 = 2
+	VEHCNT.01 = 3
+	YEAR.01 = 2000
+	DEPCNT.01 = 4
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query46.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query46.tpl', TRANSACTION_TIMESTAMP(), 0, 46, 668925104);
+	_SEED.01 = 668925104
+	_QUERY.01 = 46
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query46.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query47.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	ORDERBY.01 = nsum
+	SELECTTWO.01 = ,v1.d_year
+	SELECTONE.01 = v1.i_category, v1.i_brand, v1.s_store_name, v1.s_company_name
+	_LIMIT.01 = 100
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query47.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query47.tpl', TRANSACTION_TIMESTAMP(), 0, 47, 421995643);
+	_SEED.01 = 421995643
+	_QUERY.01 = 47
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query47.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query48.tpl
+	__LIMITA.01 = 
+	YEAR.01 = 2000
+	STATE.01 = KY
+	STATE.02 = WY
+	STATE.03 = ND
+	STATE.04 = ME
+	STATE.05 = VA
+	STATE.06 = ID
+	STATE.07 = OK
+	STATE.08 = IA
+	STATE.09 = AR
+	ES.01 = 4 yr Degree
+	ES.02 = College
+	ES.03 = Advanced Degree
+	MS.01 = M
+	MS.02 = W
+	MS.03 = S
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query48.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query48.tpl', TRANSACTION_TIMESTAMP(), 0, 48, 1998003120);
+	_SEED.01 = 1998003120
+	_QUERY.01 = 48
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query48.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query49.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	MONTH.01 = 12
+	YEAR.01 = 2001
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query49.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query49.tpl', TRANSACTION_TIMESTAMP(), 0, 49, 231810463);
+	_SEED.01 = 231810463
+	_QUERY.01 = 49
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query49.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query50.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	MONTH.01 = 10
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query50.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query50.tpl', TRANSACTION_TIMESTAMP(), 0, 50, 1227208042);
+	_SEED.01 = 1227208042
+	_QUERY.01 = 50
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query50.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query51.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DMS.01 = 1176
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query51.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query51.tpl', TRANSACTION_TIMESTAMP(), 0, 51, 1252616106);
+	_SEED.01 = 1252616106
+	_QUERY.01 = 51
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query51.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query52.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	YEAR.01 = 1999
+	MONTH.01 = 12
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query52.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query52.tpl', TRANSACTION_TIMESTAMP(), 0, 52, 2095398297);
+	_SEED.01 = 2095398297
+	_QUERY.01 = 52
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query52.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query53.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DMS.01 = 1178
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query53.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query53.tpl', TRANSACTION_TIMESTAMP(), 0, 53, 774850526);
+	_SEED.01 = 774850526
+	_QUERY.01 = 53
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query53.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query54.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	CLASS.01 = pop
+	CATEGORY.01 = Music
+	CINDX.01 = 5
+	MONTH.01 = 7
+	YEAR.01 = 2001
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query54.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query54.tpl', TRANSACTION_TIMESTAMP(), 0, 54, 2084893243);
+	_SEED.01 = 2084893243
+	_QUERY.01 = 54
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query54.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query55.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	MANAGER.01 = 3
+	MONTH.01 = 11
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query55.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query55.tpl', TRANSACTION_TIMESTAMP(), 0, 55, 1329856529);
+	_SEED.01 = 1329856529
+	_QUERY.01 = 55
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query55.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query56.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	COLOR.01 = aquamarine
+	COLOR.02 = frosted
+	COLOR.03 = cyan
+	GMT.01 = -6
+	MONTH.01 = 7
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query56.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query56.tpl', TRANSACTION_TIMESTAMP(), 0, 56, 228474529);
+	_SEED.01 = 228474529
+	_QUERY.01 = 56
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query56.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query57.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	ORDERBY.01 = nsum
+	SELECTTWO.01 = ,v1.d_year, v1.d_moy
+	SELECTONE.01 = v1.i_category, v1.i_brand
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query57.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query57.tpl', TRANSACTION_TIMESTAMP(), 0, 57, 1861863898);
+	_SEED.01 = 1861863898
+	_QUERY.01 = 57
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query57.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query58.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	SALES_DATE.01 = 2002-04-11
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query58.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query58.tpl', TRANSACTION_TIMESTAMP(), 0, 58, 2075615276);
+	_SEED.01 = 2075615276
+	_QUERY.01 = 58
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query58.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query59.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DMS.01 = 1209
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query59.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query59.tpl', TRANSACTION_TIMESTAMP(), 0, 59, 1141581864);
+	_SEED.01 = 1141581864
+	_QUERY.01 = 59
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query59.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query60.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	CATEGORY.01 = Children
+	GMT.01 = -5
+	MONTH.01 = 8
+	YEAR.01 = 2001
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query60.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query60.tpl', TRANSACTION_TIMESTAMP(), 0, 60, 1127465728);
+	_SEED.01 = 1127465728
+	_QUERY.01 = 60
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query60.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query61.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	CATEGORY.01 = Books
+	GMT.01 = -6
+	MONTH.01 = 11
+	YEAR.01 = 1999
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query61.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query61.tpl', TRANSACTION_TIMESTAMP(), 0, 61, 1903460336);
+	_SEED.01 = 1903460336
+	_QUERY.01 = 61
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query61.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query62.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DMS.01 = 1182
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query62.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query62.tpl', TRANSACTION_TIMESTAMP(), 0, 62, 393977793);
+	_SEED.01 = 393977793
+	_QUERY.01 = 62
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query62.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query63.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DMS.01 = 1201
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query63.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query63.tpl', TRANSACTION_TIMESTAMP(), 0, 63, 892683250);
+	_SEED.01 = 892683250
+	_QUERY.01 = 63
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query63.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query64.tpl
+	__LIMITA.01 = 
+	YEAR.01 = 2001
+	PRICE.01 = 0
+	COLOR.01 = thistle
+	COLOR.02 = ivory
+	COLOR.03 = dodger
+	COLOR.04 = deep
+	COLOR.05 = goldenrod
+	COLOR.06 = saddle
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query64.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query64.tpl', TRANSACTION_TIMESTAMP(), 0, 64, 1410867608);
+	_SEED.01 = 1410867608
+	_QUERY.01 = 64
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query64.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query65.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DMS.01 = 1223
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query65.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query65.tpl', TRANSACTION_TIMESTAMP(), 0, 65, 2084941129);
+	_SEED.01 = 2084941129
+	_QUERY.01 = 65
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query65.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query66.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	SALESTWO.01 = cs_ext_sales_price
+	SALESONE.01 = ws_sales_price
+	NETTWO.01 = cs_net_paid_inc_tax
+	NETONE.01 = ws_net_paid_inc_tax
+	SMC.01 = DIAMOND
+	SMC.02 = ALLIANCE
+	TIMEONE.01 = 55460
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query66.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query66.tpl', TRANSACTION_TIMESTAMP(), 0, 66, 951547797);
+	_SEED.01 = 951547797
+	_QUERY.01 = 66
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query66.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query67.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DMS.01 = 1219
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query67.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query67.tpl', TRANSACTION_TIMESTAMP(), 0, 67, 353104970);
+	_SEED.01 = 353104970
+	_QUERY.01 = 67
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query67.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query68.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	CITY_B.01 = Midway
+	CITY_A.01 = Fairview
+	CITYNUMBER.01 = 2
+	CITYNUMBER.02 = 1
+	VEHCNT.01 = 3
+	YEAR.01 = 1998
+	DEPCNT.01 = 7
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query68.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query68.tpl', TRANSACTION_TIMESTAMP(), 0, 68, 823360027);
+	_SEED.01 = 823360027
+	_QUERY.01 = 68
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query68.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query69.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	STATE.01 = KY
+	STATE.02 = TX
+	STATE.03 = PA
+	YEAR.01 = 2003
+	MONTH.01 = 2
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query69.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query69.tpl', TRANSACTION_TIMESTAMP(), 0, 69, 1916687117);
+	_SEED.01 = 1916687117
+	_QUERY.01 = 69
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query69.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query70.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	DMS.01 = 1212
+	_LIMIT.01 = 100
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query70.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query70.tpl', TRANSACTION_TIMESTAMP(), 0, 70, 1505670419);
+	_SEED.01 = 1505670419
+	_QUERY.01 = 70
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query70.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query71.tpl
+	__LIMITA.01 = 
+	MONTH.01 = 11
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query71.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query71.tpl', TRANSACTION_TIMESTAMP(), 0, 71, 1262407599);
+	_SEED.01 = 1262407599
+	_QUERY.01 = 71
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query71.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query72.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	MS.01 = W
+	BP.01 = 501-1000
+	_LIMIT.01 = 100
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query72.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query72.tpl', TRANSACTION_TIMESTAMP(), 0, 72, 1253815427);
+	_SEED.01 = 1253815427
+	_QUERY.01 = 72
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query72.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query73.tpl
+	__LIMITA.01 = 
+	COUNTY_D.01 = Williamson County
+	COUNTY_C.01 = Williamson County
+	COUNTY_B.01 = Williamson County
+	COUNTY_A.01 = Williamson County
+	COUNTYNUMBER.01 = 1
+	COUNTYNUMBER.02 = 1
+	COUNTYNUMBER.03 = 1
+	COUNTYNUMBER.04 = 1
+	COUNTYNUMBER.05 = 1
+	COUNTYNUMBER.06 = 1
+	COUNTYNUMBER.07 = 1
+	COUNTYNUMBER.08 = 1
+	YEAR.01 = 1998
+	BPTWO.01 = 0-500
+	BPONE.01 = >10000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query73.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query73.tpl', TRANSACTION_TIMESTAMP(), 0, 73, 2589649);
+	_SEED.01 = 2589649
+	_QUERY.01 = 73
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query73.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query74.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	ORDERC.01 = 2
+	ORDERC.02 = 1
+	ORDERC.03 = 3
+	AGGONE.01 = max
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query74.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query74.tpl', TRANSACTION_TIMESTAMP(), 0, 74, 308372610);
+	_SEED.01 = 308372610
+	_QUERY.01 = 74
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query74.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query75.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	YEAR.01 = 2002
+	CATEGORY.01 = Shoes
+	CINDX.01 = 4
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query75.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query75.tpl', TRANSACTION_TIMESTAMP(), 0, 75, 93061693);
+	_SEED.01 = 93061693
+	_QUERY.01 = 75
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query75.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query76.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	NULLCOLWS.01 = ws_promo_sk
+	NULLCOLSS.01 = ss_customer_sk
+	NULLCOLCS.01 = cs_promo_sk
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query76.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query76.tpl', TRANSACTION_TIMESTAMP(), 0, 76, 1123735819);
+	_SEED.01 = 1123735819
+	_QUERY.01 = 76
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query76.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query77.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	SALES_DATE.01 = 1998-08-14
+	YEAR.01 = 1998
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query77.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query77.tpl', TRANSACTION_TIMESTAMP(), 0, 77, 190072503);
+	_SEED.01 = 190072503
+	_QUERY.01 = 77
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query77.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query78.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	SELECTONE.01 = ss_sold_year
+	YEAR.01 = 1998
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query78.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query78.tpl', TRANSACTION_TIMESTAMP(), 0, 78, 1356039995);
+	_SEED.01 = 1356039995
+	_QUERY.01 = 78
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query78.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query79.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	VEHCNT.01 = 0
+	YEAR.01 = 1998
+	DEPCNT.01 = 6
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query79.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query79.tpl', TRANSACTION_TIMESTAMP(), 0, 79, 711517696);
+	_SEED.01 = 711517696
+	_QUERY.01 = 79
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query79.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query80.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	SALES_DATE.01 = 1999-08-26
+	YEAR.01 = 1999
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query80.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query80.tpl', TRANSACTION_TIMESTAMP(), 0, 80, 2054200743);
+	_SEED.01 = 2054200743
+	_QUERY.01 = 80
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query80.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query81.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	YEAR.01 = 2002
+	STATE.01 = ID
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query81.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query81.tpl', TRANSACTION_TIMESTAMP(), 0, 81, 292634773);
+	_SEED.01 = 292634773
+	_QUERY.01 = 81
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query81.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query82.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	MANUFACT_ID.01 = 183
+	MANUFACT_ID.02 = 891
+	MANUFACT_ID.03 = 436
+	MANUFACT_ID.04 = 517
+	INVDATE.01 = 2000-06-16
+	PRICE.01 = 42
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query82.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query82.tpl', TRANSACTION_TIMESTAMP(), 0, 82, 916935698);
+	_SEED.01 = 916935698
+	_QUERY.01 = 82
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query82.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query83.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	RETURNED_DATE_THREE.01 = 2002-11-23
+	RETURNED_DATE_TWO.01 = 2002-10-12
+	RETURNED_DATE_ONE.01 = 2002-04-21
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query83.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query83.tpl', TRANSACTION_TIMESTAMP(), 0, 83, 1831846618);
+	_SEED.01 = 1831846618
+	_QUERY.01 = 83
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query83.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query84.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	INCOME.01 = 53613
+	CITY.01 = Highland Park
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query84.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query84.tpl', TRANSACTION_TIMESTAMP(), 0, 84, 750029238);
+	_SEED.01 = 750029238
+	_QUERY.01 = 84
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query84.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query85.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	YEAR.01 = 1999
+	STATE.01 = SD
+	STATE.02 = GA
+	STATE.03 = KY
+	STATE.04 = NM
+	STATE.05 = WV
+	STATE.06 = MN
+	STATE.07 = MI
+	STATE.08 = NY
+	STATE.09 = IA
+	ES.01 = 2 yr Degree
+	ES.02 = College
+	ES.03 = Primary
+	MS.01 = U
+	MS.02 = M
+	MS.03 = D
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query85.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query85.tpl', TRANSACTION_TIMESTAMP(), 0, 85, 865081585);
+	_SEED.01 = 865081585
+	_QUERY.01 = 85
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query85.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query86.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DMS.01 = 1224
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query86.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query86.tpl', TRANSACTION_TIMESTAMP(), 0, 86, 961908905);
+	_SEED.01 = 961908905
+	_QUERY.01 = 86
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query86.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query87.tpl
+	__LIMITA.01 = 
+	DMS.01 = 1215
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query87.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query87.tpl', TRANSACTION_TIMESTAMP(), 0, 87, 546071719);
+	_SEED.01 = 546071719
+	_QUERY.01 = 87
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query87.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query88.tpl
+	__LIMITA.01 = 
+	STORE.01 = Unknown
+	HOUR.01 = 1
+	HOUR.02 = 0
+	HOUR.03 = 4
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query88.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query88.tpl', TRANSACTION_TIMESTAMP(), 0, 88, 957648238);
+	_SEED.01 = 957648238
+	_QUERY.01 = 88
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query88.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query89.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	CLASS_F.01 = televisions
+	CAT_F.01 = Electronics
+	CLASS_E.01 = athletic
+	CAT_E.01 = Shoes
+	CLASS_D.01 = costume
+	CAT_D.01 = Jewelry
+	CLASS_C.01 = rock
+	CAT_C.01 = Music
+	CLASS_B.01 = cooking
+	CAT_B.01 = Books
+	CLASS_A.01 = toddlers
+	CAT_A.01 = Children
+	IDX.01 = 3
+	IDX.02 = 9
+	IDX.03 = 5
+	IDX.04 = 6
+	IDX.05 = 4
+	IDX.06 = 10
+	YEAR.01 = 1999
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query89.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query89.tpl', TRANSACTION_TIMESTAMP(), 0, 89, 206923651);
+	_SEED.01 = 206923651
+	_QUERY.01 = 89
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query89.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query90.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	HOUR_PM.01 = 15
+	HOUR_AM.01 = 9
+	DEPCNT.01 = 6
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query90.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query90.tpl', TRANSACTION_TIMESTAMP(), 0, 90, 2112324206);
+	_SEED.01 = 2112324206
+	_QUERY.01 = 90
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query90.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query91.tpl
+	__LIMITA.01 = 
+	GMT.01 = -7
+	BUY_POTENTIAL.01 = 0-500
+	MONTH.01 = 11
+	YEAR.01 = 2001
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query91.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query91.tpl', TRANSACTION_TIMESTAMP(), 0, 91, 1604160123);
+	_SEED.01 = 1604160123
+	_QUERY.01 = 91
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query91.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query92.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	WSDATE.01 = 2001-02-26
+	YEAR.01 = 2001
+	IMID.01 = 858
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query92.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query92.tpl', TRANSACTION_TIMESTAMP(), 0, 92, 1270964857);
+	_SEED.01 = 1270964857
+	_QUERY.01 = 92
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query92.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query93.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	REASON.01 = reason 66
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query93.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query93.tpl', TRANSACTION_TIMESTAMP(), 0, 93, 86514890);
+	_SEED.01 = 86514890
+	_QUERY.01 = 93
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query93.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query94.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	STATE.01 = NY
+	MONTH.01 = 5
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query94.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query94.tpl', TRANSACTION_TIMESTAMP(), 0, 94, 715365153);
+	_SEED.01 = 715365153
+	_QUERY.01 = 94
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query94.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query95.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	STATE.01 = TX
+	MONTH.01 = 4
+	YEAR.01 = 2000
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query95.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query95.tpl', TRANSACTION_TIMESTAMP(), 0, 95, 1974963917);
+	_SEED.01 = 1974963917
+	_QUERY.01 = 95
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query95.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query96.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DEPCNT.01 = 7
+	HOUR.01 = 16
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query96.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query96.tpl', TRANSACTION_TIMESTAMP(), 0, 96, 654432238);
+	_SEED.01 = 654432238
+	_QUERY.01 = 96
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query96.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query97.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DMS.01 = 1179
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query97.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query97.tpl', TRANSACTION_TIMESTAMP(), 0, 97, 1778867779);
+	_SEED.01 = 1778867779
+	_QUERY.01 = 97
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query97.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: ../query_postgresql/query98.tpl
+	__LIMITA.01 = 
+	CATEGORY.01 = Children
+	CATEGORY.02 = Books
+	CATEGORY.03 = Men
+	SDATE.01 = 2002-04-20
+	YEAR.01 = 2002
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = '../query_postgresql/query98.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('../query_postgresql/query98.tpl', TRANSACTION_TIMESTAMP(), 0, 98, 336639479);
+	_SEED.01 = 336639479
+	_QUERY.01 = 98
+	_STREAM.01 = 0
+	_TEMPLATE.01 = ../query_postgresql/query98.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+Template: query99.tpl
+	__LIMITA.01 = 
+	_LIMITC.01 = limit 100
+	_LIMITB.01 = 
+	_LIMITA.01 = 
+	_LIMIT.01 = 100
+	DMS.01 = 1202
+	_END.01 = UPDATE time_statistics SET e_time = TRANSACTION_TIMESTAMP() WHERE template = 'query99.tpl' AND stream = 0;
+	_BEGIN.01 = LOAD 'auto_explain'; SET auto_explain.log_min_duration TO 0; SET auto_explain.log_analyze TO on; SET auto_explain.log_level TO notice; INSERT INTO time_statistics (template, s_time, stream, query, seed) VALUES ('query99.tpl', TRANSACTION_TIMESTAMP(), 0, 99, 1427797355);
+	_SEED.01 = 1427797355
+	_QUERY.01 = 99
+	_STREAM.01 = 0
+	_TEMPLATE.01 = query99.tpl
+	__LIMITC.01 = limit %d
+	__LIMITB.01 = 
+
+END STREAM 0

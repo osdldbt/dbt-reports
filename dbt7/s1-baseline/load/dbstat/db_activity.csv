@@ -1,0 +1,20 @@
+ctime,datid,datname,pid,leader_pid,usesysid,usename,application_name,client_addr,client_hostname,client_port,backend_start,xact_start,query_start,state_change,wait_event_type,wait_event,state,backend_xid,backend_xmin,query_id,query,backend_type
+1719457505.899204,,,2559531,,,,"",,,,2024-06-26 00:36:03.456573+00,,,,Activity,AutoVacuumMain,,,,,"",autovacuum launcher
+1719457505.899204,,,2559532,,10,markwkm,"",,,,2024-06-26 00:36:03.457075+00,,,,Activity,LogicalLauncherMain,,,,,"",logical replication launcher
+1719457505.899204,4263817,dbt7,2852853,,10,markwkm,psql,,,-1,2024-06-27 03:05:05.89443+00,,2024-06-27 03:05:05.897972+00,2024-06-27 03:05:05.901714+00,Client,ClientRead,idle,,,,"COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime,
+datname, nspname, relname, pg_locks.*
+FROM pg_locks, pg_class, pg_namespace, pg_database
+WHERE relfilenode = relation
+  AND relnamespace = pg_namespace.oid
+  AND database = pg_database.oid
+  AND current_database() = datname
+ORDER BY relname) TO STDOUT (FORMAT CSV, HEADER);",client backend
+1719457505.899204,4263817,dbt7,2852854,,10,markwkm,psql,,,-1,2024-06-27 03:05:05.895772+00,2024-06-27 03:05:05.899204+00,2024-06-27 03:05:05.899204+00,2024-06-27 03:05:05.899205+00,,,active,,4813304,,"COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime, *
+FROM pg_stat_activity) TO STDOUT (FORMAT CSV, HEADER);",client backend
+1719457505.899204,4263817,dbt7,2852855,,10,markwkm,psql,,,-1,2024-06-27 03:05:05.896932+00,2024-06-27 03:05:05.900308+00,2024-06-27 03:05:05.900308+00,2024-06-27 03:05:05.900309+00,,,active,,4813304,,"COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime, *
+FROM pg_stat_database) TO STDOUT (FORMAT CSV, HEADER);",client backend
+1719457505.899204,4263817,dbt7,2852856,,10,markwkm,psql,,,-1,2024-06-27 03:05:05.898238+00,2024-06-27 03:05:05.901539+00,2024-06-27 03:05:05.901539+00,2024-06-27 03:05:05.90154+00,,,active,,4813304,,"COPY (SELECT extract(EPOCH FROM transaction_timestamp()) AS ctime, *
+FROM pg_stat_progress_vacuum) TO STDOUT (FORMAT CSV, HEADER);",client backend
+1719457505.899204,,,2559528,,,,"",,,,2024-06-26 00:36:03.450386+00,,,,Activity,BgWriterMain,,,,,"",background writer
+1719457505.899204,,,2559527,,,,"",,,,2024-06-26 00:36:03.449941+00,,,,Activity,CheckpointerMain,,,,,"",checkpointer
+1719457505.899204,,,2559530,,,,"",,,,2024-06-26 00:36:03.456156+00,,,,Activity,WalWriterMain,,,,,"",walwriter
